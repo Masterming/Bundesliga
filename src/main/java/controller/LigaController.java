@@ -7,7 +7,7 @@ import view.LigaView;
  * @author Rene
  */
 public class LigaController {
-    
+
     private Liga liga;
     private LigaView view;
 

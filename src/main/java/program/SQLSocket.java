@@ -19,12 +19,12 @@ public class SQLSocket {
         }
         try {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/DB", "root", "");
-            //System.out.println("connected to sqlsocket");
+            // System.out.println("connected to sqlsocket");
         } catch (SQLException e) {
             System.out.println("connection to sqlsocket failed:" + e.getMessage());
         }
     }
-    
+
     public List<String> getAllPlayers() {
         List<String> l = new ArrayList<>();
 

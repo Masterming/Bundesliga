@@ -11,7 +11,7 @@ public class Game {
     private final int clubB;
     private int scoreA;
     private int scoreB;
-    
+
     private LocalDateTime start;
 
     public Game(int id, int clubA, int clubB, int scoreA, int scoreB, LocalDateTime start) {
@@ -50,12 +50,12 @@ public class Game {
     public void setStart(LocalDateTime start) {
         this.start = start;
     }
-    
-    public void increaseScoreA(){
+
+    public void increaseScoreA() {
         scoreA++;
     }
-    
-    public void increaseScoreB(){
+
+    public void increaseScoreB() {
         scoreB++;
     }
 }
