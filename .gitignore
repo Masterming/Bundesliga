@@ -23,7 +23,7 @@ target/
 *.class
 
 # Package Files #
-# *.jar
+*.jar
 *.war
 *.nar
 *.ear
@@ -42,10 +42,13 @@ target/
 *.ctxt
 
 # Misc
-.settings/
-.project
-.classpath
 *.swp
 release.properties
 pom.xml.releaseBackup
 pom.xml.tag
+
+# Personal
+.settings/
+.project
+.classpath
+notes.txt

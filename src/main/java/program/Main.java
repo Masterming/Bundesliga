@@ -30,8 +30,6 @@ public class Main {
         firstLiga.addClub(new Club(4, "Borussia Dortmund"));
         firstLiga.addClub(new Club(5, "VfL Wolfsburg"));
         firstLiga.addClub(new Club(6, "1. FC Union Berlin"));
-
-        // TODO: connect to db and get data
         return firstLiga;
     }
 
