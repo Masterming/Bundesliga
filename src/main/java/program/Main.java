@@ -37,7 +37,8 @@ public class Main {
         lcontroller.addClub(new Club("RB Leipzig"));
         lcontroller.addClub(new Club("Borussia Dortmund"));
         lcontroller.addClub(new Club("VfL Wolfsburg"));
-
+        
+        // currently just prints table of points to console
         lcontroller.updateView();
     }
 }

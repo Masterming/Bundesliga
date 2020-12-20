@@ -7,7 +7,7 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
-nbactions.xml
+# nbactions.xml
 nb-configuration.xml
 
 # IntelliJ project files 

@@ -18,11 +18,11 @@ public class Game implements Serializable {
     private final int gameId;
 
     @OneToOne
-    @JoinColumn(name = "clubId")
+    @MapsId
     private Club club1;
 
     @OneToOne
-    @JoinColumn(name = "clubId")
+    @MapsId
     private Club club2;
 
     private int score1;
