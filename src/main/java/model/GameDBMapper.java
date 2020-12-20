@@ -41,7 +41,7 @@ public class GameDBMapper {
 
         try {
             game = tq.getSingleResult();
-            LOGGER.log(Level.INFO, game.toString());
+            LOGGER.log(Level.INFO, "QUERY: {0}", game.toString());
         } catch (NoResultException ex) {
             LOGGER.log(Level.WARNING, "No game found for id = {0}", id);
         } catch (Exception ex) {
@@ -60,7 +60,7 @@ public class GameDBMapper {
 
         try {
             games = tq.getResultList();
-            LOGGER.log(Level.INFO, Arrays.toString(games.toArray()));
+            LOGGER.log(Level.INFO, "QUERY: {0}", Arrays.toString(games.toArray()));
         } catch (NoResultException ex) {
             LOGGER.log(Level.WARNING, "No games found in table");
         } catch (Exception ex) {

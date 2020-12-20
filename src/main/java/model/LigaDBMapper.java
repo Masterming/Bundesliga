@@ -41,7 +41,7 @@ public class LigaDBMapper {
 
         try {
             liga = tq.getSingleResult();
-            LOGGER.log(Level.INFO, liga.toString());
+            LOGGER.log(Level.INFO, "QUERY: {0}", liga.toString());
         } catch (NoResultException ex) {
             LOGGER.log(Level.WARNING, "No liga found for id = {0}", id);
         } catch (Exception ex) {
@@ -60,7 +60,7 @@ public class LigaDBMapper {
 
         try {
             ligas = tq.getResultList();
-            LOGGER.log(Level.INFO, Arrays.toString(ligas.toArray()));
+            LOGGER.log(Level.INFO, "QUERY: {0}", Arrays.toString(ligas.toArray()));
         } catch (NoResultException ex) {
             LOGGER.log(Level.WARNING, "No ligas found in table");
         } catch (Exception ex) {

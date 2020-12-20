@@ -43,7 +43,7 @@ public class ClubDBMapper {
 
         try {
             cust = tq.getSingleResult();
-            LOGGER.log(Level.INFO, cust.toString());
+            LOGGER.log(Level.INFO, "QUERY: {0}", cust.toString());
         } catch (NoResultException ex) {
             LOGGER.log(Level.WARNING, "No club found for id = {0}", id);
         } catch (Exception ex) {
@@ -62,7 +62,7 @@ public class ClubDBMapper {
 
         try {
             custs = tq.getResultList();
-            LOGGER.log(Level.INFO, Arrays.toString(custs.toArray()));
+            LOGGER.log(Level.INFO, "QUERY: {0}", Arrays.toString(custs.toArray()));
         } catch (NoResultException ex) {
             LOGGER.log(Level.WARNING, "No clubs found in table");
         } catch (Exception ex) {

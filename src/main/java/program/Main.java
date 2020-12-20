@@ -15,9 +15,11 @@ public class Main {
     private final static Logger LOGGER = Logger.getLogger(Main.class.getName());
 
     public static void main(String[] args) {
-        ExtendedLogger.setDebugLevel(Level.SEVERE); // SEVERE or INFO
+        // Custom logging
         try {
-            ExtendedLogger.setup();
+            ExtendedLogger.disableConsole();
+            ExtendedLogger.enableHtml();
+            ExtendedLogger.setDebugLevel(Level.INFO); // SEVERE or INFO
         } catch (IOException ex) {
             LOGGER.warning(ex.getLocalizedMessage());
         }

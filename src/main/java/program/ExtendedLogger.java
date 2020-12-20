@@ -8,25 +8,35 @@ import java.util.logging.*;
  */
 public class ExtendedLogger {
 
-    // Save global logging to txt
-    static public void setup() throws IOException {
-        FileHandler fileTxt = new FileHandler("Logging.txt");
-        fileTxt.setFormatter(new SimpleFormatter());
+    // Save global logging to html file
+    static public void enableHtml() throws IOException {
+        // create an HTML formatter
+        Logger logger = Logger.getLogger("");
+        FileHandler fileHTML = new FileHandler("Logging.html");
 
-        Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
-        logger.addHandler(fileTxt);
+        HtmlFormatter formatterHTML = new HtmlFormatter();
+        fileHTML.setFormatter(formatterHTML);
+        logger.addHandler(fileHTML);
     }
 
     // change loggin level for all logger
     static public void setDebugLevel(Level newLvl) {
-        Logger rootLogger = LogManager.getLogManager().getLogger("");
-        rootLogger.setLevel(newLvl);
+        Logger logger = LogManager.getLogManager().getLogger("");
+        logger.setLevel(newLvl);
 
-        Handler[] handlers = rootLogger.getHandlers();
+        Handler[] handlers = logger.getHandlers();
         for (Handler h : handlers) {
             if (h instanceof FileHandler) {
                 h.setLevel(newLvl);
             }
+        }
+    }
+
+    static public void disableConsole() {
+        Logger logger = Logger.getLogger("");
+        Handler[] handlers = logger.getHandlers();
+        if (handlers[0] instanceof ConsoleHandler) {
+            logger.removeHandler(handlers[0]);
         }
     }
 }
