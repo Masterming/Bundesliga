@@ -1,61 +1,94 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
+import javax.persistence.*;
 
 /**
  * @author Rene
  */
-public class Game {
+@Entity
+@Table(name = "games")
+public class Game implements Serializable {
+
+    private static final long serialVersionUID = 3L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private final int id;
-    private final int clubA;
-    private final int clubB;
-    private int scoreA;
-    private int scoreB;
 
-    private LocalDateTime start;
+    @OneToOne
+    @JoinColumn(name = "club1id")
+    private Club club1;
 
-    public Game(int id, int clubA, int clubB, int scoreA, int scoreB, LocalDateTime start) {
+    @OneToOne
+    @JoinColumn(name = "club2id")
+    private Club club2;
+
+    private int score1;
+    private int score2;
+    private LocalDateTime startTime;
+
+    public Game() {
+        this.id = -1;
+    }
+
+    public Game(Club clubA, Club clubB, LocalDateTime start) {
+        this.id = -1;
+        this.club1 = clubA;
+        this.club2 = clubB;
+        this.score1 = 0;
+        this.score2 = 0;
+        this.startTime = start;
+    }
+
+    public Game(int id, Club clubA, Club clubB, LocalDateTime start) {
         this.id = id;
-        this.clubA = clubA;
-        this.clubB = clubB;
-        this.scoreA = 0;
-        this.scoreB = 0;
-        this.start = start;
+        this.club1 = clubA;
+        this.club2 = clubB;
+        this.score1 = 0;
+        this.score2 = 0;
+        this.startTime = start;
     }
 
     public int getId() {
         return id;
     }
 
-    public int getClubA() {
-        return clubA;
+    public Club getClubA() {
+        return club1;
     }
 
-    public int getClubB() {
-        return clubB;
+    public Club getClubB() {
+        return club2;
     }
 
     public int getScoreA() {
-        return scoreA;
+        return score1;
     }
 
     public int getScoreB() {
-        return scoreB;
+        return score2;
     }
 
     public LocalDateTime getStart() {
-        return start;
+        return startTime;
     }
 
     public void setStart(LocalDateTime start) {
-        this.start = start;
+        this.startTime = start;
     }
 
     public void increaseScoreA() {
-        scoreA++;
+        score1++;
     }
 
     public void increaseScoreB() {
-        scoreB++;
+        score2++;
+    }
+
+    @Override
+    public String toString() {
+        return "Game: " + club1.getName() + " vs " + club2.getName();
     }
 }

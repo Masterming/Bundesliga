@@ -1,19 +1,40 @@
 package model;
 
+import java.io.Serializable;
 import java.util.*;
+import javax.persistence.*;
 
 /**
  * @author Rene
  */
-public class Liga {
+@Entity
+@Table(name = "ligas")
+public class Liga implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private final int id;
-    private final String name;
+    private String name;
+
+    @OneToMany(mappedBy = "club")
     private List<Club> clubs;
+
+    public Liga() {
+        this.id = -1;
+    }
+
+    public Liga(String name) {
+        this.id = -1;
+        this.name = name;
+        this.clubs = new ArrayList<>();
+    }
 
     public Liga(int id, String name) {
         this.id = id;
         this.name = name;
-        this.clubs = new ArrayList<Club>();
+        this.clubs = new ArrayList<>();
     }
 
     public int getId() {
@@ -34,5 +55,10 @@ public class Liga {
 
     public boolean removeClub(Club c) {
         return clubs.remove(c);
+    }
+
+    @Override
+    public String toString() {
+        return "Liga: " + name;
     }
 }
