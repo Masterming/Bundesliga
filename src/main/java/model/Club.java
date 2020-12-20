@@ -19,11 +19,8 @@ public class Club implements Serializable {
     private String name;
     private int points;
 
-    @OneToMany
-    @JoinTable(
-            joinColumns = @JoinColumn(name = "clubId"),
-            inverseJoinColumns = @JoinColumn(name = "playerId")
-    )
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(joinColumns = @JoinColumn(name = "clubId"), inverseJoinColumns = @JoinColumn(name = "playerId"))
     private List<Player> players;
 
     public Club() {

@@ -1,7 +1,6 @@
 package model;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.logging.*;
 import javax.persistence.*;
 
@@ -14,10 +13,9 @@ public class PlayerDBMapper {
             .createEntityManagerFactory("Bundesliga");
     private final static Logger LOGGER = Logger.getLogger(PlayerDBMapper.class.getName());
 
-    public void addPlayer(String name, String country, int goals) {
+    public void addPlayer(Player player) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction et = null;
-        Player player = new Player(name, country, goals);
 
         try {
             et = em.getTransaction();
@@ -36,7 +34,7 @@ public class PlayerDBMapper {
 
     public Player getPlayer(int id) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
-        String query = "SELECT p FROM players p WHERE p.id = :id";
+        String query = "SELECT p FROM Player p WHERE p.id = :id";
         TypedQuery<Player> tq = em.createQuery(query, Player.class);
         tq.setParameter("id", id);
         Player player = null;
@@ -45,7 +43,7 @@ public class PlayerDBMapper {
             player = tq.getSingleResult();
             LOGGER.log(Level.INFO, player.toString());
         } catch (NoResultException ex) {
-            LOGGER.log(Level.WARNING, "No players found for id = {0}", id);
+            LOGGER.log(Level.WARNING, "No player found for id = {0}", id);
         } catch (Exception ex) {
             LOGGER.log(Level.SEVERE, ex.getLocalizedMessage());
         } finally {
@@ -56,9 +54,9 @@ public class PlayerDBMapper {
 
     public List<Player> getPlayers() {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
-        String strQuery = "SELECT p FROM players p WHERE p.id IS NOT NULL";
+        String strQuery = "SELECT p FROM Player p WHERE p.id IS NOT NULL";
         TypedQuery<Player> tq = em.createQuery(strQuery, Player.class);
-        List<Player> players = null;
+        List<Player> players = new ArrayList<>();
 
         try {
             players = tq.getResultList();
@@ -71,5 +69,28 @@ public class PlayerDBMapper {
             em.close();
         }
         return players;
+    }
+
+    public int reset() {
+        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        EntityTransaction et = null;
+
+        String strQuery = "DELETE FROM Player";
+        Query q = em.createQuery(strQuery);
+        int i = 0;
+        try {
+            et = em.getTransaction();
+            et.begin();
+            i = q.executeUpdate();
+            et.commit();
+        } catch (Exception ex) {
+            if (et != null) {
+                et.rollback();
+            }
+            LOGGER.log(Level.SEVERE, ex.getLocalizedMessage());
+        } finally {
+            em.close();
+        }
+        return i;
     }
 }

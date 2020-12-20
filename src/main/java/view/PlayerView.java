@@ -8,6 +8,6 @@ import model.Player;
 public class PlayerView {
 
     public void printOverview(Player model) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        System.out.println(model);
     }
 }

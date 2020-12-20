@@ -18,4 +18,8 @@ public class PlayerController {
     public void updateView() {
         view.printOverview(model);
     }
+
+    public void incrementGoals() {
+        model.increaseGoals();
+    }
 }

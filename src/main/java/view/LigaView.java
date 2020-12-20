@@ -12,9 +12,9 @@ public class LigaView {
     public void printOverview(Liga model) {
         List<Club> clubs = model.getClubs();
         clubs.sort((o1, o2) -> o2.getPoints() - o1.getPoints());
-        System.out.println("Ligatabelle");
-        clubs.forEach(c -> {
+        System.out.println(model.getName() + ": ");
+        for (Club c : clubs) {
             System.out.println(c.getName() + ": " + c.getPoints());
-        });
+        }
     }
 }

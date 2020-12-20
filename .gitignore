@@ -48,8 +48,8 @@ pom.xml.releaseBackup
 pom.xml.tag
 
 # Personal
+bundesliga/
 .settings/
 .project
 .classpath
-notes.txt
-Logging.txt
+*.txt

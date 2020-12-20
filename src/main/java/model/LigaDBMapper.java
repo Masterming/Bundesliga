@@ -1,7 +1,6 @@
 package model;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.logging.*;
 import javax.persistence.*;
 
@@ -14,10 +13,9 @@ public class LigaDBMapper {
             .createEntityManagerFactory("Bundesliga");
     private final static Logger LOGGER = Logger.getLogger(LigaDBMapper.class.getName());
 
-    public void addLiga(String name) {
+    public void addLiga(Liga liga) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction et = null;
-        Liga liga = new Liga(name);
 
         try {
             et = em.getTransaction();
@@ -36,7 +34,7 @@ public class LigaDBMapper {
 
     public Liga getLiga(int id) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
-        String query = "SELECT l FROM ligas l WHERE l.id = :id";
+        String query = "SELECT l FROM Liga l WHERE l.id = :id";
         TypedQuery<Liga> tq = em.createQuery(query, Liga.class);
         tq.setParameter("id", id);
         Liga liga = null;
@@ -56,9 +54,9 @@ public class LigaDBMapper {
 
     public List<Liga> getLigas() {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
-        String strQuery = "SELECT l FROM ligas l WHERE l.id IS NOT NULL";
+        String strQuery = "SELECT l FROM Liga l WHERE l.id IS NOT NULL";
         TypedQuery<Liga> tq = em.createQuery(strQuery, Liga.class);
-        List<Liga> ligas = null;
+        List<Liga> ligas = new ArrayList<>();
 
         try {
             ligas = tq.getResultList();
@@ -71,5 +69,28 @@ public class LigaDBMapper {
             em.close();
         }
         return ligas;
+    }
+
+    public int reset() {
+        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        EntityTransaction et = null;
+
+        String strQuery = "DELETE FROM Liga";
+        Query q = em.createQuery(strQuery);
+        int i = 0;
+        try {
+            et = em.getTransaction();
+            et.begin();
+            i = q.executeUpdate();
+            et.commit();
+        } catch (Exception ex) {
+            if (et != null) {
+                et.rollback();
+            }
+            LOGGER.log(Level.SEVERE, ex.getLocalizedMessage());
+        } finally {
+            em.close();
+        }
+        return i;
     }
 }

@@ -12,11 +12,11 @@
     <properties>
       <property name="show_sql" value="true" />
       <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyTenSevenDialect" />
-      <property name="javax.persistence.jdbc.url" value="jdbc:derby:C:/Apache/bundesliga;create=true"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:derby:./src/main/resources/database/bundesliga;create=true"/>
       <property name="javax.persistence.jdbc.user" value=""/>
       <property name="javax.persistence.jdbc.password" value=""/>
       <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver"/>
-      <property name="javax.persistence.schema-generation.database.action" value="create"/>
+      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
     </properties>
   </persistence-unit>
 </persistence>

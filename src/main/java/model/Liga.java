@@ -18,11 +18,8 @@ public class Liga implements Serializable {
     private final int ligaId;
     private String name;
 
-    @OneToMany
-    @JoinTable(
-            joinColumns = @JoinColumn(name = "ligaId"),
-            inverseJoinColumns = @JoinColumn(name = "clubId")
-    )
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(joinColumns = @JoinColumn(name = "ligaId"), inverseJoinColumns = @JoinColumn(name = "clubId"))
     private List<Club> clubs;
 
     public Liga() {
