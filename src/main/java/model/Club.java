@@ -15,32 +15,36 @@ public class Club implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private final int id;
+    private final int clubId;
     private String name;
     private int points;
 
-    @OneToMany(mappedBy = "club")
+    @OneToMany
+    @JoinTable(
+            joinColumns = @JoinColumn(name = "clubId"),
+            inverseJoinColumns = @JoinColumn(name = "playerId")
+    )
     private List<Player> players;
 
     public Club() {
-        this.id = -1;
+        this.clubId = -1;
     }
 
     public Club(String name) {
-        this.id = -1;
+        this.clubId = -1;
         this.name = name;
         this.points = 0;
         this.players = new ArrayList<>();
     }
 
     public Club(int id, String name) {
-        this.id = id;
+        this.clubId = id;
         this.name = name;
         this.points = 0;
     }
 
     public int getId() {
-        return id;
+        return clubId;
     }
 
     public String getName() {

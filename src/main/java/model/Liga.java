@@ -15,30 +15,34 @@ public class Liga implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private final int id;
+    private final int ligaId;
     private String name;
 
-    @OneToMany(mappedBy = "club")
+    @OneToMany
+    @JoinTable(
+            joinColumns = @JoinColumn(name = "ligaId"),
+            inverseJoinColumns = @JoinColumn(name = "clubId")
+    )
     private List<Club> clubs;
 
     public Liga() {
-        this.id = -1;
+        this.ligaId = -1;
     }
 
     public Liga(String name) {
-        this.id = -1;
+        this.ligaId = -1;
         this.name = name;
         this.clubs = new ArrayList<>();
     }
 
     public Liga(int id, String name) {
-        this.id = id;
+        this.ligaId = id;
         this.name = name;
         this.clubs = new ArrayList<>();
     }
 
     public int getId() {
-        return id;
+        return ligaId;
     }
 
     public String getName() {

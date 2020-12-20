@@ -15,14 +15,14 @@ public class Game implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private final int id;
+    private final int gameId;
 
     @OneToOne
-    @JoinColumn(name = "club1id")
+    @JoinColumn(name = "clubId")
     private Club club1;
 
     @OneToOne
-    @JoinColumn(name = "club2id")
+    @JoinColumn(name = "clubId")
     private Club club2;
 
     private int score1;
@@ -30,11 +30,11 @@ public class Game implements Serializable {
     private LocalDateTime startTime;
 
     public Game() {
-        this.id = -1;
+        this.gameId = -1;
     }
 
     public Game(Club clubA, Club clubB, LocalDateTime start) {
-        this.id = -1;
+        this.gameId = -1;
         this.club1 = clubA;
         this.club2 = clubB;
         this.score1 = 0;
@@ -43,7 +43,7 @@ public class Game implements Serializable {
     }
 
     public Game(int id, Club clubA, Club clubB, LocalDateTime start) {
-        this.id = id;
+        this.gameId = id;
         this.club1 = clubA;
         this.club2 = clubB;
         this.score1 = 0;
@@ -52,7 +52,7 @@ public class Game implements Serializable {
     }
 
     public int getId() {
-        return id;
+        return gameId;
     }
 
     public Club getClubA() {

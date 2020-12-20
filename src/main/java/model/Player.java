@@ -15,31 +15,31 @@ public class Player implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private final int id;
+    private final int playerId;
     private String name;
     private String country;
     private int goals;
 
     public Player() {
-        this.id = -1;
+        this.playerId = -1;
     }
 
     public Player(String name, String country, int goals) {
-        this.id = -1;
+        this.playerId = -1;
         this.name = name;
         this.country = country;
         this.goals = goals;
     }
 
     public Player(int id, String name, String country, int goals) {
-        this.id = id;
+        this.playerId = id;
         this.name = name;
         this.country = country;
         this.goals = goals;
     }
 
     public int getId() {
-        return id;
+        return playerId;
     }
 
     public String getName() {
