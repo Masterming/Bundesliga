@@ -6,6 +6,8 @@
 package view;
 
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 
 /**
@@ -299,6 +301,36 @@ public class MainView extends javax.swing.JFrame {
                 
             }
         });
+    }
+
+    public JButton getClubsBtn() {
+        return clubsBtn;
+    }
+
+    public JButton getLiga1Btn() {
+        return liga1Btn;
+    }
+
+
+    public JButton getLiga2Btn() {
+        return liga2Btn;
+    }
+
+    public JButton getLiga3Btn() {
+        return liga3Btn;
+    }
+
+
+    public JButton getPlanBtn() {
+        return planBtn;
+    }
+
+
+    public JButton getTableBtn() {
+        return tableBtn;
+    }
+    public void addActionListener (ActionListener listenForButton){
+        this.liga1Btn.addActionListener(listenForButton);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
