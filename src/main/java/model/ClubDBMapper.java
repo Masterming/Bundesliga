@@ -54,7 +54,7 @@ public class ClubDBMapper {
         return cust;
     }
 
-    public List<Club> getClubs() {
+    public List<Club> getAllClubs() {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         String strQuery = "SELECT c FROM Club c WHERE c.id IS NOT NULL";
         TypedQuery<Club> tq = em.createQuery(strQuery, Club.class);

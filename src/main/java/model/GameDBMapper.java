@@ -52,7 +52,7 @@ public class GameDBMapper {
         return game;
     }
 
-    public List<Game> getGames() {
+    public List<Game> getAllGames() {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         String strQuery = "SELECT g FROM Game c WHERE g.id IS NOT NULL";
         TypedQuery<Game> tq = em.createQuery(strQuery, Game.class);

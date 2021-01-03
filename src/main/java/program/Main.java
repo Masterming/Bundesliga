@@ -55,7 +55,7 @@ public class Main {
 
     private static void testGetPlayer() {
         PlayerDBMapper dao = new PlayerDBMapper();
-        for (Player model : dao.getPlayers()) {
+        for (Player model : dao.getAllPlayers()) {
             PlayerView view = new PlayerView();
             PlayerController controller = new PlayerController(model, view);
 
