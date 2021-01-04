@@ -136,7 +136,7 @@ public class MainController implements ActionListener {
         }
         if(spielplan){
             this.view.getPlanBtn().setBackground(Color.white);
-                        this.view.getContentView().removeAll();
+            this.view.getContentView().removeAll();
             this.view.getContentView().repaint();
             this.view.getContentView().revalidate();
             
@@ -146,7 +146,7 @@ public class MainController implements ActionListener {
         }
         if(clubs){
             this.view.getClubsBtn().setBackground(Color.white);
-                        this.view.getContentView().removeAll();
+            this.view.getContentView().removeAll();
             this.view.getContentView().repaint();
             this.view.getContentView().revalidate();
 

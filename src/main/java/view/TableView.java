@@ -5,52 +5,85 @@
  */
 package view;
 
+import java.awt.Dimension;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.TableModel;
 
 /**
  *
  * @author z003ywys
  */
 public class TableView extends javax.swing.JPanel {
-    JLabel test1;
-    JButton jButton1;
+    JScrollPane  jScrollPane1;
+    JTable table;
+    JLabel jLabel1;
     private  void initComponents() {
-        test1 = new javax.swing.JLabel();
-        jButton1= new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        table = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(51, 255, 51));
-        setPreferredSize(new java.awt.Dimension(0, 261));
-        setRequestFocusEnabled(false);
-
-        test1.setText("Table");
+        table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+            },
+            new String [] {
+                "Platz", "Team", "Spiele", "Punkte", "Siege", "Unentschieden", "Niederlagen", "Torverhältnisse"
+            }
+        ));
+        jScrollPane1.setViewportView(table);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(test1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addContainerGap(369, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(test1)
-                    .addComponent(jButton1))
-                .addContainerGap(223, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE))
         );
         
-        jButton1.setText("TestAction Table neu");
-        jButton1.setActionCommand("test");
-        jButton1.getAccessibleContext().setAccessibleName("testBtn");
     }
+
+    public JScrollPane getjScrollPane1() {
+        return jScrollPane1;
+    }
+
+    public void setjScrollPane1(JScrollPane jScrollPane1) {
+        this.jScrollPane1 = jScrollPane1;
+    }
+
+    public JTable getjTable1() {
+        return table;
+    }
+
+    public void setjTable1(JTable jTable1) {
+        this.table = jTable1;
+    }
+
+    public JLabel getjLabel1() {
+        return jLabel1;
+    }
+
+    public void setjLabel1(String liga) {
+        this.jLabel1.setText(liga);
+    }
+    
+    public void setTableContent (TableModel tbm){
+        this.table.setModel(tbm);
+    }
+    
 
     public TableView() {
         initComponents();
@@ -72,20 +105,6 @@ public class TableView extends javax.swing.JPanel {
             java.util.logging.Logger.getLogger(MainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         this.setVisible(true);
-    }
-    
-
-    public JLabel getTest1() {
-        return test1;
-    }
-
-    public void setTest1(String name) {
-        String a = this.test1.getText();
-        this.test1.setText(a + " " +name);
-    }
-
-    public JButton getjButton1() {
-        return jButton1;
     }
     
     
