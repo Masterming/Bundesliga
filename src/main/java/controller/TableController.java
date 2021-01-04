@@ -42,17 +42,56 @@ public class TableController implements ActionListener {
         DefaultTableModel tbm = (DefaultTableModel)this.tableView.getjTable1().getModel();
         
         //Sample Data
-        String [] data = new String[8];
-        data[0] = "1";
-        data [1] = "FC Bayern";
-        data[2] = "7";
-        data[3] = "18";
-        data[4] = "6";
-        data[5] = "0";
-        data[6] ="1";
-        data[7] = "27:11";
-        tbm.addRow(data);
+        String [][] data = getData();
+        for(String[] d : data){
+             tbm.addRow(d);
+        }
+       
         this.tableView.setTableContent(tbm);
+    }
+    private String[][] getData(){
+        String[][] data = new String[0][]; 
+        if(this.l.getName()=="Liga 1"){
+            data = new String[2][];
+            String [] temp = new String[8];
+            temp[0] = "1";
+            temp [1] = "FC Bayern";
+            temp[2] = "7";
+            temp[3] = "18";
+            temp[4] = "6";
+            temp[5] = "0";
+            temp[6] ="1";
+            temp[7] = "27:11";
+            
+            data[0] = temp;
+            temp = new String[8];
+            temp[0] = "2";
+            temp [1] = "RB Leipzig";
+            temp[2] = "7";
+            temp[3] = "16";
+            temp[4] = "5";
+            temp[5] = "1";
+            temp[6] ="1";
+            temp[7] = "15:11";
+            data[1] = temp;
+        }
+        if(this.l.getName()=="Liga 2"){
+            data = new String[1][];
+            String [] temp = new String[8];
+            temp[0] = "1";
+            temp [1] = "Hamburger SV";
+            temp[2] = "14";
+            temp[3] = "29";
+            temp[4] = "9";
+            temp[5] = "2";
+            temp[6] ="3";
+            temp[7] = "30:18";
+            data[0] = temp;
+        }
+        if(this.l.getName()=="Liga 3"){
+            
+        }
+        return data;
     }
     
     
