@@ -6,9 +6,14 @@
 package view;
 
 import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Panel;
 import java.awt.event.ActionListener;
+import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  *
@@ -19,6 +24,7 @@ public class MainView extends javax.swing.JFrame {
     /**
      * Creates new form MainView
      */
+    GridBagLayout layout1 = new GridBagLayout();
     private boolean liga1;
     private boolean liga2;
     private boolean liga3;
@@ -26,13 +32,20 @@ public class MainView extends javax.swing.JFrame {
     private boolean spielplan;
     private boolean clubs;
     public MainView() {
+        initComponents();
         liga1 = false;
         liga2 = false;
         liga3 = false;
         table = false;
         spielplan = false;
         clubs = false;
-        initComponents();
+        //GroupLayout layout = new GroupLayout(this.contentView);
+        //this.contentView.setLayout(layout);
+        //this.contentView.setLayout(layout);
+        this.contentView.removeAll();
+
+        
+        
     }
 
     /**
@@ -51,6 +64,8 @@ public class MainView extends javax.swing.JFrame {
         planBtn = new javax.swing.JButton();
         clubsBtn = new javax.swing.JButton();
         contentView = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -109,16 +124,30 @@ public class MainView extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout contentViewLayout = new javax.swing.GroupLayout(contentView);
-        contentView.setLayout(contentViewLayout);
-        contentViewLayout.setHorizontalGroup(
-            contentViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+        contentView.setLayout(new java.awt.BorderLayout());
+
+        jPanel1.setBackground(new java.awt.Color(153, 255, 153));
+
+        jLabel1.setText("Testpanel");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        contentViewLayout.setVerticalGroup(
-            contentViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 209, Short.MAX_VALUE)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(173, Short.MAX_VALUE))
         );
+
+        contentView.add(jPanel1, java.awt.BorderLayout.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -136,7 +165,7 @@ public class MainView extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(liga2Btn, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 228, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(liga3Btn, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(planBtn)
@@ -157,9 +186,9 @@ public class MainView extends javax.swing.JFrame {
                     .addComponent(tableBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(planBtn)
                     .addComponent(clubsBtn))
-                .addGap(18, 18, 18)
-                .addComponent(contentView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(26, 26, 26)
+                .addComponent(contentView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         liga1Btn.getAccessibleContext().setAccessibleName("liga1btn");
@@ -168,6 +197,7 @@ public class MainView extends javax.swing.JFrame {
         liga3Btn.getAccessibleContext().setAccessibleName("liga3btn");
         tableBtn.getAccessibleContext().setAccessibleName("tableBtn");
         planBtn.getAccessibleContext().setAccessibleName("planBtn");
+        contentView.getAccessibleContext().setAccessibleName("contentView");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -245,12 +275,7 @@ public class MainView extends javax.swing.JFrame {
         //Den View Anpassen über so was wie onproperty changed
         if(liga1 ==true){
             System.out.println("Liga 1 ");
-            JLabel l =new JLabel();
-            l.setText("Liga 1");
             
-            contentView.add(l);
-            contentView.repaint();
-            contentView.revalidate();
             
         }
         if(liga2 == true){
@@ -261,12 +286,31 @@ public class MainView extends javax.swing.JFrame {
         }
         if(table == true){
             System.out.println("Table");
+            this.contentView.removeAll();
+            this.contentView.repaint();
+            this.contentView.revalidate();
+            //this.contentView.repaint();
+            
+            this.contentView.add(this.jPanel1);
+            this.contentView.repaint();
+            this.contentView.revalidate();
+            
+            
+            
+            //this.contentView.setVisible(true);
+            
         }
         if(spielplan == true){
             System.out.println("Spielplan");
+            this.contentView.removeAll();
+            this.contentView.repaint();
+            this.contentView.revalidate();
         }
         if(clubs == true){
             System.out.println("CLub");
+            this.contentView.removeAll();
+            this.contentView.repaint();
+            this.contentView.revalidate();
         }
         System.out.println("");
     }
@@ -296,11 +340,14 @@ public class MainView extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new MainView().setVisible(true);
                 
             }
+            
         });
+       
     }
 
     public JButton getClubsBtn() {
@@ -336,6 +383,8 @@ public class MainView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton clubsBtn;
     private javax.swing.JPanel contentView;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JButton liga1Btn;
     private javax.swing.JButton liga2Btn;
     private javax.swing.JButton liga3Btn;

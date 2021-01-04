@@ -5,6 +5,8 @@
  */
 package view;
 
+import java.awt.Dimension;
+import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -22,7 +24,8 @@ public class MainView2 extends javax.swing.JFrame  {
         JButton clubsBtn;
         JPanel contentView;
     private  void initComponents() {
-
+        Dimension preferredSize = new Dimension(724,423);
+        this.setPreferredSize(preferredSize);
          liga1Btn = new javax.swing.JButton();
          liga2Btn = new javax.swing.JButton();
          liga3Btn = new javax.swing.JButton();
@@ -143,11 +146,15 @@ public class MainView2 extends javax.swing.JFrame  {
         liga3Btn.getAccessibleContext().setAccessibleName("liga3btn");
         tableBtn.getAccessibleContext().setAccessibleName("tableBtn");
         planBtn.getAccessibleContext().setAccessibleName("planBtn");
+        contentView.getAccessibleContext().setAccessibleName("contentView");
+        contentView.setLayout(new java.awt.BorderLayout()); //Wichtig für Darstellung
 
         this.pack();
     }// </editor-fold> 
     
     public MainView2() {
+        //GroupLayout layout = new GroupLayout(this.contentView);
+        //this.contentView.setLayout(layout);
         initComponents();
         try {
             
