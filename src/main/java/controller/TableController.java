@@ -40,6 +40,7 @@ public class TableController implements ActionListener {
         //Neues TableModel erstellen je nach Liga
         //Aufrufen der SetTableContentMethode der Tabelle 
         DefaultTableModel tbm = (DefaultTableModel)this.tableView.getjTable1().getModel();
+        
         //Sample Data
         String [] data = new String[8];
         data[0] = "1";

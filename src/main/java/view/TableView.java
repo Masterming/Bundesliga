@@ -26,13 +26,16 @@ public class TableView extends javax.swing.JPanel {
         table = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
+        //ggf. extra Tabellen Modell als extra Klasse erstellen erstellen in dem man Eigenschaften wie Editable relaisiert 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
             },
             new String [] {
                 "Platz", "Team", "Spiele", "Punkte", "Siege", "Unentschieden", "Niederlagen", "Torverhältnisse"
             }
-        ));
+                
+        )     
+        );
         jScrollPane1.setViewportView(table);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
