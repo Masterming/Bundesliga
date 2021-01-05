@@ -96,7 +96,7 @@ public class ClubDBMapper {
         return i;
     }
     
-    public boolean deletePlayer(Club c){        
+    public boolean deleteClub(Club c){        
         boolean bSuccess = true;        
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction et = null;
@@ -118,7 +118,7 @@ public class ClubDBMapper {
         return bSuccess;
     }
     
-    public boolean updatePlayer(Club c){        
+    public boolean updateClub(Club c){        
         boolean bSuccess = true;        
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction et = null;
