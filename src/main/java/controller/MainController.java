@@ -11,8 +11,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 import model.Liga;
+import model.PlanModel;
 import view.MainView;
 import view.MainView2;
+import view.PlanView;
 import view.TableView;
 
 /**
@@ -137,6 +139,18 @@ public class MainController implements ActionListener {
         if(spielplan){
             this.view.getPlanBtn().setBackground(Color.white);
             this.view.getContentView().removeAll();
+            this.view.getContentView().repaint();
+            this.view.getContentView().revalidate();
+            
+            
+            
+            //Plan  View erstellen
+            //Plan Controller erstellen
+            PlanView plv = new PlanView();
+            PlanModel plm = new PlanModel();
+            this.view.getContentView().add(plv);
+            PlanController plc = new PlanController(plv, plm);
+            plm.setlM(this.ligaModel);
             this.view.getContentView().repaint();
             this.view.getContentView().revalidate();
             

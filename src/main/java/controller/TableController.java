@@ -41,6 +41,7 @@ public class TableController implements ActionListener {
         //Aufrufen der SetTableContentMethode der Tabelle 
         DefaultTableModel tbm = (DefaultTableModel)this.tableView.getjTable1().getModel();
         
+        //Bekomme list mit CLub Objkete mit Daten
         //Sample Data
         String [][] data = getData();
         for(String[] d : data){
@@ -93,12 +94,5 @@ public class TableController implements ActionListener {
         }
         return data;
     }
-    
-    
-    
-  
 
-    
-    
-    
 }
