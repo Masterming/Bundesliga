@@ -13,7 +13,7 @@ public class LigaDBMapper {
             .createEntityManagerFactory("Bundesliga");
     private final static Logger LOGGER = Logger.getLogger(LigaDBMapper.class.getName());
 
-    public void addLiga(Liga liga) {
+    public int addLiga(Liga liga) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction et = null;
 
@@ -30,6 +30,7 @@ public class LigaDBMapper {
         } finally {
             em.close();
         }
+        return liga.getId();
     }
 
     public Liga getLiga(int id) {

@@ -13,15 +13,17 @@ public class PlayerDBMapper {
             .createEntityManagerFactory("Bundesliga");
     private final static Logger LOGGER = Logger.getLogger(PlayerDBMapper.class.getName());
 
-    public void addPlayer(Player player) {
+    public int addPlayer(Player player) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction et = null;
 
         try {
+            
             et = em.getTransaction();
             et.begin();
             em.persist(player);
             et.commit();
+            LOGGER.log(Level.WARNING, "PlayerID: {0}", player.getId());
         } catch (Exception ex) {
             if (et != null) {
                 et.rollback();
@@ -30,6 +32,7 @@ public class PlayerDBMapper {
         } finally {
             em.close();
         }
+        return player.getId();
     }
 
     public Player getPlayer(int id) {

@@ -13,7 +13,7 @@ public class GameDBMapper {
             .createEntityManagerFactory("Bundesliga");
     private final static Logger LOGGER = Logger.getLogger(GameDBMapper.class.getName());
 
-    public void addGame(Game game) {
+    public int addGame(Game game) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction et = null;
 
@@ -30,6 +30,7 @@ public class GameDBMapper {
         } finally {
             em.close();
         }
+        return game.getId();
     }
 
     public Game getGame(int id) {

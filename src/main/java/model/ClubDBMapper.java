@@ -15,7 +15,7 @@ public class ClubDBMapper {
     public ClubDBMapper() {
     }
 
-    public void addClub(Club club) {
+    public int addClub(Club club) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction et = null;
 
@@ -32,6 +32,7 @@ public class ClubDBMapper {
         } finally {
             em.close();
         }
+        return club.getId();
     }
 
     public Club getClub(int id) {

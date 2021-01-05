@@ -14,20 +14,21 @@ public class Liga implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private final int ligaId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int ligaId;
     private String name;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(joinColumns = @JoinColumn(name = "ligaId"), inverseJoinColumns = @JoinColumn(name = "clubId"))
     private List<Club> clubs;
 
     public Liga() {
-        this.ligaId = -1;
+        // this.ligaId = -1;
+        clubs = new ArrayList<>();
     }
 
     public Liga(String name) {
-        this.ligaId = -1;
+        // this.ligaId = -1;
         this.name = name;
         this.clubs = new ArrayList<>();
     }
@@ -40,6 +41,10 @@ public class Liga implements Serializable {
 
     public int getId() {
         return ligaId;
+    }
+
+    public void setId(int id) {
+        ligaId = id;
     }
 
     public String getName() {
