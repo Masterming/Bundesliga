@@ -93,4 +93,48 @@ public class LigaDBMapper {
         }
         return i;
     }
+    
+    public boolean deleteLiga(Liga l){        
+        boolean bSuccess = true;        
+        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        EntityTransaction et = null;
+
+        try {
+            et = em.getTransaction();
+            et.begin();
+            em.remove(l);
+            et.commit();
+        } catch (Exception ex) {
+            if (et != null) {
+                et.rollback();
+            }
+            bSuccess = false;
+            LOGGER.log(Level.SEVERE, ex.getLocalizedMessage());
+        } finally {
+            em.close();
+        }
+        return bSuccess;
+    }
+    
+    public boolean updateLiga(Liga l){        
+        boolean bSuccess = true;        
+        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        EntityTransaction et = null;
+
+        try {
+            et = em.getTransaction();
+            et.begin();
+            em.merge(l);
+            et.commit();
+        } catch (Exception ex) {
+            if (et != null) {
+                et.rollback();
+            }
+            bSuccess = false;
+            LOGGER.log(Level.SEVERE, ex.getLocalizedMessage());
+        } finally {
+            em.close();
+        }
+        return bSuccess;
+    }
 }

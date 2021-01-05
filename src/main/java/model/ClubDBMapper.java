@@ -95,4 +95,48 @@ public class ClubDBMapper {
         }
         return i;
     }
+    
+    public boolean deletePlayer(Club c){        
+        boolean bSuccess = true;        
+        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        EntityTransaction et = null;
+
+        try {
+            et = em.getTransaction();
+            et.begin();
+            em.remove(c);
+            et.commit();
+        } catch (Exception ex) {
+            if (et != null) {
+                et.rollback();
+            }
+            bSuccess = false;
+            LOGGER.log(Level.SEVERE, ex.getLocalizedMessage());
+        } finally {
+            em.close();
+        }
+        return bSuccess;
+    }
+    
+    public boolean updatePlayer(Club c){        
+        boolean bSuccess = true;        
+        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        EntityTransaction et = null;
+
+        try {
+            et = em.getTransaction();
+            et.begin();
+            em.merge(c);
+            et.commit();
+        } catch (Exception ex) {
+            if (et != null) {
+                et.rollback();
+            }
+            bSuccess = false;
+            LOGGER.log(Level.SEVERE, ex.getLocalizedMessage());
+        } finally {
+            em.close();
+        }
+        return bSuccess;
+    }
 }
