@@ -8,6 +8,8 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import model.PlanModel;
 import view.PlanView;
 
@@ -23,7 +25,10 @@ public class PlanController implements ActionListener {
        this.plm = plmx;
        this.plv = plx;
        this.plm.addObserver(this.plv);
-       this.plv.getjButton1().addActionListener(this);
+       //this.plv.getjButton1().addActionListener(this);
+       //Problem: Durch MVC- Beobahcter Pattern wird View erst durch die Veränderung des Models initialisert -->
+       //zum Zeitpunkt der Controller erstellung ist nicht bekannt welche Buttons es geben wird --> Kann keine Action verlinkt werden
+       //this.setUpPlanView();
    }
    @Override
     public void actionPerformed(ActionEvent e) {
@@ -33,6 +38,5 @@ public class PlanController implements ActionListener {
                 break;
         }
     }
-    //private PlanView;
-    //private PlanModel;
+
 }

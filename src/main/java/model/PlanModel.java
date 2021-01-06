@@ -15,8 +15,10 @@ public class PlanModel extends Observable {
     //die Liaga als Model dient als Grundlage für die Erstellung des PlanModels
     private Liga lM;
     private int test;
+    //private String[][] 
     public PlanModel() {
         setChanged();
+        
     }
     //DatenStruktur überlegen --> Aus DB holen
 

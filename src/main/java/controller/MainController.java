@@ -10,6 +10,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 import model.Liga;
 import model.PlanModel;
 import view.MainView;
@@ -148,9 +149,13 @@ public class MainController implements ActionListener {
             //Plan Controller erstellen
             PlanView plv = new PlanView();
             PlanModel plm = new PlanModel();
-            this.view.getContentView().add(plv);
+            
+            
             PlanController plc = new PlanController(plv, plm);
             plm.setlM(this.ligaModel);
+            //Ding Soll Scrollable sein
+            JScrollPane scroll = new JScrollPane(plv);
+            this.view.getContentView().add(scroll);
             this.view.getContentView().repaint();
             this.view.getContentView().revalidate();
             

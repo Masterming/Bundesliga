@@ -5,8 +5,13 @@
  */
 package view;
 
+import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.BoxLayout;
+import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -17,67 +22,92 @@ import model.PlanModel;
  * @author z003ywys
  */
 public class PlanView extends JPanel implements Observer{
-    private JLabel jLabel1;
-    private JButton jButton1;
-    private JLabel jLabel2;
+    
     @Override
     public void update(Observable o, Object arg1) {
         //Hier landet man wenn man im Model was verändert hat durch norifyObservers
+        this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         if(o instanceof PlanModel){
             //To change body of generated methods, choose Tools | Templates.
+            //javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+            //this.setLayout(layout);
             
-            //Buttons und Labels je nach Liga erstellen
-            jLabel1.setText("Spielplan: " + ((PlanModel) o).getlM().getName());
-            jLabel2.setText("Counter " + ((PlanModel) o).getTest());
+            for(int i=0; i<10;i++){
+            JLabel test = new JLabel(((PlanModel) o).getlM().getName());
+            JButton testBtn = new JButton("TestBTN");
+            test.setAlignmentX(Component.CENTER_ALIGNMENT);
+            testBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+            testBtn.setActionCommand(String.valueOf(i));
+            testBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                action(evt);
+            }
+        });
+            this.add(test);
+            this.add(testBtn);
+            }
+            
+            this.revalidate();
+            this.repaint();
+            this.setVisible(true);
+           
             
     }
     }
+    
+    private void action (ActionEvent e){
+        String a = e.getActionCommand();
+        System.out.println("Das Action Command war: " + a);
+        System.out.println("Button gesetzt durch model geklickt");
+        //Neues Pop Up fenster
+    }
+    
     private void initComponents(){
         //Dynamisches Erstellen der View je nach Model machen
         
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-
-        jLabel1.setText("jLabel1");
-
-        jButton1.setText("jButton1");
-        jButton1.setActionCommand("test");
-
-        jLabel2.setText("jLabel2");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(28, 28, 28)
-                .addComponent(jButton1)
-                .addGap(55, 55, 55)
-                .addComponent(jLabel2)
-                .addContainerGap(170, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jButton1)
-                    .addComponent(jLabel2))
-                .addContainerGap(269, Short.MAX_VALUE))
-        );
+//        jLabel1 = new javax.swing.JLabel();
+//        jButton1 = new javax.swing.JButton();
+//        jLabel2 = new javax.swing.JLabel();
+//
+//        jLabel1.setText("jLabel1");
+//
+//        jButton1.setText("jButton1");
+//        jButton1.setActionCommand("test");
+//        
+//        jLabel2.setText("jLabel2");
+//
+        //javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        //this.setLayout(layout);
+//        layout.setHorizontalGroup(
+//            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//            .addGroup(layout.createSequentialGroup()
+//                .addContainerGap()
+//                .addComponent(jLabel1)
+//                .addGap(28, 28, 28)
+//                .addComponent(jButton1)
+//                .addGap(55, 55, 55)
+//                .addComponent(jLabel2)
+//                .addContainerGap(170, Short.MAX_VALUE))
+//        );
+//        layout.setVerticalGroup(
+//            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//            .addGroup(layout.createSequentialGroup()
+//                .addContainerGap()
+//                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+//                    .addComponent(jLabel1)
+//                    .addComponent(jButton1)
+//                    .addComponent(jLabel2))
+//                .addContainerGap(269, Short.MAX_VALUE))
+//        );
+        
     }
 
-    public JButton getjButton1() {
-        return jButton1;
-    }
+    
     
 
     public PlanView() {
         initComponents();
+        
         try {
             
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -97,5 +127,6 @@ public class PlanView extends JPanel implements Observer{
         }
         this.setVisible(true);
     }
+    
     
 }
