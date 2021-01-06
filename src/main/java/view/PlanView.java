@@ -5,6 +5,7 @@
  */
 package view;
 
+import controller.ErgebnisInputController;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.Observer;
 import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import model.PlanModel;
@@ -22,6 +24,8 @@ import model.PlanModel;
  * @author z003ywys
  */
 public class PlanView extends JPanel implements Observer{
+    private JFrame mainView;
+    private PlanModel plm;
     
     @Override
     public void update(Observable o, Object arg1) {
@@ -31,13 +35,24 @@ public class PlanView extends JPanel implements Observer{
             //To change body of generated methods, choose Tools | Templates.
             //javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
             //this.setLayout(layout);
-            
-            for(int i=0; i<10;i++){
+            this.removeAll();
+            this.plm =(PlanModel)o;
+            int count =1;
+            if(this.plm.getlM().getName().contains("1")){
+                count = 5;
+            }
+            if(this.plm.getlM().getName().contains("2")){
+                count = 10;
+            }
+            if(this.plm.getlM().getName().contains("3")){
+                count = 15;
+            }
+            for(int i=0; i<count;i++){
             JLabel test = new JLabel(((PlanModel) o).getlM().getName());
             JButton testBtn = new JButton("TestBTN");
             test.setAlignmentX(Component.CENTER_ALIGNMENT);
             testBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
-            testBtn.setActionCommand(String.valueOf(i));
+            testBtn.setActionCommand(String.valueOf(i)+ "RB Leipzig");
             testBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 action(evt);
@@ -59,7 +74,10 @@ public class PlanView extends JPanel implements Observer{
         String a = e.getActionCommand();
         System.out.println("Das Action Command war: " + a);
         System.out.println("Button gesetzt durch model geklickt");
-        //Neues Pop Up fenster
+        //Neues Pop Up fenster + Controller --> bekommt z.B. Spiel Model mit
+        ErgebnisInputView pop = new ErgebnisInputView(this.mainView,false);
+        ErgebnisInputController con = new ErgebnisInputController(pop, a,a, this.plm);
+        pop.setVisible(true);
     }
     
     private void initComponents(){
@@ -105,9 +123,9 @@ public class PlanView extends JPanel implements Observer{
     
     
 
-    public PlanView() {
+    public PlanView(JFrame main) {
         initComponents();
-        
+        this.mainView = main;
         try {
             
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

@@ -147,7 +147,7 @@ public class MainController implements ActionListener {
             
             //Plan  View erstellen
             //Plan Controller erstellen
-            PlanView plv = new PlanView();
+            PlanView plv = new PlanView(this.view);
             PlanModel plm = new PlanModel();
             
             
