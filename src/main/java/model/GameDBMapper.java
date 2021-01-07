@@ -8,7 +8,7 @@ import javax.persistence.*;
  * @author Rene
  */
 public class GameDBMapper {
-
+    /*
     private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence
             .createEntityManagerFactory("Bundesliga");
 
@@ -97,4 +97,5 @@ public class GameDBMapper {
         }
         return i;
     }
+     */
 }

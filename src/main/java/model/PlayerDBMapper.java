@@ -11,6 +11,7 @@ public class PlayerDBMapper {
 
     private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence
             .createEntityManagerFactory("Bundesliga");
+
     private final static Logger LOGGER = Logger.getLogger(PlayerDBMapper.class.getName());
 
     public int addPlayer(Player player) {

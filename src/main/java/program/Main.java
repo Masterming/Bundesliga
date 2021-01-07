@@ -40,7 +40,7 @@ public class Main {
         int count = 0;
         count += ldao.reset();
         count += cdao.reset();
-        count += gdao.reset();
+        //count += gdao.reset();
         count += pdao.reset();
 
         LOGGER.log(Level.INFO, "Removed {0} entries", count);
