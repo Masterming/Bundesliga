@@ -106,7 +106,12 @@ public class PlanView extends JPanel implements Observer{
 //                .addGap(55, 55, 55)
 //                .addComponent(jLabel2)
 //                .addContainerGap(170, Short.MAX_VALUE))
-//        );
+//                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+//                    .addComponent(jLabel1)
+//                    .addComponent(jButton1)
+//                    .addComponent(jLabel2))
+//                .addContainerGap(269, Short.MAX_VALUE))
+//  /        );
 //        layout.setVerticalGroup(
 //            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 //            .addGroup(layout.createSequentialGroup()
