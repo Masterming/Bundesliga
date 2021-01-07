@@ -23,7 +23,6 @@ public class PlayerDBMapper {
             et.begin();
             em.persist(player);
             et.commit();
-            LOGGER.log(Level.WARNING, "PlayerID: {0}", player.getId());
         } catch (Exception ex) {
             if (et != null) {
                 et.rollback();

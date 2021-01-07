@@ -17,12 +17,10 @@ public class Game implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int gameId;
 
-    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    @MapsId
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Club club1;
 
-    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    @MapsId
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Club club2;
 
     private int score1;

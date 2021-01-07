@@ -16,11 +16,13 @@ public class LigaDBMapper {
     public int addLiga(Liga liga) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction et = null;
+        int id = -1;
 
         try {
             et = em.getTransaction();
             et.begin();
-            em.persist(liga);
+            Liga merge = em.merge(liga);
+            id = merge.getId();
             et.commit();
         } catch (Exception ex) {
             if (et != null) {
@@ -30,7 +32,7 @@ public class LigaDBMapper {
         } finally {
             em.close();
         }
-        return liga.getId();
+        return id;
     }
 
     public Liga getLiga(int id) {

@@ -8,21 +8,22 @@ import javax.persistence.*;
  * @author Rene
  */
 public class ClubDBMapper {
+
     private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence
             .createEntityManagerFactory("Bundesliga");
-    private final static Logger LOGGER = Logger.getLogger(ClubDBMapper.class.getName());
 
-    public ClubDBMapper() {
-    }
+    private final static Logger LOGGER = Logger.getLogger(ClubDBMapper.class.getName());
 
     public int addClub(Club club) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction et = null;
+        int id = -1;
 
         try {
             et = em.getTransaction();
             et.begin();
-            em.persist(club);
+            Club merge = em.merge(club);
+            id = merge.getId();
             et.commit();
         } catch (Exception ex) {
             if (et != null) {
@@ -32,7 +33,7 @@ public class ClubDBMapper {
         } finally {
             em.close();
         }
-        return club.getId();
+        return id;
     }
 
     public Club getClub(int id) {

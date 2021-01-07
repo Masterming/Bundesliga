@@ -19,11 +19,11 @@ public class Player implements Serializable {
     private int goals;
 
     public Player() {
-        // this.playerId = -1;
+        this.playerId = -1;
     }
 
     public Player(String name, int goals) {
-        // this.playerId = -1;
+        this.playerId = -1;
         this.name = name;
         this.goals = goals;
     }

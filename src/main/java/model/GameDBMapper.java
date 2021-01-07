@@ -11,16 +11,19 @@ public class GameDBMapper {
 
     private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence
             .createEntityManagerFactory("Bundesliga");
+
     private final static Logger LOGGER = Logger.getLogger(GameDBMapper.class.getName());
 
     public int addGame(Game game) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction et = null;
+        int id = -1;
 
         try {
             et = em.getTransaction();
             et.begin();
-            em.persist(game);
+            Game merge = em.merge(game);
+            id = merge.getId();
             et.commit();
         } catch (Exception ex) {
             if (et != null) {
@@ -30,7 +33,7 @@ public class GameDBMapper {
         } finally {
             em.close();
         }
-        return game.getId();
+        return id;
     }
 
     public Game getGame(int id) {

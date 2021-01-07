@@ -19,17 +19,17 @@ public class Club implements Serializable {
     private String name;
     private int points;
 
-    @OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(joinColumns = @JoinColumn(name = "clubId"), inverseJoinColumns = @JoinColumn(name = "playerId"))
     private List<Player> players;
 
     public Club() {
-        // this.clubId = -1;
+        this.clubId = -1;
         this.players = new ArrayList<>();
     }
 
     public Club(String name) {
-        // this.clubId = -1;
+        this.clubId = -1;
         this.name = name;
         this.points = 0;
         this.players = new ArrayList<>();
