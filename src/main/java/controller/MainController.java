@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import model.Liga;
 import model.PlanModel;
+import view.ClubView2;
 import view.MainView;
 import view.MainView2;
 import view.PlanView;
@@ -168,6 +169,7 @@ public class MainController implements ActionListener {
             this.view.getContentView().removeAll();
             this.view.getContentView().repaint();
             this.view.getContentView().revalidate();
+            this.view.getContentView().add(new ClubView2());
 
         }else{
             this.view.getClubsBtn().setBackground(Color.lightGray);

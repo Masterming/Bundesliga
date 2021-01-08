@@ -5,6 +5,7 @@
  */
 package view;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -23,7 +24,11 @@ public class TableView extends javax.swing.JPanel {
     JLabel jLabel1;
     private  void initComponents() {
         jScrollPane1 = new javax.swing.JScrollPane();
-        table = new javax.swing.JTable();
+        table = new javax.swing.JTable(){
+            public boolean editCellAt(int row, int column, java.util.EventObject e) {
+            return false;
+         }
+        };
         jLabel1 = new javax.swing.JLabel();
 
         //ggf. extra Tabellen Modell als extra Klasse erstellen erstellen in dem man Eigenschaften wie Editable relaisiert 
@@ -36,6 +41,11 @@ public class TableView extends javax.swing.JPanel {
                 
         )     
         );
+        table.setRowSelectionAllowed(false);
+        table.setColumnSelectionAllowed(false);
+        table.setAutoCreateRowSorter(true);
+        Color backGround = new Color(240,240,240);
+        this.setBackground(backGround);
         jScrollPane1.setViewportView(table);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
