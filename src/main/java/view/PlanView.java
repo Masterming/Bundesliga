@@ -50,6 +50,7 @@ public class PlanView extends JPanel implements Observer{
             for(int i=0; i<count;i++){
             JLabel test = new JLabel(((PlanModel) o).getlM().getName());
             JButton testBtn = new JButton("TestBTN");
+            test.setBackground(java.awt.Color.lightGray);
             test.setAlignmentX(Component.CENTER_ALIGNMENT);
             testBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
             testBtn.setActionCommand(String.valueOf(i)+ "RB Leipzig");

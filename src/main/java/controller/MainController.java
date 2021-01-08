@@ -169,7 +169,8 @@ public class MainController implements ActionListener {
             this.view.getContentView().removeAll();
             this.view.getContentView().repaint();
             this.view.getContentView().revalidate();
-            ClubView clV = new ClubView();
+            
+            ClubView clV = new ClubView(this.view);
             ClubController cCl = new ClubController(clV, this.ligaModel);
             this.view.getContentView().add(clV);
 

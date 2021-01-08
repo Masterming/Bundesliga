@@ -2,7 +2,9 @@ package view;
 
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.JFrame;
 import javax.swing.JTable;
+import javax.swing.table.TableModel;
 import model.Club;
 
 /**
@@ -11,6 +13,7 @@ import model.Club;
 public class ClubView extends javax.swing.JPanel implements Observer{
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable clubTable;
+    private JFrame mainView; 
     public void printOverview(Club model) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
@@ -25,9 +28,9 @@ public class ClubView extends javax.swing.JPanel implements Observer{
 
         clubTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"FC Bayern", "Allianz Arena"},
-                {"RB Leipzig", "Red Bull Arena"},
-                {"Borussia Dortmund", "Signal Iduna Park"},
+//                {"FC Bayern", "Allianz Arena"},
+//                {"RB Leipzig", "Red Bull Arena"},
+//                {"Borussia Dortmund", "Signal Iduna Park"},
             },
             new String [] {
                 "Club", "Stadion"
@@ -65,11 +68,20 @@ public class ClubView extends javax.swing.JPanel implements Observer{
     public JTable getClubTable() {
         return clubTable;
     }
-    
-    
-    public ClubView(){
-        initComponents();
+    public void setTableContent (TableModel tbm){
+        this.clubTable.setModel(tbm);
     }
+    
+    
+    public ClubView(JFrame MainView){
+        initComponents();
+        this.mainView=MainView;
+    }
+
+    public JFrame getMainView() {
+        return mainView;
+    }
+    
 
     @Override
     public void update(Observable arg0, Object arg1) {

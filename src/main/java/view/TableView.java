@@ -36,7 +36,7 @@ public class TableView extends javax.swing.JPanel {
             new Object [][] {
             },
             new String [] {
-                "Platz", "Team", "Spiele", "Punkte", "Siege", "Unentschieden", "Niederlagen", "Torverhältnisse"
+                "Platz", "Club", "Spiele", "Punkte", "Siege", "Unentschieden", "Niederlagen", "Torverhältnisse"
             }
                 
         )     
