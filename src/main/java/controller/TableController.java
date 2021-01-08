@@ -25,7 +25,7 @@ public class TableController implements ActionListener {
         this.tableView = tbv;
         //this.tableView.getjButton1().addActionListener(this);
         this.l = l;
-        this.tableView.setjLabel1(l.getName());
+        //this.tableView.setjLabel1(l.getName());
         this.setTableData();
     }
     @Override public void actionPerformed (ActionEvent ae){

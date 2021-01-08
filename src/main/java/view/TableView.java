@@ -21,7 +21,7 @@ import javax.swing.table.TableModel;
 public class TableView extends javax.swing.JPanel {
     JScrollPane  jScrollPane1;
     JTable table;
-    JLabel jLabel1;
+    //JLabel jLabel1;
     private  void initComponents() {
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable(){
@@ -29,7 +29,7 @@ public class TableView extends javax.swing.JPanel {
             return false;
          }
         };
-        jLabel1 = new javax.swing.JLabel();
+        //jLabel1 = new javax.swing.JLabel();
 
         //ggf. extra Tabellen Modell als extra Klasse erstellen erstellen in dem man Eigenschaften wie Editable relaisiert 
         table.setModel(new javax.swing.table.DefaultTableModel(
@@ -48,23 +48,18 @@ public class TableView extends javax.swing.JPanel {
         this.setBackground(backGround);
         jScrollPane1.setViewportView(table);
 
+        
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         
     }
@@ -85,13 +80,13 @@ public class TableView extends javax.swing.JPanel {
         this.table = jTable1;
     }
 
-    public JLabel getjLabel1() {
-        return jLabel1;
-    }
+//    public JLabel getjLabel1() {
+//        return jLabel1;
+//    }
 
-    public void setjLabel1(String liga) {
-        this.jLabel1.setText(liga);
-    }
+//    public void setjLabel1(String liga) {
+//        this.jLabel1.setText(liga);
+//    }
     
     public void setTableContent (TableModel tbm){
         this.table.setModel(tbm);
