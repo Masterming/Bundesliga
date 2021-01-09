@@ -102,17 +102,35 @@ public class TransController implements ActionListener, MouseListener {
     
     private void transFinish(){
         int best = JOptionPane.showConfirmDialog(null, "Wollen Sie die Transaktion abschließen");
+        boolean nullIncluded =false;
         if(best ==0){
             System.out.println("True");
             List<String>transferPlayer = new ArrayList();
         for(int i=0; i<listModelSend.getSize();i++){
+            if(listModelSend.getElementAt(i)!=null){
             transferPlayer.add(listModelSend.getElementAt(i).toString());
+            }
+            else{
+                nullIncluded=true;
+            }
         }
         //Transaktion mit den Spielern passieren 
+        if(nullIncluded==false &&transferPlayer.size()>0){
+            //Transaktion durchführen
         System.out.println("trans Finish");
         for(String st : transferPlayer){
-            System.out.println(st);
+            if(st!=null){
+                System.out.println("Übertragende Objekte " + st);
+            }
         }
+        JOptionPane.showMessageDialog(this.trV, "Transfer War erfolgreich");
+ 
+        }
+        else{
+            System.out.println("Bitte Wählen Sie die zu übertragenden Teams aus");
+            JOptionPane.showMessageDialog(this.trV, "Bitte Wählen Sie die zu übertragenden Teams aus");
+        }
+
             
         }
         else{

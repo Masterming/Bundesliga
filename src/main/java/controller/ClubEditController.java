@@ -16,7 +16,6 @@ import view.ClubEditView2;
 import view.PlanView;
 import view.TableView;
 import view.TransView;
-import view.TransView2;
 
 /**
  *
