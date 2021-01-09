@@ -14,6 +14,7 @@ import javax.swing.JPanel;
  * @author z003ywys
  */
 public class ClubEditView extends javax.swing.JDialog  {
+    private static final long serialVersionUID = 6L;
     public ClubEditView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();

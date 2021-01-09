@@ -15,7 +15,7 @@ import model.Liga;
 import model.PlanModel;
 import view.ClubView;
 import view.MainView;
-import view.MainView2;
+import view.MainView;
 import view.PlanView;
 import view.TableView;
 
@@ -24,11 +24,11 @@ import view.TableView;
  * @author z003ywys
  */
 public class MainController implements ActionListener {
-    private MainView2 view;
+    private MainView view;
     private Liga ligaModel;
  
 
-    public void setView(MainView2 view) {
+    public void setView(MainView view) {
         this.view = view;
     }
     //Variable für angezeigtesn View
@@ -41,7 +41,7 @@ public class MainController implements ActionListener {
     boolean spielplan = false;
     boolean clubs = false;
 
-    public MainController(MainView2 view, Liga ligaModel) {
+    public MainController(MainView view, Liga ligaModel) {
         this.view = view;
         this.ligaModel = ligaModel;
         this.view.getLiga1Btn().addActionListener(this);

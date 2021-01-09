@@ -27,7 +27,7 @@ public class PlanModelDBMapper {
     private final static Logger LOGGER = Logger.getLogger(PlanModelDBMapper.class.getName());
 
     public void addPlanModel(PlanModel pm) {
-        EntityManager em = ManagerFacory.createEntityManager();
+        EntityManager em = ManagerFactory.createEntityManager();
         EntityTransaction et = null;
 
         try {
@@ -46,7 +46,7 @@ public class PlanModelDBMapper {
     }
 
     public PlanModel getPlanModel(int id) {
-        EntityManager em = ManagerFacory.createEntityManager();
+        EntityManager em = ManagerFactory.createEntityManager();
         String query = "SELECT p FROM planmodels p WHERE p.id = :id";
         TypedQuery<PlanModel> tq = em.createQuery(query, PlanModel.class);
         tq.setParameter("id", id);
@@ -66,7 +66,7 @@ public class PlanModelDBMapper {
     }
 
     public List<PlanModel> getAllPlanModels() {
-        EntityManager em = ManagerFacory.createEntityManager();
+        EntityManager em = ManagerFactory.createEntityManager();
         String strQuery = "SELECT p FROM planmodel p WHERE p.id IS NOT NULL";
         TypedQuery<PlanModel> tq = em.createQuery(strQuery, PlanModel.class);
         List<PlanModel> pms = new ArrayList<>();
@@ -85,7 +85,7 @@ public class PlanModelDBMapper {
     }
 
     public int reset() {
-        EntityManager em = ManagerFacory.createEntityManager();
+        EntityManager em = ManagerFactory.createEntityManager();
         EntityTransaction et = null;
 
         String strQuery = "DELETE FROM planmodels";
@@ -109,7 +109,7 @@ public class PlanModelDBMapper {
     
     public boolean deletePlanModel(PlanModel pm){        
         boolean bSuccess = true;        
-        EntityManager em = ManagerFacory.createEntityManager();
+        EntityManager em = ManagerFactory.createEntityManager();
         EntityTransaction et = null;
 
         try {
@@ -131,7 +131,7 @@ public class PlanModelDBMapper {
     
     public boolean updatePlanModel(PlanModel pm){        
         boolean bSuccess = true;        
-        EntityManager em = ManagerFacory.createEntityManager();
+        EntityManager em = ManagerFactory.createEntityManager();
         EntityTransaction et = null;
 
         try {

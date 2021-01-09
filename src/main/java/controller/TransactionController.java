@@ -20,13 +20,13 @@ import view.TransView;
  *
  * @author z003ywys
  */
-public class TransController implements ActionListener, MouseListener {
+public class TransactionController implements ActionListener, MouseListener {
     private TransView trV;
     private String selectedTeam;
     private DefaultListModel listModelUrsprung;
     private DefaultListModel listModelSend;
 
-    public TransController(TransView trV) {
+    public TransactionController(TransView trV) {
         this.trV = trV;
         this.trV.getAddToTransBtn().addActionListener(this);
         this.trV.getRemoveFromTransBtn().addActionListener(this);

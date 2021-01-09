@@ -15,9 +15,13 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "planmodels")
-public class PlanModel extends Observable {
+public class PlanModel extends Observable implements Serializable{
+    
+    private static final long serialVersionUID = 5L;
+    
     //die Liaga als Model dient als Grundlage für die Erstellung des PlanModels
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private final int planModelID;
     private Liga lM;
     private int test;

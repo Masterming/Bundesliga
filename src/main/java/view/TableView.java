@@ -19,6 +19,7 @@ import javax.swing.table.TableModel;
  * @author z003ywys
  */
 public class TableView extends javax.swing.JPanel {
+    private static final long serialVersionUID = 14L;
     JScrollPane  jScrollPane1;
     JTable table;
     //JLabel jLabel1;

@@ -8,6 +8,7 @@ import model.Liga;
  * @author Rene
  */
 public class LigaView {
+    private static final long serialVersionUID = 11L;
 
     public void printOverview(Liga model) {
         List<Club> clubs = model.getClubs();

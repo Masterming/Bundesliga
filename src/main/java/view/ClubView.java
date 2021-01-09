@@ -11,6 +11,7 @@ import model.Club;
  * @author Rene
  */
 public class ClubView extends javax.swing.JPanel implements Observer{
+    private static final long serialVersionUID = 8L;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable clubTable;
     private JFrame mainView; 

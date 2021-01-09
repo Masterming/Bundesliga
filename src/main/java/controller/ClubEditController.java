@@ -58,7 +58,7 @@ public class ClubEditController implements ActionListener {
             this.cev.getTransBtn().setBackground(Color.white);
             this.cev.getKaderBtn().setBackground(Color.lightGray);
             TransView tranView = new TransView();
-            TransController tr = new TransController (tranView);
+            TransactionController tr = new TransactionController (tranView);
             //Layout setzen ?
             this.cev.getClubEditContent().removeAll();
             this.cev.getClubEditContent().add(tranView);

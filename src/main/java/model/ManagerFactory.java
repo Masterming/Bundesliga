@@ -5,7 +5,7 @@ import javax.persistence.*;
 /**
  * @author Rene
  */
-public class ManagerFacory {
+public class ManagerFactory {
 
     private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("Bundesliga");
 

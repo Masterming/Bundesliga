@@ -14,6 +14,7 @@ import javax.swing.JTextField;
  * @author z003ywys
  */
 public class ErgebnisInputView extends javax.swing.JDialog {
+    private static final long serialVersionUID = 9L;
     public ErgebnisInputView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();

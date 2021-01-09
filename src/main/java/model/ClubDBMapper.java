@@ -12,7 +12,7 @@ public class ClubDBMapper {
     private final static Logger LOGGER = Logger.getLogger(ClubDBMapper.class.getName());
 
     public int addClub(Club club) {
-        EntityManager em = ManagerFacory.createEntityManager();
+        EntityManager em = ManagerFactory.createEntityManager();
         EntityTransaction et = null;
         int id = -1;
 
@@ -34,7 +34,7 @@ public class ClubDBMapper {
     }
 
     public Club getClub(int id) {
-        EntityManager em = ManagerFacory.createEntityManager();
+        EntityManager em = ManagerFactory.createEntityManager();
         String query = "SELECT c FROM Club c WHERE c.id = :id";
         TypedQuery<Club> tq = em.createQuery(query, Club.class);
         tq.setParameter("id", id);
@@ -54,7 +54,7 @@ public class ClubDBMapper {
     }
 
     public List<Club> getAllClubs() {
-        EntityManager em = ManagerFacory.createEntityManager();
+        EntityManager em = ManagerFactory.createEntityManager();
         String strQuery = "SELECT c FROM Club c WHERE c.id IS NOT NULL";
         TypedQuery<Club> tq = em.createQuery(strQuery, Club.class);
         List<Club> custs = new ArrayList<>();
@@ -73,7 +73,7 @@ public class ClubDBMapper {
     }
 
     public int reset() {
-        EntityManager em = ManagerFacory.createEntityManager();
+        EntityManager em = ManagerFactory.createEntityManager();
         EntityTransaction et = null;
 
         String strQuery = "DELETE FROM Club";
@@ -97,7 +97,7 @@ public class ClubDBMapper {
     
     public boolean deleteClub(Club c){        
         boolean bSuccess = true;        
-        EntityManager em = ManagerFacory.createEntityManager();
+        EntityManager em = ManagerFactory.createEntityManager();
         EntityTransaction et = null;
 
         try {
@@ -119,7 +119,7 @@ public class ClubDBMapper {
     
     public boolean updateClub(Club c){        
         boolean bSuccess = true;        
-        EntityManager em = ManagerFacory.createEntityManager();
+        EntityManager em = ManagerFactory.createEntityManager();
         EntityTransaction et = null;
 
         try {

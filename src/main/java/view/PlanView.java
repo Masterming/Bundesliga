@@ -24,6 +24,7 @@ import model.PlanModel;
  * @author z003ywys
  */
 public class PlanView extends JPanel implements Observer{
+    private static final long serialVersionUID = 13L;
     private JFrame mainView;
     private PlanModel plm;
     

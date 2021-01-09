@@ -16,6 +16,7 @@ import javax.swing.JTextField;
  * @author z003ywys
  */
 public class TransView extends javax.swing.JPanel {
+    private static final long serialVersionUID = 7L;
     private javax.swing.JButton addToTransBtn;
     private javax.swing.JList<String> ergListTeam;
     private javax.swing.JCheckBox jCheckBox1;
