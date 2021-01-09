@@ -13,6 +13,8 @@ import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
 import view.ClubEditView;
 import view.ClubEditView2;
+import view.KaderView;
+import view.KaderView2;
 import view.PlanView;
 import view.TableView;
 import view.TransView;
@@ -39,11 +41,19 @@ public class ClubEditController implements ActionListener {
         if(evt.getActionCommand()=="kader"){
             this.cev.getKaderBtn().setBackground(Color.white);
             this.cev.getTransBtn().setBackground(Color.lightGray);
-            this.cev.getClubName().setText("Button Kader wurde geklickt");
+            //this.cev.getClubName().setText("Button Kader wurde geklickt");
             System.out.println("Kader");
             this.cev.getClubEditContent().removeAll();
             this.cev.getClubEditContent().repaint();
             this.cev.getClubEditContent().revalidate();
+            
+            KaderView kdw2 = new KaderView();
+            KaderController kDc = new KaderController(kdw2,team);
+            this.cev.getClubEditContent().add(kdw2);
+            this.cev.getClubEditContent().repaint();
+            this.cev.getClubEditContent().revalidate();
+            
+            
         }
         if(evt.getActionCommand()=="trans"){
             System.out.println("Trans");
