@@ -6,19 +6,25 @@
 package model;
 
 import java.util.Observable;
+import java.io.Serializable;
+import javax.persistence.*;
 
 /**
  *
  * @author z003ywys
  */
+@Entity
+@Table(name = "planmodels")
 public class PlanModel extends Observable {
     //die Liaga als Model dient als Grundlage für die Erstellung des PlanModels
+    @Id
+    private final int planModelID;
     private Liga lM;
     private int test;
     //private String[][] 
     public PlanModel() {
-        setChanged();
-        
+        this.planModelID = -1;
+        setChanged();        
     }
     //DatenStruktur überlegen --> Aus DB holen
 
@@ -44,9 +50,8 @@ public class PlanModel extends Observable {
         setChanged();
         notifyObservers(lM);
     }
-    
-    
 
-    
-    
+    public int getPlanModelID() {
+        return planModelID;
+    }    
 }
