@@ -173,6 +173,8 @@ public class MainController implements ActionListener {
             ClubView clV = new ClubView(this.view);
             ClubController cCl = new ClubController(clV, this.ligaModel);
             this.view.getContentView().add(clV);
+            this.view.getContentView().repaint();
+            this.view.getContentView().revalidate();
 
         }else{
             this.view.getClubsBtn().setBackground(Color.lightGray);

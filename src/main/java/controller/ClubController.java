@@ -50,7 +50,7 @@ public class ClubController implements MouseListener {
             int row = temp.getSelectedRow();
             int column = 0;
             String team =temp.getValueAt(row, column).toString();
-            ClubEditView cbV = new ClubEditView(this.view.getMainView(),false);
+            ClubEditView cbV = new ClubEditView(this.view.getMainView(),true);
             ClubEditController cbC = new ClubEditController(cbV, team);
             cbV.setVisible(true);
         }

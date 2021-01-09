@@ -5,7 +5,9 @@
  */
 package view;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  *
@@ -19,6 +21,7 @@ public class ClubEditView2 extends javax.swing.JDialog {
     public ClubEditView2(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        //this.setVisible(true);
     }
 
     /**
@@ -36,6 +39,7 @@ public class ClubEditView2 extends javax.swing.JDialog {
         clubEditContent = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(472, 337));
 
         kaderBtn.setText("Kader");
         kaderBtn.setActionCommand("kader");
@@ -47,46 +51,37 @@ public class ClubEditView2 extends javax.swing.JDialog {
         transBtn.setToolTipText("");
         transBtn.setActionCommand("trans");
 
-        javax.swing.GroupLayout clubEditContentLayout = new javax.swing.GroupLayout(clubEditContent);
-        clubEditContent.setLayout(clubEditContentLayout);
-        clubEditContentLayout.setHorizontalGroup(
-            clubEditContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        clubEditContentLayout.setVerticalGroup(
-            clubEditContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 168, Short.MAX_VALUE)
-        );
+        clubEditContent.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(114, 114, 114)
-                .addComponent(clubName, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(128, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(clubEditContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(kaderBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(transBtn))
-                    .addComponent(clubEditContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 306, Short.MAX_VALUE)
+                        .addComponent(transBtn)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(154, 154, 154)
+                .addComponent(clubName, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGap(17, 17, 17)
                 .addComponent(clubName)
-                .addGap(5, 5, 5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(kaderBtn)
                     .addComponent(transBtn))
-                .addGap(18, 18, 18)
-                .addComponent(clubEditContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(clubEditContent, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -139,9 +134,34 @@ public class ClubEditView2 extends javax.swing.JDialog {
         return clubName;
     }
 
-    public void setClubName(JLabel clubName) {
-        this.clubName = clubName;
+    public void setClubName(String clubName) {
+        this.clubName.setText(clubName);
     }
+
+    public JPanel getClubEditContent() {
+        return clubEditContent;
+    }
+
+    public void setClubEditContent(JPanel clubEditContent) {
+        this.clubEditContent = clubEditContent;
+    }
+
+    public JButton getKaderBtn() {
+        return kaderBtn;
+    }
+
+    public void setKaderBtn(JButton kaderBtn) {
+        this.kaderBtn = kaderBtn;
+    }
+
+    public JButton getTransBtn() {
+        return transBtn;
+    }
+
+    public void setTransBtn(JButton transBtn) {
+        this.transBtn = transBtn;
+    }
+    
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

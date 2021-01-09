@@ -5,9 +5,17 @@
  */
 package controller;
 
+import java.awt.Button;
+import java.awt.Color;
+import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.BoxLayout;
 import view.ClubEditView;
+import view.ClubEditView2;
+import view.PlanView;
+import view.TableView;
+import view.TransView2;
 
 /**
  *
@@ -29,17 +37,29 @@ public class ClubEditController implements ActionListener {
     public void actionPerformed(ActionEvent evt) {
         System.out.println("Button wurde gedrückt");
         if(evt.getActionCommand()=="kader"){
+            this.cev.getKaderBtn().setBackground(Color.white);
+            this.cev.getTransBtn().setBackground(Color.lightGray);
+            this.cev.getClubName().setText("Button Kader wurde geklickt");
             System.out.println("Kader");
             this.cev.getClubEditContent().removeAll();
             this.cev.getClubEditContent().repaint();
             this.cev.getClubEditContent().revalidate();
-            //Neuen Content festlegen
         }
         if(evt.getActionCommand()=="trans"){
             System.out.println("Trans");
+            this.cev.getTransBtn().setBackground(Color.white);
+            this.cev.getKaderBtn().setBackground(Color.lightGray);
+            TransView2 pltet = new TransView2();
+            //Layout setzen ?
             this.cev.getClubEditContent().removeAll();
+            this.cev.getClubEditContent().add(pltet);
+            System.out.println("Content hizugefügt");
             this.cev.getClubEditContent().repaint();
+            System.out.println("Repaint()");
             this.cev.getClubEditContent().revalidate();
+            System.out.println("Revalidate()");
+            
+
         }
     }
 }
