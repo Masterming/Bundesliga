@@ -6,27 +6,20 @@
 package view;
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
  *
  * @author z003ywys
  */
-public class ClubEditView extends javax.swing.JDialog  {
+public class ClubEditView3 extends javax.swing.JDialog {
     private static final long serialVersionUID = 6L;
-    public ClubEditView(java.awt.Frame parent, boolean modal) {
+    public ClubEditView3(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
-    private javax.swing.JButton addSpielerBtn;
-    private javax.swing.JPanel clubEditContent;
-    private javax.swing.JLabel clubName;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JButton kaderBtn;
-    private javax.swing.JButton transBtn;
-    private void initComponents() {
- jLabel1 = new javax.swing.JLabel();
+    private void initComponents(){
+         jLabel1 = new javax.swing.JLabel();
         kaderBtn = new javax.swing.JButton();
         addSpielerBtn = new javax.swing.JButton();
         transBtn = new javax.swing.JButton();
@@ -36,7 +29,6 @@ public class ClubEditView extends javax.swing.JDialog  {
         jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(400, 450));
 
         kaderBtn.setText("Kader");
         kaderBtn.setActionCommand("kader");
@@ -49,11 +41,9 @@ public class ClubEditView extends javax.swing.JDialog  {
 
         clubName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         clubName.setText("Clubname");
-        clubEditContent.setLayout(new java.awt.BorderLayout());
 
-        javax.swing.GroupLayout clubEditContentLayout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(clubEditContentLayout);
-        
+        javax.swing.GroupLayout clubEditContentLayout = new javax.swing.GroupLayout(clubEditContent);
+        clubEditContent.setLayout(clubEditContentLayout);
         clubEditContentLayout.setHorizontalGroup(
             clubEditContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
@@ -97,21 +87,23 @@ public class ClubEditView extends javax.swing.JDialog  {
         );
 
         pack();
-    }// </editor-fold>                           
-    public JLabel getClubName() {
-        return this.clubName;
     }
+    private javax.swing.JButton addSpielerBtn;
+    private javax.swing.JPanel clubEditContent;
+    private javax.swing.JLabel clubName;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton kaderBtn;
+    private javax.swing.JButton transBtn;
 
     public JPanel getClubEditContent() {
         return clubEditContent;
     }
-
-    public void setClubEditContent(JPanel clubEditContent) {
-        this.clubEditContent = clubEditContent;
-    }
-
     public void setClubName(String clubName) {
         this.clubName.setText(clubName); 
+    }
+
+    public JButton getAddSpielerBtn() {
+        return addSpielerBtn;
     }
 
     public JButton getKaderBtn() {
@@ -120,10 +112,6 @@ public class ClubEditView extends javax.swing.JDialog  {
 
     public JButton getTransBtn() {
         return transBtn;
-    }
-
-    public JButton getAddSpielerBtn() {
-        return addSpielerBtn;
     }
     
     

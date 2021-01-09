@@ -12,8 +12,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
 import view.ClubEditView;
+import view.ClubEditView3;
 import view.KaderView;
 import view.PlanView;
+import view.SpielerAdd2;
+import view.SpielerAddView;
 import view.TableView;
 import view.TransactionView;
 
@@ -31,6 +34,7 @@ public class ClubEditController implements ActionListener {
         this.team = team;
         this.cev.getKaderBtn().addActionListener(this);
         this.cev.getTransBtn().addActionListener(this);
+        this.cev.getAddSpielerBtn().addActionListener(this);
     }
 
     @Override
@@ -39,6 +43,7 @@ public class ClubEditController implements ActionListener {
         if(evt.getActionCommand()=="kader"){
             this.cev.getKaderBtn().setBackground(Color.white);
             this.cev.getTransBtn().setBackground(Color.lightGray);
+            this.cev.getAddSpielerBtn().setBackground(Color.lightGray);
             //this.cev.getClubName().setText("Button Kader wurde geklickt");
             System.out.println("Kader");
             this.cev.getClubEditContent().removeAll();
@@ -57,6 +62,7 @@ public class ClubEditController implements ActionListener {
             System.out.println("Trans");
             this.cev.getTransBtn().setBackground(Color.white);
             this.cev.getKaderBtn().setBackground(Color.lightGray);
+            this.cev.getAddSpielerBtn().setBackground(Color.lightGray);
             TransactionView tranView = new TransactionView();
             TransactionController tr = new TransactionController (tranView);
             //Layout setzen ?
@@ -67,8 +73,21 @@ public class ClubEditController implements ActionListener {
             System.out.println("Repaint()");
             this.cev.getClubEditContent().revalidate();
             System.out.println("Revalidate()");
-            
 
+        }
+        if(evt.getActionCommand()=="spieler"){
+            System.out.println("Spieler");
+            this.cev.getTransBtn().setBackground(Color.lightGray);
+            this.cev.getKaderBtn().setBackground(Color.lightGray);
+            this.cev.getAddSpielerBtn().setBackground(Color.white);
+            this.cev.getClubEditContent().removeAll();
+            this.cev.getClubEditContent().repaint();
+            this.cev.getClubEditContent().revalidate();
+            SpielerAddView spV = new SpielerAddView();
+            SpielerAddControler spAC = new SpielerAddControler(spV);
+            this.cev.getClubEditContent().add(spV);
+            this.cev.getClubEditContent().repaint();
+            this.cev.getClubEditContent().revalidate();
         }
     }
 }

@@ -11,6 +11,7 @@ import javax.swing.table.DefaultTableModel;
 import model.Club;
 import model.Liga;
 import view.ClubEditView;
+import view.ClubEditView3;
 import view.ClubView;
 
 /**
