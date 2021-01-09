@@ -18,6 +18,16 @@ public class Club implements Serializable {
     private final int clubId;
     private String name;
     private int points;
+    private int gamesCount;
+
+    public int getGamesCount() {
+        return gamesCount;
+    }
+
+    public void setGamesCount(int gamesCount) {
+        this.gamesCount = gamesCount;
+    }
+    
 
     @OneToMany(cascade = CascadeType.PERSIST)
     @JoinTable(joinColumns = @JoinColumn(name = "clubId"), inverseJoinColumns = @JoinColumn(name = "playerId"))
