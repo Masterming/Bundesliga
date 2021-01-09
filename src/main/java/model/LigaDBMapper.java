@@ -9,18 +9,18 @@ import javax.persistence.*;
  */
 public class LigaDBMapper {
 
-    private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence
-            .createEntityManagerFactory("Bundesliga");
     private final static Logger LOGGER = Logger.getLogger(LigaDBMapper.class.getName());
 
-    public void addLiga(Liga liga) {
-        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+    public int addLiga(Liga liga) {
+        EntityManager em = ManagerFacory.createEntityManager();
         EntityTransaction et = null;
+        int id = -1;
 
         try {
             et = em.getTransaction();
             et.begin();
-            em.persist(liga);
+            Liga merge = em.merge(liga);
+            id = merge.getId();
             et.commit();
         } catch (Exception ex) {
             if (et != null) {
@@ -30,10 +30,11 @@ public class LigaDBMapper {
         } finally {
             em.close();
         }
+        return id;
     }
 
     public Liga getLiga(int id) {
-        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        EntityManager em = ManagerFacory.createEntityManager();
         String query = "SELECT l FROM Liga l WHERE l.id = :id";
         TypedQuery<Liga> tq = em.createQuery(query, Liga.class);
         tq.setParameter("id", id);
@@ -53,7 +54,7 @@ public class LigaDBMapper {
     }
 
     public List<Liga> getLigas() {
-        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        EntityManager em = ManagerFacory.createEntityManager();
         String strQuery = "SELECT l FROM Liga l WHERE l.id IS NOT NULL";
         TypedQuery<Liga> tq = em.createQuery(strQuery, Liga.class);
         List<Liga> ligas = new ArrayList<>();
@@ -72,7 +73,7 @@ public class LigaDBMapper {
     }
 
     public int reset() {
-        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        EntityManager em = ManagerFacory.createEntityManager();
         EntityTransaction et = null;
 
         String strQuery = "DELETE FROM Liga";
@@ -96,7 +97,7 @@ public class LigaDBMapper {
     
     public boolean deleteLiga(Liga l){        
         boolean bSuccess = true;        
-        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        EntityManager em = ManagerFacory.createEntityManager();
         EntityTransaction et = null;
 
         try {
@@ -118,7 +119,7 @@ public class LigaDBMapper {
     
     public boolean updateLiga(Liga l){        
         boolean bSuccess = true;        
-        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        EntityManager em = ManagerFacory.createEntityManager();
         EntityTransaction et = null;
 
         try {

@@ -14,15 +14,15 @@ public class Game implements Serializable {
     private static final long serialVersionUID = 3L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private final int gameId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int gameId;
 
-    @OneToOne
-    @MapsId
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "club1_id")
     private Club club1;
 
-    @OneToOne
-    @MapsId
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "club2_id")
     private Club club2;
 
     private int score1;
@@ -31,23 +31,25 @@ public class Game implements Serializable {
 
     public Game() {
         this.gameId = -1;
-    }
-
-    public Game(Club clubA, Club clubB, LocalDateTime start) {
-        this.gameId = -1;
-        this.club1 = clubA;
-        this.club2 = clubB;
         this.score1 = 0;
         this.score2 = 0;
+    }
+
+    public Game(Club club1, Club club2, LocalDateTime start) {
+        this.gameId = -1;
+        this.score1 = 0;
+        this.score2 = 0;
+        this.club1 = club1;
+        this.club2 = club2;
         this.startTime = start;
     }
 
-    public Game(int id, Club clubA, Club clubB, LocalDateTime start) {
+    public Game(int id, Club club1, Club club2, LocalDateTime start) {
         this.gameId = id;
-        this.club1 = clubA;
-        this.club2 = clubB;
         this.score1 = 0;
         this.score2 = 0;
+        this.club1 = club1;
+        this.club2 = club2;
         this.startTime = start;
     }
 
@@ -55,19 +57,23 @@ public class Game implements Serializable {
         return gameId;
     }
 
-    public Club getClubA() {
+    public void setId(int id) {
+        gameId = id;
+    }
+
+    public Club getClub1() {
         return club1;
     }
 
-    public Club getClubB() {
+    public Club getClub2() {
         return club2;
     }
 
-    public int getScoreA() {
+    public int getScore1() {
         return score1;
     }
 
-    public int getScoreB() {
+    public int getScore2() {
         return score2;
     }
 
@@ -79,11 +85,11 @@ public class Game implements Serializable {
         this.startTime = start;
     }
 
-    public void increaseScoreA() {
+    public void increaseScore1() {
         score1++;
     }
 
-    public void increaseScoreB() {
+    public void increaseScore2() {
         score2++;
     }
 

@@ -13,13 +13,15 @@ public class Player implements Serializable {
     private static final long serialVersionUID = 4L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private final int playerId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int playerId;
     private String name;
     private int goals;
 
     public Player() {
         this.playerId = -1;
+        this.name = "";
+        this.goals = 0;
     }
 
     public Player(String name, int goals) {
@@ -36,6 +38,10 @@ public class Player implements Serializable {
 
     public int getId() {
         return playerId;
+    }
+
+    public void setId(int id) {
+        playerId = id;
     }
 
     public String getName() {
