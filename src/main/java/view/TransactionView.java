@@ -15,7 +15,7 @@ import javax.swing.JTextField;
  *
  * @author z003ywys
  */
-public class TransView extends javax.swing.JPanel {
+public class TransactionView extends javax.swing.JPanel {
     private static final long serialVersionUID = 7L;
     private javax.swing.JButton addToTransBtn;
     private javax.swing.JList<String> ergListTeam;
@@ -201,7 +201,7 @@ public class TransView extends javax.swing.JPanel {
     
     
 
-    public TransView() {
+    public TransactionView() {
         initComponents();
     }
 

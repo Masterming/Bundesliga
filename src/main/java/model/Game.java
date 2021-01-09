@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 import javax.persistence.*;
 
 /**
@@ -18,6 +19,10 @@ public class Game implements Serializable {
     private int gameId;
     
     private boolean finished = false;
+    
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(joinColumns = @JoinColumn(name = "gameId"), inverseJoinColumns = @JoinColumn(name = "ligaId"))
+    private List<Liga> leagues;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "club1_id")

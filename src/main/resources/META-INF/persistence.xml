@@ -9,7 +9,6 @@
     <class>model.Club</class>
     <class>model.Liga</class>
     <class>model.Game</class>
-    <class>model.PlanModel</class>
     <properties>
       <property name="show_sql" value="true" />
       <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyTenSevenDialect" />

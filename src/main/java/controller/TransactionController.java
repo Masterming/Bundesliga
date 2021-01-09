@@ -14,19 +14,19 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-import view.TransView;
+import view.TransactionView;
 
 /**
  *
  * @author z003ywys
  */
 public class TransactionController implements ActionListener, MouseListener {
-    private TransView trV;
+    private TransactionView trV;
     private String selectedTeam;
     private DefaultListModel listModelUrsprung;
     private DefaultListModel listModelSend;
 
-    public TransactionController(TransView trV) {
+    public TransactionController(TransactionView trV) {
         this.trV = trV;
         this.trV.getAddToTransBtn().addActionListener(this);
         this.trV.getRemoveFromTransBtn().addActionListener(this);
