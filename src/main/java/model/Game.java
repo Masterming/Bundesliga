@@ -16,6 +16,8 @@ public class Game implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int gameId;
+    
+    private boolean finished = false;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "club1_id")
@@ -96,5 +98,13 @@ public class Game implements Serializable {
     @Override
     public String toString() {
         return "Game: " + club1.getName() + " vs " + club2.getName();
+    }
+
+    public boolean isFinished() {
+        return finished;
+    }
+
+    public void setFinished(boolean finished) {
+        this.finished = finished;
     }
 }
