@@ -9,8 +9,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import view.TransView;
 
 /**
@@ -44,8 +47,9 @@ public class TransController implements ActionListener, MouseListener {
                 System.out.println("suchen");
                 suchen();
                 break;
-            case "transFinish":
+            case "trans_finish":
                 System.out.println("trans_finish");
+                transFinish();
                 break;
             case "add":
                 System.out.println("add");
@@ -95,6 +99,31 @@ public class TransController implements ActionListener, MouseListener {
         this.trV.repaint();
         this.trV.revalidate();
     }
+    
+    private void transFinish(){
+        int best = JOptionPane.showConfirmDialog(null, "Wollen Sie die Transaktion abschließen");
+        if(best ==0){
+            System.out.println("True");
+            List<String>transferPlayer = new ArrayList();
+        for(int i=0; i<listModelSend.getSize();i++){
+            transferPlayer.add(listModelSend.getElementAt(i).toString());
+        }
+        //Transaktion mit den Spielern passieren 
+        System.out.println("trans Finish");
+        for(String st : transferPlayer){
+            System.out.println(st);
+        }
+            
+        }
+        else{
+            System.out.println("False");
+        }
+        
+        
+        
+
+        
+    }
 
     @Override
     public void mouseClicked(MouseEvent evt) {
@@ -108,7 +137,7 @@ public class TransController implements ActionListener, MouseListener {
             
             //Eigenen Kader Anpassen
             listModelUrsprung.addElement("Item 1");
-            listModelUrsprung.addElement("Item2");
+            listModelUrsprung.addElement("Item 2");
             
             
         }
