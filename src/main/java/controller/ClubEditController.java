@@ -15,6 +15,7 @@ import view.ClubEditView;
 import view.ClubEditView2;
 import view.PlanView;
 import view.TableView;
+import view.TransView;
 import view.TransView2;
 
 /**
@@ -49,10 +50,11 @@ public class ClubEditController implements ActionListener {
             System.out.println("Trans");
             this.cev.getTransBtn().setBackground(Color.white);
             this.cev.getKaderBtn().setBackground(Color.lightGray);
-            TransView2 pltet = new TransView2();
+            TransView tranView = new TransView();
+            TransController tr = new TransController (tranView);
             //Layout setzen ?
             this.cev.getClubEditContent().removeAll();
-            this.cev.getClubEditContent().add(pltet);
+            this.cev.getClubEditContent().add(tranView);
             System.out.println("Content hizugefügt");
             this.cev.getClubEditContent().repaint();
             System.out.println("Repaint()");

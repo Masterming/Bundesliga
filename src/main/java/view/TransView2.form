@@ -28,26 +28,38 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="jScrollPane1" max="32767" attributes="0"/>
-                  <Component id="transFinish" alignment="0" max="32767" attributes="0"/>
-                  <Component id="selectedTeam" alignment="0" min="-2" pref="174" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="selectedTeam" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="receiveTeamLbl" min="-2" pref="99" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="transFinishBtn" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="receivingTeam" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="btnSuchen" min="-2" max="-2" attributes="0"/>
+                      <Component id="receivingTeamInput" min="-2" pref="170" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="suchenBtn" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jScrollPane2" min="-2" pref="134" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="addToTrans" min="-2" max="-2" attributes="0"/>
-                          <Component id="removeFromTrans" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jScrollPane2" min="-2" pref="134" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="addToTransBtn" min="-2" max="-2" attributes="0"/>
+                                  <Component id="removeFromTransBtn" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jScrollPane3" min="-2" pref="134" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                          <Component id="jScrollPane3" min="-2" pref="134" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace pref="29" max="32767" attributes="0"/>
@@ -58,38 +70,56 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="receivingTeam" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnSuchen" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                      <Component id="receivingTeamInput" max="32767" attributes="0"/>
+                  </Group>
+                  <Component id="suchenBtn" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="52" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="selectedTeam" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="73" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="selectedTeam" alignment="3" max="32767" attributes="0"/>
+                  <Component id="receiveTeamLbl" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jScrollPane2" min="-2" pref="89" max="-2" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Component id="addToTrans" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="addToTransBtn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="removeFromTrans" min="-2" max="-2" attributes="0"/>
+                      <Component id="removeFromTransBtn" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane3" min="-2" pref="89" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-              <Component id="transFinish" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="transFinishBtn" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JTextField" name="receivingTeam">
+    <Component class="javax.swing.JTextField" name="receivingTeamInput">
       <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="c0" green="c0" id="lightGray" palette="1" red="c0" type="palette"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Erhaltendes Team"/>
       </Properties>
+      <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="receivingTeamInputFocusGained"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="receivingTeamInputFocusLost"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnSuchen">
+    <Component class="javax.swing.JButton" name="suchenBtn">
       <Properties>
         <Property name="text" type="java.lang.String" value="Suchen"/>
       </Properties>
@@ -117,7 +147,7 @@
     </Container>
     <Component class="javax.swing.JLabel" name="selectedTeam">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Empf&#xe4;ngerteam noch w&#xe4;hlen"/>
+        <Property name="text" type="java.lang.String" value="Empf&#xe4;ngerteam:"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane2">
@@ -143,17 +173,17 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="transFinish">
+    <Component class="javax.swing.JButton" name="transFinishBtn">
       <Properties>
         <Property name="text" type="java.lang.String" value="Transaktionen best&#xe4;tigen"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="addToTrans">
+    <Component class="javax.swing.JButton" name="addToTransBtn">
       <Properties>
         <Property name="text" type="java.lang.String" value="&gt;"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="removeFromTrans">
+    <Component class="javax.swing.JButton" name="removeFromTransBtn">
       <Properties>
         <Property name="text" type="java.lang.String" value="&lt;"/>
       </Properties>
@@ -181,5 +211,20 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JLabel" name="receiveTeamLbl">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="RB Leipzig"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Eigene Spiele"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Zu sende Spiele"/>
+      </Properties>
+    </Component>
   </SubComponents>
 </Form>
