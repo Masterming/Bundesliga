@@ -41,7 +41,7 @@ public class ErgebnisInputController implements ActionListener {
         }
         System.out.println(ergA + " " + ergB);
         
-        //Speichern in der DB erfolgen
+        //TO DO: Speichern in der DB erfolgen
         //Updaten des Models --> dafür Muss Model von Observable Eextenden 
         if(inputOk){
         this.plm.setlM(new Liga("Test"));

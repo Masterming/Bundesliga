@@ -5,31 +5,40 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javassist.bytecode.SignatureAttribute.ObjectType;
+import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.event.AncestorListener;
 import javax.swing.table.DefaultTableModel;
 import model.Club;
 import model.Liga;
+import view.ClubAddView;
+import view.ClubAddView2;
 import view.ClubEditView;
-import view.ClubEditView3;
 import view.ClubView;
 
 /**
  * @author Rene
  */
-public class ClubController implements MouseListener {
+public class ClubController implements MouseListener, ActionListener {
     private Club model;
     private ClubView view;
     private Liga l;
+    private JFrame mainView;
 
-    public ClubController(Club model, ClubView view) {
+    public ClubController(Club model, ClubView view, JFrame main) {
         this.model = model;
         this.view = view;
+        this.view.getClubTable().addMouseListener(this);
+        this.view.getAddClubBtn().addActionListener(this);
+        this.mainView=main;
+        this.setData();
     }
-    public ClubController(ClubView view, Liga l){
+    public ClubController(ClubView view, Liga l, JFrame main){
         this.view=view;
         this.l = l;
         this.view.getClubTable().addMouseListener(this);
+        this.view.getAddClubBtn().addActionListener(this);
+        this.mainView=main;
         this.setData();
     }
     public void updateView() {
@@ -110,5 +119,18 @@ public class ClubController implements MouseListener {
             
         }
         return data;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent evt) {
+        switch(evt.getActionCommand()){
+            case "addClub":
+                System.out.println("Club Hinzufügen button gedrückt");
+                ClubAddView caV = new ClubAddView(this.mainView,true);
+                ClubAddController cbAC = new ClubAddController(this.mainView,caV);
+                caV.setVisible(true);
+                break;
+               
+        }
     }
 }

@@ -2,6 +2,7 @@ package view;
 
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.table.TableModel;
@@ -14,12 +15,14 @@ public class ClubView extends javax.swing.JPanel implements Observer{
     private static final long serialVersionUID = 8L;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable clubTable;
+    private javax.swing.JButton addClubBtn;
     private JFrame mainView; 
     public void printOverview(Club model) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
     
     private void initComponents(){
+       addClubBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         clubTable = new javax.swing.JTable(){
             public boolean editCellAt(int row, int column, java.util.EventObject e) {
@@ -27,42 +30,46 @@ public class ClubView extends javax.swing.JPanel implements Observer{
          }
         };
 
+        addClubBtn.setText("Club Hinzufügen");
+        addClubBtn.setActionCommand("addClub");
+
         clubTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-//                {"FC Bayern", "Allianz Arena"},
-//                {"RB Leipzig", "Red Bull Arena"},
-//                {"Borussia Dortmund", "Signal Iduna Park"},
+
             },
             new String [] {
                 "Club", "Stadion"
             }
         ));
-        
+        jScrollPane1.setViewportView(clubTable);
         clubTable.setAutoCreateRowSorter(true);
         clubTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         clubTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         clubTable.setShowVerticalLines(false);
         clubTable.getTableHeader().setReorderingAllowed(false);
-//        clubTable.addMouseListener(new java.awt.event.MouseAdapter() {
-//            public void mouseClicked(java.awt.event.MouseEvent evt) {
-//                jTable1MouseClicked(evt);
-//            }
-//            public void mousePressed(java.awt.event.MouseEvent evt) {
-//                jTable1MousePressed(evt);
-//            }
-//        });
-        jScrollPane1.setViewportView(clubTable);
         clubTable.getAccessibleContext().setAccessibleName("clubTable");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(addClubBtn)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(addClubBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }
 
@@ -82,6 +89,11 @@ public class ClubView extends javax.swing.JPanel implements Observer{
     public JFrame getMainView() {
         return mainView;
     }
+
+    public JButton getAddClubBtn() {
+        return addClubBtn;
+    }
+    
     
 
     @Override
