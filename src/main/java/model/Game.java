@@ -18,9 +18,11 @@ public class Game implements Serializable {
     private int gameId;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "club1_id")
     private Club club1;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "club2_id")
     private Club club2;
 
     private int score1;
@@ -28,24 +30,26 @@ public class Game implements Serializable {
     private LocalDateTime startTime;
 
     public Game() {
-        // this.gameId = -1;
+        this.gameId = -1;
+        this.score1 = 0;
+        this.score2 = 0;
     }
 
     public Game(Club club1, Club club2, LocalDateTime start) {
-        // this.gameId = -1;
-        this.club1 = club1;
-        this.club2 = club2;
+        this.gameId = -1;
         this.score1 = 0;
         this.score2 = 0;
+        this.club1 = club1;
+        this.club2 = club2;
         this.startTime = start;
     }
 
     public Game(int id, Club club1, Club club2, LocalDateTime start) {
         this.gameId = id;
-        this.club1 = club1;
-        this.club2 = club2;
         this.score1 = 0;
         this.score2 = 0;
+        this.club1 = club1;
+        this.club2 = club2;
         this.startTime = start;
     }
 

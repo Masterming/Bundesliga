@@ -24,6 +24,7 @@ public class Liga implements Serializable {
 
     public Liga() {
         this.ligaId = -1;
+        this.name = "";
         clubs = new ArrayList<>();
     }
 

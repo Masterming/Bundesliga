@@ -9,17 +9,14 @@ import javax.persistence.*;
  */
 public class PlayerDBMapper {
 
-    private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence
-            .createEntityManagerFactory("Bundesliga");
-
     private final static Logger LOGGER = Logger.getLogger(PlayerDBMapper.class.getName());
 
     public int addPlayer(Player player) {
-        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        EntityManager em = ManagerFacory.createEntityManager();
         EntityTransaction et = null;
 
         try {
-            
+
             et = em.getTransaction();
             et.begin();
             em.persist(player);
@@ -36,7 +33,7 @@ public class PlayerDBMapper {
     }
 
     public Player getPlayer(int id) {
-        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        EntityManager em = ManagerFacory.createEntityManager();
         String query = "SELECT p FROM Player p WHERE p.id = :id";
         TypedQuery<Player> tq = em.createQuery(query, Player.class);
         tq.setParameter("id", id);
@@ -56,7 +53,7 @@ public class PlayerDBMapper {
     }
 
     public List<Player> getAllPlayers() {
-        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        EntityManager em = ManagerFacory.createEntityManager();
         String strQuery = "SELECT p FROM Player p WHERE p.id IS NOT NULL";
         TypedQuery<Player> tq = em.createQuery(strQuery, Player.class);
         List<Player> players = new ArrayList<>();
@@ -75,7 +72,7 @@ public class PlayerDBMapper {
     }
 
     public int reset() {
-        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        EntityManager em = ManagerFacory.createEntityManager();
         EntityTransaction et = null;
 
         String strQuery = "DELETE FROM Player";

@@ -25,6 +25,8 @@ public class Club implements Serializable {
 
     public Club() {
         this.clubId = -1;
+        this.name = "";
+        this.points = 0;
         this.players = new ArrayList<>();
     }
 

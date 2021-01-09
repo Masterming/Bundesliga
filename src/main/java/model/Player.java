@@ -20,6 +20,8 @@ public class Player implements Serializable {
 
     public Player() {
         this.playerId = -1;
+        this.name = "";
+        this.goals = 0;
     }
 
     public Player(String name, int goals) {
