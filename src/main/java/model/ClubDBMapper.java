@@ -8,21 +8,19 @@ import javax.persistence.*;
  * @author Rene
  */
 public class ClubDBMapper {
-    private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence
-            .createEntityManagerFactory("Bundesliga");
+
     private final static Logger LOGGER = Logger.getLogger(ClubDBMapper.class.getName());
 
-    public ClubDBMapper() {
-    }
-
-    public void addClub(Club club) {
-        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+    public int addClub(Club club) {
+        EntityManager em = ManagerFacory.createEntityManager();
         EntityTransaction et = null;
+        int id = -1;
 
         try {
             et = em.getTransaction();
             et.begin();
-            em.persist(club);
+            Club merge = em.merge(club);
+            id = merge.getId();
             et.commit();
         } catch (Exception ex) {
             if (et != null) {
@@ -32,10 +30,11 @@ public class ClubDBMapper {
         } finally {
             em.close();
         }
+        return id;
     }
 
     public Club getClub(int id) {
-        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        EntityManager em = ManagerFacory.createEntityManager();
         String query = "SELECT c FROM Club c WHERE c.id = :id";
         TypedQuery<Club> tq = em.createQuery(query, Club.class);
         tq.setParameter("id", id);
@@ -55,7 +54,7 @@ public class ClubDBMapper {
     }
 
     public List<Club> getAllClubs() {
-        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        EntityManager em = ManagerFacory.createEntityManager();
         String strQuery = "SELECT c FROM Club c WHERE c.id IS NOT NULL";
         TypedQuery<Club> tq = em.createQuery(strQuery, Club.class);
         List<Club> custs = new ArrayList<>();
@@ -74,7 +73,7 @@ public class ClubDBMapper {
     }
 
     public int reset() {
-        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        EntityManager em = ManagerFacory.createEntityManager();
         EntityTransaction et = null;
 
         String strQuery = "DELETE FROM Club";
