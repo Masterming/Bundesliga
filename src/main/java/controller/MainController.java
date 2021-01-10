@@ -17,6 +17,8 @@ import view.ClubView;
 import view.MainView;
 import view.MainView;
 import view.PlanView;
+import view.PlanView2;
+import view.PlanViewNeu;
 import view.TableView;
 
 /**
@@ -148,11 +150,11 @@ public class MainController implements ActionListener {
             
             //Plan  View erstellen
             //Plan Controller erstellen
-            PlanView plv = new PlanView(this.view);
+            PlanViewNeu plv = new PlanViewNeu(this.view);
             PlanModel plm = new PlanModel();
             
             
-            PlanController plc = new PlanController(plv, plm);
+            PlanController plc = new PlanController(plv, plm,this.view);
             plm.setlM(this.ligaModel);
             //Ding Soll Scrollable sein
             JScrollPane scroll = new JScrollPane(plv);

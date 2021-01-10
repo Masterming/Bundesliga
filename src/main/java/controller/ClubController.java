@@ -94,6 +94,7 @@ public class ClubController implements MouseListener, ActionListener {
         this.view.setTableContent(tbm);
     }
     private String[][] getData(){
+        // TODO Get Data
         String[][] data = new String[0][]; 
         if(this.l.getName()=="Liga 1"){
             data = new String[2][];
