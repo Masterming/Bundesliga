@@ -28,6 +28,8 @@ public class ErgebnisInputController implements ActionListener {
     private PlanModel plm;
     private List<List<String>> scoreTeamA;
     private List<List<String>> scoreTeamB;
+    int teamAErg;
+    int teamBErg;
     
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -50,6 +52,7 @@ public class ErgebnisInputController implements ActionListener {
                 break;
             case "save":
                 System.out.println("save");
+                save();
                 break;
         }
         updateView();
@@ -68,6 +71,8 @@ public class ErgebnisInputController implements ActionListener {
         scoreTeamA= new ArrayList<List<String>>();
         scoreTeamB = new ArrayList<List<String>>();
         getData();
+        teamAErg=-1;
+        teamBErg=-1;
         
     }
     
@@ -142,8 +147,11 @@ public class ErgebnisInputController implements ActionListener {
         }
         //Team A
         for(List<String> strName : scoreTeamA){
-            Object [] temp = strName.toArray();
-            tbmA.addRow(temp);
+
+           if(!strName.get(1).equals("0")){
+           Object[] temp = strName.toArray();
+           tbmA.addRow(temp);
+           }
         }
         this.ergDialog.setScoredPlayerTeamA(tbmA);
         
@@ -154,16 +162,18 @@ public class ErgebnisInputController implements ActionListener {
             tbmB.removeRow(i);
         }
         for(List<String>strName : scoreTeamB){
+          if(!strName.get(1).equals("0")){
            Object[] temp = strName.toArray();
            tbmB.addRow(temp);
+           }
         }
         this.ergDialog.setScoredPlayerTeamB(tbmB);
         
         
         
         //Den spielstand aktualisieren
-        int teamAErg = getSpielStand(this.scoreTeamA);
-        int teamBErg = getSpielStand(this.scoreTeamB);
+        teamAErg = getSpielStand(this.scoreTeamA);
+        teamBErg = getSpielStand(this.scoreTeamB);
         this.ergDialog.setErgTeamALbl(String.valueOf(teamAErg));
         this.ergDialog.setErgTeamBLbl1(String.valueOf(teamBErg));
     }
@@ -178,6 +188,13 @@ public class ErgebnisInputController implements ActionListener {
             }
         }
         return erg;
+    }
+    private void save(){
+        if(teamAErg==-1 || teamBErg==-1){
+            JFrame f=new JFrame();  
+            JOptionPane.showMessageDialog(f,"Bitte fügen Sie Ergebnisse hinzu"); 
+            System.out.println("Spielstand: " + teamAErg + " zu " + teamBErg);
+        }
     }
     
 }
