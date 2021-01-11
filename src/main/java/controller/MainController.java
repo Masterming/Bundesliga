@@ -17,7 +17,6 @@ import view.ClubView;
 import view.MainView;
 import view.MainView;
 import view.PlanView;
-import view.PlanView2;
 import view.PlanViewNeu;
 import view.TableView;
 

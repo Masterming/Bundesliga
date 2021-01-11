@@ -29,6 +29,7 @@ public class ClubController implements MouseListener, ActionListener {
         this.view = view;
         this.view.getClubTable().addMouseListener(this);
         this.view.getAddClubBtn().addActionListener(this);
+        this.view.getAddExistingClubBtn().addActionListener(this);
         this.mainView=main;
         this.setData();
     }
@@ -37,6 +38,7 @@ public class ClubController implements MouseListener, ActionListener {
         this.l = l;
         this.view.getClubTable().addMouseListener(this);
         this.view.getAddClubBtn().addActionListener(this);
+        this.view.getAddExistingClubBtn().addActionListener(this);
         this.mainView=main;
         this.setData();
     }
@@ -129,6 +131,12 @@ public class ClubController implements MouseListener, ActionListener {
                 ClubAddView caV = new ClubAddView(this.mainView,true);
                 ClubAddController cbAC = new ClubAddController(this.mainView,caV);
                 caV.setVisible(true);
+                break;
+            case "addExistClub":
+                System.out.println("Vorhandenen Club zur Liga hinzufügen");
+                //Dialog box mit drop down menü über die 2 Ligen die nicht der aktuellen liga entsprechen 
+                // auf grund der auswahl wird liste angapsst mit den clubs der liga, die im Drop Down menü ausgewählt wurde
+                //in Liste: mehrfach auswahl möglich
                 break;
                
         }

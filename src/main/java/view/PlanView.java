@@ -33,9 +33,7 @@ public class PlanView extends JPanel implements Observer{
         //Hier landet man wenn man im Model was verändert hat durch norifyObservers
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         if(o instanceof PlanModel){
-            //To change body of generated methods, choose Tools | Templates.
-            //javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-            //this.setLayout(layout);
+            //TO View durch angaben am Model anpassen
             this.removeAll();
             this.plm =(PlanModel)o;
             int count =1;

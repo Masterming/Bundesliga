@@ -26,7 +26,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="addSpielBtn" pref="167" max="32767" attributes="0"/>
+                  <Component id="addSpielBtn" pref="223" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jLabel1" max="32767" attributes="0"/>
@@ -36,12 +36,13 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="teamAInputTxt" max="32767" attributes="0"/>
-                          <Component id="teamBInputTxt" pref="123" max="32767" attributes="0"/>
+                          <Component id="teamBInputTxt" pref="177" max="32767" attributes="0"/>
                           <Component id="dateInputTxt" max="32767" attributes="0"/>
+                          <Component id="jLabel4" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="27" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -63,9 +64,11 @@
                   <Component id="jLabel2" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                   <Component id="dateInputTxt" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jLabel4" min="-2" pref="13" max="-2" attributes="0"/>
+              <EmptySpace pref="18" max="32767" attributes="0"/>
               <Component id="addSpielBtn" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="30" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -95,6 +98,12 @@
     <Component class="javax.swing.JButton" name="addSpielBtn">
       <Properties>
         <Property name="text" type="java.lang.String" value="Spiel Hinzuf&#xfc;gen"/>
+        <Property name="actionCommand" type="java.lang.String" value="addGame"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel4">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Format: dd.MM.yyyy HH:mm"/>
       </Properties>
     </Component>
   </SubComponents>

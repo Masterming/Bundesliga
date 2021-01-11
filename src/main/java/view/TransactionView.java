@@ -107,9 +107,9 @@ public class TransactionView extends javax.swing.JPanel {
 
         receiveTeamLbl.setText("RB Leipzig");
 
-        jLabel1.setText("Eigene Spiele");
+        jLabel1.setText("Eigene Spieler");
 
-        jLabel2.setText("Zu sende Spiele");
+        jLabel2.setText("Zu sende Spieler");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
