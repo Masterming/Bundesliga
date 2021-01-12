@@ -34,7 +34,7 @@ public class KaderView extends javax.swing.JPanel {
             }
         ));
         jScrollPane1.setViewportView(playerTable);
-        playerTable.setRowSelectionAllowed(false);
+        playerTable.setRowSelectionAllowed(true);
         playerTable.setColumnSelectionAllowed(false);
         playerTable.setAutoCreateRowSorter(true);
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

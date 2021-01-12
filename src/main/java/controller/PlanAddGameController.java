@@ -61,6 +61,7 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
             DefaultComboBoxModel dfB = new DefaultComboBoxModel<String>(ligen);
             this.paGV.setTeamALigaList(dfC);
             this.paGV.setTeamBLigaList(dfB);
+            //TO DO Teams Holen pro liga
          }
          if(this.l.getName().contains("2")){
            String [] ligen = new String[3];
@@ -182,11 +183,15 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
         //To Do --> Daten aus DB holen
         DefaultComboBoxModel listModelTeamA = new DefaultComboBoxModel();
         DefaultComboBoxModel listModelTeamB = new DefaultComboBoxModel();
-        if(this.selectedALiga.contains("1")){
+        
+        
         //TO DO List Model befüllen 
+        if(this.selectedALiga.contains("1")){
         this.paGV.getTeamAList().removeAll();
         listModelTeamA.addElement("RB Leipzig");
         listModelTeamA.addElement("FC Bayern München");
+        }
+        if(this.selectedBLiga.contains("1")){
         this.paGV.getTeamBList().removeAll();
         listModelTeamB.addElement("RB Leipzig");
         listModelTeamB.addElement("FC Bayern München");
@@ -197,6 +202,8 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
         this.paGV.getTeamAList().removeAll();
         listModelTeamA.addElement("FC Erzgevirge Aue");
         listModelTeamA.addElement("HSV Hamburg");
+        }
+        if(this.selectedBLiga.contains("2")){
         this.paGV.getTeamBList().removeAll();
         listModelTeamB.addElement("FC Erzgevirge Aue");
         listModelTeamB.addElement("HSV Hamburg");
@@ -206,6 +213,8 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
         this.paGV.getTeamAList().removeAll();
         listModelTeamA.addElement("Ingolstadt");
         listModelTeamA.addElement("Dynamo Dresden");
+        }
+        if(this.selectedBLiga.contains("3")){
         this.paGV.getTeamBList().removeAll();
         listModelTeamB.addElement("Ingolstadt");
         listModelTeamB.addElement("Dynamo Dresden");

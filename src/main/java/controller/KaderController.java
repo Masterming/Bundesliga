@@ -5,6 +5,8 @@
  */
 package controller;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
 import view.KaderView;
 
@@ -12,13 +14,15 @@ import view.KaderView;
  *
  * @author z003ywys
  */
-public class KaderController {
+public class KaderController implements ActionListener {
     private KaderView kdV;
     private String team;
 
     public KaderController(KaderView kdV, String team) {
         this.kdV = kdV;
         this.team = team;
+        //Tabelle mit Rechtsklick -> Namen Ändern und Spieler Löschen
+        
         this.setTableData();
     }
     private void setTableData(){
@@ -44,6 +48,11 @@ public class KaderController {
         temp[1] = "900";
         data[1] = temp;
         return data;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent arg0) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
