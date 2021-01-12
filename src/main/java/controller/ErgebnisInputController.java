@@ -205,7 +205,8 @@ public class ErgebnisInputController implements ActionListener {
             //TO Do in DB Schreiben und Model ändern
             System.out.println(this.scoreTeamA);
             System.out.println(this.scoreTeamB);
-            this.plm.setlM(new Liga("Test"));
+            //this.plm.setlM(this.plm.getlM());
+            this.plm.setlM(new Liga("Liga 4"));
             this.ergDialog.dispose();
         }
     }

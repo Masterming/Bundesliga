@@ -180,17 +180,42 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
         System.out.println(selectedBLiga);
         //Club Liste an die jeweiige Liga angepasst werden
         //To Do --> Daten aus DB holen
-        this.paGV.getTeamAList().removeAll();
         DefaultComboBoxModel listModelTeamA = new DefaultComboBoxModel();
+        DefaultComboBoxModel listModelTeamB = new DefaultComboBoxModel();
+        if(this.selectedALiga.contains("1")){
         //TO DO List Model befüllen 
+        this.paGV.getTeamAList().removeAll();
         listModelTeamA.addElement("RB Leipzig");
         listModelTeamA.addElement("FC Bayern München");
-        this.paGV.setTeamAList(listModelTeamA);
-        
-       DefaultComboBoxModel listModelTeamB = new DefaultComboBoxModel();
-       this.paGV.getTeamBList().removeAll();
+        this.paGV.getTeamBList().removeAll();
         listModelTeamB.addElement("RB Leipzig");
         listModelTeamB.addElement("FC Bayern München");
+        }
+        
+        if(this.selectedALiga.contains("2")){
+        //TO DO List Model befüllen 
+        this.paGV.getTeamAList().removeAll();
+        listModelTeamA.addElement("FC Erzgevirge Aue");
+        listModelTeamA.addElement("HSV Hamburg");
+        this.paGV.getTeamBList().removeAll();
+        listModelTeamB.addElement("FC Erzgevirge Aue");
+        listModelTeamB.addElement("HSV Hamburg");
+        }
+        if(this.selectedALiga.contains("3")){
+        //TO DO List Model befüllen 
+        this.paGV.getTeamAList().removeAll();
+        listModelTeamA.addElement("Ingolstadt");
+        listModelTeamA.addElement("Dynamo Dresden");
+        this.paGV.getTeamBList().removeAll();
+        listModelTeamB.addElement("Ingolstadt");
+        listModelTeamB.addElement("Dynamo Dresden");
+        }
+        
+       
+
+        
+        
+        this.paGV.setTeamAList(listModelTeamA);
         this.paGV.setTeamBList(listModelTeamB);
         this.paGV.repaint();
         this.paGV.revalidate();
