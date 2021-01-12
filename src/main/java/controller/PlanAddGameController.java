@@ -94,7 +94,27 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
     }
     
     private void addGame(){
-        
+        String dateTemp = this.paGV.getDateInputTxt().getText();
+        DateTimeFormatter f = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+        LocalDateTime  dtGame = LocalDateTime.now();
+        boolean ok =true;
+        try{
+        dtGame = LocalDateTime.from(f.parse(dateTemp));
+        }catch(Exception e){
+            System.out.println("Bitte Datum im richtigen Format eingeben");
+            JOptionPane.showMessageDialog(null, "Bitte Datum im richtigen Format eingeben");
+            ok =false;
+        }
+        if(ok){
+            System.out.println(dtGame);
+            System.out.println(this.teamA);
+            System.out.println(this.teamB);
+            //TO DO Spiel in DB Schreiben und Model aktualisieren
+            this.plM.setlM(new Liga("Test"));
+            //this.l.setName(this.l.getName());
+            this.paGV.dispose();
+
+        }
     }
 
     @Override
@@ -160,9 +180,6 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
         System.out.println(selectedBLiga);
         //Club Liste an die jeweiige Liga angepasst werden
         //To Do --> Daten aus DB holen
-        List<String>clubs =new ArrayList();
-        clubs.add("RB Leipzig");
-        clubs.add("FC Bayern München");
         this.paGV.getTeamAList().removeAll();
         DefaultComboBoxModel listModelTeamA = new DefaultComboBoxModel();
         //TO DO List Model befüllen 

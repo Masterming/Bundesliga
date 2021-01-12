@@ -48,9 +48,9 @@ public class ClubController implements MouseListener, ActionListener {
             this.view.repaint();
             this.view.revalidate();
         }
-        if(l.getName().contains("3")){
+        else{
             this.view.getAddClubBtn().setVisible(true);
-            this.view.getAddExistingClubBtn().setVisible(false);
+            this.view.getAddExistingClubBtn().setVisible(true);
             this.view.repaint();
             this.view.revalidate();
         }

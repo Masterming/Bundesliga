@@ -92,9 +92,9 @@ public class ErgebnisInputView extends javax.swing.JDialog {
         teamASubGoalForPlayer.setText("-");
         teamASubGoalForPlayer.setActionCommand("descoreTeamA");
 
-        jLabel2.setText("Spielerliste:");
+        jLabel2.setText("Kader:");
 
-        jLabel3.setText("Spielerliste:");
+        jLabel3.setText("Kader:");
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText(":");

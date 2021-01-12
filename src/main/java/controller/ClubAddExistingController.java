@@ -59,8 +59,8 @@ public class ClubAddExistingController implements ActionListener,MouseListener, 
             this.clubList.addElement("RB Leipzig");
         }
         if(this.l.getName().contains("3")){
-            String [] ligen = new String[2];
-            ligen[1] = "Liga 2";
+            String [] ligen = new String[1];
+            ligen[0] = "Liga 2";
             DefaultComboBoxModel dfC = new DefaultComboBoxModel<String>(ligen);
             this.cAeV.setLigaComboModel(dfC);
             //Club Liste Setzen
