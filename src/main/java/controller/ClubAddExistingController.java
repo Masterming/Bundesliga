@@ -133,6 +133,7 @@ public class ClubAddExistingController implements ActionListener,MouseListener, 
             //Clubs Aufzählen aus der Liga
             this.clubList.addElement("FC Bayern München");
             this.clubList.addElement("RB Leipzig");
+            
         }
         if(ligStr.contains("2")){
             this.clubList.addElement("FC Erzgebirge Aue");
