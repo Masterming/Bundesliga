@@ -77,13 +77,17 @@ public class ErgebnisInputController implements ActionListener {
     }
     
     private void getData(){
-        
+        //To DO daten aus DB holen 
         List<String>spieler =new ArrayList();
         spieler.add("Thomas Müller");
         spieler.add("Philipp Lahm");
         DefaultListModel listModelTeamA = new DefaultListModel();
         listModelTeamA.addElement("Thomas Müller");
         listModelTeamA.addElement("Philipp Lahm");
+        
+        
+        
+        
         this.ergDialog.setTeamAPlayerList(listModelTeamA);
         this.ergDialog.repaint();
         this.ergDialog.revalidate();
@@ -107,11 +111,13 @@ public class ErgebnisInputController implements ActionListener {
             dataSet.get(index).set(1, countFin);
         }
         else{
+            if(name!=null){
             List<String>temp = new ArrayList();
             temp.add(name);
             String countFin = String.valueOf(1);
             temp.add(countFin);
             dataSet.add(temp);
+            }
         }
         
     }

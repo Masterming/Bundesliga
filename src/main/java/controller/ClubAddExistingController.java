@@ -41,9 +41,8 @@ public class ClubAddExistingController implements ActionListener,MouseListener, 
     }
     private void adaptViewToLiga(){
         if(this.l.getName().contains("1")){
-            String [] ligen = new String[2];
+            String [] ligen = new String[1];
             ligen[0] = "Liga 2";
-            ligen[1] = "Liga 3";
             DefaultComboBoxModel dfC = new DefaultComboBoxModel<String>(ligen);
             this.cAeV.setLigaComboModel(dfC);
             //Club Liste Setzen
@@ -61,7 +60,6 @@ public class ClubAddExistingController implements ActionListener,MouseListener, 
         }
         if(this.l.getName().contains("3")){
             String [] ligen = new String[2];
-            ligen[0] = "Liga 1";
             ligen[1] = "Liga 2";
             DefaultComboBoxModel dfC = new DefaultComboBoxModel<String>(ligen);
             this.cAeV.setLigaComboModel(dfC);
@@ -97,8 +95,18 @@ public class ClubAddExistingController implements ActionListener,MouseListener, 
         if(evt.getClickCount()==1){
             System.out.println("Item in Liste geklickt");
             selectedLiga = this.cAeV.getSelectedLiga().getSelectedItem().toString();
+            try{
             selectedClub = this.cAeV.getLigaClubList().getSelectedValue().toString();
+            if(selectedClub!=null){
             this.cAeV.getToAddClubLbl().setText(selectedClub);
+            }
+            else{
+                this.cAeV.getToAddClubLbl().setText("");
+            }}
+            catch(Exception e){
+                System.out.println(e); 
+                this.cAeV.getToAddClubLbl().setText("");
+            }
             
         }
     }

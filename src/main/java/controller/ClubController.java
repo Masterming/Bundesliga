@@ -41,6 +41,22 @@ public class ClubController implements MouseListener, ActionListener {
         this.view.getAddClubBtn().addActionListener(this);
         this.view.getAddExistingClubBtn().addActionListener(this);
         this.mainView=main;
+        //Überlgen ob man Buttons ausgraut
+        if(l.getName().contains("1") || l.getName().contains("2")){
+            this.view.getAddClubBtn().setVisible(false);
+            this.view.getAddExistingClubBtn().setVisible(true);
+            this.view.repaint();
+            this.view.revalidate();
+        }
+        if(l.getName().contains("3")){
+            this.view.getAddClubBtn().setVisible(true);
+            this.view.getAddExistingClubBtn().setVisible(false);
+            this.view.repaint();
+            this.view.revalidate();
+        }
+        
+        
+        
         this.setData();
     }
     public void updateView() {

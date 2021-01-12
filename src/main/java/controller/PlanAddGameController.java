@@ -7,10 +7,19 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import model.Liga;
 import model.PlanModel;
 import view.PlanAddGameView;
 
@@ -18,19 +27,61 @@ import view.PlanAddGameView;
  *
  * @author z003ywys
  */
-public class PlanAddGameController implements ActionListener {
+public class PlanAddGameController implements ActionListener, ItemListener, MouseListener {
     private JFrame mainView;
     private PlanAddGameView paGV;
     private PlanModel plM;
+    private Liga l;
+    private String selectedALiga;
+    private String selectedBLiga;
+    private String teamA;
+    private String teamB;
 
-    public PlanAddGameController(JFrame mainView, PlanAddGameView PagV, PlanModel plM) {
+    public PlanAddGameController(JFrame mainView, PlanAddGameView PagV, PlanModel plM, Liga l) {
         this.mainView = mainView;
         this.paGV=PagV;
         this.plM=plM;
+        this.l=l;
+        //this.paGV.get
         this.paGV.getAddSpielBtn().addActionListener(this);
+        this.paGV.getTeamALigaList().addItemListener(this);
+        this.paGV.getTeamBLigaList().addItemListener(this);
+        this.paGV.getTeamAList().addItemListener(this);
+        this.paGV.getTeamBList().addItemListener(this);
+        
+        adaptViewToLiga();
         
     }
-
+    private void adaptViewToLiga(){
+         if(this.l.getName().contains("1")){
+            String [] ligen = new String[2];
+            ligen[0] = "Liga 1";
+            ligen[1] = "Liga 2";
+            DefaultComboBoxModel dfC = new DefaultComboBoxModel<String>(ligen);
+            DefaultComboBoxModel dfB = new DefaultComboBoxModel<String>(ligen);
+            this.paGV.setTeamALigaList(dfC);
+            this.paGV.setTeamBLigaList(dfB);
+         }
+         if(this.l.getName().contains("2")){
+           String [] ligen = new String[3];
+           ligen[0] = "Liga 1";
+            ligen[1] = "Liga 2";
+            ligen[2] = "Liga 3";
+            DefaultComboBoxModel dfC = new DefaultComboBoxModel<String>(ligen);
+            DefaultComboBoxModel dfB = new DefaultComboBoxModel<String>(ligen);
+            this.paGV.setTeamALigaList(dfC);
+            this.paGV.setTeamBLigaList(dfB);
+         }
+         if(this.l.getName().contains("3")){
+            String [] ligen = new String[2];
+            ligen[0] = "Liga 2";
+            ligen[1] = "Liga 3";
+            DefaultComboBoxModel dfC = new DefaultComboBoxModel<String>(ligen);
+            DefaultComboBoxModel dfB = new DefaultComboBoxModel<String>(ligen);
+            this.paGV.setTeamALigaList(dfC);
+            this.paGV.setTeamBLigaList(dfB);
+         }
+    }
     @Override
     public void actionPerformed(ActionEvent evt) {
         String comm = evt.getActionCommand();
@@ -43,34 +94,122 @@ public class PlanAddGameController implements ActionListener {
     }
     
     private void addGame(){
-        String teamA = this.paGV.getTeamAInputTxt().getText().trim();
-        String teamB = this.paGV.getTeamBInputTxt().getText().trim();
-        String dateTemp = this.paGV.getDateInputTxt().getText().trim();
-        if(teamA.equalsIgnoreCase("")|| teamB.equalsIgnoreCase("") ||dateTemp.equalsIgnoreCase("")){
-            JFrame f=new JFrame();  
-            JOptionPane.showMessageDialog(f,"Bitte geben Sie in alle Felder etwas ein");  
-        }else{
-        DateTimeFormatter f = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
-        LocalDateTime  dtGame = LocalDateTime.now();
-        boolean ok =true;
-
-        try{
-        dtGame = LocalDateTime.from(f.parse(dateTemp));
-        }catch(Exception e){
-            System.out.println("Bitte Datum im richtigen Format eingeben");
-            JFrame fa=new JFrame();  
-            JOptionPane.showMessageDialog(fa,"Bitte geben Sie das Datum im richtigen Format ein");  
-            ok =false;
-        }
-        if(ok){
-            System.out.println(dtGame);
-            //TO DO
-            //Spiel in DB Schreiben und Model aktualisieren
-            
-            
-        }
-        }
         
+    }
+
+    @Override
+    public void itemStateChanged(ItemEvent arg0) {
+        //
+        boolean change=false;
+        if(this.paGV.getTeamALigaList().getSelectedItem().toString()!=selectedALiga||this.paGV.getTeamBLigaList().getSelectedItem().toString()!=selectedBLiga){
+            change=true;
+        }
+        selectedALiga  = this.paGV.getTeamALigaList().getSelectedItem().toString();
+        selectedBLiga = this.paGV.getTeamBLigaList().getSelectedItem().toString();
+        if(selectedALiga.contains("1")){
+            if(selectedBLiga.contains("3")){
+                //Fehlermeldung 
+                JOptionPane.showMessageDialog(null, "Gewünschte Ligakombination nicht auswählbar");
+                this.paGV.getTeamALigaList().setSelectedIndex(1);
+                this.paGV.repaint();
+                this.paGV.revalidate();
+            }
+        }
+        if(selectedALiga.contains("3")){
+                if(selectedBLiga.contains("1")){
+                //Fehlermeldung 
+                JOptionPane.showMessageDialog(null, "Gewünschte Ligakombination nicht auswählbar");
+                this.paGV.getTeamALigaList().setSelectedIndex(1);
+                this.paGV.repaint();
+                this.paGV.revalidate();
+            }
+        }
+        if(selectedBLiga.contains("3")){
+                if(selectedBLiga.contains("1")){
+                //Fehlermeldung 
+                JOptionPane.showMessageDialog(null, "Gewünschte Ligakombination nicht auswählbar");
+                this.paGV.getTeamALigaList().setSelectedIndex(1);
+                this.paGV.repaint();
+                this.paGV.revalidate();
+            }
+        }
+        if(change){
+        getListData();
+        }
+        if(this.paGV.getTeamAList().getSelectedItem()!=null){
+            teamA = this.paGV.getTeamAList().getSelectedItem().toString();
+        }
+        if(this.paGV.getTeamBList().getSelectedItem()!=null){
+        teamB = this.paGV.getTeamBList().getSelectedItem().toString();
+        }
+        if(teamA!=teamB){
+        this.paGV.setTeamALbl(teamA);
+        this.paGV.setTeamBLbl(teamB);
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Die Teams die gegeneinander Spielen müssen verschieden sein");
+        }
+
+        
+        
+        
+    }
+    
+    private void getListData(){
+        System.out.println(selectedALiga);
+        System.out.println(selectedBLiga);
+        //Club Liste an die jeweiige Liga angepasst werden
+        //To Do --> Daten aus DB holen
+        List<String>clubs =new ArrayList();
+        clubs.add("RB Leipzig");
+        clubs.add("FC Bayern München");
+        this.paGV.getTeamAList().removeAll();
+        DefaultComboBoxModel listModelTeamA = new DefaultComboBoxModel();
+        //TO DO List Model befüllen 
+        listModelTeamA.addElement("RB Leipzig");
+        listModelTeamA.addElement("FC Bayern München");
+        this.paGV.setTeamAList(listModelTeamA);
+        
+       DefaultComboBoxModel listModelTeamB = new DefaultComboBoxModel();
+       this.paGV.getTeamBList().removeAll();
+        listModelTeamB.addElement("RB Leipzig");
+        listModelTeamB.addElement("FC Bayern München");
+        this.paGV.setTeamBList(listModelTeamB);
+        this.paGV.repaint();
+        this.paGV.revalidate();
+    }
+    @Override
+    public void mouseClicked(MouseEvent arg0) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String liga1 = this.paGV.getTeamALigaList().getSelectedItem().toString();
+        if(liga1.contains("1")){
+            //Nur nOch liga 2 oder liga 1 bei 
+            String[] disLiga = new String[2];
+            disLiga[0] ="Liga 1";
+            disLiga[2] ="Liga 2";
+            DefaultComboBoxModel dfC = new DefaultComboBoxModel<String>(disLiga);
+            this.paGV.setTeamBLigaList(dfC);
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent arg0) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent arg0) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent arg0) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseExited(MouseEvent arg0) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

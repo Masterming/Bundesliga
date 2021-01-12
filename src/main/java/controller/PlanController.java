@@ -42,7 +42,7 @@ public class PlanController implements ActionListener {
             case "addSpiel":
                 System.out.println("Plan Controller angekommen");
                 PlanAddGameView pagV = new PlanAddGameView(this.mainView,true);
-                PlanAddGameController pagC = new PlanAddGameController(this.mainView,pagV,this.plm);
+                PlanAddGameController pagC = new PlanAddGameController(this.mainView,pagV,this.plm, this.plm.getlM());
                 pagV.setVisible(true);
                 break;
         }
