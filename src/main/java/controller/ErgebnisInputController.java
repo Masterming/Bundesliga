@@ -195,6 +195,11 @@ public class ErgebnisInputController implements ActionListener {
             JOptionPane.showMessageDialog(f,"Bitte fügen Sie Ergebnisse hinzu"); 
             System.out.println("Spielstand: " + teamAErg + " zu " + teamBErg);
         }
+        else{
+            //TO Do in DB Schreiben
+            System.out.println(this.scoreTeamA);
+            System.out.println(this.scoreTeamB);
+        }
     }
     
 }

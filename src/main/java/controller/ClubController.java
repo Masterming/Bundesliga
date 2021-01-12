@@ -11,6 +11,7 @@ import javax.swing.event.AncestorListener;
 import javax.swing.table.DefaultTableModel;
 import model.Club;
 import model.Liga;
+import view.ClubAddExistingView;
 import view.ClubAddView;
 import view.ClubEditView;
 import view.ClubView;
@@ -137,6 +138,9 @@ public class ClubController implements MouseListener, ActionListener {
                 //Dialog box mit drop down menü über die 2 Ligen die nicht der aktuellen liga entsprechen 
                 // auf grund der auswahl wird liste angapsst mit den clubs der liga, die im Drop Down menü ausgewählt wurde
                 //in Liste: mehrfach auswahl möglich
+                ClubAddExistingView caEV = new ClubAddExistingView(this.mainView,true);
+                ClubAddExistingController caEC = new ClubAddExistingController(caEV,this.l);
+                caEV.setVisible(true);
                 break;
                
         }
