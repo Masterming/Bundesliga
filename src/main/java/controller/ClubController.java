@@ -7,6 +7,7 @@ import java.awt.event.MouseListener;
 import javassist.bytecode.SignatureAttribute.ObjectType;
 import javax.swing.JFrame;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.event.AncestorListener;
 import javax.swing.table.DefaultTableModel;
 import model.Club;
@@ -70,7 +71,7 @@ public class ClubController implements MouseListener, ActionListener {
     @Override
     public void mouseClicked(MouseEvent evt) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        if(evt.getClickCount()==2){
+        if(evt.getClickCount()==2&&SwingUtilities.isLeftMouseButton(evt)){
             System.out.println("Tabelle wurde 2 mal geklcikt im ClubController");
             //Neues Fenster geht auf --> Neuen Controller + View
             JTable temp = (JTable)evt.getSource();
@@ -81,6 +82,7 @@ public class ClubController implements MouseListener, ActionListener {
             ClubEditController cbC = new ClubEditController(cbV, team);
             cbV.setVisible(true);
         }
+        
     }
 
     @Override

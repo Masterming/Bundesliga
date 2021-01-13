@@ -7,14 +7,19 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import javax.swing.JPopupMenu;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import view.KaderView;
+import view.RowPopupPlayerView;
 
 /**
  *
  * @author z003ywys
  */
-public class KaderController implements ActionListener {
+public class KaderController implements ActionListener, MouseListener {
     private KaderView kdV;
     private String team;
 
@@ -22,7 +27,7 @@ public class KaderController implements ActionListener {
         this.kdV = kdV;
         this.team = team;
         //Tabelle mit Rechtsklick -> Namen Ändern und Spieler Löschen
-        
+        this.kdV.getPlayerTable().addMouseListener(this);
         this.setTableData();
     }
     private void setTableData(){
@@ -35,7 +40,7 @@ public class KaderController implements ActionListener {
         this.kdV.setPlayerTableContent(tbm);
     }
     private String[][] getData(){
-        //daten holen 
+        //TO DO daten holen 
         String[][] data = new String[0][]; 
         data = new String[2][];
         String temp [] = new String[2];
@@ -53,6 +58,39 @@ public class KaderController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent arg0) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent evt) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        if(SwingUtilities.isRightMouseButton(evt)){
+            System.out.println("kontext Menü");
+            System.out.println("Rechts klick");
+            //Kontext Menü mit Spieler Löschen und name Ändern über Pop up Item
+            RowPopupPlayerView kontext = new RowPopupPlayerView(this.kdV.getPlayerTable(), this.kdV);
+            kontext.show(this.kdV.getPlayerTable(), evt.getX(), evt.getY());
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent evt) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent arg0) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent arg0) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseExited(MouseEvent arg0) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

@@ -42,17 +42,16 @@ public class ClubView extends javax.swing.JPanel implements Observer{
                 "Club", "Stadion"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return false;
             }
         });
         clubTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(clubTable);
-
+        clubTable.setRowSelectionAllowed(true);
+        clubTable.setColumnSelectionAllowed(true);
+        clubTable.setAutoCreateRowSorter(true);
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(

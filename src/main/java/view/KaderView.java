@@ -16,16 +16,19 @@ public class KaderView extends javax.swing.JPanel {
     private static final long serialVersionUID = 10L;
         public KaderView() {
         initComponents();
+        editCell=false;
     }
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         playerTable = new javax.swing.JTable(){
+        @Override
         public boolean editCellAt(int row, int column, java.util.EventObject e) {
-            return false;
+            
+            return editCell;
          }
         };
-
+        //playerTable = new javax.swing.JTable();
         playerTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
             },
@@ -35,7 +38,7 @@ public class KaderView extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(playerTable);
         playerTable.setRowSelectionAllowed(true);
-        playerTable.setColumnSelectionAllowed(false);
+        playerTable.setColumnSelectionAllowed(true);
         playerTable.setAutoCreateRowSorter(true);
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -58,5 +61,15 @@ public class KaderView extends javax.swing.JPanel {
     public JTable getPlayerTable() {
         return playerTable;
     }
+    private boolean editCell;
+
+    public boolean isEditCell() {
+        return editCell;
+    }
+
+    public void setEditCell(boolean editCell) {
+        this.editCell = editCell;
+    }
+    
     
 }

@@ -27,6 +27,10 @@ import view.TableView;
 public class MainController implements ActionListener {
     private MainView view;
     private Liga ligaModel;
+    //Es wird 3 Ligen Model geben jeweils eins pro Liga --> werden beim ersten Klick auf LigaButtons gesetzt
+    private Liga liga1Model;
+    private Liga liga2Model;
+    private Liga liga3Model;
  
 
     public void setView(MainView view) {
