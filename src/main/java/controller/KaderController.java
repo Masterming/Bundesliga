@@ -68,7 +68,7 @@ public class KaderController implements ActionListener, MouseListener {
             System.out.println("kontext Menü");
             System.out.println("Rechts klick");
             //Kontext Menü mit Spieler Löschen und name Ändern über Pop up Item
-            RowPopupPlayerView kontext = new RowPopupPlayerView(this.kdV.getPlayerTable(), this.kdV);
+            RowPopupPlayerView kontext = new RowPopupPlayerView(this.kdV.getPlayerTable());
             kontext.show(this.kdV.getPlayerTable(), evt.getX(), evt.getY());
         }
     }

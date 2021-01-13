@@ -16,6 +16,8 @@ import view.ClubAddExistingView;
 import view.ClubAddView;
 import view.ClubEditView;
 import view.ClubView;
+import view.RowPopupClubView;
+import view.RowPopupPlayerView;
 
 /**
  * @author Rene
@@ -81,6 +83,13 @@ public class ClubController implements MouseListener, ActionListener {
             ClubEditView cbV = new ClubEditView(this.view.getMainView(),true);
             ClubEditController cbC = new ClubEditController(cbV, team);
             cbV.setVisible(true);
+        }
+        if(SwingUtilities.isRightMouseButton(evt)){
+            System.out.println("kontext Menü");
+            System.out.println("Rechts klick");
+            //Kontext Menü mit Spieler Löschen und name Ändern über Pop up Item
+            RowPopupClubView kontext = new RowPopupClubView(this.view.getClubTable());
+            kontext.show(this.view.getClubTable(), evt.getX(), evt.getY());
         }
         
     }

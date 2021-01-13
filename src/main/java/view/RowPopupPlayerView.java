@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class RowPopupPlayerView extends JPopupMenu {
     
-    public RowPopupPlayerView(JTable table, KaderView kdv){
+    public RowPopupPlayerView(JTable table){
         JMenuItem loeschen = new JMenuItem("Löschen");
         loeschen.addActionListener(new ActionListener(){
             @Override
