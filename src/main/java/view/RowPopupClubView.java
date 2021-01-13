@@ -70,6 +70,7 @@ public class RowPopupClubView extends JPopupMenu {
                 }
                 if (stadion != null && column == 1) {
                     String stadionNeu = JOptionPane.showInputDialog("Neuen Stadion eingeben eingeben");
+                    stadionNeu.trim();
                     if (!"".equals(stadionNeu)) {
                         tbm.setValueAt(stadionNeu, row, column);
                     }
