@@ -65,7 +65,7 @@ public class TransactionController implements ActionListener, MouseListener {
     private void suchen() {
         this.trV.getErgListTeam().removeAll();
         String suchAnfrage = this.trV.getReceivingTeamInput().getText();
-        // Such ergebnisse als Liste o.Ä. engezigt bekommen
+        // Such ergebnisse als Liste o.ae. engezigt bekommen
         DefaultListModel<String> listModel = new DefaultListModel<>();
         this.trV.getErgListTeam().setModel(listModel);
         listModel.addElement(suchAnfrage);
@@ -98,7 +98,7 @@ public class TransactionController implements ActionListener, MouseListener {
     }
 
     private void transFinish() {
-        int best = JOptionPane.showConfirmDialog(null, "Wollen Sie die Transaktion abschließen");
+        int best = JOptionPane.showConfirmDialog(null, "Wollen Sie die Transaktion abschliessen");
         boolean nullIncluded = false;
         if (best == 0) {
             System.out.println("True");
@@ -112,18 +112,18 @@ public class TransactionController implements ActionListener, MouseListener {
             }
             // Transaktion mit den Spielern passieren
             if (nullIncluded == false && transferPlayer.size() > 0) {
-                // Transaktion durchführen
+                // Transaktion durchfuehren
                 System.out.println("trans Finish");
                 for (String st : transferPlayer) {
                     if (st != null) {
-                        System.out.println("Übertragende Objekte " + st);
+                        System.out.println("uebertragende Objekte " + st);
                     }
                 }
                 JOptionPane.showMessageDialog(this.trV, "Transfer War erfolgreich");
 
             } else {
-                System.out.println("Bitte Wählen Sie die zu übertragenden Teams aus");
-                JOptionPane.showMessageDialog(this.trV, "Bitte Wählen Sie die zu übertragenden Teams aus");
+                System.out.println("Bitte Waehlen Sie die zu uebertragenden Teams aus");
+                JOptionPane.showMessageDialog(this.trV, "Bitte Waehlen Sie die zu uebertragenden Teams aus");
             }
 
         } else {

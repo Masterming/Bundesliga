@@ -146,7 +146,7 @@ public class MainView extends javax.swing.JFrame {
         tableBtn.getAccessibleContext().setAccessibleName("tableBtn");
         planBtn.getAccessibleContext().setAccessibleName("planBtn");
         contentView.getAccessibleContext().setAccessibleName("contentView");
-        contentView.setLayout(new java.awt.BorderLayout()); // Wichtig für Darstellung
+        contentView.setLayout(new java.awt.BorderLayout()); // Wichtig fuer Darstellung
 
         this.pack();
     }// </editor-fold>

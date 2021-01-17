@@ -44,7 +44,7 @@ public class ClubEditView extends javax.swing.JDialog {
         kaderBtn.setText("Kader");
         kaderBtn.setActionCommand("kader");
 
-        addSpielerBtn.setText("Spieler Hinzufügen");
+        addSpielerBtn.setText("Spieler Hinzufuegen");
         addSpielerBtn.setActionCommand("spieler");
 
         transBtn.setText("Transaktion");

@@ -30,7 +30,7 @@ public class PlanView extends JPanel implements Observer {
 
     @Override
     public void update(Observable o, Object arg1) {
-        // Hier landet man wenn man im Model was verändert hat durch norifyObservers
+        // Hier landet man wenn man im Model was veraendert hat durch norifyObservers
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         if (o instanceof PlanModel) {
             // TO View durch angaben am Model anpassen

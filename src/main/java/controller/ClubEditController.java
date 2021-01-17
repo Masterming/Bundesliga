@@ -37,7 +37,7 @@ public class ClubEditController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent evt) {
-        System.out.println("Button wurde gedrückt");
+        System.out.println("Button wurde gedrueckt");
         if (evt.getActionCommand() == "kader") {
             this.cev.getKaderBtn().setBackground(Color.white);
             this.cev.getTransBtn().setBackground(Color.lightGray);
@@ -65,7 +65,7 @@ public class ClubEditController implements ActionListener {
             // Layout setzen ?
             this.cev.getClubEditContent().removeAll();
             this.cev.getClubEditContent().add(tranView);
-            System.out.println("Content hizugefügt");
+            System.out.println("Content hizugefuegt");
             this.cev.getClubEditContent().repaint();
             System.out.println("Repaint()");
             this.cev.getClubEditContent().revalidate();

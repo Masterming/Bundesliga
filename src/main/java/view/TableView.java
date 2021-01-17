@@ -36,7 +36,7 @@ public class TableView extends javax.swing.JPanel {
         // ggf. extra Tabellen Modell als extra Klasse erstellen erstellen in dem man
         // Eigenschaften wie Editable relaisiert
         table.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {}, new String[] { "Platz", "Club",
-                "Spiele", "Punkte", "Siege", "Unentschieden", "Niederlagen", "Torverhältnisse" }
+                "Spiele", "Punkte", "Siege", "Unentschieden", "Niederlagen", "Torverhaeltnisse" }
 
         ));
         table.setRowSelectionAllowed(false);

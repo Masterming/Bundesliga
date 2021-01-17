@@ -58,7 +58,7 @@ public class PlanAddGameView2 extends javax.swing.JDialog {
 
         jLabel3.setText("Liga");
 
-        addSpielBtn.setText("Spiel Hinzufügen");
+        addSpielBtn.setText("Spiel Hinzufuegen");
         addSpielBtn.setActionCommand("addGame");
 
         jLabel4.setText("Format: dd.MM.yyyy HH:mm");

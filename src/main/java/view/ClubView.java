@@ -25,10 +25,10 @@ public class ClubView extends javax.swing.JPanel implements Observer {
         jScrollPane1 = new javax.swing.JScrollPane();
         clubTable = new javax.swing.JTable();
 
-        addClubBtn.setText("Neuen Club Hinzufügen");
+        addClubBtn.setText("Neuen Club Hinzufuegen");
         addClubBtn.setActionCommand("addClub");
 
-        addExistingClubBtn.setText("Vorhandenen Club Hinzufügen");
+        addExistingClubBtn.setText("Vorhandenen Club Hinzufuegen");
         addExistingClubBtn.setActionCommand("addExistClub");
 
         clubTable.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {

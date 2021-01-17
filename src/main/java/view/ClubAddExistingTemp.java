@@ -58,9 +58,9 @@ public class ClubAddExistingTemp extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(ligaClubList);
 
-        jLabel2.setText("Der hinzuzufügende Club:");
+        jLabel2.setText("Der hinzuzufuegende Club:");
 
-        adClubToLigaBtn.setText("Club zur Liga hinzufügen");
+        adClubToLigaBtn.setText("Club zur Liga hinzufuegen");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

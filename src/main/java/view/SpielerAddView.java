@@ -43,7 +43,7 @@ public class SpielerAddView extends javax.swing.JPanel {
         anzToreTxt.setMinimumSize(new java.awt.Dimension(3, 15));
         anzToreTxt.setPreferredSize(new java.awt.Dimension(127, 19));
 
-        addSpielerBtn.setText("Spieler hinzufügen");
+        addSpielerBtn.setText("Spieler hinzufuegen");
         addSpielerBtn.setActionCommand("addSpieler");
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

@@ -25,23 +25,23 @@ public class RowPopupPlayerView extends JPopupMenu {
     private static final long serialVersionUID = 109L;
 
     public RowPopupPlayerView(JTable table) {
-        JMenuItem loeschen = new JMenuItem("Löschen");
+        JMenuItem loeschen = new JMenuItem("Loeschen");
         loeschen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                System.out.println("Löschen");
-                // Selected Value bekommen bzw. Ändern
+                System.out.println("Loeschen");
+                // Selected Value bekommen bzw. aendern
                 int index1 = table.getSelectedRow();
                 String name = table.getValueAt(index1, 0).toString();
                 System.out.println(name);
                 DefaultTableModel tbm = (DefaultTableModel) table.getModel();
                 if (name != null) {
-                    // Pop Up menü mit text
+                    // Pop Up menue mit text
                     int best = JOptionPane.showConfirmDialog(null,
-                            "Wollen Sie den Spieler " + name + " wirklich löschen?");
+                            "Wollen Sie den Spieler " + name + " wirklich loeschen?");
                     if (best == 0) {
                         System.out.println("True");
-                        // TO DO Name aus DB Löschen
+                        // TODO Name aus DB Loeschen
                         tbm.removeRow(index1);
                     } else {
                         System.out.println("false");
@@ -56,17 +56,17 @@ public class RowPopupPlayerView extends JPopupMenu {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 System.out.println("Bearbeiten");
-                // Selected Value bekommen bzw. Ändern
+                // Selected Value bekommen bzw. aendern
                 int row = table.getSelectedRow();
                 int column = table.getSelectedColumn();
-                // Über Kader View
+                // ueber Kader View
 
                 String name = table.getValueAt(row, 0).toString();
                 String goal = table.getValueAt(row, 1).toString();
                 System.out.println(name);
                 DefaultTableModel tbm = (DefaultTableModel) table.getModel();
                 if (name != null && column == 0) {
-                    // Pop Up menü mit text
+                    // Pop Up menue mit text
 
                     String nameNeu = JOptionPane.showInputDialog("Neuen Namen eingeben");
                     nameNeu = nameNeu.trim();

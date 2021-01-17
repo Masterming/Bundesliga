@@ -30,7 +30,7 @@ public class ClubAddController implements ActionListener {
         String comm = evt.getActionCommand();
         switch (comm) {
             case "clubAdd":
-                System.out.println("Club Hinzugefügt");
+                System.out.println("Club Hinzugefuegt");
                 addClub();
                 break;
         }
@@ -51,9 +51,9 @@ public class ClubAddController implements ActionListener {
         }
         if (!eingabe) {
             JFrame f = new JFrame();
-            JOptionPane.showMessageDialog(f, "Bitte geben sie etwas für Clubname und Stadion erin");
+            JOptionPane.showMessageDialog(f, "Bitte geben sie etwas fuer Clubname und Stadion erin");
         } else {
-            // TODO Hinzufügen zur DB
+            // TODO Hinzufuegen zur DB
             System.out.println(stadion);
             System.out.println(clubName);
 

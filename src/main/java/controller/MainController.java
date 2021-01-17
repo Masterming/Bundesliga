@@ -36,8 +36,8 @@ public class MainController implements ActionListener {
     public void setView(MainView view) {
         this.view = view;
     }
-    // Variable für angezeigtesn View
-    // Variable für jeweils genutzten Controller
+    // Variable fuer angezeigtesn View
+    // Variable fuer jeweils genutzten Controller
 
     boolean liga1 = false;
     boolean liga2 = false;

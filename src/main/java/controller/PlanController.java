@@ -32,7 +32,7 @@ public class PlanController implements ActionListener {
         this.plm.addObserver(this.plv);
         this.plv.getAddSpielBtn().addActionListener(this);
         // this.plv.getjButton1().addActionListener(this);
-        // Problem: Durch MVC- Beobahcter Pattern wird View erst durch die Veränderung
+        // Problem: Durch MVC- Beobahcter Pattern wird View erst durch die Veraenderung
         // des Models initialisert -->
         // zum Zeitpunkt der Controller erstellung ist nicht bekannt welche Buttons es
         // geben wird --> Kann keine Action verlinkt werden

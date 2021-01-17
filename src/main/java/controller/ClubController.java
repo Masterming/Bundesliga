@@ -49,7 +49,7 @@ public class ClubController implements MouseListener, ActionListener {
         this.view.getAddClubBtn().addActionListener(this);
         this.view.getAddExistingClubBtn().addActionListener(this);
         this.mainView = main;
-        // Überlegen ob man Buttons ausgraut
+        // ueberlegen ob man Buttons ausgraut
         if (l.getName().contains("1") || l.getName().contains("2")) {
             this.view.getAddClubBtn().setVisible(false);
             this.view.getAddExistingClubBtn().setVisible(true);
@@ -85,9 +85,9 @@ public class ClubController implements MouseListener, ActionListener {
             cbV.setVisible(true);
         }
         if (SwingUtilities.isRightMouseButton(evt)) {
-            System.out.println("kontext Menü");
+            System.out.println("kontext Menue");
             System.out.println("Rechts klick");
-            // Kontext Menü mit Spieler Löschen und name Ändern über Pop up Item
+            // Kontext Menue mit Spieler Loeschen und name aendern ueber Pop up Item
             RowPopupClubView kontext = new RowPopupClubView(this.view.getClubTable());
             kontext.show(this.view.getClubTable(), evt.getX(), evt.getY());
         }
@@ -168,18 +168,18 @@ public class ClubController implements MouseListener, ActionListener {
     public void actionPerformed(ActionEvent evt) {
         switch (evt.getActionCommand()) {
             case "addClub":
-                System.out.println("Club Hinzufügen button gedrückt");
+                System.out.println("Club Hinzufuegen button gedrueckt");
                 ClubAddView caV = new ClubAddView(this.mainView, true);
                 ClubAddController cbAC = new ClubAddController(this.mainView, caV);
                 caV.setVisible(true);
                 break;
             case "addExistClub":
-                System.out.println("Vorhandenen Club zur Liga hinzufügen");
-                // Dialog box mit drop down menü über die 2 Ligen die nicht der aktuellen liga
+                System.out.println("Vorhandenen Club zur Liga hinzufuegen");
+                // Dialog box mit drop down menue ueber die 2 Ligen die nicht der aktuellen liga
                 // entsprechen
                 // auf grund der auswahl wird liste angapsst mit den clubs der liga, die im Drop
-                // Down menü ausgewählt wurde
-                // in Liste: mehrfach auswahl möglich
+                // Down menue ausgewaehlt wurde
+                // in Liste: mehrfach auswahl moeglich
                 ClubAddExistingView caEV = new ClubAddExistingView(this.mainView, true);
                 ClubAddExistingController caEC = new ClubAddExistingController(caEV, this.l);
                 caEV.setVisible(true);

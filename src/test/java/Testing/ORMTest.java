@@ -71,7 +71,7 @@ public class ORMTest {
 
     public static void testAddPlayer() {
         LOGGER.log(Level.INFO, "Test 1: Add Player");
-        p1 = new Player("Thomas Müller", 0);
+        p1 = new Player("Thomas Mueller", 0);
         p2 = new Player("Luca Schuler", 0);
 
         PlayerDBMapper dao = new PlayerDBMapper();

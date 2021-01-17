@@ -85,7 +85,7 @@ public class TransactionView extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(ergListTeam);
 
-        selectedTeam.setText("Empfängerteam:");
+        selectedTeam.setText("Empfaengerteam:");
 
         listEigenerKader.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", " " };
@@ -100,7 +100,7 @@ public class TransactionView extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(listEigenerKader);
 
-        transFinishBtn.setText("Transaktionen bestätigen");
+        transFinishBtn.setText("Transaktionen bestaetigen");
         transFinishBtn.setActionCommand("trans_finish");
 
         addToTransBtn.setText(">");

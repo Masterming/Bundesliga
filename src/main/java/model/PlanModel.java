@@ -19,7 +19,7 @@ public class PlanModel extends Observable implements Serializable {
 
     private static final long serialVersionUID = 5L;
 
-    // die Liaga als Model dient als Grundlage für die Erstellung des PlanModels
+    // die Liaga als Model dient als Grundlage fuer die Erstellung des PlanModels
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private final int planModelID;
@@ -31,11 +31,11 @@ public class PlanModel extends Observable implements Serializable {
         this.planModelID = -1;
         setChanged();
     }
-    // DatenStruktur überlegen --> Aus DB holen
+    // DatenStruktur ueberlegen --> Aus DB holen
 
     public void setlM(Liga lM) {
         this.lM = lM;
-        // Holt sich Liste mit Gameobjekten die müssen durchsortiert werden
+        // Holt sich Liste mit Gameobjekten die muessen durchsortiert werden
         // GameTabelle: alles Games von allen Ligen zukunft und vergangenheit
         // Spiel noch nicht gespielt:boolean = false
         setChanged();

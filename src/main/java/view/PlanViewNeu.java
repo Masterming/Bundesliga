@@ -31,7 +31,7 @@ public class PlanViewNeu extends JPanel implements Observer {
 
     @Override
     public void update(Observable o, Object arg1) {
-        // Hier landet man wenn man im Model was verändert hat durch norifyObservers
+        // Hier landet man wenn man im Model was veraendert hat durch norifyObservers
         this.planContent.setLayout(new BoxLayout(this.planContent, BoxLayout.Y_AXIS));
         if (o instanceof PlanModel) {
             // To change body of generated methods, choose Tools | Templates.
@@ -102,7 +102,7 @@ public class PlanViewNeu extends JPanel implements Observer {
 
         planContent.setLayout(new javax.swing.BoxLayout(planContent, javax.swing.BoxLayout.LINE_AXIS));
 
-        addSpielBtn.setText("Spiel hinzufügen");
+        addSpielBtn.setText("Spiel hinzufuegen");
         addSpielBtn.setActionCommand("addSpiel");
 
         javax.swing.GroupLayout btnContainerLayout = new javax.swing.GroupLayout(btnContainer);

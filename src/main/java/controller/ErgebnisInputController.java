@@ -79,10 +79,10 @@ public class ErgebnisInputController implements ActionListener {
     private void getData() {
         // TODO daten aus DB holen
         List<String> spieler = new ArrayList<>();
-        spieler.add("Thomas Müller");
+        spieler.add("Thomas Mueller");
         spieler.add("Philipp Lahm");
         DefaultListModel<String> listModelTeamA = new DefaultListModel<>();
-        listModelTeamA.addElement("Thomas Müller");
+        listModelTeamA.addElement("Thomas Mueller");
         listModelTeamA.addElement("Philipp Lahm");
 
         this.ergDialog.setTeamAPlayerList(listModelTeamA);
@@ -194,10 +194,10 @@ public class ErgebnisInputController implements ActionListener {
     private void save() {
         if (teamAErg == -1 || teamBErg == -1) {
             JFrame f = new JFrame();
-            JOptionPane.showMessageDialog(f, "Bitte fügen Sie Ergebnisse hinzu");
+            JOptionPane.showMessageDialog(f, "Bitte fuegen Sie Ergebnisse hinzu");
             System.out.println("Spielstand: " + teamAErg + " zu " + teamBErg);
         } else {
-            // TO Do in DB Schreiben und Model ändern
+            // TODO in DB Schreiben und Model aendern
             System.out.println(this.scoreTeamA);
             System.out.println(this.scoreTeamB);
             // this.plm.setlM(this.plm.getlM());

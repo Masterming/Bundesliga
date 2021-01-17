@@ -90,7 +90,7 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
         String comm = evt.getActionCommand();
         switch (comm) {
             case "addGame":
-                System.out.println("Spiel hinzugefügt");
+                System.out.println("Spiel hinzugefuegt");
                 addGame();
                 break;
         }
@@ -133,7 +133,7 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
         if (selectedALiga.contains("1")) {
             if (selectedBLiga.contains("3")) {
                 // Fehlermeldung
-                JOptionPane.showMessageDialog(null, "Gewünschte Ligakombination nicht auswählbar");
+                JOptionPane.showMessageDialog(null, "Gewuenschte Ligakombination nicht auswaehlbar");
                 this.paGV.getTeamALigaList().setSelectedIndex(1);
                 this.paGV.repaint();
                 this.paGV.revalidate();
@@ -142,7 +142,7 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
         if (selectedALiga.contains("3")) {
             if (selectedBLiga.contains("1")) {
                 // Fehlermeldung
-                JOptionPane.showMessageDialog(null, "Gewünschte Ligakombination nicht auswählbar");
+                JOptionPane.showMessageDialog(null, "Gewuenschte Ligakombination nicht auswaehlbar");
                 this.paGV.getTeamALigaList().setSelectedIndex(1);
                 this.paGV.repaint();
                 this.paGV.revalidate();
@@ -151,7 +151,7 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
         if (selectedBLiga.contains("3")) {
             if (selectedBLiga.contains("1")) {
                 // Fehlermeldung
-                JOptionPane.showMessageDialog(null, "Gewünschte Ligakombination nicht auswählbar");
+                JOptionPane.showMessageDialog(null, "Gewuenschte Ligakombination nicht auswaehlbar");
                 this.paGV.getTeamALigaList().setSelectedIndex(1);
                 this.paGV.repaint();
                 this.paGV.revalidate();
@@ -170,7 +170,7 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
             this.paGV.setTeamALbl(teamA);
             this.paGV.setTeamBLbl(teamB);
         } else {
-            JOptionPane.showMessageDialog(null, "Die Teams die gegeneinander Spielen müssen verschieden sein");
+            JOptionPane.showMessageDialog(null, "Die Teams die gegeneinander Spielen muessen verschieden sein");
         }
 
     }
@@ -183,20 +183,20 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
         DefaultComboBoxModel<String> listModelTeamA = new DefaultComboBoxModel<>();
         DefaultComboBoxModel<String> listModelTeamB = new DefaultComboBoxModel<>();
 
-        // TODO List Model befüllen
+        // TODO List Model befuellen
         if (this.selectedALiga.contains("1")) {
             this.paGV.getTeamAList().removeAll();
             listModelTeamA.addElement("RB Leipzig");
-            listModelTeamA.addElement("FC Bayern München");
+            listModelTeamA.addElement("FC Bayern Muenchen");
         }
         if (this.selectedBLiga.contains("1")) {
             this.paGV.getTeamBList().removeAll();
             listModelTeamB.addElement("RB Leipzig");
-            listModelTeamB.addElement("FC Bayern München");
+            listModelTeamB.addElement("FC Bayern Muenchen");
         }
 
         if (this.selectedALiga.contains("2")) {
-            // TODO List Model befüllen
+            // TODO List Model befuellen
             this.paGV.getTeamAList().removeAll();
             listModelTeamA.addElement("FC Erzgevirge Aue");
             listModelTeamA.addElement("HSV Hamburg");
@@ -207,7 +207,7 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
             listModelTeamB.addElement("HSV Hamburg");
         }
         if (this.selectedALiga.contains("3")) {
-            // TODO List Model befüllen
+            // TODO List Model befuellen
             this.paGV.getTeamAList().removeAll();
             listModelTeamA.addElement("Ingolstadt");
             listModelTeamA.addElement("Dynamo Dresden");

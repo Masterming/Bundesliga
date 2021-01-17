@@ -36,7 +36,7 @@ public class ClubAddExistingController implements ActionListener, MouseListener,
         this.cAeV.getLigaClubList().addMouseListener(this);
         clubList = new DefaultListModel<>();
         this.cAeV.getLigaClubList().setModel(clubList);
-        // Elemente für die Erste Liga hinzufügen
+        // Elemente fuer die Erste Liga hinzufuegen
         adaptViewToLiga();
     }
 
@@ -57,7 +57,7 @@ public class ClubAddExistingController implements ActionListener, MouseListener,
             DefaultComboBoxModel<String> dfC = new DefaultComboBoxModel<>(ligen);
             this.cAeV.setLigaComboModel(dfC);
             // Club Liste Setzen -->
-            this.clubList.addElement("FC Bayern München");
+            this.clubList.addElement("FC Bayern Muenchen");
             this.clubList.addElement("RB Leipzig");
         }
         if (this.l.getName().contains("3")) {
@@ -78,10 +78,10 @@ public class ClubAddExistingController implements ActionListener, MouseListener,
             case "clubAddLiga":
 
                 System.out.println("CLub: " + this.selectedClub);
-                int best = JOptionPane.showConfirmDialog(this.cAeV, "Wollen Sie den Club zur Liga hinzufügen ?");
+                int best = JOptionPane.showConfirmDialog(this.cAeV, "Wollen Sie den Club zur Liga hinzufuegen ?");
                 if (best == 0) {
                     System.out.println("true");
-                    System.out.println("Club zur Liga hinzugefügt");
+                    System.out.println("Club zur Liga hinzugefuegt");
                     // TODO Transfer
 
                     JOptionPane.showMessageDialog(this.cAeV, "Transfer war erfolgreich");
@@ -143,17 +143,17 @@ public class ClubAddExistingController implements ActionListener, MouseListener,
         System.out.println(ligStr);
         this.clubList.removeAllElements();
         if (ligStr.contains("1")) {
-            // TODO Clubs Aufzählen aus der Liga
-            this.clubList.addElement("FC Bayern München");
+            // TODO Clubs Aufzaehlen aus der Liga
+            this.clubList.addElement("FC Bayern Muenchen");
             this.clubList.addElement("RB Leipzig");
 
         }
         if (ligStr.contains("2")) {
-            // TODO Clubs Aufzählen aus der Liga
+            // TODO Clubs Aufzaehlen aus der Liga
             this.clubList.addElement("FC Erzgebirge Aue");
         }
         if (ligStr.contains("3")) {
-            // To DoClubs Aufzählen aus der Liga
+            // TODO Clubs Aufzaehlen aus der Liga
             this.clubList.addElement("Ingolstadt");
         }
     }

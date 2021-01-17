@@ -30,7 +30,7 @@ public class SpielerAddController implements ActionListener {
     public void actionPerformed(ActionEvent evt) {
         switch (evt.getActionCommand()) {
             case "addSpieler":
-                System.out.println("Spieler hinzugefügt");
+                System.out.println("Spieler hinzugefuegt");
                 addSpieler();
                 break;
         }
