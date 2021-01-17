@@ -40,7 +40,7 @@ public class ClubAddExistingController implements ActionListener,MouseListener, 
         adaptViewToLiga();
     }
     private void adaptViewToLiga(){
-        //TO Club View Anpassen
+        //TODO Club View Anpassen
         if(this.l.getName().contains("1")){
             String [] ligen = new String[1];
             ligen[0] = "Liga 2";
@@ -80,7 +80,7 @@ public class ClubAddExistingController implements ActionListener,MouseListener, 
                 if(best==0){
                     System.out.println("true");
                      System.out.println("Club zur Liga hinzugefügt");
-                     //TO DO Transfer
+                     //TODO Transfer
                      
                      JOptionPane.showMessageDialog(this.cAeV, "Transfer war erfolgreich");
                 }
@@ -138,17 +138,17 @@ public class ClubAddExistingController implements ActionListener,MouseListener, 
         System.out.println(ligStr);
         this.clubList.removeAllElements();
         if(ligStr.contains("1")){
-            //To DoClubs Aufzählen aus der Liga
+            //ToDo Clubs Aufzählen aus der Liga
             this.clubList.addElement("FC Bayern München");
             this.clubList.addElement("RB Leipzig");
             
         }
         if(ligStr.contains("2")){
-            //To DoClubs Aufzählen aus der Liga
+            //ToDo Clubs Aufzählen aus der Liga
             this.clubList.addElement("FC Erzgebirge Aue");
         }
         if(ligStr.contains("3")){
-            //To DoClubs Aufzählen aus der Liga
+            //ToDo Clubs Aufzählen aus der Liga
             this.clubList.addElement("Ingolstadt");
         }
     }

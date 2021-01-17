@@ -61,7 +61,7 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
             DefaultComboBoxModel dfB = new DefaultComboBoxModel<String>(ligen);
             this.paGV.setTeamALigaList(dfC);
             this.paGV.setTeamBLigaList(dfB);
-            //TO DO Teams Holen pro liga
+            //TODO Teams Holen pro liga
          }
          if(this.l.getName().contains("2")){
            String [] ligen = new String[3];
@@ -110,7 +110,7 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
             System.out.println(dtGame);
             System.out.println(this.teamA);
             System.out.println(this.teamB);
-            //TO DO Spiel in DB Schreiben und Model aktualisieren
+            //TODO Spiel in DB Schreiben und Model aktualisieren
             this.plM.setlM(new Liga("Test"));
             //this.l.setName(this.l.getName());
             this.paGV.dispose();
@@ -180,12 +180,12 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
         System.out.println(selectedALiga);
         System.out.println(selectedBLiga);
         //Club Liste an die jeweiige Liga angepasst werden
-        //To Do --> Daten aus DB holen
+        //ToDo --> Daten aus DB holen
         DefaultComboBoxModel listModelTeamA = new DefaultComboBoxModel();
         DefaultComboBoxModel listModelTeamB = new DefaultComboBoxModel();
         
         
-        //TO DO List Model befüllen 
+        //TODO List Model befüllen 
         if(this.selectedALiga.contains("1")){
         this.paGV.getTeamAList().removeAll();
         listModelTeamA.addElement("RB Leipzig");
@@ -198,7 +198,7 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
         }
         
         if(this.selectedALiga.contains("2")){
-        //TO DO List Model befüllen 
+        //TODO List Model befüllen 
         this.paGV.getTeamAList().removeAll();
         listModelTeamA.addElement("FC Erzgevirge Aue");
         listModelTeamA.addElement("HSV Hamburg");
@@ -209,7 +209,7 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
         listModelTeamB.addElement("HSV Hamburg");
         }
         if(this.selectedALiga.contains("3")){
-        //TO DO List Model befüllen 
+        //TODO List Model befüllen 
         this.paGV.getTeamAList().removeAll();
         listModelTeamA.addElement("Ingolstadt");
         listModelTeamA.addElement("Dynamo Dresden");

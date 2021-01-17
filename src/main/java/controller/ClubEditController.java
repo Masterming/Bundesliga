@@ -82,7 +82,7 @@ public class ClubEditController implements ActionListener {
             this.cev.getClubEditContent().repaint();
             this.cev.getClubEditContent().revalidate();
             SpielerAddView spV = new SpielerAddView();
-            SpielerAddControler spAC = new SpielerAddControler(spV);
+            SpielerAddController spAC = new SpielerAddController(spV);
             this.cev.getClubEditContent().add(spV);
             this.cev.getClubEditContent().repaint();
             this.cev.getClubEditContent().revalidate();

@@ -54,7 +54,7 @@ public class ClubAddController implements ActionListener {
              JFrame f=new JFrame();  
             JOptionPane.showMessageDialog(f,"Bitte Geben Sie etwas für Clubname und Stadion erin");  
         }else{
-            //To Do Hinzufügen zur DB
+            //TODO Hinzufügen zur DB
             System.out.println(stadion);
             System.out.println(clubName);
             
