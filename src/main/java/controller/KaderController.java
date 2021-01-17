@@ -42,7 +42,7 @@ public class KaderController implements ActionListener, MouseListener {
     }
 
     private String[][] getData() {
-        // TO DO daten holen
+        // TODO daten holen
         String[][] data = new String[0][];
         data = new String[2][];
         String temp[] = new String[2];

@@ -77,7 +77,7 @@ public class ErgebnisInputController implements ActionListener {
     }
 
     private void getData() {
-        // To DO daten aus DB holen
+        // TODO daten aus DB holen
         List<String> spieler = new ArrayList<>();
         spieler.add("Thomas Müller");
         spieler.add("Philipp Lahm");

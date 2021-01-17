@@ -65,10 +65,6 @@ public class ClubController implements MouseListener, ActionListener {
         this.setData();
     }
 
-    public void updateView() {
-        view.printOverview(model);
-    }
-
     public void addPlayer(String player) {
         throw new UnsupportedOperationException("Not supported yet.");
     }

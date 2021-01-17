@@ -6,7 +6,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.table.TableModel;
-import model.Club;
+
 
 /**
  * @author Rene
@@ -18,10 +18,6 @@ public class ClubView extends javax.swing.JPanel implements Observer {
     private javax.swing.JTable clubTable;
     private javax.swing.JScrollPane jScrollPane1;
     private JFrame mainView;
-
-    public void printOverview(Club model) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
 
     private void initComponents() {
         addClubBtn = new javax.swing.JButton();

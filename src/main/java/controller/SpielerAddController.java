@@ -17,11 +17,11 @@ import view.SpielerAddView;
  *
  * @author z003ywys
  */
-public class SpielerAddControler implements ActionListener {
+public class SpielerAddController implements ActionListener {
     private SpielerAddView spAV;
     private Club club;
 
-    public SpielerAddControler(SpielerAddView spAV) {
+    public SpielerAddController(SpielerAddView spAV) {
         this.spAV = spAV;
         this.spAV.getAddSpielerBtn().addActionListener(this);
     }
@@ -50,7 +50,7 @@ public class SpielerAddControler implements ActionListener {
             inputOk = false;
         }
         if (inputOk) {
-            // To DO Spieler in DB Schreiben
+            // TODO Spieler in DB Schreiben
         }
     }
 

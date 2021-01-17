@@ -56,6 +56,7 @@ public class TableController implements ActionListener {
     }
 
     private String[][] getData() {
+        // TODO Daten Holen
         String[][] data = new String[0][];
         if (this.l.getName() == "Liga 1") {
             data = new String[2][];
