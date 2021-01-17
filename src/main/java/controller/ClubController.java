@@ -4,6 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javassist.bytecode.SignatureAttribute.ObjectType;
 import javax.swing.JFrame;
 import javax.swing.JTable;
@@ -12,6 +15,7 @@ import javax.swing.event.AncestorListener;
 import javax.swing.table.DefaultTableModel;
 import model.Club;
 import model.Liga;
+import model.LigaDBMapper;
 import view.ClubAddExistingView;
 import view.ClubAddView;
 import view.ClubEditView;
@@ -129,9 +133,15 @@ public class ClubController implements MouseListener, ActionListener {
     }
 
     private String[][] getData() {
-        // TODO Get Data
+        // TODO Get Data 
+        // WTF do you want here???
+        LigaDBMapper dao = new LigaDBMapper();
+        
         String[][] data = new String[0][];
         if (this.l.getName() == "Liga 1") {
+            Liga model = dao.getLiga(1);
+            List<Club> clubs_list = model.getClubs();
+            String[] clubs_array = clubs_list.stream().map(Club::getName).collect(Collectors.toList()).toArray(new String[0]);
             data = new String[2][];
             String[] temp = new String[8];
             temp[0] = "FC Bayern";
@@ -144,6 +154,7 @@ public class ClubController implements MouseListener, ActionListener {
             data[1] = temp;
         }
         if (this.l.getName() == "Liga 2") {
+            Liga model = dao.getLiga(2);
             data = new String[1][];
             String[] temp = new String[8];
             temp[0] = "FC Erzgebirge Aue";
@@ -151,6 +162,7 @@ public class ClubController implements MouseListener, ActionListener {
             data[0] = temp;
         }
         if (this.l.getName() == "Liga 3") {
+            Liga model = dao.getLiga(3);
 
         }
         return data;
