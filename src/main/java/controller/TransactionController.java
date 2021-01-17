@@ -23,8 +23,8 @@ import view.TransactionView;
 public class TransactionController implements ActionListener, MouseListener {
     private TransactionView trV;
     private String selectedTeam;
-    private DefaultListModel listModelUrsprung;
-    private DefaultListModel listModelSend;
+    private DefaultListModel<String> listModelUrsprung;
+    private DefaultListModel<String> listModelSend;
 
     public TransactionController(TransactionView trV) {
         this.trV = trV;
@@ -33,9 +33,9 @@ public class TransactionController implements ActionListener, MouseListener {
         this.trV.getSuchenBtn().addActionListener(this);
         this.trV.getTransFinishBtn().addActionListener(this);
         this.trV.getErgListTeam().addMouseListener(this);
-        listModelUrsprung = new DefaultListModel();
+        listModelUrsprung = new DefaultListModel<>();
         this.trV.getListEigenerKader().setModel(listModelUrsprung);
-        listModelSend = new DefaultListModel();
+        listModelSend = new DefaultListModel<>();
         this.trV.getListeTransKader().setModel(listModelSend);
     }
 
@@ -66,7 +66,7 @@ public class TransactionController implements ActionListener, MouseListener {
         this.trV.getErgListTeam().removeAll();
         String suchAnfrage = this.trV.getReceivingTeamInput().getText();
         // Such ergebnisse als Liste o.Ä. engezigt bekommen
-        DefaultListModel listModel = new DefaultListModel();
+        DefaultListModel<String> listModel = new DefaultListModel<>();
         this.trV.getErgListTeam().setModel(listModel);
         listModel.addElement(suchAnfrage);
 
@@ -102,7 +102,7 @@ public class TransactionController implements ActionListener, MouseListener {
         boolean nullIncluded = false;
         if (best == 0) {
             System.out.println("True");
-            List<String> transferPlayer = new ArrayList();
+            List<String> transferPlayer = new ArrayList<>();
             for (int i = 0; i < listModelSend.getSize(); i++) {
                 if (listModelSend.getElementAt(i) != null) {
                     transferPlayer.add(listModelSend.getElementAt(i).toString());

@@ -14,7 +14,12 @@ import javax.swing.JTextField;
  */
 public class SpielerAddView extends javax.swing.JPanel {
 
-    public SpielerAddView() {
+        /**
+         *
+         */
+        private static final long serialVersionUID = 111L;
+
+        public SpielerAddView() {
         initComponents();
     }
 

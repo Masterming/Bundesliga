@@ -24,6 +24,11 @@ import model.PlanModel;
  */
 public class PlanViewNeu extends JPanel implements Observer {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = 107L;
+
     @Override
     public void update(Observable o, Object arg1) {
         // Hier landet man wenn man im Model was verändert hat durch norifyObservers

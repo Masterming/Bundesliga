@@ -12,6 +12,11 @@ package view;
 public class ClubViewTemp extends javax.swing.JPanel {
 
     /**
+     *
+     */
+    private static final long serialVersionUID = 102L;
+
+    /**
      * Creates new form ClubViewTemp
      */
     public ClubViewTemp() {

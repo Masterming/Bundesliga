@@ -26,7 +26,7 @@ public class ClubAddExistingController implements ActionListener, MouseListener,
     private Liga l;
     private String selectedLiga;
     private String selectedClub;
-    private DefaultListModel clubList;
+    private DefaultListModel<String> clubList;
 
     public ClubAddExistingController(ClubAddExistingView cAeV, Liga l) {
         this.cAeV = cAeV;
@@ -34,7 +34,7 @@ public class ClubAddExistingController implements ActionListener, MouseListener,
         this.cAeV.getAdClubToLigaBtn().addActionListener(this);
         this.cAeV.getSelectedLiga().addItemListener(this);
         this.cAeV.getLigaClubList().addMouseListener(this);
-        clubList = new DefaultListModel();
+        clubList = new DefaultListModel<>();
         this.cAeV.getLigaClubList().setModel(clubList);
         // Elemente für die Erste Liga hinzufügen
         adaptViewToLiga();
@@ -45,7 +45,7 @@ public class ClubAddExistingController implements ActionListener, MouseListener,
         if (this.l.getName().contains("1")) {
             String[] ligen = new String[1];
             ligen[0] = "Liga 2";
-            DefaultComboBoxModel dfC = new DefaultComboBoxModel<String>(ligen);
+            DefaultComboBoxModel<String> dfC = new DefaultComboBoxModel<>(ligen);
             this.cAeV.setLigaComboModel(dfC);
             // Club Liste Setzen
             this.clubList.addElement("FC Erzgebirge Aue");
@@ -54,7 +54,7 @@ public class ClubAddExistingController implements ActionListener, MouseListener,
             String[] ligen = new String[2];
             ligen[0] = "Liga 1";
             ligen[1] = "Liga 3";
-            DefaultComboBoxModel dfC = new DefaultComboBoxModel<String>(ligen);
+            DefaultComboBoxModel<String> dfC = new DefaultComboBoxModel<>(ligen);
             this.cAeV.setLigaComboModel(dfC);
             // Club Liste Setzen -->
             this.clubList.addElement("FC Bayern München");
@@ -63,7 +63,7 @@ public class ClubAddExistingController implements ActionListener, MouseListener,
         if (this.l.getName().contains("3")) {
             String[] ligen = new String[1];
             ligen[0] = "Liga 2";
-            DefaultComboBoxModel dfC = new DefaultComboBoxModel<String>(ligen);
+            DefaultComboBoxModel<String> dfC = new DefaultComboBoxModel<>(ligen);
             this.cAeV.setLigaComboModel(dfC);
             // Club Liste Setzen
             this.clubList.addElement("Ingolstadt");

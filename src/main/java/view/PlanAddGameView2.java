@@ -11,9 +11,14 @@ package view;
  */
 public class PlanAddGameView2 extends javax.swing.JDialog {
 
-    /**
-     * Creates new form PlanAddGameView2
-     */
+        /**
+         *
+         */
+        private static final long serialVersionUID = 106L;
+
+        /**
+         * Creates new form PlanAddGameView2
+         */
     public PlanAddGameView2(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();

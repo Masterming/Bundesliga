@@ -16,7 +16,12 @@ import javax.swing.JTextField;
  * @author z003ywys
  */
 public class PlanAddGameView extends javax.swing.JDialog {
-    public PlanAddGameView(java.awt.Frame parent, boolean modal) {
+        /**
+         *
+         */
+        private static final long serialVersionUID = 104L;
+
+        public PlanAddGameView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -243,19 +248,19 @@ public class PlanAddGameView extends javax.swing.JDialog {
         return teamBList;
     }
 
-    public void setTeamALigaList(DefaultComboBoxModel teamALigaList) {
+    public void setTeamALigaList(DefaultComboBoxModel<String> teamALigaList) {
         this.teamALigaList.setModel(teamALigaList);
     }
 
-    public void setTeamAList(DefaultComboBoxModel teamAList) {
+    public void setTeamAList(DefaultComboBoxModel<String> teamAList) {
         this.teamAList.setModel(teamAList);
     }
 
-    public void setTeamBLigaList(DefaultComboBoxModel teamBLigaList) {
+    public void setTeamBLigaList(DefaultComboBoxModel<String> teamBLigaList) {
         this.teamBLigaList.setModel(teamBLigaList);
     }
 
-    public void setTeamBList(DefaultComboBoxModel teamBList) {
+    public void setTeamBList(DefaultComboBoxModel<String> teamBList) {
         this.teamBList.setModel(teamBList);
     }
 

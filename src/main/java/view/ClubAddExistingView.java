@@ -110,7 +110,7 @@ public class ClubAddExistingView extends javax.swing.JDialog {
         return toAddClubLbl;
     }
 
-    public void setLigaComboModel(DefaultComboBoxModel dCM) {
+    public void setLigaComboModel(DefaultComboBoxModel<String> dCM) {
         this.selectedLiga.setModel(dCM);
     }
 

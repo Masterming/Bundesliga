@@ -19,6 +19,11 @@ import javax.swing.table.DefaultTableModel;
  */
 public class RowPopupClubView extends JPopupMenu {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = 108L;
+
     public RowPopupClubView(JTable table) {
         JMenuItem loeschen = new JMenuItem("Löschen");
         loeschen.addActionListener(new ActionListener() {

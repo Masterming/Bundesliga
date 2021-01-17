@@ -12,6 +12,11 @@ package view;
 public class ClubAddExistingTemp extends javax.swing.JDialog {
 
     /**
+     *
+     */
+    private static final long serialVersionUID = 101L;
+
+    /**
      * Creates new form ClubAddExistingTemp
      */
     public ClubAddExistingTemp(java.awt.Frame parent, boolean modal) {

@@ -11,9 +11,14 @@ package view;
  */
 public class ErgebnisInputViewTemp extends javax.swing.JDialog {
 
-    /**
-     * Creates new form ErgebnisInputViewTemp
-     */
+        /**
+         *
+         */
+        private static final long serialVersionUID = 103L;
+
+        /**
+         * Creates new form ErgebnisInputViewTemp
+         */
     public ErgebnisInputViewTemp(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();

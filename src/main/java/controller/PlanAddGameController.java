@@ -58,8 +58,8 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
             String[] ligen = new String[2];
             ligen[0] = "Liga 1";
             ligen[1] = "Liga 2";
-            DefaultComboBoxModel dfC = new DefaultComboBoxModel<String>(ligen);
-            DefaultComboBoxModel dfB = new DefaultComboBoxModel<String>(ligen);
+            DefaultComboBoxModel<String> dfC = new DefaultComboBoxModel<>(ligen);
+            DefaultComboBoxModel<String> dfB = new DefaultComboBoxModel<>(ligen);
             this.paGV.setTeamALigaList(dfC);
             this.paGV.setTeamBLigaList(dfB);
             // TO DO Teams Holen pro liga
@@ -69,8 +69,8 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
             ligen[0] = "Liga 1";
             ligen[1] = "Liga 2";
             ligen[2] = "Liga 3";
-            DefaultComboBoxModel dfC = new DefaultComboBoxModel<String>(ligen);
-            DefaultComboBoxModel dfB = new DefaultComboBoxModel<String>(ligen);
+            DefaultComboBoxModel<String> dfC = new DefaultComboBoxModel<>(ligen);
+            DefaultComboBoxModel<String> dfB = new DefaultComboBoxModel<>(ligen);
             this.paGV.setTeamALigaList(dfC);
             this.paGV.setTeamBLigaList(dfB);
         }
@@ -78,8 +78,8 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
             String[] ligen = new String[2];
             ligen[0] = "Liga 2";
             ligen[1] = "Liga 3";
-            DefaultComboBoxModel dfC = new DefaultComboBoxModel<String>(ligen);
-            DefaultComboBoxModel dfB = new DefaultComboBoxModel<String>(ligen);
+            DefaultComboBoxModel<String> dfC = new DefaultComboBoxModel<>(ligen);
+            DefaultComboBoxModel<String> dfB = new DefaultComboBoxModel<>(ligen);
             this.paGV.setTeamALigaList(dfC);
             this.paGV.setTeamBLigaList(dfB);
         }
@@ -180,8 +180,8 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
         System.out.println(selectedBLiga);
         // Club Liste an die jeweiige Liga angepasst werden
         // To Do --> Daten aus DB holen
-        DefaultComboBoxModel listModelTeamA = new DefaultComboBoxModel();
-        DefaultComboBoxModel listModelTeamB = new DefaultComboBoxModel();
+        DefaultComboBoxModel<String> listModelTeamA = new DefaultComboBoxModel<>();
+        DefaultComboBoxModel<String> listModelTeamB = new DefaultComboBoxModel<>();
 
         // TO DO List Model befüllen
         if (this.selectedALiga.contains("1")) {
@@ -234,7 +234,7 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
             String[] disLiga = new String[2];
             disLiga[0] = "Liga 1";
             disLiga[2] = "Liga 2";
-            DefaultComboBoxModel dfC = new DefaultComboBoxModel<String>(disLiga);
+            DefaultComboBoxModel<String> dfC = new DefaultComboBoxModel<>(disLiga);
             this.paGV.setTeamBLigaList(dfC);
         }
     }

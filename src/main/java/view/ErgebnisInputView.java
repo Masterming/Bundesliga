@@ -310,11 +310,11 @@ public class ErgebnisInputView extends javax.swing.JDialog {
         return teamBSubGoalForPlayer;
     }
 
-    public void setTeamAPlayerList(AbstractListModel teamAPlayerList) {
+    public void setTeamAPlayerList(AbstractListModel<String> teamAPlayerList) {
         this.teamAPlayerList.setModel(teamAPlayerList);
     }
 
-    public void setTeamBPlayerList(AbstractListModel teamBPlayerList) {
+    public void setTeamBPlayerList(AbstractListModel<String> teamBPlayerList) {
         this.teamBPlayerList.setModel(teamBPlayerList);
     }
 
