@@ -30,14 +30,14 @@ public class ErgebnisInputController implements ActionListener {
     private List<List<String>> scoreTeamB;
     int teamAErg;
     int teamBErg;
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        //String a = this.ergDialog.getErg1().getText();
-        //String b = this.ergDialog.getErg2().getText();
+        // String a = this.ergDialog.getErg1().getText();
+        // String b = this.ergDialog.getErg2().getText();
         String nameA = this.ergDialog.getTeamAPlayerList().getSelectedValue();
         String nameB = this.ergDialog.getTeamBPlayerList().getSelectedValue();
-        switch(e.getActionCommand()){
+        switch (e.getActionCommand()) {
             case "scoreTeamA":
                 scoreTeam(nameA, this.scoreTeamA);
                 break;
@@ -68,147 +68,142 @@ public class ErgebnisInputController implements ActionListener {
         this.ergDialog.getTeamASubGoalForPlayer().addActionListener(this);
         this.ergDialog.getTeamBAddGoalForPlayer().addActionListener(this);
         this.ergDialog.getTeamBSubGoalForPlayer().addActionListener(this);
-        scoreTeamA= new ArrayList<List<String>>();
+        scoreTeamA = new ArrayList<List<String>>();
         scoreTeamB = new ArrayList<List<String>>();
         getData();
-        teamAErg=-1;
-        teamBErg=-1;
-        
+        teamAErg = -1;
+        teamBErg = -1;
+
     }
-    
-    private void getData(){
-        //To DO daten aus DB holen 
-        List<String>spieler =new ArrayList();
+
+    private void getData() {
+        // To DO daten aus DB holen
+        List<String> spieler = new ArrayList();
         spieler.add("Thomas Müller");
         spieler.add("Philipp Lahm");
         DefaultListModel listModelTeamA = new DefaultListModel();
         listModelTeamA.addElement("Thomas Müller");
         listModelTeamA.addElement("Philipp Lahm");
-        
-        
-        
-        
+
         this.ergDialog.setTeamAPlayerList(listModelTeamA);
         this.ergDialog.repaint();
         this.ergDialog.revalidate();
     }
-    
-    private void scoreTeam(String name, List<List<String>> dataSet){
-        int index=-1;
-        boolean found =false;
-        for(int i=0; i<dataSet.size();i++){
-            if(dataSet.get(i).contains(name)){
-                found=true;
-                index=i;
+
+    private void scoreTeam(String name, List<List<String>> dataSet) {
+        int index = -1;
+        boolean found = false;
+        for (int i = 0; i < dataSet.size(); i++) {
+            if (dataSet.get(i).contains(name)) {
+                found = true;
+                index = i;
                 break;
             }
         }
-        if(found){
+        if (found) {
             String currentCountStr = dataSet.get(index).get(1);
             int currentCount = Integer.parseInt(currentCountStr);
             currentCount++;
             String countFin = String.valueOf(currentCount);
             dataSet.get(index).set(1, countFin);
-        }
-        else{
-            if(name!=null){
-            List<String>temp = new ArrayList();
-            temp.add(name);
-            String countFin = String.valueOf(1);
-            temp.add(countFin);
-            dataSet.add(temp);
+        } else {
+            if (name != null) {
+                List<String> temp = new ArrayList();
+                temp.add(name);
+                String countFin = String.valueOf(1);
+                temp.add(countFin);
+                dataSet.add(temp);
             }
         }
-        
+
     }
-    private void descoreTeam(String name, List<List<String>> dataSet){
+
+    private void descoreTeam(String name, List<List<String>> dataSet) {
         System.out.println("Descore Team A");
-                int index=-1;
-        boolean found =false;
-        for(int i=0; i<dataSet.size();i++){
-            if(dataSet.get(i).contains(name)){
-                found=true;
-                index=i;
+        int index = -1;
+        boolean found = false;
+        for (int i = 0; i < dataSet.size(); i++) {
+            if (dataSet.get(i).contains(name)) {
+                found = true;
+                index = i;
                 break;
             }
         }
-        if(found){
+        if (found) {
             String currentCountStr = dataSet.get(index).get(1);
             int currentCount = Integer.parseInt(currentCountStr);
-            if(currentCount>0){
-            currentCount--;
+            if (currentCount > 0) {
+                currentCount--;
             }
-            if(currentCount==0){
-                //Aus der Liste Entfernen
+            if (currentCount == 0) {
+                // Aus der Liste Entfernen
             }
             String countFin = String.valueOf(currentCount);
             dataSet.get(index).set(1, countFin);
         }
     }
-    private void updateView(){
-        DefaultTableModel tbmA = (DefaultTableModel)this.ergDialog.getScoredPlayerTeamA().getModel();
 
-        for(int i=tbmA.getRowCount()-1; i>=0;i--){
+    private void updateView() {
+        DefaultTableModel tbmA = (DefaultTableModel) this.ergDialog.getScoredPlayerTeamA().getModel();
+
+        for (int i = tbmA.getRowCount() - 1; i >= 0; i--) {
             tbmA.removeRow(i);
         }
-        //Team A
-        for(List<String> strName : scoreTeamA){
+        // Team A
+        for (List<String> strName : scoreTeamA) {
 
-           if(!strName.get(1).equals("0")){
-           Object[] temp = strName.toArray();
-           tbmA.addRow(temp);
-           }
+            if (!strName.get(1).equals("0")) {
+                Object[] temp = strName.toArray();
+                tbmA.addRow(temp);
+            }
         }
         this.ergDialog.setScoredPlayerTeamA(tbmA);
-        
-        
-        
-        DefaultTableModel tbmB = (DefaultTableModel)this.ergDialog.getScoredPlayerTeamB().getModel();
-        for(int i=tbmB.getRowCount()-1; i>=0;i--){
+
+        DefaultTableModel tbmB = (DefaultTableModel) this.ergDialog.getScoredPlayerTeamB().getModel();
+        for (int i = tbmB.getRowCount() - 1; i >= 0; i--) {
             tbmB.removeRow(i);
         }
-        for(List<String>strName : scoreTeamB){
-          if(!strName.get(1).equals("0")){
-           Object[] temp = strName.toArray();
-           tbmB.addRow(temp);
-           }
+        for (List<String> strName : scoreTeamB) {
+            if (!strName.get(1).equals("0")) {
+                Object[] temp = strName.toArray();
+                tbmB.addRow(temp);
+            }
         }
         this.ergDialog.setScoredPlayerTeamB(tbmB);
-        
-        
-        
-        //Den spielstand aktualisieren
+
+        // Den spielstand aktualisieren
         teamAErg = getSpielStand(this.scoreTeamA);
         teamBErg = getSpielStand(this.scoreTeamB);
         this.ergDialog.setErgTeamALbl(String.valueOf(teamAErg));
         this.ergDialog.setErgTeamBLbl1(String.valueOf(teamBErg));
     }
-    private int getSpielStand(List<List<String>> inPutData){
-        int erg=0;
-        for(int i=0; i<inPutData.size();i++){
-            for(int j=1; j<inPutData.get(i).size();j++){
+
+    private int getSpielStand(List<List<String>> inPutData) {
+        int erg = 0;
+        for (int i = 0; i < inPutData.size(); i++) {
+            for (int j = 1; j < inPutData.get(i).size(); j++) {
                 String temp = inPutData.get(i).get(j);
-                int tempErg=Integer.parseInt(temp);
-                erg+=tempErg;
-                
+                int tempErg = Integer.parseInt(temp);
+                erg += tempErg;
+
             }
         }
         return erg;
     }
-    private void save(){
-        if(teamAErg==-1 || teamBErg==-1){
-            JFrame f=new JFrame();  
-            JOptionPane.showMessageDialog(f,"Bitte fügen Sie Ergebnisse hinzu"); 
+
+    private void save() {
+        if (teamAErg == -1 || teamBErg == -1) {
+            JFrame f = new JFrame();
+            JOptionPane.showMessageDialog(f, "Bitte fügen Sie Ergebnisse hinzu");
             System.out.println("Spielstand: " + teamAErg + " zu " + teamBErg);
-        }
-        else{
-            //TO Do in DB Schreiben und Model ändern
+        } else {
+            // TO Do in DB Schreiben und Model ändern
             System.out.println(this.scoreTeamA);
             System.out.println(this.scoreTeamB);
-            //this.plm.setlM(this.plm.getlM());
+            // this.plm.setlM(this.plm.getlM());
             this.plm.setlM(new Liga("Liga 4"));
             this.ergDialog.dispose();
         }
     }
-    
+
 }

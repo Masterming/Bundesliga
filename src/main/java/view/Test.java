@@ -13,9 +13,9 @@ import model.Liga;
  * @author z003ywys
  */
 public class Test {
-     public static void main(String args[]){ 
-            System.out.println("Test");
-            MainView mv2 = new MainView();
-            MainController m2 = new MainController(mv2, new Liga("Liga 1"));
+    public static void main(String args[]) {
+        System.out.println("Test");
+        MainView mv2 = new MainView();
+        MainController m2 = new MainController(mv2, new Liga("Liga 1"));
     }
 }

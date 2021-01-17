@@ -94,9 +94,9 @@ public class GameDBMapper {
         }
         return i;
     }
-    
-    public boolean deleteGame(Game g){        
-        boolean bSuccess = true;        
+
+    public boolean deleteGame(Game g) {
+        boolean bSuccess = true;
         EntityManager em = ManagerFactory.createEntityManager();
         EntityTransaction et = null;
 
@@ -116,9 +116,9 @@ public class GameDBMapper {
         }
         return bSuccess;
     }
-    
-    public boolean updateGame(Game g){        
-        boolean bSuccess = true;        
+
+    public boolean updateGame(Game g) {
+        boolean bSuccess = true;
         EntityManager em = ManagerFactory.createEntityManager();
         EntityTransaction et = null;
 

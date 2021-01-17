@@ -25,17 +25,18 @@ public class RowPopupClubView extends JPopupMenu {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 System.out.println("Löschen");
-                //Selected Value bekommen bzw. Ändern
+                // Selected Value bekommen bzw. Ändern
                 int index1 = table.getSelectedRow();
                 String name = table.getValueAt(index1, 0).toString();
                 System.out.println(name);
                 DefaultTableModel tbm = (DefaultTableModel) table.getModel();
                 if (name != null) {
-                    //Pop Up menü mit text
-                    int best = JOptionPane.showConfirmDialog(null, "Wollen Sie den Club " + name + " wirklich löschen?");
+                    // Pop Up menü mit text
+                    int best = JOptionPane.showConfirmDialog(null,
+                            "Wollen Sie den Club " + name + " wirklich löschen?");
                     if (best == 0) {
                         System.out.println("True");
-                        //TO DO Name aus DB Löschen
+                        // TO DO Name aus DB Löschen
                         tbm.removeRow(index1);
                     } else {
                         System.out.println("false");
@@ -51,13 +52,13 @@ public class RowPopupClubView extends JPopupMenu {
             public void actionPerformed(ActionEvent arg0) {
                 int row = table.getSelectedRow();
                 int column = table.getSelectedColumn();
-                //Über Kader View
+                // Über Kader View
 
                 String name = table.getValueAt(row, 0).toString();
                 String stadion = table.getValueAt(row, 1).toString();
                 DefaultTableModel tbm = (DefaultTableModel) table.getModel();
                 if (name != null && column == 0) {
-                    //Pop Up menü mit text
+                    // Pop Up menü mit text
 
                     String nameNeu = JOptionPane.showInputDialog("Neuen Namen eingeben");
                     nameNeu = nameNeu.trim();

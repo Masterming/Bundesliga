@@ -93,9 +93,9 @@ public class PlayerDBMapper {
         }
         return i;
     }
-    
-    public boolean deletePlayer(Player p){        
-        boolean bSuccess = true;        
+
+    public boolean deletePlayer(Player p) {
+        boolean bSuccess = true;
         EntityManager em = ManagerFactory.createEntityManager();
         EntityTransaction et = null;
 
@@ -115,9 +115,9 @@ public class PlayerDBMapper {
         }
         return bSuccess;
     }
-    
-    public boolean updatePlayer(Player p){        
-        boolean bSuccess = true;        
+
+    public boolean updatePlayer(Player p) {
+        boolean bSuccess = true;
         EntityManager em = ManagerFactory.createEntityManager();
         EntityTransaction et = null;
 

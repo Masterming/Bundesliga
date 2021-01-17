@@ -23,116 +23,112 @@ import model.PlanModel;
  *
  * @author z003ywys
  */
-public class PlanView extends JPanel implements Observer{
+public class PlanView extends JPanel implements Observer {
     private static final long serialVersionUID = 13L;
     private JFrame mainView;
     private PlanModel plm;
-    
+
     @Override
     public void update(Observable o, Object arg1) {
-        //Hier landet man wenn man im Model was verändert hat durch norifyObservers
-        this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
-        if(o instanceof PlanModel){
-            //TO View durch angaben am Model anpassen
+        // Hier landet man wenn man im Model was verändert hat durch norifyObservers
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        if (o instanceof PlanModel) {
+            // TO View durch angaben am Model anpassen
             this.removeAll();
-            this.plm =(PlanModel)o;
-            int count =1;
-            if(this.plm.getlM().getName().contains("1")){
+            this.plm = (PlanModel) o;
+            int count = 1;
+            if (this.plm.getlM().getName().contains("1")) {
                 count = 5;
             }
-            if(this.plm.getlM().getName().contains("2")){
+            if (this.plm.getlM().getName().contains("2")) {
                 count = 10;
             }
-            if(this.plm.getlM().getName().contains("3")){
+            if (this.plm.getlM().getName().contains("3")) {
                 count = 15;
             }
-            for(int i=0; i<count;i++){
-            JLabel test = new JLabel(((PlanModel) o).getlM().getName());
-            JButton testBtn = new JButton("TestBTN");
-            test.setBackground(java.awt.Color.lightGray);
-            test.setAlignmentX(Component.CENTER_ALIGNMENT);
-            testBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
-            testBtn.setActionCommand(String.valueOf(i)+ "RB Leipzig");
-            testBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                action(evt);
+            for (int i = 0; i < count; i++) {
+                JLabel test = new JLabel(((PlanModel) o).getlM().getName());
+                JButton testBtn = new JButton("TestBTN");
+                test.setBackground(java.awt.Color.lightGray);
+                test.setAlignmentX(Component.CENTER_ALIGNMENT);
+                testBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+                testBtn.setActionCommand(String.valueOf(i) + "RB Leipzig");
+                testBtn.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        action(evt);
+                    }
+                });
+                this.add(test);
+                this.add(testBtn);
             }
-        });
-            this.add(test);
-            this.add(testBtn);
-            }
-            
+
             this.revalidate();
             this.repaint();
             this.setVisible(true);
-           
-            
+
+        }
     }
-    }
-    
-    private void action (ActionEvent e){
+
+    private void action(ActionEvent e) {
         String a = e.getActionCommand();
         System.out.println("Das Action Command war: " + a);
         System.out.println("Button gesetzt durch model geklickt");
-        //Neues Pop Up fenster + Controller --> bekommt z.B. Spiel Model mit
-        ErgebnisInputView pop = new ErgebnisInputView(this.mainView,true);
-        ErgebnisInputController con = new ErgebnisInputController(pop, a,a, this.plm);
+        // Neues Pop Up fenster + Controller --> bekommt z.B. Spiel Model mit
+        ErgebnisInputView pop = new ErgebnisInputView(this.mainView, true);
+        ErgebnisInputController con = new ErgebnisInputController(pop, a, a, this.plm);
         pop.setVisible(true);
     }
-    
-    private void initComponents(){
-        //Dynamisches Erstellen der View je nach Model machen
-        
-//        jLabel1 = new javax.swing.JLabel();
-//        jButton1 = new javax.swing.JButton();
-//        jLabel2 = new javax.swing.JLabel();
-//
-//        jLabel1.setText("jLabel1");
-//
-//        jButton1.setText("jButton1");
-//        jButton1.setActionCommand("test");
-//        
-//        jLabel2.setText("jLabel2");
-//
-        //javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        //this.setLayout(layout);
-//        layout.setHorizontalGroup(
-//            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-//            .addGroup(layout.createSequentialGroup()
-//                .addContainerGap()
-//                .addComponent(jLabel1)
-//                .addGap(28, 28, 28)
-//                .addComponent(jButton1)
-//                .addGap(55, 55, 55)
-//                .addComponent(jLabel2)
-//                .addContainerGap(170, Short.MAX_VALUE))
-//                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-//                    .addComponent(jLabel1)
-//                    .addComponent(jButton1)
-//                    .addComponent(jLabel2))
-//                .addContainerGap(269, Short.MAX_VALUE))
-//  /        );
-//        layout.setVerticalGroup(
-//            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-//            .addGroup(layout.createSequentialGroup()
-//                .addContainerGap()
-//                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-//                    .addComponent(jLabel1)
-//                    .addComponent(jButton1)
-//                    .addComponent(jLabel2))
-//                .addContainerGap(269, Short.MAX_VALUE))
-//        );
-        
-    }
 
-    
-    
+    private void initComponents() {
+        // Dynamisches Erstellen der View je nach Model machen
+
+        // jLabel1 = new javax.swing.JLabel();
+        // jButton1 = new javax.swing.JButton();
+        // jLabel2 = new javax.swing.JLabel();
+        //
+        // jLabel1.setText("jLabel1");
+        //
+        // jButton1.setText("jButton1");
+        // jButton1.setActionCommand("test");
+        //
+        // jLabel2.setText("jLabel2");
+        //
+        // javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        // this.setLayout(layout);
+        // layout.setHorizontalGroup(
+        // layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        // .addGroup(layout.createSequentialGroup()
+        // .addContainerGap()
+        // .addComponent(jLabel1)
+        // .addGap(28, 28, 28)
+        // .addComponent(jButton1)
+        // .addGap(55, 55, 55)
+        // .addComponent(jLabel2)
+        // .addContainerGap(170, Short.MAX_VALUE))
+        // .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        // .addComponent(jLabel1)
+        // .addComponent(jButton1)
+        // .addComponent(jLabel2))
+        // .addContainerGap(269, Short.MAX_VALUE))
+        // / );
+        // layout.setVerticalGroup(
+        // layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        // .addGroup(layout.createSequentialGroup()
+        // .addContainerGap()
+        // .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        // .addComponent(jLabel1)
+        // .addComponent(jButton1)
+        // .addComponent(jLabel2))
+        // .addContainerGap(269, Short.MAX_VALUE))
+        // );
+
+    }
 
     public PlanView(JFrame main) {
         initComponents();
         this.mainView = main;
         try {
-            
+
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
@@ -150,6 +146,5 @@ public class PlanView extends JPanel implements Observer{
         }
         this.setVisible(true);
     }
-    
-    
+
 }

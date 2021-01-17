@@ -19,10 +19,10 @@ public class ClubAddView extends javax.swing.JDialog {
         super(owner, modal);
         initComponents();
     }
-    
+
     private void initComponents() {
 
-      jLabel1 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         clubNameTxt = new javax.swing.JTextField();
@@ -31,7 +31,7 @@ public class ClubAddView extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(250, 250));
-        //setPreferredSize(new java.awt.Dimension(204, 200));
+        // setPreferredSize(new java.awt.Dimension(204, 200));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -52,7 +52,8 @@ public class ClubAddView extends javax.swing.JDialog {
         getContentPane().add(clubAddBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 190, -1));
 
         pack();
-    }// </editor-fold> 
+    }// </editor-fold>
+
     private javax.swing.JButton clubAddBtn;
     private javax.swing.JTextField clubNameTxt;
     private javax.swing.JTextField clubStadionTxt;
@@ -71,7 +72,5 @@ public class ClubAddView extends javax.swing.JDialog {
     public JButton getClubAddBtn() {
         return clubAddBtn;
     }
-    
-    
-    
+
 }

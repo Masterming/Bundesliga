@@ -33,12 +33,10 @@ public class TransactionView extends javax.swing.JPanel {
     private javax.swing.JLabel selectedTeam;
     private javax.swing.JButton suchenBtn;
     private javax.swing.JButton transFinishBtn;
-    
-    
-    
+
     private void initComponents() {
 
-         jCheckBox1 = new javax.swing.JCheckBox();
+        jCheckBox1 = new javax.swing.JCheckBox();
         receivingTeamInput = new javax.swing.JTextField();
         suchenBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -65,6 +63,7 @@ public class TransactionView extends javax.swing.JPanel {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 receivingTeamInputFocusGained(evt);
             }
+
             public void focusLost(java.awt.event.FocusEvent evt) {
                 receivingTeamInputFocusLost(evt);
             }
@@ -75,8 +74,14 @@ public class TransactionView extends javax.swing.JPanel {
 
         ergListTeam.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+
+            public int getSize() {
+                return strings.length;
+            }
+
+            public String getElementAt(int i) {
+                return strings[i];
+            }
         });
         jScrollPane1.setViewportView(ergListTeam);
 
@@ -84,8 +89,14 @@ public class TransactionView extends javax.swing.JPanel {
 
         listEigenerKader.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", " " };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+
+            public int getSize() {
+                return strings.length;
+            }
+
+            public String getElementAt(int i) {
+                return strings[i];
+            }
         });
         jScrollPane2.setViewportView(listEigenerKader);
 
@@ -100,8 +111,14 @@ public class TransactionView extends javax.swing.JPanel {
 
         listeTransKader.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", " " };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+
+            public int getSize() {
+                return strings.length;
+            }
+
+            public String getElementAt(int i) {
+                return strings[i];
+            }
         });
         jScrollPane3.setViewportView(listeTransKader);
 
@@ -113,93 +130,87 @@ public class TransactionView extends javax.swing.JPanel {
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup().addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jScrollPane1)
+                                .addGroup(layout.createSequentialGroup().addComponent(selectedTeam)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(receiveTeamLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 99,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(transFinishBtn, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createSequentialGroup()
+                                        .addComponent(
+                                                receivingTeamInput, javax.swing.GroupLayout.PREFERRED_SIZE, 170,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18).addComponent(suchenBtn))
+                                .addGroup(layout.createSequentialGroup().addGroup(layout
+                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 134,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(addToTransBtn).addComponent(removeFromTransBtn)))
+                                        .addComponent(jLabel1))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel2).addComponent(jScrollPane3,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE, 134,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap(29, Short.MAX_VALUE)));
+        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout
+                .createSequentialGroup().addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(selectedTeam)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(receiveTeamLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(transFinishBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(receivingTeamInput, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGroup(layout.createSequentialGroup().addGap(1, 1, 1).addComponent(receivingTeamInput))
                         .addComponent(suchenBtn))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(addToTransBtn)
-                                    .addComponent(removeFromTransBtn)))
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(29, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(receivingTeamInput))
-                    .addComponent(suchenBtn))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 73,
+                        javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(selectedTeam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(receiveTeamLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(selectedTeam, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(receiveTeamLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 20,
+                                javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(3, 3, 3)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(jLabel1)
+                        .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(addToTransBtn)
-                        .addGap(18, 18, 18)
-                        .addComponent(removeFromTransBtn))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(transFinishBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-    }// </editor-fold>     
-    
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 89,
+                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup().addComponent(addToTransBtn).addGap(18, 18, 18)
+                                .addComponent(removeFromTransBtn))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 89,
+                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addComponent(transFinishBtn,
+                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()));
+    }// </editor-fold>
 
-    private void receivingTeamInputFocusLost(java.awt.event.FocusEvent evt) {                                             
+    private void receivingTeamInputFocusLost(java.awt.event.FocusEvent evt) {
         // TODO add your handling code here:
         String a = this.receivingTeamInput.getText().trim();
         this.receivingTeamInput.setText(a);
-        
-        if(this.receivingTeamInput.getText().equals("")){
+
+        if (this.receivingTeamInput.getText().equals("")) {
             this.receivingTeamInput.setText("Erhaltendes Team");
             this.receivingTeamInput.setForeground(Color.lightGray);
         }
-    }                                          
+    }
 
-    private void receivingTeamInputFocusGained(java.awt.event.FocusEvent evt) {                                               
+    private void receivingTeamInputFocusGained(java.awt.event.FocusEvent evt) {
         // TODO add your handling code here:
         String a = this.receivingTeamInput.getText().trim();
         this.receivingTeamInput.setText(a);
-        if(this.receivingTeamInput.getText().equals("Erhaltendes Team")){
+        if (this.receivingTeamInput.getText().equals("Erhaltendes Team")) {
             this.receivingTeamInput.setText("");
             this.receivingTeamInput.setForeground(Color.BLACK);
         }
-    }                                              
-
-    
-    
+    }
 
     public TransactionView() {
         initComponents();
@@ -208,7 +219,7 @@ public class TransactionView extends javax.swing.JPanel {
     public JTextField getReceivingTeamInput() {
         return receivingTeamInput;
     }
-    
+
     public JList<String> getErgListTeam() {
         return ergListTeam;
     }
@@ -238,7 +249,7 @@ public class TransactionView extends javax.swing.JPanel {
     }
 
     public void setReceiveTeamLbl(String receiveTeamLbl) {
-        this.receiveTeamLbl.setText(receiveTeamLbl); 
+        this.receiveTeamLbl.setText(receiveTeamLbl);
     }
 
     public JButton getAddToTransBtn() {
@@ -255,5 +266,5 @@ public class TransactionView extends javax.swing.JPanel {
 
     public JButton getTransFinishBtn() {
         return transFinishBtn;
-    }  
+    }
 }

@@ -34,34 +34,33 @@ public class ClubController implements MouseListener, ActionListener {
         this.view.getClubTable().addMouseListener(this);
         this.view.getAddClubBtn().addActionListener(this);
         this.view.getAddExistingClubBtn().addActionListener(this);
-        this.mainView=main;
+        this.mainView = main;
         this.setData();
     }
-    public ClubController(ClubView view, Liga l, JFrame main){
-        this.view=view;
+
+    public ClubController(ClubView view, Liga l, JFrame main) {
+        this.view = view;
         this.l = l;
         this.view.getClubTable().addMouseListener(this);
         this.view.getAddClubBtn().addActionListener(this);
         this.view.getAddExistingClubBtn().addActionListener(this);
-        this.mainView=main;
-        //Überlgen ob man Buttons ausgraut
-        if(l.getName().contains("1") || l.getName().contains("2")){
+        this.mainView = main;
+        // Überlgen ob man Buttons ausgraut
+        if (l.getName().contains("1") || l.getName().contains("2")) {
             this.view.getAddClubBtn().setVisible(false);
             this.view.getAddExistingClubBtn().setVisible(true);
             this.view.repaint();
             this.view.revalidate();
-        }
-        else{
+        } else {
             this.view.getAddClubBtn().setVisible(true);
             this.view.getAddExistingClubBtn().setVisible(true);
             this.view.repaint();
             this.view.revalidate();
         }
-        
-        
-        
+
         this.setData();
     }
+
     public void updateView() {
         view.printOverview(model);
     }
@@ -72,104 +71,112 @@ public class ClubController implements MouseListener, ActionListener {
 
     @Override
     public void mouseClicked(MouseEvent evt) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        if(evt.getClickCount()==2&&SwingUtilities.isLeftMouseButton(evt)){
+        // throw new UnsupportedOperationException("Not supported yet."); //To change
+        // body of generated methods, choose Tools | Templates.
+        if (evt.getClickCount() == 2 && SwingUtilities.isLeftMouseButton(evt)) {
             System.out.println("Tabelle wurde 2 mal geklcikt im ClubController");
-            //Neues Fenster geht auf --> Neuen Controller + View
-            JTable temp = (JTable)evt.getSource();
+            // Neues Fenster geht auf --> Neuen Controller + View
+            JTable temp = (JTable) evt.getSource();
             int row = temp.getSelectedRow();
             int column = 0;
-            String team =temp.getValueAt(row, column).toString();
-            ClubEditView cbV = new ClubEditView(this.view.getMainView(),true);
+            String team = temp.getValueAt(row, column).toString();
+            ClubEditView cbV = new ClubEditView(this.view.getMainView(), true);
             ClubEditController cbC = new ClubEditController(cbV, team);
             cbV.setVisible(true);
         }
-        if(SwingUtilities.isRightMouseButton(evt)){
+        if (SwingUtilities.isRightMouseButton(evt)) {
             System.out.println("kontext Menü");
             System.out.println("Rechts klick");
-            //Kontext Menü mit Spieler Löschen und name Ändern über Pop up Item
+            // Kontext Menü mit Spieler Löschen und name Ändern über Pop up Item
             RowPopupClubView kontext = new RowPopupClubView(this.view.getClubTable());
             kontext.show(this.view.getClubTable(), evt.getX(), evt.getY());
         }
-        
+
     }
 
     @Override
     public void mousePressed(MouseEvent arg0) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // throw new UnsupportedOperationException("Not supported yet."); //To change
+        // body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void mouseReleased(MouseEvent arg0) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // throw new UnsupportedOperationException("Not supported yet."); //To change
+        // body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void mouseEntered(MouseEvent arg0) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // throw new UnsupportedOperationException("Not supported yet."); //To change
+        // body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void mouseExited(MouseEvent arg0) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // throw new UnsupportedOperationException("Not supported yet."); //To change
+        // body of generated methods, choose Tools | Templates.
     }
-    
-    private void setData(){
-        DefaultTableModel tbm = (DefaultTableModel)this.view.getClubTable().getModel();
+
+    private void setData() {
+        DefaultTableModel tbm = (DefaultTableModel) this.view.getClubTable().getModel();
         String data[][] = getData();
-                for(String[] d : data){
-             tbm.addRow(d);
+        for (String[] d : data) {
+            tbm.addRow(d);
         }
-       
+
         this.view.setTableContent(tbm);
     }
-    private String[][] getData(){
+
+    private String[][] getData() {
         // TODO Get Data
-        String[][] data = new String[0][]; 
-        if(this.l.getName()=="Liga 1"){
+        String[][] data = new String[0][];
+        if (this.l.getName() == "Liga 1") {
             data = new String[2][];
-            String [] temp = new String[8];
-            temp [0] = "FC Bayern";
+            String[] temp = new String[8];
+            temp[0] = "FC Bayern";
             temp[1] = "Alianz Arena";
-            
+
             data[0] = temp;
             temp = new String[8];
             temp[0] = "RB Leipzig";
-            temp [1] = "Red Bull Arena";
+            temp[1] = "Red Bull Arena";
             data[1] = temp;
         }
-        if(this.l.getName()=="Liga 2"){
+        if (this.l.getName() == "Liga 2") {
             data = new String[1][];
-            String [] temp = new String[8];
+            String[] temp = new String[8];
             temp[0] = "FC Erzgebirge Aue";
-            temp [1] = "Erzgebirge Stadio";
+            temp[1] = "Erzgebirge Stadio";
             data[0] = temp;
         }
-        if(this.l.getName()=="Liga 3"){
-            
+        if (this.l.getName() == "Liga 3") {
+
         }
         return data;
     }
 
     @Override
     public void actionPerformed(ActionEvent evt) {
-        switch(evt.getActionCommand()){
+        switch (evt.getActionCommand()) {
             case "addClub":
                 System.out.println("Club Hinzufügen button gedrückt");
-                ClubAddView caV = new ClubAddView(this.mainView,true);
-                ClubAddController cbAC = new ClubAddController(this.mainView,caV);
+                ClubAddView caV = new ClubAddView(this.mainView, true);
+                ClubAddController cbAC = new ClubAddController(this.mainView, caV);
                 caV.setVisible(true);
                 break;
             case "addExistClub":
                 System.out.println("Vorhandenen Club zur Liga hinzufügen");
-                //Dialog box mit drop down menü über die 2 Ligen die nicht der aktuellen liga entsprechen 
-                // auf grund der auswahl wird liste angapsst mit den clubs der liga, die im Drop Down menü ausgewählt wurde
-                //in Liste: mehrfach auswahl möglich
-                ClubAddExistingView caEV = new ClubAddExistingView(this.mainView,true);
-                ClubAddExistingController caEC = new ClubAddExistingController(caEV,this.l);
+                // Dialog box mit drop down menü über die 2 Ligen die nicht der aktuellen liga
+                // entsprechen
+                // auf grund der auswahl wird liste angapsst mit den clubs der liga, die im Drop
+                // Down menü ausgewählt wurde
+                // in Liste: mehrfach auswahl möglich
+                ClubAddExistingView caEV = new ClubAddExistingView(this.mainView, true);
+                ClubAddExistingController caEC = new ClubAddExistingController(caEV, this.l);
                 caEV.setVisible(true);
                 break;
-               
+
         }
     }
 }

@@ -17,9 +17,9 @@ public class Game implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int gameId;
-    
+
     private boolean finished = false;
-    
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(joinColumns = @JoinColumn(name = "gameId"), inverseJoinColumns = @JoinColumn(name = "ligaId"))
     private List<Liga> leagues;

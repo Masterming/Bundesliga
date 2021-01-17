@@ -15,28 +15,29 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "planmodels")
-public class PlanModel extends Observable implements Serializable{
-    
+public class PlanModel extends Observable implements Serializable {
+
     private static final long serialVersionUID = 5L;
-    
-    //die Liaga als Model dient als Grundlage für die Erstellung des PlanModels
+
+    // die Liaga als Model dient als Grundlage für die Erstellung des PlanModels
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private final int planModelID;
     private Liga lM;
     private int test;
-    //private String[][] 
+
+    // private String[][]
     public PlanModel() {
         this.planModelID = -1;
-        setChanged();        
+        setChanged();
     }
-    //DatenStruktur überlegen --> Aus DB holen
+    // DatenStruktur überlegen --> Aus DB holen
 
     public void setlM(Liga lM) {
         this.lM = lM;
-        //Holt sich Liste mit Gameobjekten die müssen durchsortiert werden
-        //GameTabelle: alles Games von allen Ligen zukunft und vergangenheit
-        //Spiel noch nicht gespielt:boolean = false
+        // Holt sich Liste mit Gameobjekten die müssen durchsortiert werden
+        // GameTabelle: alles Games von allen Ligen zukunft und vergangenheit
+        // Spiel noch nicht gespielt:boolean = false
         setChanged();
         notifyObservers(lM);
     }
@@ -57,5 +58,5 @@ public class PlanModel extends Observable implements Serializable{
 
     public int getPlanModelID() {
         return planModelID;
-    }    
+    }
 }
