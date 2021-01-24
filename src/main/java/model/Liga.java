@@ -38,11 +38,10 @@ public class Liga extends Observable implements Serializable  {
         this.clubs = new ArrayList<>();
     }
 
-    public Liga(int id, String name, MainController mc) {
+    public Liga(int id, String name) {
         this.ligaId = id;
         this.name = name;
-        this.clubs = new ArrayList<>();
-        
+        this.clubs = new ArrayList<>();    
     }
 
     public int getId() {
@@ -69,12 +68,15 @@ public class Liga extends Observable implements Serializable  {
     }
 
     public boolean removeClub(Club c) {
+        setChanged();
+        notifyObservers(this);
         return clubs.remove(c);
     }
     
     public boolean removeClub(String name){
         for(Club c: clubs){
             if(c.getName().equals(name)){
+                setChanged();
                 notifyObservers(this);
                 return clubs.remove(c);
                 
@@ -87,6 +89,7 @@ public class Liga extends Observable implements Serializable  {
         for(Club c : clubs){
             if(c.getName().equals(clubNameAlt)){
                 c.setName(clubNameNeu);
+                setChanged();
                 notifyObservers(this);
                 return true;
             }

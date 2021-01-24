@@ -21,7 +21,6 @@ import view.RowPopupClubView;
  * @author Rene
  */
 public class ClubController implements MouseListener, ActionListener {
-    private Club model;
     private ClubView view;
     private Liga l;
     private JFrame mainView;
