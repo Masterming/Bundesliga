@@ -94,9 +94,9 @@ public class LigaDBMapper {
         }
         return i;
     }
-    
-    public boolean deleteLiga(Liga l){        
-        boolean bSuccess = true;        
+
+    public boolean deleteLiga(Liga l) {
+        boolean bSuccess = true;
         EntityManager em = ManagerFactory.createEntityManager();
         EntityTransaction et = null;
 
@@ -116,9 +116,9 @@ public class LigaDBMapper {
         }
         return bSuccess;
     }
-    
-    public boolean updateLiga(Liga l){        
-        boolean bSuccess = true;        
+
+    public boolean updateLiga(Liga l) {
+        boolean bSuccess = true;
         EntityManager em = ManagerFactory.createEntityManager();
         EntityTransaction et = null;
 

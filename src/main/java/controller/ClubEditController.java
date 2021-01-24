@@ -25,9 +25,9 @@ import view.TransactionView;
 public class ClubEditController implements ActionListener {
     private ClubEditView cev;
     private String team;
-     
-        public ClubEditController(ClubEditView CeV, String team) {
-        this.cev=CeV;
+
+    public ClubEditController(ClubEditView CeV, String team) {
+        this.cev = CeV;
         this.cev.setClubName(team);
         this.team = team;
         this.cev.getKaderBtn().addActionListener(this);
@@ -37,43 +37,42 @@ public class ClubEditController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent evt) {
-        System.out.println("Button wurde gedrückt");
-        if(evt.getActionCommand()=="kader"){
+        System.out.println("Button wurde gedrueckt");
+        if (evt.getActionCommand() == "kader") {
             this.cev.getKaderBtn().setBackground(Color.white);
             this.cev.getTransBtn().setBackground(Color.lightGray);
             this.cev.getAddSpielerBtn().setBackground(Color.lightGray);
-            //this.cev.getClubName().setText("Button Kader wurde geklickt");
+            // this.cev.getClubName().setText("Button Kader wurde geklickt");
             System.out.println("Kader");
             this.cev.getClubEditContent().removeAll();
             this.cev.getClubEditContent().repaint();
             this.cev.getClubEditContent().revalidate();
-            
+
             KaderView kdw2 = new KaderView();
-            KaderController kDc = new KaderController(kdw2,team);
+            KaderController kDc = new KaderController(kdw2, team);
             this.cev.getClubEditContent().add(kdw2);
             this.cev.getClubEditContent().repaint();
             this.cev.getClubEditContent().revalidate();
-            
-            
+
         }
-        if(evt.getActionCommand()=="trans"){
+        if (evt.getActionCommand() == "trans") {
             System.out.println("Trans");
             this.cev.getTransBtn().setBackground(Color.white);
             this.cev.getKaderBtn().setBackground(Color.lightGray);
             this.cev.getAddSpielerBtn().setBackground(Color.lightGray);
             TransactionView tranView = new TransactionView();
-            TransactionController tr = new TransactionController (tranView);
-            //Layout setzen ?
+            TransactionController tr = new TransactionController(tranView);
+            // Layout setzen ?
             this.cev.getClubEditContent().removeAll();
             this.cev.getClubEditContent().add(tranView);
-            System.out.println("Content hizugefügt");
+            System.out.println("Content hizugefuegt");
             this.cev.getClubEditContent().repaint();
             System.out.println("Repaint()");
             this.cev.getClubEditContent().revalidate();
             System.out.println("Revalidate()");
 
         }
-        if(evt.getActionCommand()=="spieler"){
+        if (evt.getActionCommand() == "spieler") {
             System.out.println("Spieler");
             this.cev.getTransBtn().setBackground(Color.lightGray);
             this.cev.getKaderBtn().setBackground(Color.lightGray);

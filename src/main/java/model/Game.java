@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.*;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 /**
  * @author Rene
@@ -17,18 +19,21 @@ public class Game implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int gameId;
-    
+
     private boolean finished = false;
-    
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(joinColumns = @JoinColumn(name = "gameId"), inverseJoinColumns = @JoinColumn(name = "ligaId"))
     private List<Liga> leagues;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "club1_id")
     private Club club1;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "club2_id")
     private Club club2;
 

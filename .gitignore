@@ -49,6 +49,7 @@ pom.xml.tag
 
 # Personal
 bundesliga/
+.vscode/
 .settings/
 .project
 .classpath

@@ -26,29 +26,31 @@ public class KaderController implements ActionListener, MouseListener {
     public KaderController(KaderView kdV, String team) {
         this.kdV = kdV;
         this.team = team;
-        //Tabelle mit Rechtsklick -> Namen Ändern und Spieler Löschen
+        // Tabelle mit Rechtsklick -> Namen aendern und Spieler Loeschen
         this.kdV.getPlayerTable().addMouseListener(this);
         this.setTableData();
     }
-    private void setTableData(){
-        DefaultTableModel tbm = (DefaultTableModel)this.kdV.getPlayerTable().getModel();
-        String [][] data = getData();
-        for(String[] d : data){
-             tbm.addRow(d);
+
+    private void setTableData() {
+        DefaultTableModel tbm = (DefaultTableModel) this.kdV.getPlayerTable().getModel();
+        String[][] data = getData();
+        for (String[] d : data) {
+            tbm.addRow(d);
         }
-       
+
         this.kdV.setPlayerTableContent(tbm);
     }
-    private String[][] getData(){
-        //TODO daten holen 
-        String[][] data = new String[0][]; 
+
+    private String[][] getData() {
+        // TODO daten holen
+        String[][] data = new String[0][];
         data = new String[2][];
-        String temp [] = new String[2];
-        temp[0] = "Thomas Müller";
+        String temp[] = new String[2];
+        temp[0] = "Thomas Mueller";
         temp[1] = "1123";
-        data[0]=temp;
-        
-        temp=new String[2];
+        data[0] = temp;
+
+        temp = new String[2];
         temp[0] = "Max Mustermann";
         temp[1] = "900";
         data[1] = temp;
@@ -57,17 +59,19 @@ public class KaderController implements ActionListener, MouseListener {
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
+                                                                       // Tools | Templates.
     }
 
     @Override
     public void mouseClicked(MouseEvent evt) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        
-        if(SwingUtilities.isRightMouseButton(evt)){
-            System.out.println("kontext Menü");
+        // throw new UnsupportedOperationException("Not supported yet."); //To change
+        // body of generated methods, choose Tools | Templates.
+
+        if (SwingUtilities.isRightMouseButton(evt)) {
+            System.out.println("kontext Menue");
             System.out.println("Rechts klick");
-            //Kontext Menü mit Spieler Löschen und name Ändern über Pop up Item
+            // Kontext Menue mit Spieler Loeschen und name aendern ueber Pop up Item
             RowPopupPlayerView kontext = new RowPopupPlayerView(this.kdV.getPlayerTable());
             kontext.show(this.kdV.getPlayerTable(), evt.getX(), evt.getY());
         }
@@ -75,22 +79,26 @@ public class KaderController implements ActionListener, MouseListener {
 
     @Override
     public void mousePressed(MouseEvent evt) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // throw new UnsupportedOperationException("Not supported yet."); //To change
+        // body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void mouseReleased(MouseEvent arg0) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // throw new UnsupportedOperationException("Not supported yet."); //To change
+        // body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void mouseEntered(MouseEvent arg0) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // throw new UnsupportedOperationException("Not supported yet."); //To change
+        // body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void mouseExited(MouseEvent arg0) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // throw new UnsupportedOperationException("Not supported yet."); //To change
+        // body of generated methods, choose Tools | Templates.
     }
-    
+
 }

@@ -3,6 +3,8 @@ package model;
 import java.io.Serializable;
 import java.util.*;
 import javax.persistence.*;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 /**
  * @author Rene
@@ -18,8 +20,16 @@ public class Club implements Serializable {
     private int clubId;
     private String name;
     private int points;
+    private int gamesCount;
+    private int wins;
+    private int draw;
+    private int losses;
+    //Für die Anzeige des Torverhältnisses
+    private int madeGoals;
+    private int receivedGoals;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(joinColumns = @JoinColumn(name = "clubId"), inverseJoinColumns = @JoinColumn(name = "playerId"))
     private List<Player> players;
 
@@ -84,4 +94,53 @@ public class Club implements Serializable {
     public String toString() {
         return "Club: " + name;
     }
+
+    public int getGamesCount() {
+        return gamesCount;
+    }
+
+    public void setGamesCount(int gamesCount) {
+        this.gamesCount = gamesCount;
+    }
+
+    public int getWins() {
+        return wins;
+    }
+
+    public void setWins(int wins) {
+        this.wins = wins;
+    }
+
+    public int getDraw() {
+        return draw;
+    }
+
+    public void setDraw(int draw) {
+        this.draw = draw;
+    }
+
+    public int getLosses() {
+        return losses;
+    }
+
+    public void setLosses(int losses) {
+        this.losses = losses;
+    }
+
+    public int getMadeGoals() {
+        return madeGoals;
+    }
+
+    public void setMadeGoals(int madeGoals) {
+        this.madeGoals = madeGoals;
+    }
+
+    public int getReceivedGoals() {
+        return receivedGoals;
+    }
+
+    public void setReceivedGoals(int receivedGoals) {
+        this.receivedGoals = receivedGoals;
+    }
+    
 }

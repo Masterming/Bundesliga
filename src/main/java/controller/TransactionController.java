@@ -23,8 +23,8 @@ import view.TransactionView;
 public class TransactionController implements ActionListener, MouseListener {
     private TransactionView trV;
     private String selectedTeam;
-    private DefaultListModel listModelUrsprung;
-    private DefaultListModel listModelSend;
+    private DefaultListModel<String> listModelUrsprung;
+    private DefaultListModel<String> listModelSend;
 
     public TransactionController(TransactionView trV) {
         this.trV = trV;
@@ -33,16 +33,16 @@ public class TransactionController implements ActionListener, MouseListener {
         this.trV.getSuchenBtn().addActionListener(this);
         this.trV.getTransFinishBtn().addActionListener(this);
         this.trV.getErgListTeam().addMouseListener(this);
-        listModelUrsprung = new DefaultListModel();
+        listModelUrsprung = new DefaultListModel<>();
         this.trV.getListEigenerKader().setModel(listModelUrsprung);
-        listModelSend =  new DefaultListModel();
+        listModelSend = new DefaultListModel<>();
         this.trV.getListeTransKader().setModel(listModelSend);
     }
 
     @Override
     public void actionPerformed(ActionEvent evt) {
         String command = evt.getActionCommand();
-        switch(command){
+        switch (command) {
             case "suchen":
                 System.out.println("suchen");
                 suchen();
@@ -61,126 +61,116 @@ public class TransactionController implements ActionListener, MouseListener {
                 break;
         }
     }
-    
-    private void suchen(){
+
+    private void suchen() {
         this.trV.getErgListTeam().removeAll();
         String suchAnfrage = this.trV.getReceivingTeamInput().getText();
-        //Such ergebnisse als Liste o.Ä. engezigt bekommen
-        DefaultListModel listModel = new DefaultListModel();
+        // Such ergebnisse als Liste o.ae. engezigt bekommen
+        DefaultListModel<String> listModel = new DefaultListModel<>();
         this.trV.getErgListTeam().setModel(listModel);
         listModel.addElement(suchAnfrage);
 
-        
         this.trV.repaint();
         this.trV.revalidate();
     }
-    
-    private void add(){
-        String eigenerK = this.trV.getListEigenerKader().getSelectedValue();
-        
-        listModelUrsprung.removeElement(eigenerK);
-        
-       
-        listModelSend.addElement(eigenerK);
-        
-        this.trV.repaint();
-        this.trV.revalidate();
-        
-    }
-    
-    private void remove(){
-        String eigenerK = this.trV.getListeTransKader().getSelectedValue();
-        
-        listModelSend.removeElement(eigenerK);
-        
-       
-        listModelUrsprung.addElement(eigenerK);
-        
-        this.trV.repaint();
-        this.trV.revalidate();
-    }
-    
-    private void transFinish(){
-        int best = JOptionPane.showConfirmDialog(null, "Wollen Sie die Transaktion abschließen");
-        boolean nullIncluded =false;
-        if(best ==0){
-            System.out.println("True");
-            List<String>transferPlayer = new ArrayList();
-        for(int i=0; i<listModelSend.getSize();i++){
-            if(listModelSend.getElementAt(i)!=null){
-            transferPlayer.add(listModelSend.getElementAt(i).toString());
-            }
-            else{
-                nullIncluded=true;
-            }
-        }
-        //Transaktion mit den Spielern passieren 
-        if(nullIncluded==false &&transferPlayer.size()>0){
-            //Transaktion durchführen
-        System.out.println("trans Finish");
-        for(String st : transferPlayer){
-            if(st!=null){
-                System.out.println("Übertragende Objekte " + st);
-            }
-        }
-        JOptionPane.showMessageDialog(this.trV, "Transfer War erfolgreich");
- 
-        }
-        else{
-            System.out.println("Bitte Wählen Sie die zu übertragenden Teams aus");
-            JOptionPane.showMessageDialog(this.trV, "Bitte Wählen Sie die zu übertragenden Teams aus");
-        }
 
-            
-        }
-        else{
+    private void add() {
+        String eigenerK = this.trV.getListEigenerKader().getSelectedValue();
+
+        listModelUrsprung.removeElement(eigenerK);
+
+        listModelSend.addElement(eigenerK);
+
+        this.trV.repaint();
+        this.trV.revalidate();
+
+    }
+
+    private void remove() {
+        String eigenerK = this.trV.getListeTransKader().getSelectedValue();
+
+        listModelSend.removeElement(eigenerK);
+
+        listModelUrsprung.addElement(eigenerK);
+
+        this.trV.repaint();
+        this.trV.revalidate();
+    }
+
+    private void transFinish() {
+        int best = JOptionPane.showConfirmDialog(null, "Wollen Sie die Transaktion abschliessen");
+        boolean nullIncluded = false;
+        if (best == 0) {
+            System.out.println("True");
+            List<String> transferPlayer = new ArrayList<>();
+            for (int i = 0; i < listModelSend.getSize(); i++) {
+                if (listModelSend.getElementAt(i) != null) {
+                    transferPlayer.add(listModelSend.getElementAt(i).toString());
+                } else {
+                    nullIncluded = true;
+                }
+            }
+            // Transaktion mit den Spielern passieren
+            if (nullIncluded == false && transferPlayer.size() > 0) {
+                // Transaktion durchfuehren
+                System.out.println("trans Finish");
+                for (String st : transferPlayer) {
+                    if (st != null) {
+                        System.out.println("uebertragende Objekte " + st);
+                    }
+                }
+                JOptionPane.showMessageDialog(this.trV, "Transfer War erfolgreich");
+
+            } else {
+                System.out.println("Bitte Waehlen Sie die zu uebertragenden Teams aus");
+                JOptionPane.showMessageDialog(this.trV, "Bitte Waehlen Sie die zu uebertragenden Teams aus");
+            }
+
+        } else {
             System.out.println("False");
         }
-        
-        
-        
 
-        
     }
 
     @Override
     public void mouseClicked(MouseEvent evt) {
-        if(evt.getClickCount()==1){
+        if (evt.getClickCount() == 1) {
             System.out.println("Item in Liste geklickt");
             selectedTeam = this.trV.getErgListTeam().getSelectedValue();
             this.trV.setReceiveTeamLbl(selectedTeam);
             listModelUrsprung.removeAllElements();
             listModelSend.removeAllElements();
-            
-            
-            //Eigenen Kader Anpassen
+
+            // Eigenen Kader Anpassen
             listModelUrsprung.addElement("Item 1");
             listModelUrsprung.addElement("Item 2");
-            
-            
+
         }
-        
+
     }
 
     @Override
     public void mousePressed(MouseEvent arg0) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // throw new UnsupportedOperationException("Not supported yet."); //To change
+        // body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void mouseReleased(MouseEvent arg0) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // throw new UnsupportedOperationException("Not supported yet."); //To change
+        // body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void mouseEntered(MouseEvent arg0) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // throw new UnsupportedOperationException("Not supported yet."); //To change
+        // body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void mouseExited(MouseEvent arg0) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // throw new UnsupportedOperationException("Not supported yet."); //To change
+        // body of generated methods, choose Tools | Templates.
     }
-    
-    
+
 }

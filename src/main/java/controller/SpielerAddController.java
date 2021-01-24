@@ -25,36 +25,33 @@ public class SpielerAddController implements ActionListener {
         this.spAV = spAV;
         this.spAV.getAddSpielerBtn().addActionListener(this);
     }
-    
 
     @Override
     public void actionPerformed(ActionEvent evt) {
-       switch(evt.getActionCommand()){
-           case "addSpieler":
-               System.out.println("Spieler hinzugefügt");
-               addSpieler();
-               break;
-       }
+        switch (evt.getActionCommand()) {
+            case "addSpieler":
+                System.out.println("Spieler hinzugefuegt");
+                addSpieler();
+                break;
+        }
     }
-    
-    private void addSpieler(){
+
+    private void addSpieler() {
         String name = this.spAV.getPlayerNameTxt().getText();
         String anzTorStr = this.spAV.getAnzToreTxt().getText();
-        int anzTor =-1;
+        int anzTor = -1;
         boolean inputOk = true;
-        try{
+        try {
             anzTor = Integer.parseInt(anzTorStr);
-        }
-        catch (Exception ex){
+        } catch (Exception ex) {
             System.out.println("Es wurden keine ganzen Zahlen einegeben");
-            JFrame f=new JFrame();  
-            JOptionPane.showMessageDialog(f,"Es wurden keine ganzen Zahlen einegeben! Bitte Versucen sie es erneut");  
+            JFrame f = new JFrame();
+            JOptionPane.showMessageDialog(f, "Es wurden keine ganzen Zahlen einegeben! Bitte Versucen sie es erneut");
             inputOk = false;
         }
-        if(inputOk){
-            //TODO Spieler in DB Schreiben
+        if (inputOk) {
+            // TODO Spieler in DB Schreiben
         }
     }
-    
-    
+
 }
