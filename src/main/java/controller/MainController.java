@@ -48,9 +48,9 @@ public class MainController implements ActionListener {
     boolean spielplan = false;
     boolean clubs = false;
 
-    public MainController(MainView view, Liga ligaModel) {
+    public MainController(MainView view) {
         this.view = view;
-        this.ligaModel = ligaModel;
+        //this.ligaModel = ligaModel;
         this.view.getLiga1Btn().addActionListener(this);
         this.view.getLiga2Btn().addActionListener(this);
         this.view.getLiga3Btn().addActionListener(this);

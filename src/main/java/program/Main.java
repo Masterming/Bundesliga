@@ -27,7 +27,7 @@ public class Main {
         try {
             // Insert Code here
         MainView mv2 = new MainView();
-        MainController m2 = new MainController(mv2, new Liga("Liga 1"));
+        MainController m2 = new MainController(mv2);
             // resetDB(); //current persistence settings auto-drop on startup
         } catch (Exception ex) {
             LOGGER.log(Level.SEVERE, ex.getLocalizedMessage());
