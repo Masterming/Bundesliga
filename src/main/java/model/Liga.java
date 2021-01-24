@@ -1,5 +1,6 @@
 package model;
 
+import controller.MainController;
 import java.io.Serializable;
 import java.util.*;
 import javax.persistence.*;
@@ -11,7 +12,7 @@ import org.hibernate.annotations.LazyCollectionOption;
  */
 @Entity
 @Table(name = "ligas")
-public class Liga implements Serializable {
+public class Liga extends Observable implements Serializable  {
 
     private static final long serialVersionUID = 1L;
 
@@ -37,10 +38,11 @@ public class Liga implements Serializable {
         this.clubs = new ArrayList<>();
     }
 
-    public Liga(int id, String name) {
+    public Liga(int id, String name, MainController mc) {
         this.ligaId = id;
         this.name = name;
         this.clubs = new ArrayList<>();
+        
     }
 
     public int getId() {
@@ -48,6 +50,7 @@ public class Liga implements Serializable {
     }
 
     public void setId(int id) {
+        notifyObservers(this);
         ligaId = id;
     }
 
@@ -60,11 +63,35 @@ public class Liga implements Serializable {
     }
 
     public boolean addClub(Club c) {
+        setChanged();
+        notifyObservers(this);
         return clubs.add(c);
     }
 
     public boolean removeClub(Club c) {
         return clubs.remove(c);
+    }
+    
+    public boolean removeClub(String name){
+        for(Club c: clubs){
+            if(c.getName().equals(name)){
+                notifyObservers(this);
+                return clubs.remove(c);
+                
+            }
+        }
+        return false;
+    }
+    
+    public boolean changeClubName(String clubNameNeu, String clubNameAlt){
+        for(Club c : clubs){
+            if(c.getName().equals(clubNameAlt)){
+                c.setName(clubNameNeu);
+                notifyObservers(this);
+                return true;
+            }
+        }
+        return false;
     }
 
     public void setName(String name) {
@@ -75,4 +102,5 @@ public class Liga implements Serializable {
     public String toString() {
         return "Liga: " + name;
     }
+    
 }

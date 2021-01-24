@@ -13,7 +13,6 @@ import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
 import view.ClubEditView;
 import view.KaderView;
-import view.PlanView;
 import view.SpielerAddView;
 import view.TableView;
 import view.TransactionView;

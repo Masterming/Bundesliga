@@ -22,70 +22,86 @@ public class RowPopupClubView extends JPopupMenu {
     /**
      *
      */
+    private JMenuItem loeschen;
+    private JMenuItem bearbeiten;
     private static final long serialVersionUID = 108L;
 
-    public RowPopupClubView(JTable table) {
-        JMenuItem loeschen = new JMenuItem("Loeschen");
-        loeschen.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                System.out.println("Loeschen");
-                // Selected Value bekommen bzw. aendern
-                int index1 = table.getSelectedRow();
-                String name = table.getValueAt(index1, 0).toString();
-                System.out.println(name);
-                DefaultTableModel tbm = (DefaultTableModel) table.getModel();
-                if (name != null) {
-                    // Pop Up menue mit text
-                    int best = JOptionPane.showConfirmDialog(null,
-                            "Wollen Sie den Club " + name + " wirklich loeschen?");
-                    if (best == 0) {
-                        System.out.println("True");
-                        // TODO Name aus DB Loeschen
-                        tbm.removeRow(index1);
-                    } else {
-                        System.out.println("false");
-                    }
-                }
-            }
-
-        });
+    public RowPopupClubView() {
+        loeschen = new JMenuItem("Loeschen");
+        loeschen.setActionCommand("loeschen");
+//        loeschen.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent arg0) {
+//                System.out.println("Loeschen");
+//                // Selected Value bekommen bzw. aendern
+//                int index1 = table.getSelectedRow();
+//                String name = table.getValueAt(index1, 0).toString();
+//                System.out.println(name);
+//                DefaultTableModel tbm = (DefaultTableModel) table.getModel();
+//                if (name != null) {
+//                    // Pop Up menue mit text
+//                    int best = JOptionPane.showConfirmDialog(null,
+//                            "Wollen Sie den Club " + name + " wirklich loeschen?");
+//                    if (best == 0) {
+//                        System.out.println("True");
+//                        // TODO Name aus DB Loeschen
+//                        
+//                        
+//                        
+//                        tbm.removeRow(index1);
+//                    } else {
+//                        System.out.println("false");
+//                    }
+//                }
+//            }
+//
+//        });
         add(loeschen);
-        JMenuItem bearbeiten = new JMenuItem("Bearbeiten");
-        bearbeiten.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                int row = table.getSelectedRow();
-                int column = table.getSelectedColumn();
-                // ueber Kader View
-
-                String name = table.getValueAt(row, 0).toString();
-                String stadion = table.getValueAt(row, 1).toString();
-                DefaultTableModel tbm = (DefaultTableModel) table.getModel();
-                if (name != null && column == 0) {
-                    // Pop Up menue mit text
-
-                    String nameNeu = JOptionPane.showInputDialog("Neuen Namen eingeben");
-                    nameNeu = nameNeu.trim();
-                    if (nameNeu != null) {
-                        if (!"".equals(nameNeu)) {
-                            tbm.setValueAt(nameNeu, row, column);
-                        }
-                    }
-
-                }
-                if (stadion != null && column == 1) {
-                    String stadionNeu = JOptionPane.showInputDialog("Neuen Stadion eingeben eingeben");
-                    stadionNeu.trim();
-                    if (!"".equals(stadionNeu)) {
-                        tbm.setValueAt(stadionNeu, row, column);
-                    }
-                }
-
-            }
-        });
+        bearbeiten = new JMenuItem("Bearbeiten");
+        bearbeiten.setActionCommand("bearbeiten");
+//        bearbeiten.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent arg0) {
+//                int row = table.getSelectedRow();
+//                int column = table.getSelectedColumn();
+//                // ueber Kader View
+//
+//                String name = table.getValueAt(row, 0).toString();
+//                String stadion = table.getValueAt(row, 1).toString();
+//                DefaultTableModel tbm = (DefaultTableModel) table.getModel();
+//                if (name != null && column == 0) {
+//                    // Pop Up menue mit text
+//
+//                    String nameNeu = JOptionPane.showInputDialog("Neuen Namen eingeben");
+//                    nameNeu = nameNeu.trim();
+//                    if (nameNeu != null) {
+//                        if (!"".equals(nameNeu)) {
+//                            tbm.setValueAt(nameNeu, row, column);
+//                        }
+//                    }
+//
+//                }
+//                if (stadion != null && column == 1) {
+//                    String stadionNeu = JOptionPane.showInputDialog("Neuen Stadion eingeben eingeben");
+//                    stadionNeu.trim();
+//                    if (!"".equals(stadionNeu)) {
+//                        tbm.setValueAt(stadionNeu, row, column);
+//                    }
+//                }
+//
+//            }
+//        });
         add(bearbeiten);
 
     }
+
+    public JMenuItem getLoeschen() {
+        return loeschen;
+    }
+
+    public JMenuItem getBearbeiten() {
+        return bearbeiten;
+    }
+    
 
 }

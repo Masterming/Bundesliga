@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import model.Club;
+import model.Liga;
 import view.ClubAddView;
 
 /**
@@ -18,11 +20,14 @@ import view.ClubAddView;
 public class ClubAddController implements ActionListener {
     private JFrame mainView;
     private ClubAddView cAv;
+    private Liga l;
+    //private ClubDB
 
-    public ClubAddController(JFrame mainView, ClubAddView cAv) {
+    public ClubAddController(JFrame mainView, ClubAddView cAv, Liga L) {
         this.mainView = mainView;
         this.cAv = cAv;
         this.cAv.getClubAddBtn().addActionListener(this);
+        this.l=L;
     }
 
     @Override
@@ -53,9 +58,14 @@ public class ClubAddController implements ActionListener {
             JFrame f = new JFrame();
             JOptionPane.showMessageDialog(f, "Bitte geben sie etwas fuer Clubname und Stadion erin");
         } else {
-            // TODO Hinzufuegen zur DB
+            // TODO Hinzufuegen zur DB 
+            Club temp = new Club(clubName,stadion);
+            this.l.addClub(temp);
             System.out.println(stadion);
             System.out.println(clubName);
+            this.mainView.repaint();
+            this.mainView.revalidate();
+            this.cAv.dispose();
 
         }
 

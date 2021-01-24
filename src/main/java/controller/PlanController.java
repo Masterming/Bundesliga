@@ -13,7 +13,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import model.PlanModel;
 import view.PlanAddGameView;
-import view.PlanView;
 import view.PlanViewNeu;
 
 /**

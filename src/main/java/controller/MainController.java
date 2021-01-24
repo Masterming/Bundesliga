@@ -9,6 +9,8 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
@@ -19,7 +21,6 @@ import model.PlanModel;
 import view.ClubView;
 import view.MainView;
 import view.MainView;
-import view.PlanView;
 import view.PlanViewNeu;
 import view.TableView;
 
@@ -27,7 +28,7 @@ import view.TableView;
  *
  * @author z003ywys
  */
-public class MainController implements ActionListener {
+public class MainController implements ActionListener, Observer {
     
 
     private final static Logger LOGGER = Logger.getLogger(MainController.class.getName());
@@ -53,6 +54,7 @@ public class MainController implements ActionListener {
     boolean table = false;
     boolean spielplan = false;
     boolean clubs = false;
+    private ClubView clV;
 
     public MainController(MainView view) {
         this.view = view;
@@ -69,6 +71,11 @@ public class MainController implements ActionListener {
         this.liga1Model = this.dao.getLiga(1);
         this.liga2Model = this.dao.getLiga(2);
         this.liga3Model = this.dao.getLiga(3);
+        
+        this.liga1Model.addObserver(this);
+        this.liga2Model.addObserver(this);
+        this.liga3Model.addObserver(this);
+        this.ligaModel.addObserver(this);
     }
 
     @Override
@@ -114,6 +121,7 @@ public class MainController implements ActionListener {
             this.view.getLiga1Btn().setBackground(Color.white);
             // Datenkontext anpassen --> Model
             this.ligaModel = this.liga1Model;
+
 
         } else {
             this.view.getLiga1Btn().setBackground(Color.lightGray);
@@ -181,7 +189,7 @@ public class MainController implements ActionListener {
             this.view.getContentView().repaint();
             this.view.getContentView().revalidate();
 
-            ClubView clV = new ClubView(this.view);
+            clV = new ClubView(this.view);
             ClubController cCl = new ClubController(clV, this.ligaModel, this.view);
             this.view.getContentView().add(clV);
             this.view.getContentView().repaint();
@@ -191,6 +199,39 @@ public class MainController implements ActionListener {
             this.view.getClubsBtn().setBackground(Color.lightGray);
 
         }
+    }
+
+    @Override
+    public void update(Observable arg0, Object arg1) {
+        System.out.println("Main Controller benachrichtigt");
+        if(arg0 instanceof Liga){
+            Liga temp = (Liga) arg0;
+            dao.updateLiga(temp);
+            if(temp.getId()==1){
+                liga1 =true;
+                liga2 = false;
+                liga3 = false;
+                this.liga1Model=temp;
+                renderView();
+            }
+            if(temp.getId()==2){
+                liga1 =false;
+                liga2 = true;
+                liga3 = false;
+                this.liga2Model=temp;
+                renderView();
+            }
+            if(temp.getId()==3){
+                liga1 =false;
+                liga2 = false;
+                liga3 = true;
+                this.liga3Model=temp;
+                renderView();
+            }
+            this.clV.repaint();
+            this.clV.revalidate();
+        }
+        
     }
 
 }

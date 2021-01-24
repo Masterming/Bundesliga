@@ -32,16 +32,6 @@ public class ClubController implements MouseListener, ActionListener {
     private Liga l;
     private JFrame mainView;
 
-    public ClubController(Club model, ClubView view, JFrame main) {
-        this.model = model;
-        this.view = view;
-        this.view.getClubTable().addMouseListener(this);
-        this.view.getAddClubBtn().addActionListener(this);
-        this.view.getAddExistingClubBtn().addActionListener(this);
-        this.mainView = main;
-        this.setData();
-    }
-
     public ClubController(ClubView view, Liga l, JFrame main) {
         this.view = view;
         this.l = l;
@@ -61,7 +51,6 @@ public class ClubController implements MouseListener, ActionListener {
             this.view.repaint();
             this.view.revalidate();
         }
-
         this.setData();
     }
 
@@ -88,7 +77,8 @@ public class ClubController implements MouseListener, ActionListener {
             System.out.println("kontext Menue");
             System.out.println("Rechts klick");
             // Kontext Menue mit Spieler Loeschen und name aendern ueber Pop up Item
-            RowPopupClubView kontext = new RowPopupClubView(this.view.getClubTable());
+            RowPopupClubView kontext = new RowPopupClubView();
+            RowPopupClubController rPUPCC = new  RowPopupClubController(kontext,this.l,view.getClubTable());
             kontext.show(this.view.getClubTable(), evt.getX(), evt.getY());
         }
 
@@ -131,35 +121,16 @@ public class ClubController implements MouseListener, ActionListener {
     private String[][] getData() {
         // TODO Get Data 
         // WTF do you want here???
-        LigaDBMapper dao = new LigaDBMapper();
         
-        String[][] data = new String[0][];
-        if (this.l.getName() == "Liga 1") {
-            Liga model = dao.getLiga(1);
-            List<Club> clubs_list = model.getClubs();
-            String[] clubs_array = clubs_list.stream().map(Club::getName).collect(Collectors.toList()).toArray(new String[0]);
-            data = new String[2][];
-            String[] temp = new String[8];
-            temp[0] = "FC Bayern";
-            temp[1] = "Alianz Arena";
-
-            data[0] = temp;
-            temp = new String[8];
-            temp[0] = "RB Leipzig";
-            temp[1] = "Red Bull Arena";
-            data[1] = temp;
-        }
-        if (this.l.getName() == "Liga 2") {
-            Liga model = dao.getLiga(2);
-            data = new String[1][];
-            String[] temp = new String[8];
-            temp[0] = "FC Erzgebirge Aue";
-            temp[1] = "Erzgebirge Stadio";
-            data[0] = temp;
-        }
-        if (this.l.getName() == "Liga 3") {
-            Liga model = dao.getLiga(3);
-
+        
+        String[][] data = new String[l.getClubs().size()][];
+        int count =0;
+        for (Club c : l.getClubs()){
+            String [] temp = new String[2];
+            temp[0] = c.getName();
+            temp[1] = c.getStadion();
+            data[count] = temp;
+            count++;
         }
         return data;
     }
@@ -170,7 +141,7 @@ public class ClubController implements MouseListener, ActionListener {
             case "addClub":
                 System.out.println("Club Hinzufuegen button gedrueckt");
                 ClubAddView caV = new ClubAddView(this.mainView, true);
-                ClubAddController cbAC = new ClubAddController(this.mainView, caV);
+                ClubAddController cbAC = new ClubAddController(this.mainView, caV, l);
                 caV.setVisible(true);
                 break;
             case "addExistClub":

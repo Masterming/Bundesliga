@@ -19,6 +19,7 @@ public class Club implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int clubId;
     private String name;
+    private String stadion;
     private int points;
     private int gamesCount;
     private int wins;
@@ -27,6 +28,7 @@ public class Club implements Serializable {
     //Für die Anzeige des Torverhältnisses
     private int madeGoals;
     private int receivedGoals;
+    
 
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(cascade = CascadeType.ALL)
@@ -45,6 +47,11 @@ public class Club implements Serializable {
         this.name = name;
         this.points = 0;
         this.players = new ArrayList<>();
+    }
+
+    public Club(String name, String stadion) {
+        this.name = name;
+        this.stadion = stadion;
     }
 
     public Club(int id, String name) {
@@ -142,5 +149,19 @@ public class Club implements Serializable {
     public void setReceivedGoals(int receivedGoals) {
         this.receivedGoals = receivedGoals;
     }
+
+    public String getStadion() {
+        return stadion;
+    }
+
+    public void setStadion(String stadion) {
+        this.stadion = stadion;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    
     
 }
