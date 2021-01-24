@@ -22,13 +22,13 @@ public class ClubAddController implements ActionListener {
     private JFrame mainView;
     private ClubAddView cAv;
     private Liga l;
-    //private ClubDB
+    // private ClubDB
 
     public ClubAddController(JFrame mainView, ClubAddView cAv, Liga L) {
         this.mainView = mainView;
         this.cAv = cAv;
         this.cAv.getClubAddBtn().addActionListener(this);
-        this.l=L;
+        this.l = L;
     }
 
     @Override
@@ -59,8 +59,8 @@ public class ClubAddController implements ActionListener {
             JFrame f = new JFrame();
             JOptionPane.showMessageDialog(f, "Bitte geben sie etwas fuer Clubname und Stadion erin");
         } else {
-            // TODO Hinzufuegen zur DB 
-            Club temp = new Club(clubName,stadion);
+            // TODO Hinzufuegen zur DB
+            Club temp = new Club(clubName, stadion);
             this.l.addClub(temp);
             System.out.println(stadion);
             System.out.println(clubName);

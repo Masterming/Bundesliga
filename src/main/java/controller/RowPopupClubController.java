@@ -23,15 +23,15 @@ public class RowPopupClubController implements ActionListener {
         this.l = c;
         this.rPCV.getBearbeiten().addActionListener(this);
         this.rPCV.getLoeschen().addActionListener(this);
-        this.table=tab;
+        this.table = tab;
     }
 
     @Override
     public void actionPerformed(ActionEvent evt) {
         System.out.println("Loeschen");
-        switch(evt.getActionCommand()){
+        switch (evt.getActionCommand()) {
             case "loeschen":
-                                // Selected Value bekommen bzw. aendern
+                // Selected Value bekommen bzw. aendern
                 int index1 = table.getSelectedRow();
                 String name = table.getValueAt(index1, 0).toString();
                 System.out.println(name);
@@ -44,8 +44,7 @@ public class RowPopupClubController implements ActionListener {
                         System.out.println("True");
                         // TODO Name aus DB Loeschen
                         this.l.removeClub(name);
-                        
-                        
+
                         tbm.removeRow(index1);
                     } else {
                         System.out.println("false");
@@ -58,7 +57,7 @@ public class RowPopupClubController implements ActionListener {
                 // ueber Kader View
 
                 String name2 = table.getValueAt(row, 0).toString();
-                //String stadion = table.getValueAt(row, 1).toString();
+                // String stadion = table.getValueAt(row, 1).toString();
                 DefaultTableModel tbm2 = (DefaultTableModel) table.getModel();
                 if (name2 != null && column == 0) {
                     // Pop Up menue mit text
@@ -69,21 +68,22 @@ public class RowPopupClubController implements ActionListener {
                         if (!"".equals(nameNeu)) {
                             tbm2.setValueAt(nameNeu, row, column);
                             this.l.changeClubName(nameNeu, name2);
-                            
+
                         }
                     }
 
                 }
-//                if (stadion != null && column == 1) {
-//                    String stadionNeu = JOptionPane.showInputDialog("Neuen Stadion eingeben eingeben");
-//                    stadionNeu.trim();
-//                    if (!"".equals(stadionNeu)) {
-//                        tbm2.setValueAt(stadionNeu, row, column);
-//                    }
-//                }
+                // if (stadion != null && column == 1) {
+                // String stadionNeu = JOptionPane.showInputDialog("Neuen Stadion eingeben
+                // eingeben");
+                // stadionNeu.trim();
+                // if (!"".equals(stadionNeu)) {
+                // tbm2.setValueAt(stadionNeu, row, column);
+                // }
+                // }
                 break;
         }
 
     }
-    
+
 }

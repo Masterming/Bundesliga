@@ -72,7 +72,7 @@ public class ClubController implements MouseListener, ActionListener {
             System.out.println("Rechts klick");
             // Kontext Menue mit Spieler Loeschen und name aendern ueber Pop up Item
             RowPopupClubView kontext = new RowPopupClubView();
-            RowPopupClubController rPUPCC = new  RowPopupClubController(kontext,this.l,view.getClubTable());
+            RowPopupClubController rPUPCC = new RowPopupClubController(kontext, this.l, view.getClubTable());
             kontext.show(this.view.getClubTable(), evt.getX(), evt.getY());
         }
 
@@ -113,14 +113,13 @@ public class ClubController implements MouseListener, ActionListener {
     }
 
     private String[][] getData() {
-        // TODO Get Data 
+        // TODO Get Data
         // WTF do you want here???
-        
-        
+
         String[][] data = new String[l.getClubs().size()][];
-        int count =0;
-        for (Club c : l.getClubs()){
-            String [] temp = new String[2];
+        int count = 0;
+        for (Club c : l.getClubs()) {
+            String[] temp = new String[2];
             temp[0] = c.getName();
             temp[1] = c.getStadion();
             data[count] = temp;

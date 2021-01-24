@@ -8,6 +8,7 @@ package controller;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.*;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.logging.Level;
@@ -27,87 +28,64 @@ import view.TableView;
  * @author z003ywys
  */
 public class MainController implements ActionListener, Observer {
-    
 
     private final static Logger LOGGER = Logger.getLogger(MainController.class.getName());
-    
-    private MainView view;
-    private Liga ligaModel;
-    // Es wird 3 Ligen Model geben jeweils eins pro Liga --> werden beim ersten
-    // Klick auf LigaButtons gesetzt
-    private Liga liga1Model;
-    private Liga liga2Model;
-    private Liga liga3Model;
+
+    // Es wird 3 Ligen Model geben jeweils eins pro Liga
+    // --> werden beim ersten klick auf LigaButtons gesetzt
+    private Map<Integer, Liga> ligas;
     private LigaDBMapper dao;
+
+    private MainView view;
+    private ClubView clV;
+    private int ligaId = 1;
+    private int selection = 1;
+
+    public MainController(MainView view) {
+        LOGGER.log(Level.INFO, "Adding Ligas");
+        dao = new LigaDBMapper();
+        ligas = new HashMap<>();
+
+        for (int i = 1; i <= 3; i++) {
+            ligas.put(i, dao.getLiga(i));
+            ligas.get(i).addObserver(this);
+        }
+
+        view.getLiga1Btn().addActionListener(this);
+        view.getLiga2Btn().addActionListener(this);
+        view.getLiga3Btn().addActionListener(this);
+        view.getClubsBtn().addActionListener(this);
+        view.getPlanBtn().addActionListener(this);
+        view.getTableBtn().addActionListener(this);
+        view.setVisible(true);
+        this.view = view;
+        renderView();
+    }
 
     public void setView(MainView view) {
         this.view = view;
-    }
-    // Variable fuer angezeigtesn View
-    // Variable fuer jeweils genutzten Controller
-
-    boolean liga1 = false;
-    boolean liga2 = false;
-    boolean liga3 = false;
-    boolean table = false;
-    boolean spielplan = false;
-    boolean clubs = false;
-    private ClubView clV;
-
-    public MainController(MainView view) {
-        this.view = view;
-        //this.ligaModel = ligaModel;
-        this.view.getLiga1Btn().addActionListener(this);
-        this.view.getLiga2Btn().addActionListener(this);
-        this.view.getLiga3Btn().addActionListener(this);
-        this.view.getClubsBtn().addActionListener(this);
-        this.view.getPlanBtn().addActionListener(this);
-        this.view.getTableBtn().addActionListener(this);
-        this.view.setVisible(true);
-        LOGGER.log(Level.INFO, "Adding Ligas");
-        this.dao = new LigaDBMapper();
-        this.liga1Model = this.dao.getLiga(1);
-        this.liga2Model = this.dao.getLiga(2);
-        this.liga3Model = this.dao.getLiga(3);
-        
-        this.liga1Model.addObserver(this);
-        this.liga2Model.addObserver(this);
-        this.liga3Model.addObserver(this);
-        this.ligaModel.addObserver(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
             case "liga1":
-                liga1 = true;
-                liga2 = false;
-                liga3 = false;
+                ligaId = 1;
                 break;
             case "liga2":
-                liga1 = false;
-                liga2 = true;
-                liga3 = false;
+                ligaId = 2;
                 break;
             case "liga3":
-                liga1 = false;
-                liga2 = false;
-                liga3 = true;
+                ligaId = 3;
                 break;
             case "table":
-                table = true;
-                spielplan = false;
-                clubs = false;
+                selection = 1;
                 break;
             case "plan":
-                table = false;
-                spielplan = true;
-                clubs = false;
+                selection = 2;
                 break;
             case "clubs":
-                table = false;
-                spielplan = false;
-                clubs = true;
+                selection = 3;
                 break;
         }
         renderView();
@@ -115,121 +93,77 @@ public class MainController implements ActionListener, Observer {
     }
 
     private void renderView() {
-        if (liga1) {
-            this.view.getLiga1Btn().setBackground(Color.white);
-            // Datenkontext anpassen --> Model
-            this.ligaModel = this.liga1Model;
+        view.getLiga1Btn().setBackground(Color.lightGray);
+        view.getLiga2Btn().setBackground(Color.lightGray);
+        view.getLiga3Btn().setBackground(Color.lightGray);
+        view.getTableBtn().setBackground(Color.lightGray);
+        view.getPlanBtn().setBackground(Color.lightGray);
+        view.getClubsBtn().setBackground(Color.lightGray);
 
-
-        } else {
-            this.view.getLiga1Btn().setBackground(Color.lightGray);
+        switch (ligaId) {
+            case 1:
+                view.getLiga1Btn().setBackground(Color.white);
+                break;
+            case 2:
+                view.getLiga2Btn().setBackground(Color.white);
+                break;
+            case 3:
+                view.getLiga3Btn().setBackground(Color.white);
+                break;
         }
-        if (liga2) {
-            this.view.getLiga2Btn().setBackground(Color.white);
-            this.ligaModel = this.liga2Model;
-            // Datenkontext anpassen --> Model
-        } else {
-            this.view.getLiga2Btn().setBackground(Color.lightGray);
+
+        switch (selection) {
+            case 1:
+                view.getTableBtn().setBackground(Color.white);
+                // Aktiv die anzeige anpassen
+                // view.setContentView(new TableView());
+                view.getContentView().removeAll();
+                TableController tbc;
+                TableView tb1;
+
+                tb1 = new TableView();
+                view.getContentView().add(tb1);
+                tbc = new TableController(tb1, ligas.get(ligaId));
+                break;
+            case 2:
+                view.getPlanBtn().setBackground(Color.white);
+                view.getContentView().removeAll();
+
+                // Plan View erstellen
+                // Plan Controller erstellen
+                PlanViewNeu plv = new PlanViewNeu(view);
+                PlanModel plm = new PlanModel();
+
+                PlanController plc = new PlanController(plv, plm, view);
+                plm.setlM(ligas.get(ligaId));
+                // Ding Soll Scrollable sein
+                JScrollPane scroll = new JScrollPane(plv);
+                view.getContentView().add(scroll);
+                break;
+            case 3:
+                view.getClubsBtn().setBackground(Color.white);
+                view.getContentView().removeAll();
+
+                clV = new ClubView(view);
+                ClubController cCl = new ClubController(clV, ligas.get(ligaId), view);
+                view.getContentView().add(clV);
+                break;
         }
-        if (liga3) {
-            this.view.getLiga3Btn().setBackground(Color.white);
-            this.ligaModel = this.liga3Model;
-            // Datenkontext anpassen --> Model
-        } else {
-            this.view.getLiga3Btn().setBackground(Color.lightGray);
-        }
-        if (table) {
-            this.view.getTableBtn().setBackground(Color.white);
-            // Aktiv die anzeige anpassen
-            // this.view.setContentView(new TableView());
-            this.view.getContentView().removeAll();
-            this.view.getContentView().repaint();
-            this.view.getContentView().revalidate();
-            TableController tbc;
-            TableView tb1;
-
-            tb1 = new TableView();
-            this.view.getContentView().add(tb1);
-            tbc = new TableController(tb1, this.ligaModel);
-            this.view.getContentView().repaint();
-            this.view.getContentView().revalidate();
-
-        } else {
-            this.view.getTableBtn().setBackground(Color.lightGray);
-
-        }
-        if (spielplan) {
-            this.view.getPlanBtn().setBackground(Color.white);
-            this.view.getContentView().removeAll();
-            this.view.getContentView().repaint();
-            this.view.getContentView().revalidate();
-
-            // Plan View erstellen
-            // Plan Controller erstellen
-            PlanViewNeu plv = new PlanViewNeu(this.view);
-            PlanModel plm = new PlanModel();
-
-            PlanController plc = new PlanController(plv, plm, this.view);
-            plm.setlM(this.ligaModel);
-            // Ding Soll Scrollable sein
-            JScrollPane scroll = new JScrollPane(plv);
-            this.view.getContentView().add(scroll);
-            this.view.getContentView().repaint();
-            this.view.getContentView().revalidate();
-
-        } else {
-            this.view.getPlanBtn().setBackground(Color.lightGray);
-
-        }
-        if (clubs) {
-            this.view.getClubsBtn().setBackground(Color.white);
-            this.view.getContentView().removeAll();
-            this.view.getContentView().repaint();
-            this.view.getContentView().revalidate();
-
-            clV = new ClubView(this.view);
-            ClubController cCl = new ClubController(clV, this.ligaModel, this.view);
-            this.view.getContentView().add(clV);
-            this.view.getContentView().repaint();
-            this.view.getContentView().revalidate();
-
-        } else {
-            this.view.getClubsBtn().setBackground(Color.lightGray);
-
-        }
+        view.getContentView().repaint();
+        view.getContentView().revalidate();
     }
 
     @Override
     public void update(Observable arg0, Object arg1) {
         System.out.println("Main Controller benachrichtigt");
-        if(arg0 instanceof Liga){
+        if (arg0 instanceof Liga) {
             Liga temp = (Liga) arg0;
             dao.updateLiga(temp);
-            if(temp.getId()==1){
-                liga1 =true;
-                liga2 = false;
-                liga3 = false;
-                this.liga1Model=temp;
-                renderView();
-            }
-            if(temp.getId()==2){
-                liga1 =false;
-                liga2 = true;
-                liga3 = false;
-                this.liga2Model=temp;
-                renderView();
-            }
-            if(temp.getId()==3){
-                liga1 =false;
-                liga2 = false;
-                liga3 = true;
-                this.liga3Model=temp;
-                renderView();
-            }
-            this.clV.repaint();
-            this.clV.revalidate();
-        }
-        
-    }
+            ligas.put(temp.getId(), temp);
 
+            renderView();
+            clV.repaint();
+            clV.revalidate();
+        }
+    }
 }
