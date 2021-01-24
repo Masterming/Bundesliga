@@ -18,8 +18,8 @@ import view.TableView;
  *
  * @author z003ywys
  */
-
 public class TableController implements ActionListener {
+
     private TableView tableView;
     private Liga l;
 
@@ -58,13 +58,12 @@ public class TableController implements ActionListener {
 
     private String[][] getData() {
         // TODO Daten Holen
-        String[][] data = new String[0][];
-        int count=0;
-        
-        //temp[0]="1";
-        for(Club c : l.getClubs()){
+        String[][] data = new String[l.getClubs().size()][];
+        int count = 0;
+
+        for (Club c : l.getClubs()) {
             String[] temp = new String[8];
-            temp[0]="";
+            temp[0] = "";
             temp[1] = c.getName();
             temp[2] = String.valueOf(c.getGamesCount());
             temp[3] = String.valueOf(c.getPoints());
@@ -72,7 +71,7 @@ public class TableController implements ActionListener {
             temp[5] = String.valueOf(c.getDraw());
             temp[6] = String.valueOf(c.getLosses());
             temp[7] = String.valueOf(c.getMadeGoals()) + " : " + String.valueOf(c.getReceivedGoals());
-            data[count]=temp;
+            data[count] = temp;
             count++;
         }
 //        if (this.l.getName() == "Liga 1") {

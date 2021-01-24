@@ -9,6 +9,8 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import model.Liga;
@@ -26,6 +28,10 @@ import view.TableView;
  * @author z003ywys
  */
 public class MainController implements ActionListener {
+    
+
+    private final static Logger LOGGER = Logger.getLogger(MainController.class.getName());
+    
     private MainView view;
     private Liga ligaModel;
     // Es wird 3 Ligen Model geben jeweils eins pro Liga --> werden beim ersten
@@ -58,6 +64,8 @@ public class MainController implements ActionListener {
         this.view.getPlanBtn().addActionListener(this);
         this.view.getTableBtn().addActionListener(this);
         this.view.setVisible(true);
+        LOGGER.log(Level.INFO, "Adding Ligas");
+        this.dao = new LigaDBMapper();
         this.liga1Model = this.dao.getLiga(1);
         this.liga2Model = this.dao.getLiga(2);
         this.liga3Model = this.dao.getLiga(3);

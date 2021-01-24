@@ -30,6 +30,8 @@ public class ORMTest {
     private static Club c1;
     private static Club c2;
     private static Liga l1;
+    private static Liga l2;
+    private static Liga l3;
     private static Game g1;
 
     @BeforeClass
@@ -99,11 +101,15 @@ public class ORMTest {
     public static void testAddLiga() {
         LOGGER.log(Level.INFO, "Test 3: Add Liga");
         l1 = new Liga("1. Bundesliga");
+        l2 = new Liga("2. Bundesliga");
+        l3 = new Liga("3. Liga");
         l1.addClub(c1);
         l1.addClub(c2);
 
         LigaDBMapper dao = new LigaDBMapper();
         l1.setId(dao.addLiga(l1));
+        l2.setId(dao.addLiga(l2));
+        l3.setId(dao.addLiga(l3));
         LOGGER.log(Level.INFO, "Liga ID: {0}", l1.getId());
     }
 
