@@ -5,16 +5,13 @@
  */
 package controller;
 
-import java.awt.Button;
 import java.awt.Color;
-import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.BoxLayout;
+
 import view.ClubEditView;
 import view.KaderView;
 import view.SpielerAddView;
-import view.TableView;
 import view.TransactionView;
 
 /**

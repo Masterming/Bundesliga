@@ -11,9 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
 import model.Liga;
 import model.PlanModel;
 import view.ErgebnisInputView;

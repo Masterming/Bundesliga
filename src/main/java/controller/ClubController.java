@@ -4,24 +4,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import javassist.bytecode.SignatureAttribute.ObjectType;
 import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
-import javax.swing.event.AncestorListener;
 import javax.swing.table.DefaultTableModel;
+
 import model.Club;
 import model.Liga;
-import model.LigaDBMapper;
 import view.ClubAddExistingView;
 import view.ClubAddView;
 import view.ClubEditView;
 import view.ClubView;
 import view.RowPopupClubView;
-import view.RowPopupPlayerView;
 
 /**
  * @author Rene

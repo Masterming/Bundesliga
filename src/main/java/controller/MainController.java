@@ -6,20 +6,18 @@
 package controller;
 
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JLabel;
 import javax.swing.JScrollPane;
+
 import model.Liga;
 import model.LigaDBMapper;
 import model.PlanModel;
 import view.ClubView;
-import view.MainView;
 import view.MainView;
 import view.PlanViewNeu;
 import view.TableView;
