@@ -172,7 +172,6 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
         } else {
             JOptionPane.showMessageDialog(null, "Die Teams die gegeneinander Spielen muessen verschieden sein");
         }
-
     }
 
     private void getListData() {
@@ -217,7 +216,6 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
             listModelTeamB.addElement("Ingolstadt");
             listModelTeamB.addElement("Dynamo Dresden");
         }
-
         this.paGV.setTeamAList(listModelTeamA);
         this.paGV.setTeamBList(listModelTeamB);
         this.paGV.repaint();

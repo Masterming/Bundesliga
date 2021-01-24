@@ -1,9 +1,11 @@
 package program;
 
+import controller.MainController;
 import model.*;
 
 import java.util.logging.*;
 import java.io.IOException;
+import view.MainView;
 
 /**
  * @author Rene
@@ -24,7 +26,8 @@ public class Main {
 
         try {
             // Insert Code here
-
+        MainView mv2 = new MainView();
+        MainController m2 = new MainController(mv2, new Liga("Liga 1"));
             // resetDB(); //current persistence settings auto-drop on startup
         } catch (Exception ex) {
             LOGGER.log(Level.SEVERE, ex.getLocalizedMessage());

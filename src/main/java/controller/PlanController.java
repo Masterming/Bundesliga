@@ -50,5 +50,6 @@ public class PlanController implements ActionListener {
                 break;
         }
     }
+    //Alternatuve Lösung: PlanController implementiert Observer und wird benachrichtigt wenn sich Model ändert und passt dann den View an
 
 }

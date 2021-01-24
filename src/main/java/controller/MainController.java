@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import model.Liga;
+import model.LigaDBMapper;
 import model.PlanModel;
 import view.ClubView;
 import view.MainView;
@@ -32,6 +33,7 @@ public class MainController implements ActionListener {
     private Liga liga1Model;
     private Liga liga2Model;
     private Liga liga3Model;
+    private LigaDBMapper dao;
 
     public void setView(MainView view) {
         this.view = view;
@@ -56,6 +58,9 @@ public class MainController implements ActionListener {
         this.view.getPlanBtn().addActionListener(this);
         this.view.getTableBtn().addActionListener(this);
         this.view.setVisible(true);
+        this.liga1Model = this.dao.getLiga(1);
+        this.liga2Model = this.dao.getLiga(2);
+        this.liga3Model = this.dao.getLiga(3);
     }
 
     @Override
@@ -100,21 +105,21 @@ public class MainController implements ActionListener {
         if (liga1) {
             this.view.getLiga1Btn().setBackground(Color.white);
             // Datenkontext anpassen --> Model
-            this.ligaModel.setName("Liga 1");
+            this.ligaModel = this.liga1Model;
 
         } else {
             this.view.getLiga1Btn().setBackground(Color.lightGray);
         }
         if (liga2) {
             this.view.getLiga2Btn().setBackground(Color.white);
-            this.ligaModel.setName("Liga 2");
+            this.ligaModel = this.liga2Model;
             // Datenkontext anpassen --> Model
         } else {
             this.view.getLiga2Btn().setBackground(Color.lightGray);
         }
         if (liga3) {
             this.view.getLiga3Btn().setBackground(Color.white);
-            this.ligaModel.setName("Liga 3");
+            this.ligaModel = this.liga3Model;
             // Datenkontext anpassen --> Model
         } else {
             this.view.getLiga3Btn().setBackground(Color.lightGray);

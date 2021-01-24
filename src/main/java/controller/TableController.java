@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import model.Club;
 import model.Liga;
 import view.TableView;
 
@@ -58,46 +59,62 @@ public class TableController implements ActionListener {
     private String[][] getData() {
         // TODO Daten Holen
         String[][] data = new String[0][];
-        if (this.l.getName() == "Liga 1") {
-            data = new String[2][];
+        int count=0;
+        
+        //temp[0]="1";
+        for(Club c : l.getClubs()){
             String[] temp = new String[8];
-            temp[0] = "1";
-            temp[1] = "FC Bayern";
-            temp[2] = "7";
-            temp[3] = "18";
-            temp[4] = "6";
-            temp[5] = "0";
-            temp[6] = "1";
-            temp[7] = "27:11";
-
-            data[0] = temp;
-            temp = new String[8];
-            temp[0] = "2";
-            temp[1] = "RB Leipzig";
-            temp[2] = "7";
-            temp[3] = "16";
-            temp[4] = "5";
-            temp[5] = "1";
-            temp[6] = "1";
-            temp[7] = "15:11";
-            data[1] = temp;
+            temp[0]="";
+            temp[1] = c.getName();
+            temp[2] = String.valueOf(c.getGamesCount());
+            temp[3] = String.valueOf(c.getPoints());
+            temp[4] = String.valueOf(c.getWins());
+            temp[5] = String.valueOf(c.getDraw());
+            temp[6] = String.valueOf(c.getLosses());
+            temp[7] = String.valueOf(c.getMadeGoals()) + " : " + String.valueOf(c.getReceivedGoals());
+            data[count]=temp;
+            count++;
         }
-        if (this.l.getName() == "Liga 2") {
-            data = new String[1][];
-            String[] temp = new String[8];
-            temp[0] = "1";
-            temp[1] = "Hamburger SV";
-            temp[2] = "14";
-            temp[3] = "29";
-            temp[4] = "9";
-            temp[5] = "2";
-            temp[6] = "3";
-            temp[7] = "30:18";
-            data[0] = temp;
-        }
-        if (this.l.getName() == "Liga 3") {
-
-        }
+//        if (this.l.getName() == "Liga 1") {
+//            data = new String[2][];
+//            String[] temp = new String[8];
+//            temp[0] = "1";
+//            temp[1] = "FC Bayern";
+//            temp[2] = "7";
+//            temp[3] = "18";
+//            temp[4] = "6";
+//            temp[5] = "0";
+//            temp[6] = "1";
+//            temp[7] = "27:11";
+//
+//            data[0] = temp;
+//            temp = new String[8];
+//            temp[0] = "2";
+//            temp[1] = "RB Leipzig";
+//            temp[2] = "7";
+//            temp[3] = "16";
+//            temp[4] = "5";
+//            temp[5] = "1";
+//            temp[6] = "1";
+//            temp[7] = "15:11";
+//            data[1] = temp;
+//        }
+//        if (this.l.getName() == "Liga 2") {
+//            data = new String[1][];
+//            String[] temp = new String[8];
+//            temp[0] = "1";
+//            temp[1] = "Hamburger SV";
+//            temp[2] = "14";
+//            temp[3] = "29";
+//            temp[4] = "9";
+//            temp[5] = "2";
+//            temp[6] = "3";
+//            temp[7] = "30:18";
+//            data[0] = temp;
+//        }
+//        if (this.l.getName() == "Liga 3") {
+//
+//        }
         return data;
     }
 
