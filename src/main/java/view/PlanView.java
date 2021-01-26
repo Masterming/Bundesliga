@@ -10,23 +10,22 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import model.PlanModel;
 
 /**
  *
  * @author z003ywys
  */
-public class PlanViewNeu extends JPanel implements Observer {
+public class PlanView extends JPanel implements Observer {
 
-    /**
-     *
-     */
+    private final static Logger LOGGER = Logger.getLogger(PlanView.class.getName());
+
     private static final long serialVersionUID = 107L;
 
     @Override
@@ -37,29 +36,27 @@ public class PlanViewNeu extends JPanel implements Observer {
             // To change body of generated methods, choose Tools | Templates.
             // javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
             // this.setLayout(layout);
-            this.planContent.removeAll();
-            this.plm = (PlanModel) o;
+            planContent.removeAll();
+            plm = (PlanModel) o;
             int count = 1;
-            if (this.plm.getlM().getName().contains("1")) {
+            if (plm.getLiga().getId() == 1) {
                 count = 5;
             }
-            if (this.plm.getlM().getName().contains("2")) {
+            if (plm.getLiga().getId() == 2) {
                 count = 10;
             }
-            if (this.plm.getlM().getName().contains("3")) {
+            if (plm.getLiga().getId() == 3) {
                 count = 15;
             }
             for (int i = 0; i < count; i++) {
-                JLabel test = new JLabel(((PlanModel) o).getlM().getName());
+                JLabel test = new JLabel(plm.getLiga().getName());
                 JButton testBtn = new JButton("TestBTN " + i);
                 test.setBackground(java.awt.Color.lightGray);
                 test.setAlignmentX(Component.CENTER_ALIGNMENT);
                 testBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
                 testBtn.setActionCommand(String.valueOf(i) + "RB Leipzig");
-                testBtn.addActionListener(new java.awt.event.ActionListener() {
-                    public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        action(evt);
-                    }
+                testBtn.addActionListener((java.awt.event.ActionEvent evt) -> {
+                    action(evt);
                 });
                 this.planContent.add(test);
                 this.planContent.add(testBtn);
@@ -71,9 +68,9 @@ public class PlanViewNeu extends JPanel implements Observer {
         }
     }
 
-    public PlanViewNeu(JFrame main) {
+    public PlanView(JFrame master) {
         initComponents();
-        this.mainView = main;
+        this.master = master;
         try {
 
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -82,14 +79,9 @@ public class PlanViewNeu extends JPanel implements Observer {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+                | javax.swing.UnsupportedLookAndFeelException ex) {
+            LOGGER.log(java.util.logging.Level.SEVERE, ex.getLocalizedMessage());
         }
         this.setVisible(true);
     }
@@ -138,7 +130,7 @@ public class PlanViewNeu extends JPanel implements Observer {
     private javax.swing.JButton addSpielBtn;
     private javax.swing.JPanel btnContainer;
     private javax.swing.JPanel planContent;
-    private JFrame mainView;
+    private JFrame master;
     private PlanModel plm;
 
     public JButton getAddSpielBtn() {
@@ -150,7 +142,7 @@ public class PlanViewNeu extends JPanel implements Observer {
         System.out.println("Das Action Command war: " + a);
         System.out.println("Button gesetzt durch model geklickt");
         // Neues Pop Up fenster + Controller --> bekommt z.B. Spiel Model mit
-        ErgebnisInputView pop = new ErgebnisInputView(this.mainView, true);
+        ErgebnisInputView pop = new ErgebnisInputView(this.master, true);
         ErgebnisInputController con = new ErgebnisInputController(pop, a, a, this.plm);
         pop.setVisible(true);
     }

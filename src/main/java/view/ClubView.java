@@ -17,7 +17,7 @@ public class ClubView extends javax.swing.JPanel implements Observer {
     private javax.swing.JButton addExistingClubBtn;
     private javax.swing.JTable clubTable;
     private javax.swing.JScrollPane jScrollPane1;
-    private JFrame mainView;
+    private JFrame master;
 
     private void initComponents() {
         addClubBtn = new javax.swing.JButton();
@@ -70,13 +70,13 @@ public class ClubView extends javax.swing.JPanel implements Observer {
         this.clubTable.setModel(tbm);
     }
 
-    public ClubView(JFrame MainView) {
+    public ClubView(JFrame master) {
         initComponents();
-        this.mainView = MainView;
+        this.master = master;
     }
 
-    public JFrame getMainView() {
-        return mainView;
+    public JFrame getmaster() {
+        return master;
     }
 
     public JButton getAddClubBtn() {

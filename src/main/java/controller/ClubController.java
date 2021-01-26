@@ -21,29 +21,30 @@ import view.RowPopupClubView;
  * @author Rene
  */
 public class ClubController implements MouseListener, ActionListener {
+
     private ClubView view;
     private Liga l;
-    private JFrame mainView;
+    private JFrame master;
 
-    public ClubController(ClubView view, Liga l, JFrame main) {
-        this.view = view;
-        this.l = l;
-        this.view.getClubTable().addMouseListener(this);
-        this.view.getAddClubBtn().addActionListener(this);
-        this.view.getAddExistingClubBtn().addActionListener(this);
-        this.mainView = main;
+    public ClubController(JFrame master, ClubView view, Liga l) {
+        view.getClubTable().addMouseListener(this);
+        view.getAddClubBtn().addActionListener(this);
+        view.getAddExistingClubBtn().addActionListener(this);
         // ueberlegen ob man Buttons ausgraut
         if (l.getName().contains("1") || l.getName().contains("2")) {
-            this.view.getAddClubBtn().setVisible(false);
-            this.view.getAddExistingClubBtn().setVisible(true);
-            this.view.repaint();
-            this.view.revalidate();
+            view.getAddClubBtn().setVisible(false);
+            view.getAddExistingClubBtn().setVisible(true);
+            view.repaint();
+            view.revalidate();
         } else {
-            this.view.getAddClubBtn().setVisible(true);
-            this.view.getAddExistingClubBtn().setVisible(true);
-            this.view.repaint();
-            this.view.revalidate();
+            view.getAddClubBtn().setVisible(true);
+            view.getAddExistingClubBtn().setVisible(true);
+            view.repaint();
+            view.revalidate();
         }
+        this.view = view;
+        this.master = master;
+        this.l = l;
         this.setData();
     }
 
@@ -53,8 +54,6 @@ public class ClubController implements MouseListener, ActionListener {
 
     @Override
     public void mouseClicked(MouseEvent evt) {
-        // throw new UnsupportedOperationException("Not supported yet."); //To change
-        // body of generated methods, choose Tools | Templates.
         if (evt.getClickCount() == 2 && SwingUtilities.isLeftMouseButton(evt)) {
             System.out.println("Tabelle wurde 2 mal geklcikt im ClubController");
             // Neues Fenster geht auf --> Neuen Controller + View
@@ -62,7 +61,7 @@ public class ClubController implements MouseListener, ActionListener {
             int row = temp.getSelectedRow();
             int column = 0;
             String team = temp.getValueAt(row, column).toString();
-            ClubEditView cbV = new ClubEditView(this.view.getMainView(), true);
+            ClubEditView cbV = new ClubEditView(view.getmaster(), true);
             ClubEditController cbC = new ClubEditController(cbV, team);
             cbV.setVisible(true);
         }
@@ -71,50 +70,51 @@ public class ClubController implements MouseListener, ActionListener {
             System.out.println("Rechts klick");
             // Kontext Menue mit Spieler Loeschen und name aendern ueber Pop up Item
             RowPopupClubView kontext = new RowPopupClubView();
-            RowPopupClubController rPUPCC = new RowPopupClubController(kontext, this.l, view.getClubTable());
-            kontext.show(this.view.getClubTable(), evt.getX(), evt.getY());
+            RowPopupClubController rPUPCC = new RowPopupClubController(master, kontext, this.l, view.getClubTable());
+            kontext.show(view.getClubTable(), evt.getX(), evt.getY());
         }
 
     }
 
     @Override
-    public void mousePressed(MouseEvent arg0) {
-        // throw new UnsupportedOperationException("Not supported yet."); //To change
-        // body of generated methods, choose Tools | Templates.
+    public void mousePressed(MouseEvent e) {
+        int r = view.getClubTable().rowAtPoint(e.getPoint());
+        if (r >= 0 && r < view.getClubTable().getRowCount()) {
+            view.getClubTable().setRowSelectionInterval(r, r);
+        } else {
+            view.getClubTable().clearSelection();
+        }
     }
 
     @Override
-    public void mouseReleased(MouseEvent arg0) {
-        // throw new UnsupportedOperationException("Not supported yet."); //To change
-        // body of generated methods, choose Tools | Templates.
+    public void mouseReleased(MouseEvent e) {
+        int r = view.getClubTable().rowAtPoint(e.getPoint());
+        if (r >= 0 && r < view.getClubTable().getRowCount()) {
+            view.getClubTable().setRowSelectionInterval(r, r);
+        } else {
+            view.getClubTable().clearSelection();
+        }
     }
 
     @Override
-    public void mouseEntered(MouseEvent arg0) {
-        // throw new UnsupportedOperationException("Not supported yet."); //To change
-        // body of generated methods, choose Tools | Templates.
+    public void mouseEntered(MouseEvent e) {
     }
 
     @Override
-    public void mouseExited(MouseEvent arg0) {
-        // throw new UnsupportedOperationException("Not supported yet."); //To change
-        // body of generated methods, choose Tools | Templates.
+    public void mouseExited(MouseEvent e) {
     }
 
     private void setData() {
-        DefaultTableModel tbm = (DefaultTableModel) this.view.getClubTable().getModel();
+        DefaultTableModel tbm = (DefaultTableModel) view.getClubTable().getModel();
         String data[][] = getData();
         for (String[] d : data) {
             tbm.addRow(d);
         }
 
-        this.view.setTableContent(tbm);
+        view.setTableContent(tbm);
     }
 
     private String[][] getData() {
-        // TODO Get Data
-        // WTF do you want here???
-
         String[][] data = new String[l.getClubs().size()][];
         int count = 0;
         for (Club c : l.getClubs()) {
@@ -132,8 +132,8 @@ public class ClubController implements MouseListener, ActionListener {
         switch (evt.getActionCommand()) {
             case "addClub":
                 System.out.println("Club Hinzufuegen button gedrueckt");
-                ClubAddView caV = new ClubAddView(this.mainView, true);
-                ClubAddController cbAC = new ClubAddController(this.mainView, caV, l);
+                ClubAddView caV = new ClubAddView(this.master, true);
+                ClubAddController cbAC = new ClubAddController(this.master, caV, l);
                 caV.setVisible(true);
                 break;
             case "addExistClub":
@@ -143,7 +143,7 @@ public class ClubController implements MouseListener, ActionListener {
                 // auf grund der auswahl wird liste angapsst mit den clubs der liga, die im Drop
                 // Down menue ausgewaehlt wurde
                 // in Liste: mehrfach auswahl moeglich
-                ClubAddExistingView caEV = new ClubAddExistingView(this.mainView, true);
+                ClubAddExistingView caEV = new ClubAddExistingView(this.master, true);
                 ClubAddExistingController caEC = new ClubAddExistingController(caEV, this.l);
                 caEV.setVisible(true);
                 break;

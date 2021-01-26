@@ -12,7 +12,7 @@ import org.hibernate.annotations.LazyCollectionOption;
  */
 @Entity
 @Table(name = "ligas")
-public class Liga extends Observable implements Serializable  {
+public class Liga extends Observable implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -41,7 +41,7 @@ public class Liga extends Observable implements Serializable  {
     public Liga(int id, String name) {
         this.ligaId = id;
         this.name = name;
-        this.clubs = new ArrayList<>();    
+        this.clubs = new ArrayList<>();
     }
 
     public int getId() {
@@ -49,8 +49,8 @@ public class Liga extends Observable implements Serializable  {
     }
 
     public void setId(int id) {
-        notifyObservers(this);
         ligaId = id;
+        notifyObservers(this);
     }
 
     public String getName() {
@@ -62,33 +62,36 @@ public class Liga extends Observable implements Serializable  {
     }
 
     public boolean addClub(Club c) {
+        boolean sucess = clubs.add(c);
         setChanged();
         notifyObservers(this);
-        return clubs.add(c);
+        return sucess;
     }
 
     public boolean removeClub(Club c) {
+        boolean sucess = clubs.remove(c);
         setChanged();
         notifyObservers(this);
-        return clubs.remove(c);
+        return sucess;
     }
-    
-    public boolean removeClub(String name){
-        for(Club c: clubs){
-            if(c.getName().equals(name)){
+
+    public boolean removeClub(String name) {
+        boolean sucess = false;
+        for (Club c : clubs) {
+            if (c.getName().equals(name)) {
+                sucess = clubs.remove(c);
                 setChanged();
                 notifyObservers(this);
-                return clubs.remove(c);
-                
+                break;
             }
         }
-        return false;
+        return sucess;
     }
-    
-    public boolean changeClubName(String clubNameNeu, String clubNameAlt){
-        for(Club c : clubs){
-            if(c.getName().equals(clubNameAlt)){
-                c.setName(clubNameNeu);
+
+    public boolean changeClubName(String name, String newName) {
+        for (Club c : clubs) {
+            if (c.getName().equals(name)) {
+                c.setName(newName);
                 setChanged();
                 notifyObservers(this);
                 return true;
@@ -105,5 +108,5 @@ public class Liga extends Observable implements Serializable  {
     public String toString() {
         return "Liga: " + name;
     }
-    
+
 }

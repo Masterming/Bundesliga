@@ -19,13 +19,13 @@ import view.ClubAddView;
  * @author z003ywys
  */
 public class ClubAddController implements ActionListener {
-    private JFrame mainView;
+    private JFrame master;
     private ClubAddView cAv;
     private Liga l;
     // private ClubDB
 
-    public ClubAddController(JFrame mainView, ClubAddView cAv, Liga L) {
-        this.mainView = mainView;
+    public ClubAddController(JFrame master, ClubAddView cAv, Liga L) {
+        this.master = master;
         this.cAv = cAv;
         this.cAv.getClubAddBtn().addActionListener(this);
         this.l = L;
@@ -64,8 +64,8 @@ public class ClubAddController implements ActionListener {
             this.l.addClub(temp);
             System.out.println(stadion);
             System.out.println(clubName);
-            this.mainView.repaint();
-            this.mainView.revalidate();
+            this.master.repaint();
+            this.master.revalidate();
             this.cAv.dispose();
 
         }

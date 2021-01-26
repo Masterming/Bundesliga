@@ -23,27 +23,28 @@ public class PlanModel extends Observable implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private final int planModelID;
-    private Liga lM;
+    private Liga liga;
     private int test;
 
     // private String[][]
-    public PlanModel() {
+    public PlanModel(Liga liga) {
         this.planModelID = -1;
+        this.liga = liga;
         setChanged();
     }
     // DatenStruktur ueberlegen --> Aus DB holen
 
-    public void setlM(Liga lM) {
-        this.lM = lM;
+    public void setLiga(Liga liga) {
+        this.liga = liga;
         // Holt sich Liste mit Gameobjekten die muessen durchsortiert werden
         // GameTabelle: alles Games von allen Ligen zukunft und vergangenheit
         // Spiel noch nicht gespielt:boolean = false
         setChanged();
-        notifyObservers(lM);
+        notifyObservers(liga);
     }
 
-    public Liga getlM() {
-        return lM;
+    public Liga getLiga() {
+        return liga;
     }
 
     public int getTest() {
@@ -53,7 +54,7 @@ public class PlanModel extends Observable implements Serializable {
     public void setTest(int test) {
         this.test = test;
         setChanged();
-        notifyObservers(lM);
+        notifyObservers(liga);
     }
 
     public int getPlanModelID() {

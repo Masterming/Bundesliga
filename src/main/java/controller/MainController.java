@@ -20,7 +20,7 @@ import model.LigaDBMapper;
 import model.PlanModel;
 import view.ClubView;
 import view.MainView;
-import view.PlanViewNeu;
+import view.PlanView;
 import view.TableView;
 
 /**
@@ -37,7 +37,6 @@ public class MainController implements ActionListener, Observer {
     private LigaDBMapper dao;
 
     private MainView view;
-    private ClubView clV;
     private int ligaId = 1;
     private int selection = 1;
 
@@ -112,41 +111,33 @@ public class MainController implements ActionListener, Observer {
                 break;
         }
 
+        // Anzeige anpassen + Controller erstellen
         switch (selection) {
             case 1:
-                view.getTableBtn().setBackground(Color.white);
-                // Aktiv die anzeige anpassen
-                // view.setContentView(new TableView());
-                view.getContentView().removeAll();
-                TableController tbc;
-                TableView tb1;
+                TableView tv = new TableView();
+                TableController tbc = new TableController(tv, ligas.get(ligaId));
 
-                tb1 = new TableView();
-                view.getContentView().add(tb1);
-                tbc = new TableController(tb1, ligas.get(ligaId));
+                view.getTableBtn().setBackground(Color.white);
+                view.getContentView().removeAll();
+                view.getContentView().add(tv);
                 break;
             case 2:
+                PlanView plv = new PlanView(view);
+                PlanModel plm = new PlanModel(ligas.get(ligaId));
+                PlanController plc = new PlanController(view, plv, plm);
+                JScrollPane scroll = new JScrollPane(plv);
+
                 view.getPlanBtn().setBackground(Color.white);
                 view.getContentView().removeAll();
-
-                // Plan View erstellen
-                // Plan Controller erstellen
-                PlanViewNeu plv = new PlanViewNeu(view);
-                PlanModel plm = new PlanModel();
-
-                PlanController plc = new PlanController(plv, plm, view);
-                plm.setlM(ligas.get(ligaId));
-                // Ding Soll Scrollable sein
-                JScrollPane scroll = new JScrollPane(plv);
                 view.getContentView().add(scroll);
                 break;
             case 3:
+                ClubView cv = new ClubView(view);
+                ClubController clc = new ClubController(view, cv, ligas.get(ligaId));
+
                 view.getClubsBtn().setBackground(Color.white);
                 view.getContentView().removeAll();
-
-                clV = new ClubView(view);
-                ClubController cCl = new ClubController(clV, ligas.get(ligaId), view);
-                view.getContentView().add(clV);
+                view.getContentView().add(cv);
                 break;
         }
         view.getContentView().repaint();
@@ -154,16 +145,14 @@ public class MainController implements ActionListener, Observer {
     }
 
     @Override
-    public void update(Observable arg0, Object arg1) {
+    public void update(Observable o, Object arg1) {
         System.out.println("Main Controller benachrichtigt");
-        if (arg0 instanceof Liga) {
-            Liga temp = (Liga) arg0;
+        if (o instanceof Liga) {
+            Liga temp = (Liga) o;
             dao.updateLiga(temp);
             ligas.put(temp.getId(), temp);
 
             renderView();
-            clV.repaint();
-            clV.revalidate();
         }
     }
 }

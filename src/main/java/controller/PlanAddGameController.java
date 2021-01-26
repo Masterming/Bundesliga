@@ -26,7 +26,7 @@ import view.PlanAddGameView;
  * @author z003ywys
  */
 public class PlanAddGameController implements ActionListener, ItemListener, MouseListener {
-    private JFrame mainView;
+    private JFrame master;
     private PlanAddGameView paGV;
     private PlanModel plM;
     private Liga l;
@@ -35,8 +35,8 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
     private String teamA;
     private String teamB;
 
-    public PlanAddGameController(JFrame mainView, PlanAddGameView PagV, PlanModel plM, Liga l) {
-        this.mainView = mainView;
+    public PlanAddGameController(JFrame master, PlanAddGameView PagV, PlanModel plM, Liga l) {
+        this.master = master;
         this.paGV = PagV;
         this.plM = plM;
         this.l = l;
@@ -111,8 +111,6 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
             System.out.println(this.teamA);
             System.out.println(this.teamB);
             // TODO Spiel in DB Schreiben und Model aktualisieren
-            this.plM.setlM(new Liga("Test"));
-            // this.l.setName(this.l.getName());
             this.paGV.dispose();
 
         }
