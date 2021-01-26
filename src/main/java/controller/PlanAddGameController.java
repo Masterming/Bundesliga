@@ -55,7 +55,7 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
     }
 
     private void adaptViewToLiga() {
-        if (this.l.getName().contains("1")) {
+        if (l.getId() == 1) {
             String[] ligen = new String[2];
             ligen[0] = "Liga 1";
             ligen[1] = "Liga 2";
@@ -65,7 +65,7 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
             this.paGV.setTeamBLigaList(dfB);
             // TODO Teams Holen pro liga
         }
-        if (this.l.getName().contains("2")) {
+        if (l.getId() == 2) {
             String[] ligen = new String[3];
             ligen[0] = "Liga 1";
             ligen[1] = "Liga 2";
@@ -75,7 +75,7 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
             this.paGV.setTeamALigaList(dfC);
             this.paGV.setTeamBLigaList(dfB);
         }
-        if (this.l.getName().contains("3")) {
+        if (l.getId() == 3) {
             String[] ligen = new String[2];
             ligen[0] = "Liga 2";
             ligen[1] = "Liga 3";

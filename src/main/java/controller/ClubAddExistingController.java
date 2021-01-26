@@ -46,7 +46,7 @@ public class ClubAddExistingController implements ActionListener, MouseListener,
 
     private void adaptViewToLiga() {
         // TODO Club View Anpassen
-        if (this.l.getName().contains("1")) {
+        if (l.getId() == 1) {
             String[] ligen = new String[1];
             ligen[0] = "Liga 2";
             DefaultComboBoxModel<String> dfC = new DefaultComboBoxModel<>(ligen);
@@ -54,7 +54,7 @@ public class ClubAddExistingController implements ActionListener, MouseListener,
             // Club Liste Setzen
             this.clubList.addElement("FC Erzgebirge Aue");
         }
-        if (this.l.getName().contains("2")) {
+        if (l.getId() == 2) {
             String[] ligen = new String[2];
             ligen[0] = "Liga 1";
             ligen[1] = "Liga 3";
@@ -64,7 +64,7 @@ public class ClubAddExistingController implements ActionListener, MouseListener,
             this.clubList.addElement("FC Bayern Muenchen");
             this.clubList.addElement("RB Leipzig");
         }
-        if (this.l.getName().contains("3")) {
+        if (l.getId() == 3) {
             String[] ligen = new String[1];
             ligen[0] = "Liga 2";
             DefaultComboBoxModel<String> dfC = new DefaultComboBoxModel<>(ligen);
