@@ -35,13 +35,13 @@ public class KaderController implements ActionListener, MouseListener {
     }
 
     private void setTableData() {
-        DefaultTableModel tbm = (DefaultTableModel) this.kdV.getPlayerTable().getModel();
+        DefaultTableModel tbm = (DefaultTableModel) kdV.getPlayerTable().getModel();
         String[][] data = getData();
         for (String[] d : data) {
             tbm.addRow(d);
         }
 
-        this.kdV.setPlayerTableContent(tbm);
+        kdV.setPlayerTableContent(tbm);
     }
 
     private String[][] getData() {
@@ -75,8 +75,8 @@ public class KaderController implements ActionListener, MouseListener {
             LOGGER.log(Level.INFO, "kontext Menue");
             LOGGER.log(Level.INFO, "Rechts klick");
             // Kontext Menue mit Spieler Loeschen und name aendern ueber Pop up Item
-            RowPopupPlayerView kontext = new RowPopupPlayerView(this.kdV.getPlayerTable());
-            kontext.show(this.kdV.getPlayerTable(), evt.getX(), evt.getY());
+            RowPopupPlayerView kontext = new RowPopupPlayerView(kdV.getPlayerTable());
+            kontext.show(kdV.getPlayerTable(), evt.getX(), evt.getY());
         }
     }
 

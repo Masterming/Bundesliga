@@ -38,7 +38,7 @@ public class TableController implements ActionListener {
         switch (ae.getActionCommand()) {
             case "test":
                 LOGGER.log(Level.INFO, "Table Controller Button/ Aktion erfolgreich");
-                LOGGER.log(Level.INFO, "Gezeigte Liga: " + this.l.getName());
+                LOGGER.log(Level.INFO, "Gezeigte Liga: " + l.getName());
                 break;
         }
     }
@@ -46,7 +46,7 @@ public class TableController implements ActionListener {
     private void setTableData() {
         // Neues TableModel erstellen je nach Liga
         // Aufrufen der SetTableContentMethode der Tabelle
-        DefaultTableModel tbm = (DefaultTableModel) this.tableView.getjTable1().getModel();
+        DefaultTableModel tbm = (DefaultTableModel) tableView.getjTable1().getModel();
 
         // Bekomme list mit CLub Objkete mit Daten
         // Sample Data
@@ -55,7 +55,7 @@ public class TableController implements ActionListener {
             tbm.addRow(d);
         }
 
-        this.tableView.setTableContent(tbm);
+        tableView.setTableContent(tbm);
     }
 
     private String[][] getData() {

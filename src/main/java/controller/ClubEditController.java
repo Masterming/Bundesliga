@@ -38,52 +38,52 @@ public class ClubEditController implements ActionListener {
     public void actionPerformed(ActionEvent evt) {
         LOGGER.log(Level.INFO, "Button wurde gedrueckt");
         if (evt.getActionCommand() == "kader") {
-            this.cev.getKaderBtn().setBackground(Color.white);
-            this.cev.getTransBtn().setBackground(Color.lightGray);
-            this.cev.getAddSpielerBtn().setBackground(Color.lightGray);
-            // this.cev.getClubName().setText("Button Kader wurde geklickt");
+            cev.getKaderBtn().setBackground(Color.white);
+            cev.getTransBtn().setBackground(Color.lightGray);
+            cev.getAddSpielerBtn().setBackground(Color.lightGray);
+            // cev.getClubName().setText("Button Kader wurde geklickt");
             LOGGER.log(Level.INFO, "Kader");
-            this.cev.getClubEditContent().removeAll();
-            this.cev.getClubEditContent().repaint();
-            this.cev.getClubEditContent().revalidate();
+            cev.getClubEditContent().removeAll();
+            cev.getClubEditContent().repaint();
+            cev.getClubEditContent().revalidate();
 
             KaderView kdw2 = new KaderView();
             KaderController kDc = new KaderController(kdw2, team);
-            this.cev.getClubEditContent().add(kdw2);
-            this.cev.getClubEditContent().repaint();
-            this.cev.getClubEditContent().revalidate();
+            cev.getClubEditContent().add(kdw2);
+            cev.getClubEditContent().repaint();
+            cev.getClubEditContent().revalidate();
 
         }
         if (evt.getActionCommand() == "trans") {
             LOGGER.log(Level.INFO, "Trans");
-            this.cev.getTransBtn().setBackground(Color.white);
-            this.cev.getKaderBtn().setBackground(Color.lightGray);
-            this.cev.getAddSpielerBtn().setBackground(Color.lightGray);
+            cev.getTransBtn().setBackground(Color.white);
+            cev.getKaderBtn().setBackground(Color.lightGray);
+            cev.getAddSpielerBtn().setBackground(Color.lightGray);
             TransactionView tranView = new TransactionView();
             TransactionController tr = new TransactionController(tranView);
             // Layout setzen ?
-            this.cev.getClubEditContent().removeAll();
-            this.cev.getClubEditContent().add(tranView);
+            cev.getClubEditContent().removeAll();
+            cev.getClubEditContent().add(tranView);
             LOGGER.log(Level.INFO, "Content hizugefuegt");
-            this.cev.getClubEditContent().repaint();
+            cev.getClubEditContent().repaint();
             LOGGER.log(Level.INFO, "Repaint()");
-            this.cev.getClubEditContent().revalidate();
+            cev.getClubEditContent().revalidate();
             LOGGER.log(Level.INFO, "Revalidate()");
 
         }
         if (evt.getActionCommand() == "spieler") {
             LOGGER.log(Level.INFO, "Spieler");
-            this.cev.getTransBtn().setBackground(Color.lightGray);
-            this.cev.getKaderBtn().setBackground(Color.lightGray);
-            this.cev.getAddSpielerBtn().setBackground(Color.white);
-            this.cev.getClubEditContent().removeAll();
-            this.cev.getClubEditContent().repaint();
-            this.cev.getClubEditContent().revalidate();
+            cev.getTransBtn().setBackground(Color.lightGray);
+            cev.getKaderBtn().setBackground(Color.lightGray);
+            cev.getAddSpielerBtn().setBackground(Color.white);
+            cev.getClubEditContent().removeAll();
+            cev.getClubEditContent().repaint();
+            cev.getClubEditContent().revalidate();
             SpielerAddView spV = new SpielerAddView();
             SpielerAddController spAC = new SpielerAddController(spV);
-            this.cev.getClubEditContent().add(spV);
-            this.cev.getClubEditContent().repaint();
-            this.cev.getClubEditContent().revalidate();
+            cev.getClubEditContent().add(spV);
+            cev.getClubEditContent().repaint();
+            cev.getClubEditContent().revalidate();
         }
     }
 }

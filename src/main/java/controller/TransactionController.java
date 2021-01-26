@@ -66,38 +66,38 @@ public class TransactionController implements ActionListener, MouseListener {
     }
 
     private void suchen() {
-        this.trV.getErgListTeam().removeAll();
-        String suchAnfrage = this.trV.getReceivingTeamInput().getText();
+        trV.getErgListTeam().removeAll();
+        String suchAnfrage = trV.getReceivingTeamInput().getText();
         // Such ergebnisse als Liste o.ae. engezigt bekommen
         DefaultListModel<String> listModel = new DefaultListModel<>();
-        this.trV.getErgListTeam().setModel(listModel);
+        trV.getErgListTeam().setModel(listModel);
         listModel.addElement(suchAnfrage);
 
-        this.trV.repaint();
-        this.trV.revalidate();
+        trV.repaint();
+        trV.revalidate();
     }
 
     private void add() {
-        String eigenerK = this.trV.getListEigenerKader().getSelectedValue();
+        String eigenerK = trV.getListEigenerKader().getSelectedValue();
 
         listModelUrsprung.removeElement(eigenerK);
 
         listModelSend.addElement(eigenerK);
 
-        this.trV.repaint();
-        this.trV.revalidate();
+        trV.repaint();
+        trV.revalidate();
 
     }
 
     private void remove() {
-        String eigenerK = this.trV.getListeTransKader().getSelectedValue();
+        String eigenerK = trV.getListeTransKader().getSelectedValue();
 
         listModelSend.removeElement(eigenerK);
 
         listModelUrsprung.addElement(eigenerK);
 
-        this.trV.repaint();
-        this.trV.revalidate();
+        trV.repaint();
+        trV.revalidate();
     }
 
     private void transFinish() {
@@ -121,11 +121,11 @@ public class TransactionController implements ActionListener, MouseListener {
                         LOGGER.log(Level.INFO, "uebertragende Objekte " + st);
                     }
                 }
-                JOptionPane.showMessageDialog(this.trV, "Transfer War erfolgreich");
+                JOptionPane.showMessageDialog(trV, "Transfer War erfolgreich");
 
             } else {
                 LOGGER.log(Level.WARNING, "Bitte Waehlen Sie die zu uebertragenden Teams aus");
-                JOptionPane.showMessageDialog(this.trV, "Bitte Waehlen Sie die zu uebertragenden Teams aus");
+                JOptionPane.showMessageDialog(trV, "Bitte Waehlen Sie die zu uebertragenden Teams aus");
             }
 
         } else {
@@ -137,8 +137,8 @@ public class TransactionController implements ActionListener, MouseListener {
     public void mouseClicked(MouseEvent evt) {
         if (evt.getClickCount() == 1) {
             LOGGER.log(Level.INFO, "Item in Liste geklickt");
-            selectedTeam = this.trV.getErgListTeam().getSelectedValue();
-            this.trV.setReceiveTeamLbl(selectedTeam);
+            selectedTeam = trV.getErgListTeam().getSelectedValue();
+            trV.setReceiveTeamLbl(selectedTeam);
             listModelUrsprung.removeAllElements();
             listModelSend.removeAllElements();
 

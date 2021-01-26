@@ -6,9 +6,7 @@
 package view;
 
 import java.awt.Dimension;
-import javax.swing.GroupLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import java.util.logging.*;

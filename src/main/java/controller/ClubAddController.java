@@ -48,9 +48,9 @@ public class ClubAddController implements ActionListener {
         boolean eingabe = false;
         String clubName = "";
         String stadion = "";
-        if (this.cAv.getClubNameTxt().getText() != null && this.cAv.getClubStadionTxt().getText() != null) {
-            clubName = this.cAv.getClubNameTxt().getText().toString();
-            stadion = this.cAv.getClubStadionTxt().getText().toString();
+        if (cAv.getClubNameTxt().getText() != null && cAv.getClubStadionTxt().getText() != null) {
+            clubName = cAv.getClubNameTxt().getText().toString();
+            stadion = cAv.getClubStadionTxt().getText().toString();
             clubName = clubName.trim();
             stadion = stadion.trim();
             if (clubName.length() > 0 && stadion.length() > 0) {
@@ -63,11 +63,11 @@ public class ClubAddController implements ActionListener {
         } else {
             // TODO Hinzufuegen zur DB
             Club temp = new Club(clubName, stadion);
-            this.l.addClub(temp);
+            l.addClub(temp);
             LOGGER.log(Level.INFO, "Club Hinzugefuegt: " + clubName);
-            this.master.repaint();
-            this.master.revalidate();
-            this.cAv.dispose();
+            master.repaint();
+            master.revalidate();
+            cAv.dispose();
 
         }
 

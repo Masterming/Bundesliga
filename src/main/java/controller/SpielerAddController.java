@@ -40,8 +40,8 @@ public class SpielerAddController implements ActionListener {
     }
 
     private void addSpieler() {
-        String name = this.spAV.getPlayerNameTxt().getText();
-        String anzTorStr = this.spAV.getAnzToreTxt().getText();
+        String name = spAV.getPlayerNameTxt().getText();
+        String anzTorStr = spAV.getAnzToreTxt().getText();
         int anzTor = -1;
         boolean inputOk = true;
         try {
