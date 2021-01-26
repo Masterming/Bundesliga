@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
+import java.util.logging.*;
 
 import model.Club;
 import model.Liga;
@@ -21,6 +22,8 @@ import view.RowPopupClubView;
  * @author Rene
  */
 public class ClubController implements MouseListener, ActionListener {
+
+    private final static Logger LOGGER = Logger.getLogger(ClubController.class.getName());
 
     private ClubView view;
     private Liga l;
@@ -55,22 +58,20 @@ public class ClubController implements MouseListener, ActionListener {
     @Override
     public void mouseClicked(MouseEvent evt) {
         if (evt.getClickCount() == 2 && SwingUtilities.isLeftMouseButton(evt)) {
-            System.out.println("Tabelle wurde 2 mal geklcikt im ClubController");
+            LOGGER.log(Level.INFO, "Tabelle wurde 2 mal geklcikt im ClubController");
             // Neues Fenster geht auf --> Neuen Controller + View
             JTable temp = (JTable) evt.getSource();
             int row = temp.getSelectedRow();
             int column = 0;
             String team = temp.getValueAt(row, column).toString();
             ClubEditView cbV = new ClubEditView(view.getmaster(), true);
-            ClubEditController cbC = new ClubEditController(cbV, team);
+            new ClubEditController(cbV, team);
             cbV.setVisible(true);
         }
         if (SwingUtilities.isRightMouseButton(evt)) {
-            System.out.println("kontext Menue");
-            System.out.println("Rechts klick");
             // Kontext Menue mit Spieler Loeschen und name aendern ueber Pop up Item
             RowPopupClubView kontext = new RowPopupClubView();
-            RowPopupClubController rPUPCC = new RowPopupClubController(master, kontext, this.l, view.getClubTable());
+            new RowPopupClubController(master, kontext, this.l, view.getClubTable());
             kontext.show(view.getClubTable(), evt.getX(), evt.getY());
         }
 
@@ -131,13 +132,13 @@ public class ClubController implements MouseListener, ActionListener {
     public void actionPerformed(ActionEvent evt) {
         switch (evt.getActionCommand()) {
             case "addClub":
-                System.out.println("Club Hinzufuegen button gedrueckt");
+                LOGGER.log(Level.INFO, "Club Hinzufuegen button gedrueckt");
                 ClubAddView caV = new ClubAddView(this.master, true);
-                ClubAddController cbAC = new ClubAddController(this.master, caV, l);
+                new ClubAddController(this.master, caV, l);
                 caV.setVisible(true);
                 break;
             case "addExistClub":
-                System.out.println("Vorhandenen Club zur Liga hinzufuegen");
+                LOGGER.log(Level.INFO, "Vorhandenen Club zur Liga hinzufuegen");
                 // Dialog box mit drop down menue ueber die 2 Ligen die nicht der aktuellen liga
                 // entsprechen
                 // auf grund der auswahl wird liste angapsst mit den clubs der liga, die im Drop

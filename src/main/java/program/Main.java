@@ -19,7 +19,7 @@ public class Main {
     public static void main(String[] args) {
         // Custom logging
         try {
-            ExtendedLogger.disableConsole();
+            ExtendedLogger.useConsole(true);
             ExtendedLogger.enableHtml();
             ExtendedLogger.setDebugLevel(Level.INFO); // SEVERE or INFO
         } catch (IOException ex) {

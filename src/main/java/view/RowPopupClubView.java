@@ -32,25 +32,23 @@ public class RowPopupClubView extends JPopupMenu {
 //        loeschen.addActionListener(new ActionListener() {
 //            @Override
 //            public void actionPerformed(ActionEvent arg0) {
-//                System.out.println("Loeschen");
+//                LOGGER.log("Loeschen");
 //                // Selected Value bekommen bzw. aendern
 //                int index1 = table.getSelectedRow();
 //                String name = table.getValueAt(index1, 0).toString();
-//                System.out.println(name);
+//                LOGGER.log(name);
 //                DefaultTableModel tbm = (DefaultTableModel) table.getModel();
 //                if (name != null) {
 //                    // Pop Up menue mit text
 //                    int best = JOptionPane.showConfirmDialog(null,
 //                            "Wollen Sie den Club " + name + " wirklich loeschen?");
 //                    if (best == 0) {
-//                        System.out.println("True");
 //                        // TODO Name aus DB Loeschen
 //                        
 //                        
 //                        
 //                        tbm.removeRow(index1);
 //                    } else {
-//                        System.out.println("false");
 //                    }
 //                }
 //            }

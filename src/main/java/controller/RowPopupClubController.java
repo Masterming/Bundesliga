@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import java.util.logging.*;
 
 import model.Liga;
 import view.RowPopupClubView;
@@ -16,6 +17,8 @@ import view.RowPopupClubView;
  * @author z003ywys
  */
 public class RowPopupClubController implements ActionListener {
+
+    private final static Logger LOGGER = Logger.getLogger(RowPopupClubController.class.getName());
 
     private RowPopupClubView rPCV;
     private Liga l;
@@ -39,23 +42,20 @@ public class RowPopupClubController implements ActionListener {
 
         switch (evt.getActionCommand()) {
             case "loeschen":
-                System.out.println("Loeschen");
                 row = table.getSelectedRow();
                 name = table.getValueAt(row, 0).toString();
 
                 if (name != null) {
                     int confirm = JOptionPane.showConfirmDialog(master,
-                            "Wollen Sie den Club " + name + " wirklich loeschen?", "Loeschen", JOptionPane.YES_NO_OPTION);
+                            "Wollen Sie den Club " + name + " wirklich loeschen?", "Loeschen",
+                            JOptionPane.YES_NO_OPTION);
                     if (confirm == JOptionPane.YES_OPTION) {
-                        System.out.println("True");
+                        LOGGER.log(Level.INFO, "Remove Club " + name);
                         l.removeClub(name);
-                    } else {
-                        System.out.println("false");
                     }
                 }
                 break;
             case "bearbeiten":
-                System.out.println("Bearbeiten");
                 row = table.getSelectedRow();
                 name = table.getValueAt(row, 0).toString();
 
@@ -64,6 +64,7 @@ public class RowPopupClubController implements ActionListener {
                     if (newName != null) {
                         newName = newName.trim();
                         if (!newName.isEmpty()) {
+                            LOGGER.log(Level.INFO, "Rename Club " + name + " to " + newName);
                             l.changeClubName(name, newName);
                         }
                     }

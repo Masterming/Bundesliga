@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
 import javax.swing.JFrame;
+import java.util.logging.*;
 
 import model.PlanModel;
 import view.PlanAddGameView;
@@ -19,6 +20,8 @@ import view.PlanView;
  * @author z003ywys
  */
 public class PlanController implements ActionListener {
+
+    private final static Logger LOGGER = Logger.getLogger(PlanController.class.getName());
 
     private PlanModel plm;
     private PlanView plv;
@@ -42,7 +45,7 @@ public class PlanController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
             case "addSpiel":
-                System.out.println("Plan Controller angekommen");
+                LOGGER.log(Level.INFO, "Plan Controller angekommen");
                 PlanAddGameView pagV = new PlanAddGameView(this.master, true);
                 PlanAddGameController pagC = new PlanAddGameController(this.master, pagV, this.plm, this.plm.getLiga());
                 pagV.setVisible(true);

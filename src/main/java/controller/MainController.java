@@ -11,9 +11,8 @@ import java.awt.event.ActionListener;
 import java.util.*;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JScrollPane;
+import java.util.logging.*;
 
 import model.Liga;
 import model.LigaDBMapper;
@@ -146,7 +145,6 @@ public class MainController implements ActionListener, Observer {
 
     @Override
     public void update(Observable o, Object arg1) {
-        System.out.println("Main Controller benachrichtigt");
         if (o instanceof Liga) {
             Liga temp = (Liga) o;
             dao.updateLiga(temp);

@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import java.util.logging.*;
 
 /**
  *
@@ -19,9 +20,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class RowPopupPlayerView extends JPopupMenu {
 
-    /**
-     *
-     */
+    private final static Logger LOGGER = Logger.getLogger(RowPopupPlayerView.class.getName());
     private static final long serialVersionUID = 109L;
 
     public RowPopupPlayerView(JTable table) {
@@ -29,22 +28,18 @@ public class RowPopupPlayerView extends JPopupMenu {
         loeschen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                System.out.println("Loeschen");
                 // Selected Value bekommen bzw. aendern
                 int index1 = table.getSelectedRow();
                 String name = table.getValueAt(index1, 0).toString();
-                System.out.println(name);
                 DefaultTableModel tbm = (DefaultTableModel) table.getModel();
                 if (name != null) {
                     // Pop Up menue mit text
                     int best = JOptionPane.showConfirmDialog(null,
                             "Wollen Sie den Spieler " + name + " wirklich loeschen?");
                     if (best == 0) {
-                        System.out.println("True");
-                        // TODO Name aus DB Loeschen
+                        LOGGER.log(Level.INFO, "Remove Spieler " + name);
                         tbm.removeRow(index1);
                     } else {
-                        System.out.println("false");
                     }
                 }
             }
@@ -55,7 +50,6 @@ public class RowPopupPlayerView extends JPopupMenu {
         bearbeiten.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                System.out.println("Bearbeiten");
                 // Selected Value bekommen bzw. aendern
                 int row = table.getSelectedRow();
                 int column = table.getSelectedColumn();
@@ -63,7 +57,6 @@ public class RowPopupPlayerView extends JPopupMenu {
 
                 String name = table.getValueAt(row, 0).toString();
                 String goal = table.getValueAt(row, 1).toString();
-                System.out.println(name);
                 DefaultTableModel tbm = (DefaultTableModel) table.getModel();
                 if (name != null && column == 0) {
                     // Pop Up menue mit text
@@ -71,6 +64,7 @@ public class RowPopupPlayerView extends JPopupMenu {
                     String nameNeu = JOptionPane.showInputDialog("Neuen Namen eingeben");
                     nameNeu = nameNeu.trim();
                     if (nameNeu != null) {
+                        LOGGER.log(Level.INFO, "Rename Spieler" + name + " to " + nameNeu);
                         if (!"".equals(nameNeu)) {
                             tbm.setValueAt(nameNeu, row, column);
                         }

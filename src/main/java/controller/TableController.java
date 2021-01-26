@@ -8,6 +8,7 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
+import java.util.logging.*;
 
 import model.Club;
 import model.Liga;
@@ -18,6 +19,8 @@ import view.TableView;
  * @author z003ywys
  */
 public class TableController implements ActionListener {
+
+    private final static Logger LOGGER = Logger.getLogger(TableController.class.getName());
 
     private TableView tableView;
     private Liga l;
@@ -34,8 +37,8 @@ public class TableController implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         switch (ae.getActionCommand()) {
             case "test":
-                System.out.println("Table Controller Button/ Aktion erfolgreich");
-                System.out.println("Gezeigte Liga: " + this.l.getName());
+                LOGGER.log(Level.INFO, "Table Controller Button/ Aktion erfolgreich");
+                LOGGER.log(Level.INFO, "Gezeigte Liga: " + this.l.getName());
                 break;
         }
     }

@@ -8,6 +8,7 @@ package controller;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.*;
 
 import view.ClubEditView;
 import view.KaderView;
@@ -19,6 +20,8 @@ import view.TransactionView;
  * @author z003ywys
  */
 public class ClubEditController implements ActionListener {
+
+    private final static Logger LOGGER = Logger.getLogger(ClubEditController.class.getName());
     private ClubEditView cev;
     private String team;
 
@@ -33,13 +36,13 @@ public class ClubEditController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent evt) {
-        System.out.println("Button wurde gedrueckt");
+        LOGGER.log(Level.INFO, "Button wurde gedrueckt");
         if (evt.getActionCommand() == "kader") {
             this.cev.getKaderBtn().setBackground(Color.white);
             this.cev.getTransBtn().setBackground(Color.lightGray);
             this.cev.getAddSpielerBtn().setBackground(Color.lightGray);
             // this.cev.getClubName().setText("Button Kader wurde geklickt");
-            System.out.println("Kader");
+            LOGGER.log(Level.INFO, "Kader");
             this.cev.getClubEditContent().removeAll();
             this.cev.getClubEditContent().repaint();
             this.cev.getClubEditContent().revalidate();
@@ -52,7 +55,7 @@ public class ClubEditController implements ActionListener {
 
         }
         if (evt.getActionCommand() == "trans") {
-            System.out.println("Trans");
+            LOGGER.log(Level.INFO, "Trans");
             this.cev.getTransBtn().setBackground(Color.white);
             this.cev.getKaderBtn().setBackground(Color.lightGray);
             this.cev.getAddSpielerBtn().setBackground(Color.lightGray);
@@ -61,15 +64,15 @@ public class ClubEditController implements ActionListener {
             // Layout setzen ?
             this.cev.getClubEditContent().removeAll();
             this.cev.getClubEditContent().add(tranView);
-            System.out.println("Content hizugefuegt");
+            LOGGER.log(Level.INFO, "Content hizugefuegt");
             this.cev.getClubEditContent().repaint();
-            System.out.println("Repaint()");
+            LOGGER.log(Level.INFO, "Repaint()");
             this.cev.getClubEditContent().revalidate();
-            System.out.println("Revalidate()");
+            LOGGER.log(Level.INFO, "Revalidate()");
 
         }
         if (evt.getActionCommand() == "spieler") {
-            System.out.println("Spieler");
+            LOGGER.log(Level.INFO, "Spieler");
             this.cev.getTransBtn().setBackground(Color.lightGray);
             this.cev.getKaderBtn().setBackground(Color.lightGray);
             this.cev.getAddSpielerBtn().setBackground(Color.white);

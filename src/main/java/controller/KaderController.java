@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
+import java.util.logging.*;
 
 import view.KaderView;
 import view.RowPopupPlayerView;
@@ -20,6 +21,8 @@ import view.RowPopupPlayerView;
  * @author z003ywys
  */
 public class KaderController implements ActionListener, MouseListener {
+
+    private final static Logger LOGGER = Logger.getLogger(KaderController.class.getName());
     private KaderView kdV;
     private String team;
 
@@ -69,8 +72,8 @@ public class KaderController implements ActionListener, MouseListener {
         // body of generated methods, choose Tools | Templates.
 
         if (SwingUtilities.isRightMouseButton(evt)) {
-            System.out.println("kontext Menue");
-            System.out.println("Rechts klick");
+            LOGGER.log(Level.INFO, "kontext Menue");
+            LOGGER.log(Level.INFO, "Rechts klick");
             // Kontext Menue mit Spieler Loeschen und name aendern ueber Pop up Item
             RowPopupPlayerView kontext = new RowPopupPlayerView(this.kdV.getPlayerTable());
             kontext.show(this.kdV.getPlayerTable(), evt.getX(), evt.getY());

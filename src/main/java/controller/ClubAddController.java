@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import java.util.logging.*;
 
 import model.Club;
 import model.Liga;
@@ -19,6 +20,8 @@ import view.ClubAddView;
  * @author z003ywys
  */
 public class ClubAddController implements ActionListener {
+
+    private final static Logger LOGGER = Logger.getLogger(ClubAddController.class.getName());
     private JFrame master;
     private ClubAddView cAv;
     private Liga l;
@@ -36,7 +39,6 @@ public class ClubAddController implements ActionListener {
         String comm = evt.getActionCommand();
         switch (comm) {
             case "clubAdd":
-                System.out.println("Club Hinzugefuegt");
                 addClub();
                 break;
         }
@@ -62,8 +64,7 @@ public class ClubAddController implements ActionListener {
             // TODO Hinzufuegen zur DB
             Club temp = new Club(clubName, stadion);
             this.l.addClub(temp);
-            System.out.println(stadion);
-            System.out.println(clubName);
+            LOGGER.log(Level.INFO, "Club Hinzugefuegt: " + clubName);
             this.master.repaint();
             this.master.revalidate();
             this.cAv.dispose();

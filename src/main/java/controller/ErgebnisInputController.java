@@ -13,6 +13,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.util.logging.*;
 
 import model.Liga;
 import model.PlanModel;
@@ -23,6 +24,8 @@ import view.ErgebnisInputView;
  * @author z003ywys
  */
 public class ErgebnisInputController implements ActionListener {
+
+    private final static Logger LOGGER = Logger.getLogger(ErgebnisInputController.class.getName());
 
     private ErgebnisInputView ergDialog;
     private PlanModel plm;
@@ -51,7 +54,7 @@ public class ErgebnisInputController implements ActionListener {
                 descoreTeam(nameB, this.scoreTeamB);
                 break;
             case "save":
-                System.out.println("save");
+                LOGGER.log(Level.INFO, "save");
                 save();
                 break;
         }
@@ -119,7 +122,7 @@ public class ErgebnisInputController implements ActionListener {
     }
 
     private void descoreTeam(String name, List<List<String>> dataSet) {
-        System.out.println("Descore Team A");
+        LOGGER.log(Level.INFO, "Descore Team A");
         int index = -1;
         boolean found = false;
         for (int i = 0; i < dataSet.size(); i++) {
@@ -195,11 +198,11 @@ public class ErgebnisInputController implements ActionListener {
         if (teamAErg == -1 || teamBErg == -1) {
             JFrame f = new JFrame();
             JOptionPane.showMessageDialog(f, "Bitte fuegen Sie Ergebnisse hinzu");
-            System.out.println("Spielstand: " + teamAErg + " zu " + teamBErg);
+            LOGGER.log(Level.INFO, "Spielstand: " + teamAErg + " zu " + teamBErg);
         } else {
             // TODO in DB Schreiben und Model aendern
-            System.out.println(this.scoreTeamA);
-            System.out.println(this.scoreTeamB);
+            LOGGER.log(Level.INFO, this.scoreTeamA.toString());
+            LOGGER.log(Level.INFO, this.scoreTeamB.toString());
 
             this.ergDialog.dispose();
         }

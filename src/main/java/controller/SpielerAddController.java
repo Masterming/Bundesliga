@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import java.util.logging.*;
 
 import model.Club;
 import view.SpielerAddView;
@@ -18,6 +19,8 @@ import view.SpielerAddView;
  * @author z003ywys
  */
 public class SpielerAddController implements ActionListener {
+
+    private final static Logger LOGGER = Logger.getLogger(SpielerAddController.class.getName());
     private SpielerAddView spAV;
     private Club club;
 
@@ -30,7 +33,7 @@ public class SpielerAddController implements ActionListener {
     public void actionPerformed(ActionEvent evt) {
         switch (evt.getActionCommand()) {
             case "addSpieler":
-                System.out.println("Spieler hinzugefuegt");
+                LOGGER.log(Level.INFO, "Spieler hinzugefuegt");
                 addSpieler();
                 break;
         }
@@ -44,7 +47,7 @@ public class SpielerAddController implements ActionListener {
         try {
             anzTor = Integer.parseInt(anzTorStr);
         } catch (Exception ex) {
-            System.out.println("Es wurden keine ganzen Zahlen einegeben");
+            LOGGER.log(Level.WARNING, "Es wurden keine ganzen Zahlen einegeben");
             JFrame f = new JFrame();
             JOptionPane.showMessageDialog(f, "Es wurden keine ganzen Zahlen einegeben! Bitte Versucen sie es erneut");
             inputOk = false;

@@ -16,6 +16,7 @@ import java.time.format.DateTimeFormatter;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import java.util.logging.*;
 
 import model.Liga;
 import model.PlanModel;
@@ -26,6 +27,8 @@ import view.PlanAddGameView;
  * @author z003ywys
  */
 public class PlanAddGameController implements ActionListener, ItemListener, MouseListener {
+
+    private final static Logger LOGGER = Logger.getLogger(PlanAddGameController.class.getName());
     private JFrame master;
     private PlanAddGameView paGV;
     private PlanModel plM;
@@ -88,7 +91,7 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
         String comm = evt.getActionCommand();
         switch (comm) {
             case "addGame":
-                System.out.println("Spiel hinzugefuegt");
+                LOGGER.log(Level.INFO, "Spiel hinzugefuegt");
                 addGame();
                 break;
         }
@@ -102,14 +105,14 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
         try {
             dtGame = LocalDateTime.from(f.parse(dateTemp));
         } catch (Exception e) {
-            System.out.println("Bitte Datum im richtigen Format eingeben");
+            LOGGER.log(Level.WARNING, "Bitte Datum im richtigen Format eingeben");
             JOptionPane.showMessageDialog(null, "Bitte Datum im richtigen Format eingeben");
             ok = false;
         }
         if (ok) {
-            System.out.println(dtGame);
-            System.out.println(this.teamA);
-            System.out.println(this.teamB);
+            LOGGER.log(Level.INFO, dtGame.toString());
+            LOGGER.log(Level.INFO, this.teamA);
+            LOGGER.log(Level.INFO, this.teamB);
             // TODO Spiel in DB Schreiben und Model aktualisieren
             this.paGV.dispose();
 
@@ -171,8 +174,8 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
     }
 
     private void getListData() {
-        System.out.println(selectedALiga);
-        System.out.println(selectedBLiga);
+        LOGGER.log(Level.INFO, selectedALiga);
+        LOGGER.log(Level.INFO, selectedBLiga);
         // Club Liste an die jeweiige Liga angepasst werden
         // TODO --> Daten aus DB holen
         DefaultComboBoxModel<String> listModelTeamA = new DefaultComboBoxModel<>();

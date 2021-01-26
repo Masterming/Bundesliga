@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import java.util.logging.*;
 
 import view.TransactionView;
 
@@ -21,6 +22,8 @@ import view.TransactionView;
  * @author z003ywys
  */
 public class TransactionController implements ActionListener, MouseListener {
+
+    private final static Logger LOGGER = Logger.getLogger(TransactionController.class.getName());
     private TransactionView trV;
     private String selectedTeam;
     private DefaultListModel<String> listModelUrsprung;
@@ -44,19 +47,19 @@ public class TransactionController implements ActionListener, MouseListener {
         String command = evt.getActionCommand();
         switch (command) {
             case "suchen":
-                System.out.println("suchen");
+                LOGGER.log(Level.INFO, "suchen");
                 suchen();
                 break;
             case "trans_finish":
-                System.out.println("trans_finish");
+                LOGGER.log(Level.INFO, "trans_finish");
                 transFinish();
                 break;
             case "add":
-                System.out.println("add");
+                LOGGER.log(Level.INFO, "add");
                 add();
                 break;
             case "rem":
-                System.out.println("rem");
+                LOGGER.log(Level.INFO, "rem");
                 remove();
                 break;
         }
@@ -101,7 +104,6 @@ public class TransactionController implements ActionListener, MouseListener {
         int best = JOptionPane.showConfirmDialog(null, "Wollen Sie die Transaktion abschliessen");
         boolean nullIncluded = false;
         if (best == 0) {
-            System.out.println("True");
             List<String> transferPlayer = new ArrayList<>();
             for (int i = 0; i < listModelSend.getSize(); i++) {
                 if (listModelSend.getElementAt(i) != null) {
@@ -113,21 +115,20 @@ public class TransactionController implements ActionListener, MouseListener {
             // Transaktion mit den Spielern passieren
             if (nullIncluded == false && transferPlayer.size() > 0) {
                 // Transaktion durchfuehren
-                System.out.println("trans Finish");
+                LOGGER.log(Level.INFO, "trans Finish");
                 for (String st : transferPlayer) {
                     if (st != null) {
-                        System.out.println("uebertragende Objekte " + st);
+                        LOGGER.log(Level.INFO, "uebertragende Objekte " + st);
                     }
                 }
                 JOptionPane.showMessageDialog(this.trV, "Transfer War erfolgreich");
 
             } else {
-                System.out.println("Bitte Waehlen Sie die zu uebertragenden Teams aus");
+                LOGGER.log(Level.WARNING, "Bitte Waehlen Sie die zu uebertragenden Teams aus");
                 JOptionPane.showMessageDialog(this.trV, "Bitte Waehlen Sie die zu uebertragenden Teams aus");
             }
 
         } else {
-            System.out.println("False");
         }
 
     }
@@ -135,7 +136,7 @@ public class TransactionController implements ActionListener, MouseListener {
     @Override
     public void mouseClicked(MouseEvent evt) {
         if (evt.getClickCount() == 1) {
-            System.out.println("Item in Liste geklickt");
+            LOGGER.log(Level.INFO, "Item in Liste geklickt");
             selectedTeam = this.trV.getErgListTeam().getSelectedValue();
             this.trV.setReceiveTeamLbl(selectedTeam);
             listModelUrsprung.removeAllElements();

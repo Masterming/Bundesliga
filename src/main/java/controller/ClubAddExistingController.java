@@ -14,6 +14,7 @@ import java.awt.event.MouseListener;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import java.util.logging.*;
 
 import model.Liga;
 import view.ClubAddExistingView;
@@ -23,6 +24,8 @@ import view.ClubAddExistingView;
  * @author z003ywys
  */
 public class ClubAddExistingController implements ActionListener, MouseListener, ItemListener {
+
+    private final static Logger LOGGER = Logger.getLogger(ClubAddExistingController.class.getName());
     private ClubAddExistingView cAeV;
     private Liga l;
     private String selectedLiga;
@@ -78,11 +81,9 @@ public class ClubAddExistingController implements ActionListener, MouseListener,
         switch (evt.getActionCommand()) {
             case "clubAddLiga":
 
-                System.out.println("CLub: " + this.selectedClub);
                 int best = JOptionPane.showConfirmDialog(this.cAeV, "Wollen Sie den Club zur Liga hinzufuegen ?");
                 if (best == 0) {
-                    System.out.println("true");
-                    System.out.println("Club zur Liga hinzugefuegt");
+                    LOGGER.log(Level.INFO, "CLub: " + this.selectedClub + " zur Liga hinzugefuegt");
                     // TODO Transfer
 
                     JOptionPane.showMessageDialog(this.cAeV, "Transfer war erfolgreich");
@@ -93,10 +94,8 @@ public class ClubAddExistingController implements ActionListener, MouseListener,
 
     @Override
     public void mouseClicked(MouseEvent evt) {
-        System.out.println("Item in Liste geklickt");
         // 1. Liga auswahl
         if (evt.getClickCount() == 1) {
-            System.out.println("Item in Liste geklickt");
             selectedLiga = this.cAeV.getSelectedLiga().getSelectedItem().toString();
             try {
                 selectedClub = this.cAeV.getLigaClubList().getSelectedValue().toString();
@@ -106,7 +105,7 @@ public class ClubAddExistingController implements ActionListener, MouseListener,
                     this.cAeV.getToAddClubLbl().setText("");
                 }
             } catch (Exception e) {
-                System.out.println(e);
+                LOGGER.log(Level.SEVERE, e.getLocalizedMessage());
                 this.cAeV.getToAddClubLbl().setText("");
             }
 
@@ -139,9 +138,7 @@ public class ClubAddExistingController implements ActionListener, MouseListener,
 
     @Override
     public void itemStateChanged(ItemEvent evt) {
-        System.out.println("Liga Selected");
         String ligStr = this.cAeV.getSelectedLiga().getSelectedItem().toString();
-        System.out.println(ligStr);
         this.clubList.removeAllElements();
         if (ligStr.contains("1")) {
             // TODO Clubs Aufzaehlen aus der Liga

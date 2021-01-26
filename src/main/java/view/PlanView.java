@@ -139,8 +139,6 @@ public class PlanView extends JPanel implements Observer {
 
     private void action(ActionEvent e) {
         String a = e.getActionCommand();
-        System.out.println("Das Action Command war: " + a);
-        System.out.println("Button gesetzt durch model geklickt");
         // Neues Pop Up fenster + Controller --> bekommt z.B. Spiel Model mit
         ErgebnisInputView pop = new ErgebnisInputView(this.master, true);
         ErgebnisInputController con = new ErgebnisInputController(pop, a, a, this.plm);
