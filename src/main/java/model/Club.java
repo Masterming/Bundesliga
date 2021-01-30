@@ -28,7 +28,6 @@ public class Club implements Serializable {
     //Für die Anzeige des Torverhältnisses
     private int madeGoals;
     private int receivedGoals;
-    
 
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(cascade = CascadeType.ALL)
@@ -161,7 +160,5 @@ public class Club implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    
-    
-    
+
 }
