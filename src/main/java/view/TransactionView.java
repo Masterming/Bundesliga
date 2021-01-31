@@ -16,7 +16,7 @@ import javax.swing.JTextField;
  * @author z003ywys
  */
 public class TransactionView extends javax.swing.JPanel {
-    private static final long serialVersionUID = 7L;
+    private static final long serialVersionUID = 21L;
     private javax.swing.JButton addToTransBtn;
     private javax.swing.JList<String> ergListTeam;
     private javax.swing.JCheckBox jCheckBox1;

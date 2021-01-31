@@ -14,7 +14,7 @@ public class ClubViewTemp extends javax.swing.JPanel {
     /**
      *
      */
-    private static final long serialVersionUID = 102L;
+    private static final long serialVersionUID = 9L;
 
     /**
      * Creates new form ClubViewTemp

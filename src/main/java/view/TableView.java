@@ -20,7 +20,7 @@ import java.util.logging.*;
 public class TableView extends JPanel {
 
     private final static Logger LOGGER = Logger.getLogger(TableView.class.getName());
-    private static final long serialVersionUID = 14L;
+    private static final long serialVersionUID = 20L;
     JScrollPane jScrollPane1;
     JTable table;
 

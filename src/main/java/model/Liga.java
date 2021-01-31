@@ -14,7 +14,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 @Table(name = "ligas")
 public class Liga extends Observable implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 3L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

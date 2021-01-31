@@ -14,7 +14,7 @@ import java.util.logging.*;
 public class PlanAddGameView2 extends javax.swing.JDialog {
 
         private final static Logger LOGGER = Logger.getLogger(PlanAddGameView2.class.getName());
-        private static final long serialVersionUID = 106L;
+        private static final long serialVersionUID = 15L;
 
         /**
          * Creates new form PlanAddGameView2

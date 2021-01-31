@@ -17,7 +17,7 @@ import javax.persistence.*;
 @Table(name = "planmodels")
 public class PlanModel extends Observable implements Serializable {
 
-    private static final long serialVersionUID = 5L;
+    private static final long serialVersionUID = 4L;
 
     // die Liaga als Model dient als Grundlage fuer die Erstellung des PlanModels
     @Id
@@ -25,6 +25,10 @@ public class PlanModel extends Observable implements Serializable {
     private final int planModelID;
     private Liga liga;
     private int test;
+
+    public PlanModel() {
+        this.planModelID = -1;
+    }
 
     // private String[][]
     public PlanModel(Liga liga) {
@@ -47,14 +51,14 @@ public class PlanModel extends Observable implements Serializable {
         return liga;
     }
 
-    public int getTest() {
-        return test;
-    }
-
     public void setTest(int test) {
         this.test = test;
         setChanged();
         notifyObservers(liga);
+    }
+
+    public int getTest() {
+        return test;
     }
 
     public int getPlanModelID() {

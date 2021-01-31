@@ -13,7 +13,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 @Table(name = "clubs")
 public class Club implements Serializable {
 
-    private static final long serialVersionUID = 2L;
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,26 +37,28 @@ public class Club implements Serializable {
     public Club() {
         this.clubId = -1;
         this.name = "";
-        this.points = 0;
+        this.stadion = "";
         this.players = new ArrayList<>();
     }
 
     public Club(String name) {
         this.clubId = -1;
         this.name = name;
-        this.points = 0;
+        this.stadion = "";
         this.players = new ArrayList<>();
     }
 
     public Club(String name, String stadion) {
+        this.clubId = -1;
         this.name = name;
         this.stadion = stadion;
+        this.players = new ArrayList<>();
     }
 
     public Club(int id, String name) {
         this.clubId = id;
         this.name = name;
-        this.points = 0;
+        this.stadion = "";
         this.players = new ArrayList<>();
     }
 

@@ -14,7 +14,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 @Table(name = "games")
 public class Game implements Serializable {
 
-    private static final long serialVersionUID = 3L;
+    private static final long serialVersionUID = 2L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,14 +43,10 @@ public class Game implements Serializable {
 
     public Game() {
         this.gameId = -1;
-        this.score1 = 0;
-        this.score2 = 0;
     }
 
     public Game(Club club1, Club club2, LocalDateTime start) {
         this.gameId = -1;
-        this.score1 = 0;
-        this.score2 = 0;
         this.club1 = club1;
         this.club2 = club2;
         this.startTime = start;
@@ -58,8 +54,6 @@ public class Game implements Serializable {
 
     public Game(int id, Club club1, Club club2, LocalDateTime start) {
         this.gameId = id;
-        this.score1 = 0;
-        this.score2 = 0;
         this.club1 = club1;
         this.club2 = club2;
         this.startTime = start;

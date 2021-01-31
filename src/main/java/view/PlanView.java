@@ -26,7 +26,7 @@ public class PlanView extends JPanel implements Observer {
 
     private final static Logger LOGGER = Logger.getLogger(PlanView.class.getName());
 
-    private static final long serialVersionUID = 107L;
+    private static final long serialVersionUID = 16L;
 
     @Override
     public void update(Observable o, Object arg1) {

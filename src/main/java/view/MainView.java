@@ -18,7 +18,7 @@ import java.util.logging.*;
 public class MainView extends javax.swing.JFrame {
 
         private final static Logger LOGGER = Logger.getLogger(MainView.class.getName());
-        private static final long serialVersionUID = 12L;
+        private static final long serialVersionUID = 13L;
         JButton liga1Btn;
         JButton liga2Btn;
         JButton liga3Btn;

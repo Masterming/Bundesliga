@@ -14,7 +14,7 @@ import java.util.logging.*;
 public class ClubAddExistingTemp extends javax.swing.JDialog {
 
     private final static Logger LOGGER = Logger.getLogger(ClubAddExistingTemp.class.getName());
-    private static final long serialVersionUID = 101L;
+    private static final long serialVersionUID = 6L;
 
     /**
      * Creates new form ClubAddExistingTemp

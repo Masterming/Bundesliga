@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Table(name = "players")
 public class Player implements Serializable {
 
-    private static final long serialVersionUID = 4L;
+    private static final long serialVersionUID = 5L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +21,6 @@ public class Player implements Serializable {
     public Player() {
         this.playerId = -1;
         this.name = "";
-        this.goals = 0;
     }
 
     public Player(String name, int goals) {

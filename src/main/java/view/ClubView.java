@@ -1,17 +1,17 @@
 package view;
 
-import java.util.Observable;
-import java.util.Observer;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-
 
 /**
  * @author Rene
  */
-public class ClubView extends javax.swing.JPanel implements Observer {
+public class ClubView extends JPanel {
     private static final long serialVersionUID = 8L;
     private javax.swing.JButton addClubBtn;
     private javax.swing.JButton addExistingClubBtn;
@@ -20,10 +20,10 @@ public class ClubView extends javax.swing.JPanel implements Observer {
     private JFrame master;
 
     private void initComponents() {
-        addClubBtn = new javax.swing.JButton();
-        addExistingClubBtn = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        clubTable = new javax.swing.JTable();
+        addClubBtn = new JButton();
+        addExistingClubBtn = new JButton();
+        jScrollPane1 = new JScrollPane();
+        clubTable = new JTable();
 
         addClubBtn.setText("Neuen Club Hinzufuegen");
         addClubBtn.setActionCommand("addClub");
@@ -31,10 +31,7 @@ public class ClubView extends javax.swing.JPanel implements Observer {
         addExistingClubBtn.setText("Vorhandenen Club Hinzufuegen");
         addExistingClubBtn.setActionCommand("addExistClub");
 
-        clubTable.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
-
-        }, new String[] { "Club", "Stadion" }) {
-
+        clubTable.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Club", "Stadion" }) {
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return false;
             }
@@ -85,11 +82,5 @@ public class ClubView extends javax.swing.JPanel implements Observer {
 
     public JButton getAddExistingClubBtn() {
         return addExistingClubBtn;
-    }
-
-    @Override
-    public void update(Observable arg0, Object arg1) {
-        throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
-                                                                       // Tools | Templates.
     }
 }

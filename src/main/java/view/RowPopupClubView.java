@@ -24,7 +24,7 @@ public class RowPopupClubView extends JPopupMenu {
      */
     private JMenuItem loeschen;
     private JMenuItem bearbeiten;
-    private static final long serialVersionUID = 108L;
+    private static final long serialVersionUID = 17L;
 
     public RowPopupClubView() {
         loeschen = new JMenuItem("Loeschen");

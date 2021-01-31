@@ -21,7 +21,7 @@ import java.util.logging.*;
 public class RowPopupPlayerView extends JPopupMenu {
 
     private final static Logger LOGGER = Logger.getLogger(RowPopupPlayerView.class.getName());
-    private static final long serialVersionUID = 109L;
+    private static final long serialVersionUID = 18L;
 
     public RowPopupPlayerView(JTable table) {
         JMenuItem loeschen = new JMenuItem("Loeschen");
