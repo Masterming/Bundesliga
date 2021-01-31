@@ -97,6 +97,16 @@ public class Club implements Serializable {
     public boolean removePlayer(Player p) {
         return players.remove(p);
     }
+    
+    public boolean removePlayer(String playerName){
+        boolean success=false;
+        for(Player p : players){
+            if(p.getName().equals(playerName)){
+                players.remove(draw);
+            }
+        }
+        return success;
+    }
 
     @Override
     public String toString() {

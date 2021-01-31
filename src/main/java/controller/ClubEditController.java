@@ -9,6 +9,9 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.logging.*;
+import javax.swing.JFrame;
+import model.Club;
+import model.Liga;
 
 import view.ClubEditView;
 import view.KaderView;
@@ -24,11 +27,16 @@ public class ClubEditController implements ActionListener {
     private final static Logger LOGGER = Logger.getLogger(ClubEditController.class.getName());
     private ClubEditView cev;
     private String team;
+    private Club club;
+    private JFrame master;
+    private Liga l;
 
-    public ClubEditController(ClubEditView CeV, String team) {
+    public ClubEditController(ClubEditView CeV, Club c, Liga l, JFrame master) {
         this.cev = CeV;
-        this.cev.setClubName(team);
-        this.team = team;
+        this.cev.setClubName(c.getName());
+        this.club=c;
+        this.l=l;
+        this.master=master;
         this.cev.getKaderBtn().addActionListener(this);
         this.cev.getTransBtn().addActionListener(this);
         this.cev.getAddSpielerBtn().addActionListener(this);
@@ -48,7 +56,7 @@ public class ClubEditController implements ActionListener {
             cev.getClubEditContent().revalidate();
 
             KaderView kdw2 = new KaderView();
-            KaderController kDc = new KaderController(kdw2, team);
+            KaderController kDc = new KaderController(kdw2, club, this.master,this.l);
             cev.getClubEditContent().add(kdw2);
             cev.getClubEditContent().repaint();
             cev.getClubEditContent().revalidate();
