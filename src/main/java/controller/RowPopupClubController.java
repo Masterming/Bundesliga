@@ -75,8 +75,8 @@ public class RowPopupClubController implements ActionListener {
                     if(stadionName!= null){
                         stadionName = stadionName.trim();
                         if (!stadionName.isEmpty()){
-                            //l(name, name)
-                            //l.
+                            l.changeClubStadion(stadion, stadionName);
+                            
                         }
                     }
                 }

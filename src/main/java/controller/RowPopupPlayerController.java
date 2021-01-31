@@ -44,6 +44,7 @@ public class RowPopupPlayerController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent evt) {
         String name;
+        String goals;
         int row;
         DefaultTableModel dtm = (DefaultTableModel) table.getModel();
         switch (evt.getActionCommand()){
@@ -67,15 +68,26 @@ public class RowPopupPlayerController implements ActionListener {
             case "bearbeiten":
                 row = table.getSelectedRow();
                 name = table.getValueAt(row, 0).toString();
-
-                if (name != null) {
+                goals = table.getValueAt(row, 1).toString();
+                
+                if (name != null && table.getSelectedColumn()==0) {
                     String newName = JOptionPane.showInputDialog(master, "Neuen Namen eingeben", name);
                     if (newName != null) {
                         newName = newName.trim();
                         if (!newName.isEmpty()) {
                             //LOGGER.log(Level.INFO, "Rename Club " + name + " to " + newName);
-                            
+                            cl.changePlayerName(name, newName);
                         }
+                    }
+                }
+                if(goals!=null&& table.getSelectedColumn()==1){
+                    String newGoals = JOptionPane.showInputDialog(master, "Neuen Toranzahl eingeben", goals);
+                    int goalsN;
+                    try{
+                     goalsN = Integer.parseInt(newGoals);
+                     cl.changePlayerGoals(name, goalsN);
+                    }catch(NumberFormatException n){
+                        goalsN=-1;
                     }
                 }
                 break;

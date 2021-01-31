@@ -125,6 +125,17 @@ public class Liga extends Observable implements Serializable {
         }
         return false;
     }
+    public boolean changeClubStadion(String name, String newName){
+          for (Club c : clubs) {
+            if (c.getName().equals(name)) {
+                c.setStadion(newName);
+                setChanged();
+                notifyObservers(this);
+                return true;
+            }
+        }
+        return false;
+    }
 
     public void setName(String name) {
         this.name = name;
