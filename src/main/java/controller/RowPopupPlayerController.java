@@ -77,6 +77,8 @@ public class RowPopupPlayerController implements ActionListener {
                         if (!newName.isEmpty()) {
                             //LOGGER.log(Level.INFO, "Rename Club " + name + " to " + newName);
                             cl.changePlayerName(name, newName);
+                            //
+                            liga.updateClub(cl.getName(), cl);
                         }
                     }
                 }
@@ -86,6 +88,7 @@ public class RowPopupPlayerController implements ActionListener {
                     try{
                      goalsN = Integer.parseInt(newGoals);
                      cl.changePlayerGoals(name, goalsN);
+                     liga.updateClub(cl.getName(), cl);
                     }catch(NumberFormatException n){
                         goalsN=-1;
                     }
