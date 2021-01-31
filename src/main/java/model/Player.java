@@ -55,6 +55,14 @@ public class Player implements Serializable {
         goals++;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setGoals(int goals) {
+        this.goals = goals;
+    }
+
     @Override
     public String toString() {
         return "Player: " + name + ": " + goals + " goals";
