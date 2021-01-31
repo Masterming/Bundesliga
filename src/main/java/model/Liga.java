@@ -97,6 +97,23 @@ public class Liga extends Observable implements Serializable {
         return null;
     }
 
+    public boolean updateClub(String name, Club c) {
+        boolean sucess = false;
+        ListIterator<Club> iterator = clubs.listIterator();
+        while (iterator.hasNext()) {
+            Club next = iterator.next();
+            if (next.getName().equals(name)) {
+                //Replace element
+                iterator.set(c);
+                sucess = true;
+                setChanged();
+                notifyObservers(this);
+                break;
+            }
+        }
+        return sucess;
+    }
+
     public boolean changeClubName(String name, String newName) {
         for (Club c : clubs) {
             if (c.getName().equals(name)) {
