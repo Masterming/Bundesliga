@@ -34,6 +34,8 @@ public class RowPopupPlayerController implements ActionListener {
         this.table = table;
         this.master = master;
         this.liga=l;
+        this.rPoPV.getBearbeiten().addActionListener(this);
+        this.rPoPV.getLoeschen().addActionListener(this);
         
     }
     
@@ -55,7 +57,10 @@ public class RowPopupPlayerController implements ActionListener {
                             JOptionPane.YES_NO_OPTION);
                     if (confirm == JOptionPane.YES_OPTION) {
                         //LOGGER.log(Level.INFO, "Remove Club " + name);
-                        //cl.removePlayer(p);
+                        cl.removePlayer(name);
+                        liga.updateClub(cl.getName(), cl);
+                        DefaultTableModel tbm = (DefaultTableModel)this.table.getModel();
+                        tbm.removeRow(row);
                     }
                 }
                 break;
@@ -69,7 +74,7 @@ public class RowPopupPlayerController implements ActionListener {
                         newName = newName.trim();
                         if (!newName.isEmpty()) {
                             //LOGGER.log(Level.INFO, "Rename Club " + name + " to " + newName);
-                            //cl.
+                            
                         }
                     }
                 }

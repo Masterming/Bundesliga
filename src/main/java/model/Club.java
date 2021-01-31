@@ -102,7 +102,10 @@ public class Club implements Serializable {
         boolean success=false;
         for(Player p : players){
             if(p.getName().equals(playerName)){
-                players.remove(draw);
+                players.remove(p);
+                
+                break;
+                
             }
         }
         return success;

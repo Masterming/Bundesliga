@@ -22,9 +22,10 @@ public class RowPopupPlayerView extends JPopupMenu {
 
     private final static Logger LOGGER = Logger.getLogger(RowPopupPlayerView.class.getName());
     private static final long serialVersionUID = 18L;
-
+        private JMenuItem loeschen;
+    private JMenuItem bearbeiten;
     public RowPopupPlayerView(JTable table) {
-        JMenuItem loeschen = new JMenuItem("Loeschen");
+         loeschen = new JMenuItem("Loeschen");
 //        loeschen.addActionListener(new ActionListener() {
 //            @Override
 //            public void actionPerformed(ActionEvent arg0) {
@@ -47,7 +48,7 @@ public class RowPopupPlayerView extends JPopupMenu {
 //        });
 loeschen.setActionCommand("loeschen");
         add(loeschen);
-        JMenuItem bearbeiten = new JMenuItem("Bearbeiten");
+         bearbeiten = new JMenuItem("Bearbeiten");
 //        bearbeiten.addActionListener(new ActionListener() {
 //            @Override
 //            public void actionPerformed(ActionEvent arg0) {
@@ -106,4 +107,13 @@ loeschen.setActionCommand("loeschen");
         add(bearbeiten);
 
     }
+
+    public JMenuItem getLoeschen() {
+        return loeschen;
+    }
+
+    public JMenuItem getBearbeiten() {
+        return bearbeiten;
+    }
+    
 }

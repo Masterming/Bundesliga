@@ -37,6 +37,7 @@ public class RowPopupClubController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent evt) {
         String name;
+        String stadion;
         int row;
         DefaultTableModel dtm = (DefaultTableModel) table.getModel();
 
@@ -58,7 +59,7 @@ public class RowPopupClubController implements ActionListener {
             case "bearbeiten":
                 row = table.getSelectedRow();
                 name = table.getValueAt(row, 0).toString();
-
+                stadion = table.getValueAt(row, 1).toString();
                 if (name != null) {
                     String newName = JOptionPane.showInputDialog(master, "Neuen Namen eingeben", name);
                     if (newName != null) {
@@ -66,6 +67,15 @@ public class RowPopupClubController implements ActionListener {
                         if (!newName.isEmpty()) {
                             LOGGER.log(Level.INFO, "Rename Club " + name + " to " + newName);
                             l.changeClubName(name, newName);
+                        }
+                    }
+                }
+                if(stadion!=null){
+                    String stadionName = JOptionPane.showInputDialog(master, "Neuen Stadionname eingeben",stadion);
+                    if(stadionName!= null){
+                        stadionName = stadionName.trim();
+                        if (!stadionName.isEmpty()){
+                            
                         }
                     }
                 }
