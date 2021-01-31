@@ -60,7 +60,7 @@ public class RowPopupClubController implements ActionListener {
                 row = table.getSelectedRow();
                 name = table.getValueAt(row, 0).toString();
                 stadion = table.getValueAt(row, 1).toString();
-                if (name != null) {
+                if (name != null && table.getSelectedColumn() == 0) {
                     String newName = JOptionPane.showInputDialog(master, "Neuen Namen eingeben", name);
                     if (newName != null) {
                         newName = newName.trim();
@@ -70,13 +70,13 @@ public class RowPopupClubController implements ActionListener {
                         }
                     }
                 }
-                if(stadion!=null){
-                    String stadionName = JOptionPane.showInputDialog(master, "Neuen Stadionname eingeben",stadion);
-                    if(stadionName!= null){
+                if (stadion != null && table.getSelectedColumn() == 1) {
+                    String stadionName = JOptionPane.showInputDialog(master, "Neuen Stadionname eingeben", stadion);
+                    if (stadionName != null) {
                         stadionName = stadionName.trim();
-                        if (!stadionName.isEmpty()){
+                        if (!stadionName.isEmpty()) {
+                            LOGGER.log(Level.INFO, "Change stadion to " + stadionName);
                             l.changeClubStadion(stadion, stadionName);
-                            
                         }
                     }
                 }

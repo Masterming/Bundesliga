@@ -22,6 +22,7 @@ import view.RowPopupPlayerView;
  * @author z003ywys
  */
 public class RowPopupPlayerController implements ActionListener {
+
     private RowPopupPlayerView rPoPV;
     private Club cl;
     private JTable table;
@@ -33,13 +34,11 @@ public class RowPopupPlayerController implements ActionListener {
         this.cl = cl;
         this.table = table;
         this.master = master;
-        this.liga=l;
+        this.liga = l;
         this.rPoPV.getBearbeiten().addActionListener(this);
         this.rPoPV.getLoeschen().addActionListener(this);
-        
+
     }
-    
-    
 
     @Override
     public void actionPerformed(ActionEvent evt) {
@@ -47,7 +46,7 @@ public class RowPopupPlayerController implements ActionListener {
         String goals;
         int row;
         DefaultTableModel dtm = (DefaultTableModel) table.getModel();
-        switch (evt.getActionCommand()){
+        switch (evt.getActionCommand()) {
             case "loeschen":
                 row = table.getSelectedRow();
                 name = table.getValueAt(row, 0).toString();
@@ -60,7 +59,7 @@ public class RowPopupPlayerController implements ActionListener {
                         //LOGGER.log(Level.INFO, "Remove Club " + name);
                         cl.removePlayer(name);
                         liga.updateClub(cl.getName(), cl);
-                        DefaultTableModel tbm = (DefaultTableModel)this.table.getModel();
+                        DefaultTableModel tbm = (DefaultTableModel) this.table.getModel();
                         tbm.removeRow(row);
                     }
                 }
@@ -69,8 +68,8 @@ public class RowPopupPlayerController implements ActionListener {
                 row = table.getSelectedRow();
                 name = table.getValueAt(row, 0).toString();
                 goals = table.getValueAt(row, 1).toString();
-                
-                if (name != null && table.getSelectedColumn()==0) {
+
+                if (name != null && table.getSelectedColumn() == 0) {
                     String newName = JOptionPane.showInputDialog(master, "Neuen Namen eingeben", name);
                     if (newName != null) {
                         newName = newName.trim();
@@ -82,19 +81,19 @@ public class RowPopupPlayerController implements ActionListener {
                         }
                     }
                 }
-                if(goals!=null&& table.getSelectedColumn()==1){
+                if (goals != null && table.getSelectedColumn() == 1) {
                     String newGoals = JOptionPane.showInputDialog(master, "Neuen Toranzahl eingeben", goals);
                     int goalsN;
-                    try{
-                     goalsN = Integer.parseInt(newGoals);
-                     cl.changePlayerGoals(name, goalsN);
-                     liga.updateClub(cl.getName(), cl);
-                    }catch(NumberFormatException n){
-                        goalsN=-1;
+                    try {
+                        goalsN = Integer.parseInt(newGoals);
+                        cl.changePlayerGoals(name, goalsN);
+                        liga.updateClub(cl.getName(), cl);
+                    } catch (NumberFormatException n) {
+                        goalsN = -1;
                     }
                 }
                 break;
         }
     }
-    
+
 }
