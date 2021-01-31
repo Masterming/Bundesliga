@@ -53,7 +53,6 @@ public class KaderController implements ActionListener, MouseListener {
     }
 
     private String[][] getData() {
-        // TODO daten holen
         String[][] data = new String[team.getPlayers().size()][];
          int count = 0;
 

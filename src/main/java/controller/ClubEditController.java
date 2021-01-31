@@ -68,7 +68,7 @@ public class ClubEditController implements ActionListener {
             cev.getKaderBtn().setBackground(Color.lightGray);
             cev.getAddSpielerBtn().setBackground(Color.lightGray);
             TransactionView tranView = new TransactionView();
-            TransactionController tr = new TransactionController(tranView);
+            TransactionController tr = new TransactionController(tranView, club);
             // Layout setzen ?
             cev.getClubEditContent().removeAll();
             cev.getClubEditContent().add(tranView);

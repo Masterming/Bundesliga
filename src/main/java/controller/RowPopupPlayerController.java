@@ -78,6 +78,8 @@ public class RowPopupPlayerController implements ActionListener {
                             cl.changePlayerName(name, newName);
                             //
                             liga.updateClub(cl.getName(), cl);
+                            this.table.repaint();
+                            this.table.revalidate();
                         }
                     }
                 }
@@ -88,6 +90,8 @@ public class RowPopupPlayerController implements ActionListener {
                         goalsN = Integer.parseInt(newGoals);
                         cl.changePlayerGoals(name, goalsN);
                         liga.updateClub(cl.getName(), cl);
+                        this.table.repaint();
+                        this.table.revalidate();
                     } catch (NumberFormatException n) {
                         goalsN = -1;
                     }

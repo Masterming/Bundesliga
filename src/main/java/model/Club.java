@@ -98,16 +98,16 @@ public class Club implements Serializable {
         return players.remove(p);
     }
     
-    public boolean removePlayer(String playerName){
-        boolean success=false;
+    public Player removePlayer(String playerName){
+        Player ret = null;
         for(Player p : players){
             if(p.getName().equals(playerName)){
-                players.remove(p);
-                
+                ret = p;
+                players.remove(p);                
                 break;
             }
         }
-        return success;
+        return ret;
     }
     
     @Override
@@ -194,5 +194,52 @@ public class Club implements Serializable {
         }
         return false;
     }
+
+    void clone(Club c) {
+        name = c.name;
+        stadion = c.stadion;
+        points = c.points;
+        gamesCount = c.gamesCount;
+        wins = c.wins;
+        draw = c.draw;
+        losses = c.losses;
+        madeGoals = c.madeGoals;
+        receivedGoals = c.receivedGoals;
+        
+        List<Integer> ids = new ArrayList<>();
+        for (Player p : c.players){
+            ids.add(p.getId());
+            if(players.contains(p)){
+                players.get(players.indexOf(p)).clone(p);
+            }
+            else{
+                players.add(p);
+            }
+        }
+        List<Player> delete = new ArrayList<>();
+        for(Player p : players){
+            if(!ids.contains(p.getId())){
+                delete.add(p);
+            }
+        }
+        for(Player p : delete){
+            players.remove(p);
+        }
+    }
     
+    @Override
+    public boolean equals(Object o) {
+        // self check
+        if (this == o)
+            return true;
+        // null check
+        if (o == null)
+            return false;
+        // type check and cast
+        if (getClass() != o.getClass())
+            return false;
+        Club club = (Club) o;
+        // field comparison
+        return this.clubId == club.clubId;
+    }     
 }

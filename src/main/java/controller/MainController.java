@@ -32,12 +32,12 @@ public class MainController implements ActionListener, Observer {
 
     // Es wird 3 Ligen Model geben jeweils eins pro Liga
     // --> werden beim ersten klick auf LigaButtons gesetzt
-    private Map<Integer, Liga> ligas;
-    private LigaDBMapper dao;
+    private static Map<Integer, Liga> ligas;
+    private static LigaDBMapper dao;
 
-    private MainView view;
-    private int ligaId = 1;
-    private int selection = 1;
+    private static MainView view;
+    private static int ligaId = 1;
+    private static int selection = 1;
 
     public MainController(MainView view) {
         LOGGER.log(Level.INFO, "Adding Ligas");
@@ -58,10 +58,6 @@ public class MainController implements ActionListener, Observer {
         view.setVisible(true);
         this.view = view;
         renderView();
-    }
-
-    public void setView(MainView view) {
-        this.view = view;
     }
 
     @Override
@@ -90,7 +86,7 @@ public class MainController implements ActionListener, Observer {
 
     }
 
-    private void renderView() {
+    private static void renderView() {
         view.getLiga1Btn().setBackground(Color.lightGray);
         view.getLiga2Btn().setBackground(Color.lightGray);
         view.getLiga3Btn().setBackground(Color.lightGray);
@@ -152,5 +148,12 @@ public class MainController implements ActionListener, Observer {
 
             renderView();
         }
+    }
+    
+    public static void reloadFromDB(){
+        for (int i = 1; i <= 3; i++) {
+            ligas.get(i).clone(dao.getLiga(i));
+        }
+        renderView();
     }
 }

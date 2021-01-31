@@ -73,7 +73,7 @@ public class TransactionView extends javax.swing.JPanel {
         suchenBtn.setActionCommand("suchen");
 
         ergListTeam.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1" };
+            String[] strings = {};
 
             public int getSize() {
                 return strings.length;

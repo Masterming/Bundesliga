@@ -14,6 +14,9 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import java.util.logging.*;
+import model.Club;
+import model.ClubDBMapper;
+import model.Player;
 
 import view.TransactionView;
 
@@ -25,11 +28,14 @@ public class TransactionController implements ActionListener, MouseListener {
 
     private final static Logger LOGGER = Logger.getLogger(TransactionController.class.getName());
     private TransactionView trV;
+    private Club club;
     private String selectedTeam;
     private DefaultListModel<String> listModelUrsprung;
     private DefaultListModel<String> listModelSend;
+    private ClubDBMapper dao = new ClubDBMapper();
+    private List<Club> clubs;
 
-    public TransactionController(TransactionView trV) {
+    public TransactionController(TransactionView trV, Club club) {
         this.trV = trV;
         this.trV.getAddToTransBtn().addActionListener(this);
         this.trV.getRemoveFromTransBtn().addActionListener(this);
@@ -40,6 +46,8 @@ public class TransactionController implements ActionListener, MouseListener {
         this.trV.getListEigenerKader().setModel(listModelUrsprung);
         listModelSend = new DefaultListModel<>();
         this.trV.getListeTransKader().setModel(listModelSend);
+        this.club = club;
+        clubs = dao.getAllClubs();
     }
 
     @Override
@@ -68,10 +76,12 @@ public class TransactionController implements ActionListener, MouseListener {
     private void suchen() {
         trV.getErgListTeam().removeAll();
         String suchAnfrage = trV.getReceivingTeamInput().getText();
-        // Such ergebnisse als Liste o.ae. engezigt bekommen
         DefaultListModel<String> listModel = new DefaultListModel<>();
+        for(Club c : clubs){
+            if(c.getName().toLowerCase().contains(suchAnfrage.toLowerCase()) && !c.getName().equals(club.getName()))
+                listModel.addElement(c.getName());
+        }
         trV.getErgListTeam().setModel(listModel);
-        listModel.addElement(suchAnfrage);
 
         trV.repaint();
         trV.revalidate();
@@ -102,35 +112,32 @@ public class TransactionController implements ActionListener, MouseListener {
 
     private void transFinish() {
         int best = JOptionPane.showConfirmDialog(null, "Wollen Sie die Transaktion abschliessen");
-        boolean nullIncluded = false;
+        Player removedPlayer;
+        Club targetClub = null;
+        
         if (best == 0) {
-            List<String> transferPlayer = new ArrayList<>();
-            for (int i = 0; i < listModelSend.getSize(); i++) {
-                if (listModelSend.getElementAt(i) != null) {
-                    transferPlayer.add(listModelSend.getElementAt(i).toString());
-                } else {
-                    nullIncluded = true;
-                }
-            }
-            // Transaktion mit den Spielern passieren
-            if (nullIncluded == false && transferPlayer.size() > 0) {
-                // Transaktion durchfuehren
-                LOGGER.log(Level.INFO, "trans Finish");
-                for (String st : transferPlayer) {
-                    if (st != null) {
-                        LOGGER.log(Level.INFO, "uebertragende Objekte " + st);
-                    }
-                }
-                JOptionPane.showMessageDialog(trV, "Transfer War erfolgreich");
-
-            } else {
+            if(listModelSend.getSize() == 0){
                 LOGGER.log(Level.WARNING, "Bitte Waehlen Sie die zu uebertragenden Teams aus");
                 JOptionPane.showMessageDialog(trV, "Bitte Waehlen Sie die zu uebertragenden Teams aus");
+                return;
             }
-
-        } else {
+            
+            for(Club c : clubs){
+                if(c.getName().equals(selectedTeam))
+                    targetClub = c;
+            }
+            
+            for (int i = 0; i < listModelSend.getSize(); i++) {
+                if (listModelSend.getElementAt(i) != null) {
+                    removedPlayer = club.removePlayer(listModelSend.getElementAt(i));
+                    targetClub.addPlayer(removedPlayer);
+                }
+            }
+            JOptionPane.showMessageDialog(trV, "Transfer War erfolgreich");
+            dao.updateClub(club);
+            dao.updateClub(targetClub);
+            MainController.reloadFromDB();
         }
-
     }
 
     @Override
@@ -143,9 +150,9 @@ public class TransactionController implements ActionListener, MouseListener {
             listModelSend.removeAllElements();
 
             // Eigenen Kader Anpassen
-            listModelUrsprung.addElement("Item 1");
-            listModelUrsprung.addElement("Item 2");
-
+            for(Player p : club.getPlayers()){
+                listModelUrsprung.addElement(p.getName());
+            }
         }
 
     }

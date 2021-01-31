@@ -145,5 +145,29 @@ public class Liga extends Observable implements Serializable {
     public String toString() {
         return "Liga: " + name;
     }
+    
+    public void clone(Liga l){
+        this.name = l.name;
+        
+        List<Integer> ids = new ArrayList<>();
+        for (Club c : l.clubs){
+            ids.add(c.getId());
+            if(clubs.contains(c)){
+                clubs.get(clubs.indexOf(c)).clone(c);
+            }
+            else{
+                clubs.add(c);
+            }
+        }
+        List<Club> delete = new ArrayList<>();
+        for(Club c : clubs){
+            if(!ids.contains(c.getId())){
+                delete.add(c);
+            }
+        }
+        for(Club c : delete){
+            clubs.remove(c);
+        }
+    }
 
 }
