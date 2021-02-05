@@ -149,11 +149,16 @@ public class MainController implements ActionListener, Observer {
             renderView();
         }
     }
-    
-    public static void reloadFromDB(){
+
+    public static boolean reloadFromDB() {
+        boolean success = true;
         for (int i = 1; i <= 3; i++) {
-            ligas.get(i).clone(dao.getLiga(i));
+            if (!ligas.get(i).copy(dao.getLiga(i))) {
+                LOGGER.log(Level.WARNING, "Mismatch in copy of {0}", ligas.get(i));
+                success = false;
+            }
         }
         renderView();
+        return success;
     }
 }

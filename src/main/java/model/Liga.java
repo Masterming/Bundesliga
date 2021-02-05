@@ -87,8 +87,8 @@ public class Liga extends Observable implements Serializable {
         }
         return sucess;
     }
-    
-    public Club getClub(String name){
+
+    public Club getClub(String name) {
         for (Club c : clubs) {
             if (c.getName().equals(name)) {
                 return c;
@@ -103,7 +103,7 @@ public class Liga extends Observable implements Serializable {
         while (iterator.hasNext()) {
             Club next = iterator.next();
             if (next.getName().equals(name)) {
-                //Replace element
+                // Replace element
                 iterator.set(c);
                 sucess = true;
                 setChanged();
@@ -125,8 +125,9 @@ public class Liga extends Observable implements Serializable {
         }
         return false;
     }
-    public boolean changeClubStadion(String name, String newName){
-          for (Club c : clubs) {
+
+    public boolean changeClubStadion(String name, String newName) {
+        for (Club c : clubs) {
             if (c.getName().equals(name)) {
                 c.setStadion(newName);
                 setChanged();
@@ -141,33 +142,59 @@ public class Liga extends Observable implements Serializable {
         this.name = name;
     }
 
+    public boolean copy(Liga other) {
+        boolean success = true;
+        if (!equals(other)) {
+            success = false;
+        }
+
+        this.name = other.name;
+
+        List<Integer> ids = new ArrayList<>();
+        for (Club c : other.clubs) {
+            ids.add(c.getId());
+            if (clubs.contains(c)) {
+                if (!clubs.get(clubs.indexOf(c)).copy(c)) {
+                    success = false;
+                }
+            } else {
+                clubs.add(c);
+            }
+        }
+        List<Club> toRemove = new ArrayList<>();
+        for (Club c : clubs) {
+            if (!ids.contains(c.getId())) {
+                toRemove.add(c);
+            }
+        }
+        for (Club c : toRemove) {
+            clubs.remove(c);
+        }
+        return success;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        // self check
+        if (this == o) {
+            System.out.println("Liga mismatch");
+            return true;
+        }
+        // null check
+        if (o == null) {
+            return false;
+        }
+        // type check and cast
+        if (getClass() != o.getClass()) {
+            return false;
+        }
+        Liga l = (Liga) o;
+        // field comparison
+        return this.ligaId == l.ligaId;
+    }
+
     @Override
     public String toString() {
         return "Liga: " + name;
     }
-    
-    public void clone(Liga l){
-        this.name = l.name;
-        
-        List<Integer> ids = new ArrayList<>();
-        for (Club c : l.clubs){
-            ids.add(c.getId());
-            if(clubs.contains(c)){
-                clubs.get(clubs.indexOf(c)).clone(c);
-            }
-            else{
-                clubs.add(c);
-            }
-        }
-        List<Club> delete = new ArrayList<>();
-        for(Club c : clubs){
-            if(!ids.contains(c.getId())){
-                delete.add(c);
-            }
-        }
-        for(Club c : delete){
-            clubs.remove(c);
-        }
-    }
-
 }

@@ -81,8 +81,9 @@ public class ClubAddExistingController implements ActionListener, MouseListener,
         switch (evt.getActionCommand()) {
             case "clubAddLiga":
 
-                int best = JOptionPane.showConfirmDialog(cAeV, "Wollen Sie den Club zur Liga hinzufuegen ?");
-                if (best == 0) {
+                int confirm = JOptionPane.showConfirmDialog(cAeV, "Wollen Sie den Club zur Liga hinzufuegen ?",
+                        "Club Hinzufuegen", JOptionPane.YES_NO_OPTION);
+                if (confirm == JOptionPane.YES_OPTION) {
                     LOGGER.log(Level.INFO, "CLub: " + selectedClub + " zur Liga hinzugefuegt");
                     // TODO Transfer
 

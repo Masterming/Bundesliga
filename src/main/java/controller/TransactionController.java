@@ -9,7 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -55,19 +54,15 @@ public class TransactionController implements ActionListener, MouseListener {
         String command = evt.getActionCommand();
         switch (command) {
             case "suchen":
-                LOGGER.log(Level.INFO, "suchen");
                 suchen();
                 break;
             case "trans_finish":
-                LOGGER.log(Level.INFO, "trans_finish");
                 transFinish();
                 break;
             case "add":
-                LOGGER.log(Level.INFO, "add");
                 add();
                 break;
             case "rem":
-                LOGGER.log(Level.INFO, "rem");
                 remove();
                 break;
         }
@@ -75,68 +70,82 @@ public class TransactionController implements ActionListener, MouseListener {
 
     private void suchen() {
         trV.getErgListTeam().removeAll();
-        String suchAnfrage = trV.getReceivingTeamInput().getText();
+        String searchTerm = trV.getReceivingTeamInput().getText();
         DefaultListModel<String> listModel = new DefaultListModel<>();
-        for(Club c : clubs){
-            if(c.getName().toLowerCase().contains(suchAnfrage.toLowerCase()) && !c.getName().equals(club.getName()))
+        for (Club c : clubs) {
+            if ((searchTerm.equals("Erhaltendes Team") || c.getName().toLowerCase().contains(searchTerm.toLowerCase())) && !c.equals(club)) {
                 listModel.addElement(c.getName());
+            }
         }
         trV.getErgListTeam().setModel(listModel);
+
+        LOGGER.log(Level.INFO, "Search \"{0}\"", searchTerm);
 
         trV.repaint();
         trV.revalidate();
     }
 
     private void add() {
-        String eigenerK = trV.getListEigenerKader().getSelectedValue();
+        String player = trV.getListEigenerKader().getSelectedValue();
 
-        listModelUrsprung.removeElement(eigenerK);
+        if (player != null) {
+            listModelUrsprung.removeElement(player);
+            listModelSend.addElement(player);
+            LOGGER.log(Level.INFO, "Add {0}", player);
 
-        listModelSend.addElement(eigenerK);
-
-        trV.repaint();
-        trV.revalidate();
+            trV.repaint();
+            trV.revalidate();
+        }
 
     }
 
     private void remove() {
-        String eigenerK = trV.getListeTransKader().getSelectedValue();
+        String player = trV.getListeTransKader().getSelectedValue();
 
-        listModelSend.removeElement(eigenerK);
+        if (player != null) {
+            listModelSend.removeElement(player);
+            listModelUrsprung.addElement(player);
+            LOGGER.log(Level.INFO, "Remove {0}", player);
 
-        listModelUrsprung.addElement(eigenerK);
-
-        trV.repaint();
-        trV.revalidate();
+            trV.repaint();
+            trV.revalidate();
+        }
     }
 
     private void transFinish() {
-        int best = JOptionPane.showConfirmDialog(null, "Wollen Sie die Transaktion abschliessen");
+        int confirm = JOptionPane.showConfirmDialog(trV, "Wollen Sie die Transaktion abschliessen", "Bestaetigen",
+                JOptionPane.YES_NO_OPTION);
         Player removedPlayer;
         Club targetClub = null;
-        
-        if (best == 0) {
-            if(listModelSend.getSize() == 0){
-                LOGGER.log(Level.WARNING, "Bitte Waehlen Sie die zu uebertragenden Teams aus");
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            if (listModelSend.getSize() == 0) {
+                LOGGER.log(Level.WARNING, "No players selected");
                 JOptionPane.showMessageDialog(trV, "Bitte Waehlen Sie die zu uebertragenden Teams aus");
                 return;
             }
-            
-            for(Club c : clubs){
-                if(c.getName().equals(selectedTeam))
+
+            for (Club c : clubs) {
+                if (c.getName().equals(selectedTeam)) {
                     targetClub = c;
+                }
             }
-            
+
             for (int i = 0; i < listModelSend.getSize(); i++) {
                 if (listModelSend.getElementAt(i) != null) {
                     removedPlayer = club.removePlayer(listModelSend.getElementAt(i));
                     targetClub.addPlayer(removedPlayer);
                 }
             }
-            JOptionPane.showMessageDialog(trV, "Transfer War erfolgreich");
             dao.updateClub(club);
             dao.updateClub(targetClub);
-            MainController.reloadFromDB();
+            if (MainController.reloadFromDB()) {
+                JOptionPane.showMessageDialog(trV, "Transfer war erfolgreich");
+                LOGGER.log(Level.INFO, "Transfer finished successfully");
+            } else {
+                JOptionPane.showMessageDialog(trV, "Potenzieller Fehler bei Transaktion. Bitte Daten kontrolieren.");
+                LOGGER.log(Level.SEVERE, "Transfer finished with errors");
+            }
         }
     }
 
@@ -150,7 +159,7 @@ public class TransactionController implements ActionListener, MouseListener {
             listModelSend.removeAllElements();
 
             // Eigenen Kader Anpassen
-            for(Player p : club.getPlayers()){
+            for (Player p : club.getPlayers()) {
                 listModelUrsprung.addElement(p.getName());
             }
         }
