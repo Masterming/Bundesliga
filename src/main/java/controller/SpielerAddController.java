@@ -12,6 +12,8 @@ import javax.swing.JOptionPane;
 import java.util.logging.*;
 
 import model.Club;
+import model.Liga;
+import model.Player;
 import view.SpielerAddView;
 
 /**
@@ -23,10 +25,13 @@ public class SpielerAddController implements ActionListener {
     private final static Logger LOGGER = Logger.getLogger(SpielerAddController.class.getName());
     private SpielerAddView spAV;
     private Club club;
+    private Liga lig;
 
-    public SpielerAddController(SpielerAddView spAV) {
+    public SpielerAddController(SpielerAddView spAV, Club cl, Liga l) {
         this.spAV = spAV;
         this.spAV.getAddSpielerBtn().addActionListener(this);
+        this.club=cl;
+        this.lig=l;
     }
 
     @Override
@@ -47,13 +52,17 @@ public class SpielerAddController implements ActionListener {
         try {
             anzTor = Integer.parseInt(anzTorStr);
         } catch (Exception ex) {
-            LOGGER.log(Level.WARNING, "Es wurden keine ganzen Zahlen einegeben");
+            LOGGER.log(Level.WARNING, "Es wurden keine ganzen Zahlen eingeben");
             JFrame f = new JFrame();
-            JOptionPane.showMessageDialog(f, "Es wurden keine ganzen Zahlen einegeben! Bitte Versucen sie es erneut");
+            JOptionPane.showMessageDialog(f, "Es wurden keine ganzen Zahlen eingeben! Bitte versuchen Sie es erneut");
             inputOk = false;
         }
         if (inputOk) {
             // TODO Spieler in DB Schreiben
+            Player P = new Player(name, anzTor);
+            club.addPlayer(P);
+            lig.updateClub(club.getName(), club);
+            
         }
     }
 
