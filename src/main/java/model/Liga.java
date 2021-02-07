@@ -75,17 +75,18 @@ public class Liga extends Observable implements Serializable {
         return sucess;
     }
 
-    public boolean removeClub(String name) {
-        boolean sucess = false;
+    public Club removeClub(String name) {
+        Club temp = null;
         for (Club c : clubs) {
             if (c.getName().equals(name)) {
-                sucess = clubs.remove(c);
+                temp =c;
+                clubs.remove(c);
                 setChanged();
                 notifyObservers(this);
                 break;
             }
         }
-        return sucess;
+        return temp;
     }
 
     public Club getClub(String name) {
