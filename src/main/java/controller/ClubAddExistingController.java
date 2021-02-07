@@ -98,9 +98,10 @@ public class ClubAddExistingController implements ActionListener, MouseListener,
                         //l.removeClub(selectedClub);
                         //l.addClub(c)
                        Club remClub = allLigas.get(this.ligaRemID).removeClub(selectedClub);
-                       l.addClub(remClub);
-                       lDBM.updateLiga(l);
                        lDBM.updateLiga(allLigas.get(this.ligaRemID));
+                       allLigas.get(l.getId()-1).addClub(remClub);
+                       lDBM.updateLiga( allLigas.get(l.getId()-1));
+                       
                        MainController.reloadFromDB();
                        JOptionPane.showMessageDialog(cAeV, "Transfer war erfolgreich");
                     }
