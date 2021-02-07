@@ -63,29 +63,37 @@ public class Player implements Serializable {
         this.goals = goals;
     }
 
-    @Override
-    public String toString() {
-        return "Player: " + name + ": " + goals + " goals";
+    public boolean copy(Player other) {
+        if (!equals(other)) {
+            System.out.println("Player mismatch");
+            return false;
+        }
+        this.name = other.name;
+        this.goals = other.goals;
+        return true;
     }
-    
+
     @Override
     public boolean equals(Object o) {
         // self check
-        if (this == o)
+        if (this == o) {
             return true;
+        }
         // null check
-        if (o == null)
+        if (o == null) {
             return false;
+        }
         // type check and cast
-        if (getClass() != o.getClass())
+        if (getClass() != o.getClass()) {
             return false;
-        Player player = (Player) o;
+        }
+        Player p = (Player) o;
         // field comparison
-        return this.playerId == player.playerId;
-    } 
+        return this.playerId == p.playerId;
+    }
 
-    public void clone(Player p) {
-        name = p.name;
-        goals = p.goals;
+    @Override
+    public String toString() {
+        return "Player: " + name;
     }
 }

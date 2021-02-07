@@ -48,7 +48,7 @@ public class RowPopupClubController implements ActionListener {
 
                 if (name != null) {
                     int confirm = JOptionPane.showConfirmDialog(master,
-                            "Wollen Sie den Club " + name + " wirklich loeschen?", "Loeschen",
+                            "Wollen Sie den Club " + name + " wirklich loeschen?", "Club Loeschen",
                             JOptionPane.YES_NO_OPTION);
                     if (confirm == JOptionPane.YES_OPTION) {
                         LOGGER.log(Level.INFO, "Remove Club " + name);

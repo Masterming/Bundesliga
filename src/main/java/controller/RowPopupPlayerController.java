@@ -53,10 +53,10 @@ public class RowPopupPlayerController implements ActionListener {
 
                 if (name != null) {
                     int confirm = JOptionPane.showConfirmDialog(master,
-                            "Wollen Sie den Spieler " + name + " wirklich loeschen?", "Loeschen",
+                            "Wollen Sie den Spieler " + name + " wirklich loeschen?", "Spieler Loeschen",
                             JOptionPane.YES_NO_OPTION);
                     if (confirm == JOptionPane.YES_OPTION) {
-                        //LOGGER.log(Level.INFO, "Remove Club " + name);
+                        // LOGGER.log(Level.INFO, "Remove Club " + name);
                         cl.removePlayer(name);
                         liga.updateClub(cl.getName(), cl);
                         DefaultTableModel tbm = (DefaultTableModel) this.table.getModel();
@@ -74,7 +74,7 @@ public class RowPopupPlayerController implements ActionListener {
                     if (newName != null) {
                         newName = newName.trim();
                         if (!newName.isEmpty()) {
-                            //LOGGER.log(Level.INFO, "Rename Club " + name + " to " + newName);
+                            // LOGGER.log(Level.INFO, "Rename Club " + name + " to " + newName);
                             cl.changePlayerName(name, newName);
                             //
                             liga.updateClub(cl.getName(), cl);

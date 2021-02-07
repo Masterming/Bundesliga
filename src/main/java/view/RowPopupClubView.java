@@ -40,9 +40,9 @@ public class RowPopupClubView extends JPopupMenu {
 //                DefaultTableModel tbm = (DefaultTableModel) table.getModel();
 //                if (name != null) {
 //                    // Pop Up menue mit text
-//                    int best = JOptionPane.showConfirmDialog(null,
+//                    int confirm = JOptionPane.showConfirmDialog(null,
 //                            "Wollen Sie den Club " + name + " wirklich loeschen?");
-//                    if (best == 0) {
+//                    if (confirm == JOptionPane.YES_OPTION) {
 //                        // TODO Name aus DB Loeschen
 //                        
 //                        
