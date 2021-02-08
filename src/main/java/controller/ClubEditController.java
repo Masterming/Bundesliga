@@ -38,13 +38,13 @@ public class ClubEditController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent evt) {
-        LOGGER.log(Level.INFO, "Button wurde gedrueckt");
+        // LOGGER.log(Level.INFO, "Button wurde gedrueckt");
         if ("kader".equals(evt.getActionCommand())) {
             cev.getKaderBtn().setBackground(Color.white);
             cev.getTransBtn().setBackground(Color.lightGray);
             cev.getAddSpielerBtn().setBackground(Color.lightGray);
             // cev.getClubName().setText("Button Kader wurde geklickt");
-            LOGGER.log(Level.INFO, "Kader");
+            // LOGGER.log(Level.INFO, "Kader");
             cev.getClubEditContent().removeAll();
             cev.getClubEditContent().repaint();
             cev.getClubEditContent().revalidate();
@@ -66,15 +66,15 @@ public class ClubEditController implements ActionListener {
             // Layout setzen ?
             cev.getClubEditContent().removeAll();
             cev.getClubEditContent().add(tranView);
-            LOGGER.log(Level.INFO, "Content hizugefuegt");
+            // LOGGER.log(Level.INFO, "Content hizugefuegt");
             cev.getClubEditContent().repaint();
-            LOGGER.log(Level.INFO, "Repaint()");
+            // LOGGER.log(Level.INFO, "Repaint()");
             cev.getClubEditContent().revalidate();
-            LOGGER.log(Level.INFO, "Revalidate()");
+            // LOGGER.log(Level.INFO, "Revalidate()");
 
         }
         if ("spieler".equals(evt.getActionCommand())) {
-            LOGGER.log(Level.INFO, "Spieler");
+            // LOGGER.log(Level.INFO, "Spieler");
             cev.getTransBtn().setBackground(Color.lightGray);
             cev.getKaderBtn().setBackground(Color.lightGray);
             cev.getAddSpielerBtn().setBackground(Color.white);
