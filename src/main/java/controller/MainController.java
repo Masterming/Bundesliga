@@ -142,9 +142,11 @@ public class MainController implements ActionListener, Observer {
     @Override
     public void update(Observable o, Object arg1) {
         if (o instanceof Liga) {
-            Liga temp = (Liga) o;
-            int id = temp.getId();
-            if (!ligas.get(id).copy(dao.updateLiga(temp))) {
+            Liga l = (Liga) o;
+            int id = l.getId();
+            Liga temp = dao.updateLiga(l);
+
+            if (!ligas.get(id).copy(temp)) {
                 LOGGER.log(Level.WARNING, "Mismatch in copy of {0}", ligas.get(id));
             }
 

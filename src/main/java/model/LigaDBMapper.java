@@ -127,7 +127,9 @@ public class LigaDBMapper {
         try {
             et = em.getTransaction();
             et.begin();
-            ret = em.merge(l);
+            //ret = em.merge(l);
+            ret = em.find(Liga.class, l.getId());
+            ret.copy(l);
             et.commit();
         } catch (Exception ex) {
             if (et != null) {

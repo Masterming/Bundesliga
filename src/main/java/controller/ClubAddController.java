@@ -59,9 +59,8 @@ public class ClubAddController implements ActionListener {
         }
         if (!eingabe) {
             JFrame f = new JFrame();
-            JOptionPane.showMessageDialog(f, "Bitte geben sie etwas fuer Clubname und Stadion erin");
+            JOptionPane.showMessageDialog(f, "Bitte geben sie etwas fuer Clubname und Stadion ein");
         } else {
-            // TODO Hinzufuegen zur DB
             Club temp = new Club(clubName, stadion);
             l.addClub(temp);
             LOGGER.log(Level.INFO, "Club Hinzugefuegt: " + clubName);

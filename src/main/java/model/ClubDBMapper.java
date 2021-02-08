@@ -135,6 +135,8 @@ public class ClubDBMapper {
         } finally {
             em.close();
         }
+
+        LOGGER.log(Level.INFO, "Update: {0}", c);
         return bSuccess;
     }
 }

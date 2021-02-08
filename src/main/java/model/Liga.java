@@ -179,7 +179,6 @@ public class Liga extends Observable implements Serializable {
     public boolean equals(Object o) {
         // self check
         if (this == o) {
-            System.out.println("Liga mismatch");
             return true;
         }
         // null check
@@ -193,6 +192,13 @@ public class Liga extends Observable implements Serializable {
         Liga l = (Liga) o;
         // field comparison
         return this.ligaId == l.ligaId;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 89 * hash + this.ligaId;
+        return hash;
     }
 
     @Override

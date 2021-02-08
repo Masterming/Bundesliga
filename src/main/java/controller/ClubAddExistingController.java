@@ -28,7 +28,7 @@ public class ClubAddExistingController implements ActionListener, MouseListener,
     private String selectedClub;
     private DefaultListModel<String> clubList;
     private LigaDBMapper dao = new LigaDBMapper();
-    private List<Liga> allLigas;
+    private List<Liga> ligas;
     private int ligaRemID;
 
     public ClubAddExistingController(ClubAddExistingView view, Liga l) {
@@ -39,7 +39,7 @@ public class ClubAddExistingController implements ActionListener, MouseListener,
         this.view.getLigaClubList().addMouseListener(this);
         clubList = new DefaultListModel<>();
         this.view.getLigaClubList().setModel(clubList);
-        this.allLigas = dao.getLigas();
+        this.ligas = dao.getLigas();
         adaptViewToLiga();
 
     }
@@ -82,18 +82,26 @@ public class ClubAddExistingController implements ActionListener, MouseListener,
                 int confirm = JOptionPane.showConfirmDialog(view, "Wollen Sie den Club zur Liga hinzufuegen ?",
                         "Club Hinzufuegen", JOptionPane.YES_NO_OPTION);
                 if (confirm == JOptionPane.YES_OPTION) {
-                    LOGGER.log(Level.INFO, "CLub: " + selectedClub + " zur Liga hinzugefuegt");
+                    LOGGER.log(Level.INFO, "Club: {0} zur Liga hinzugefuegt", selectedClub);
                     // TODO Transfer
                     if (selectedClub != null) {
                         // l.removeClub(selectedClub);
                         // l.addClub(c)
-                        Club remClub = allLigas.get(this.ligaRemID).removeClub(selectedClub);
-                        dao.updateLiga(allLigas.get(this.ligaRemID));
-                        allLigas.get(l.getId() - 1).addClub(remClub);
-                        dao.updateLiga(allLigas.get(l.getId() - 1));
+                        Club remClub = ligas.get(this.ligaRemID).removeClub(selectedClub);
+                        // dao.updateLiga(ligas.get(this.ligaRemID));
+                        ligas.get(l.getId() - 1).addClub(remClub);
+                        // dao.updateLiga(ligas.get(l.getId() - 1));
 
-                        MainController.reloadFromDB();
-                        JOptionPane.showMessageDialog(view, "Transfer war erfolgreich");
+                        if (MainController.reloadFromDB()) {
+                            JOptionPane.showMessageDialog(view, "Transfer war erfolgreich");
+                            LOGGER.log(Level.INFO, "Club Transfer finished successfully");
+                        } else {
+                            JOptionPane.showMessageDialog(view,
+                                    "Potenzieller Fehler bei Transaktion. Bitte Daten kontrolieren.");
+                            LOGGER.log(Level.SEVERE, "Club Transfer finished with errors");
+                        }
+
+                        view.dispose();
                     }
                 }
                 break;
@@ -154,7 +162,7 @@ public class ClubAddExistingController implements ActionListener, MouseListener,
         clubList.removeAllElements();
         if (ligStr.contains("1")) {
             // TODO Clubs Aufzaehlen aus der Liga
-            for (Club c : allLigas.get(0).getClubs()) {
+            for (Club c : ligas.get(0).getClubs()) {
                 clubList.addElement(c.getName());
             }
             this.ligaRemID = 0;
@@ -162,7 +170,7 @@ public class ClubAddExistingController implements ActionListener, MouseListener,
         }
         if (ligStr.contains("2")) {
             // TODO Clubs Aufzaehlen aus der Liga
-            for (Club c : allLigas.get(1).getClubs()) {
+            for (Club c : ligas.get(1).getClubs()) {
                 clubList.addElement(c.getName());
             }
             this.ligaRemID = 1;
@@ -170,7 +178,7 @@ public class ClubAddExistingController implements ActionListener, MouseListener,
         }
         if (ligStr.contains("3")) {
             // TODO Clubs Aufzaehlen aus der Liga
-            for (Club c : allLigas.get(2).getClubs()) {
+            for (Club c : ligas.get(2).getClubs()) {
                 clubList.addElement(c.getName());
             }
             this.ligaRemID = 2;

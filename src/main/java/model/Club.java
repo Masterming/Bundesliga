@@ -249,6 +249,13 @@ public class Club implements Serializable {
     }
 
     @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 29 * hash + this.clubId;
+        return hash;
+    }
+
+    @Override
     public String toString() {
         return "Club: " + name;
     }
