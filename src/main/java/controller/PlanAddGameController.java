@@ -13,11 +13,10 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.util.logging.*;
+
 import model.Club;
 import model.Game;
-
 import model.Liga;
-import model.PlanModel;
 import view.PlanAddGameView;
 
 /**
@@ -115,9 +114,8 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
             LOGGER.log(Level.INFO, teamB);
             // TODO Spiel in DB Schreiben und Model aktualisieren
             //Ligas holen
-            Game g1 = new Game(this.ligaA.getClub(teamA),this.ligaB.getClub(teamB),dtGame);
-            
-            
+            Game g1 = new Game(this.ligaA.getClub(teamA), this.ligaB.getClub(teamB), dtGame);
+
             paGV.dispose();
 
         }

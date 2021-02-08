@@ -6,7 +6,6 @@ import javax.swing.JFrame;
 import java.util.logging.*;
 import model.Liga;
 
-import model.PlanModel;
 import view.PlanAddGameView;
 import view.PlanView;
 
@@ -18,13 +17,11 @@ public class PlanController implements ActionListener {
 
     private final static Logger LOGGER = Logger.getLogger(PlanController.class.getName());
 
-    private PlanModel plm;
     private PlanView plv;
     private JFrame master;
     private Liga lig;
 
-    public PlanController(JFrame master, PlanView plx, PlanModel plmx, Liga l) {
-        this.plm = plmx;
+    public PlanController(JFrame master, PlanView plx, Liga l) {
         this.plv = plx;
         this.master = master;
         this.lig = l;

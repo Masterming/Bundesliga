@@ -22,10 +22,8 @@ public class Game implements Serializable {
 
     private boolean finished = false;
 
-    @LazyCollection(LazyCollectionOption.FALSE)
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(joinColumns = @JoinColumn(name = "gameId"), inverseJoinColumns = @JoinColumn(name = "ligaId"))
-    private List<Liga> leagues;
+    @ManyToMany(mappedBy = "games")
+    private List<Liga> ligas;
 
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToOne(cascade = CascadeType.ALL)

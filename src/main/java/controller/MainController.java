@@ -111,8 +111,7 @@ public class MainController implements ActionListener, Observer {
                 break;
             case 2:
                 PlanView plv = new PlanView(view);
-                PlanModel plm = new PlanModel(ligas.get(ligaId));
-                PlanController plc = new PlanController(view, plv, plm, ligas.get(ligaId));
+                PlanController plc = new PlanController(view, plv, ligas.get(ligaId));
                 JScrollPane scroll = new JScrollPane(plv);
 
                 view.getPlanBtn().setBackground(Color.white);

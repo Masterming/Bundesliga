@@ -10,7 +10,6 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.util.logging.*;
 
-import model.PlanModel;
 import view.ErgebnisInputView;
 
 /**
@@ -22,17 +21,15 @@ public class ErgebnisInputController implements ActionListener {
     private final static Logger LOGGER = Logger.getLogger(ErgebnisInputController.class.getName());
 
     private ErgebnisInputView ergDialog;
-    private PlanModel plm;
     private List<List<String>> scoreTeamA;
     private List<List<String>> scoreTeamB;
     int teamAErg;
     int teamBErg;
 
-    public ErgebnisInputController(ErgebnisInputView ergDialog, String teamA, String teamB, PlanModel plmEx) {
+    public ErgebnisInputController(ErgebnisInputView ergDialog, String teamA, String teamB) {
         this.ergDialog = ergDialog;
         this.ergDialog.setTeamALbl(teamA);
         this.ergDialog.setTeamBLbl(teamB);
-        this.plm = plmEx;
         this.ergDialog.getSaveBtn().addActionListener(this);
         this.ergDialog.getTeamAAddGoalForPlayer().addActionListener(this);
         this.ergDialog.getTeamASubGoalForPlayer().addActionListener(this);

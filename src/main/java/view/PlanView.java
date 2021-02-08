@@ -6,17 +6,11 @@
 package view;
 
 import controller.ErgebnisInputController;
-import java.awt.Component;
 import java.awt.event.ActionEvent;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.logging.Logger;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import model.PlanModel;
 
 /**
  *
@@ -27,6 +21,82 @@ public class PlanView extends JPanel {
     private final static Logger LOGGER = Logger.getLogger(PlanView.class.getName());
 
     private static final long serialVersionUID = 16L;
+
+    private javax.swing.JButton addSpielBtn;
+    private javax.swing.JPanel btnContainer;
+    private javax.swing.JPanel planContent;
+    private JFrame master;
+
+    public PlanView(JFrame master) {
+        initComponents();
+        this.master = master;
+        try {
+
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+                | javax.swing.UnsupportedLookAndFeelException ex) {
+            LOGGER.log(java.util.logging.Level.SEVERE, ex.getLocalizedMessage());
+        }
+        this.setVisible(true);
+    }
+
+    private void initComponents() {
+
+        planContent = new javax.swing.JPanel();
+        btnContainer = new javax.swing.JPanel();
+        addSpielBtn = new javax.swing.JButton();
+
+        planContent.setLayout(new javax.swing.BoxLayout(planContent, javax.swing.BoxLayout.LINE_AXIS));
+
+        addSpielBtn.setText("Spiel hinzufuegen");
+        addSpielBtn.setActionCommand("addSpiel");
+
+        javax.swing.GroupLayout btnContainerLayout = new javax.swing.GroupLayout(btnContainer);
+        btnContainer.setLayout(btnContainerLayout);
+        btnContainerLayout.setHorizontalGroup(btnContainerLayout
+                .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(btnContainerLayout
+                .createSequentialGroup().addComponent(addSpielBtn).addGap(0, 273, Short.MAX_VALUE)));
+        btnContainerLayout.setVerticalGroup(btnContainerLayout
+                .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(btnContainerLayout
+                .createSequentialGroup().addComponent(addSpielBtn).addGap(0, 13, Short.MAX_VALUE)));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout
+                .createSequentialGroup().addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(planContent, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnContainer, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 62, Short.MAX_VALUE)))
+                .addContainerGap()));
+        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup().addContainerGap()
+                        .addComponent(btnContainer, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(planContent, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                        .addContainerGap()));
+    }
+
+    public JButton getAddSpielBtn() {
+        return addSpielBtn;
+    }
+
+    private void action(ActionEvent e) {
+        String a = e.getActionCommand();
+        // Neues Pop Up fenster + Controller --> bekommt z.B. Spiel Model mit
+        ErgebnisInputView pop = new ErgebnisInputView(this.master, true);
+        ErgebnisInputController con = new ErgebnisInputController(pop, a, a);
+        pop.setVisible(true);
+    }
 
 //    @Override
 //    public void update(Observable o, Object arg1) {
@@ -67,82 +137,4 @@ public class PlanView extends JPanel {
 //
 //        }
 //    }
-
-    public PlanView(JFrame master) {
-        initComponents();
-        this.master = master;
-        try {
-
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-                | javax.swing.UnsupportedLookAndFeelException ex) {
-            LOGGER.log(java.util.logging.Level.SEVERE, ex.getLocalizedMessage());
-        }
-        this.setVisible(true);
-    }
-
-    private void initComponents() {
-
-        planContent = new javax.swing.JPanel();
-        btnContainer = new javax.swing.JPanel();
-        addSpielBtn = new javax.swing.JButton();
-
-        planContent.setLayout(new javax.swing.BoxLayout(planContent, javax.swing.BoxLayout.LINE_AXIS));
-
-        addSpielBtn.setText("Spiel hinzufuegen");
-        addSpielBtn.setActionCommand("addSpiel");
-
-        javax.swing.GroupLayout btnContainerLayout = new javax.swing.GroupLayout(btnContainer);
-        btnContainer.setLayout(btnContainerLayout);
-        btnContainerLayout.setHorizontalGroup(btnContainerLayout
-                .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(btnContainerLayout
-                        .createSequentialGroup().addComponent(addSpielBtn).addGap(0, 273, Short.MAX_VALUE)));
-        btnContainerLayout.setVerticalGroup(btnContainerLayout
-                .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(btnContainerLayout
-                        .createSequentialGroup().addComponent(addSpielBtn).addGap(0, 13, Short.MAX_VALUE)));
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout
-                .createSequentialGroup().addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(planContent, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnContainer, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 62, Short.MAX_VALUE)))
-                .addContainerGap()));
-        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup().addContainerGap()
-                        .addComponent(btnContainer, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(planContent, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-                        .addContainerGap()));
-    }
-
-    private javax.swing.JButton addSpielBtn;
-    private javax.swing.JPanel btnContainer;
-    private javax.swing.JPanel planContent;
-    private JFrame master;
-    private PlanModel plm;
-
-    public JButton getAddSpielBtn() {
-        return addSpielBtn;
-    }
-
-    private void action(ActionEvent e) {
-        String a = e.getActionCommand();
-        // Neues Pop Up fenster + Controller --> bekommt z.B. Spiel Model mit
-        ErgebnisInputView pop = new ErgebnisInputView(this.master, true);
-        ErgebnisInputController con = new ErgebnisInputController(pop, a, a, this.plm);
-        pop.setVisible(true);
-    }
-
 }
