@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import java.awt.Color;
@@ -14,9 +9,7 @@ import java.util.Observer;
 import javax.swing.JScrollPane;
 import java.util.logging.*;
 
-import model.Liga;
-import model.LigaDBMapper;
-import model.PlanModel;
+import model.*;
 import view.ClubView;
 import view.MainView;
 import view.PlanView;
@@ -154,15 +147,7 @@ public class MainController implements ActionListener, Observer {
         }
     }
 
-    public static boolean reloadFromDB() {
-        boolean success = true;
-        for (int i = 1; i <= 3; i++) {
-            if (!ligas.get(i).copy(dao.getLiga(i))) {
-                LOGGER.log(Level.WARNING, "Mismatch in copy of {0}", ligas.get(i));
-                success = false;
-            }
-        }
-        renderView();
-        return success;
+    public static Map<Integer, Liga> getLigas() {
+        return ligas;
     }
 }

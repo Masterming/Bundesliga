@@ -12,7 +12,7 @@ public class PlayerDBMapper {
     private final static Logger LOGGER = Logger.getLogger(PlayerDBMapper.class.getName());
 
     public int addPlayer(Player player) {
-        EntityManager em = ManagerFactory.createEntityManager();
+        EntityManager em = ManagerFactory.getEntityManager();
         EntityTransaction et = null;
 
         try {
@@ -27,13 +27,13 @@ public class PlayerDBMapper {
             }
             LOGGER.log(Level.SEVERE, ex.getLocalizedMessage());
         } finally {
-            em.close();
+            // em.close();
         }
         return player.getId();
     }
 
     public Player getPlayer(int id) {
-        EntityManager em = ManagerFactory.createEntityManager();
+        EntityManager em = ManagerFactory.getEntityManager();
         String query = "SELECT p FROM Player p WHERE p.id = :id";
         TypedQuery<Player> tq = em.createQuery(query, Player.class);
         tq.setParameter("id", id);
@@ -47,13 +47,13 @@ public class PlayerDBMapper {
         } catch (Exception ex) {
             LOGGER.log(Level.SEVERE, ex.getLocalizedMessage());
         } finally {
-            em.close();
+            // em.close();
         }
         return player;
     }
 
     public List<Player> getAllPlayers() {
-        EntityManager em = ManagerFactory.createEntityManager();
+        EntityManager em = ManagerFactory.getEntityManager();
         String strQuery = "SELECT p FROM Player p WHERE p.id IS NOT NULL";
         TypedQuery<Player> tq = em.createQuery(strQuery, Player.class);
         List<Player> players = new ArrayList<>();
@@ -66,13 +66,13 @@ public class PlayerDBMapper {
         } catch (Exception ex) {
             LOGGER.log(Level.SEVERE, ex.getLocalizedMessage());
         } finally {
-            em.close();
+            // em.close();
         }
         return players;
     }
 
     public int reset() {
-        EntityManager em = ManagerFactory.createEntityManager();
+        EntityManager em = ManagerFactory.getEntityManager();
         EntityTransaction et = null;
 
         String strQuery = "DELETE FROM Player";
@@ -89,14 +89,14 @@ public class PlayerDBMapper {
             }
             LOGGER.log(Level.SEVERE, ex.getLocalizedMessage());
         } finally {
-            em.close();
+            // em.close();
         }
         return i;
     }
 
     public boolean deletePlayer(Player p) {
         boolean bSuccess = true;
-        EntityManager em = ManagerFactory.createEntityManager();
+        EntityManager em = ManagerFactory.getEntityManager();
         EntityTransaction et = null;
 
         try {
@@ -110,14 +110,14 @@ public class PlayerDBMapper {
             }
             bSuccess = false;
         } finally {
-            em.close();
+            // em.close();
         }
         return bSuccess;
     }
 
     public boolean updatePlayer(Player p) {
         boolean bSuccess = true;
-        EntityManager em = ManagerFactory.createEntityManager();
+        EntityManager em = ManagerFactory.getEntityManager();
         EntityTransaction et = null;
 
         try {
@@ -132,7 +132,7 @@ public class PlayerDBMapper {
             bSuccess = false;
             LOGGER.log(Level.SEVERE, ex.getLocalizedMessage());
         } finally {
-            em.close();
+            // em.close();
         }
         return bSuccess;
     }

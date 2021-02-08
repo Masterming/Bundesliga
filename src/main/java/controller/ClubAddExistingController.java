@@ -9,12 +9,11 @@ import java.awt.event.MouseListener;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
-import java.util.List;
+import java.util.Map;
 import java.util.logging.*;
 
 import model.Club;
 import model.Liga;
-import model.LigaDBMapper;
 import view.ClubAddExistingView;
 
 /**
@@ -27,9 +26,8 @@ public class ClubAddExistingController implements ActionListener, MouseListener,
     private Liga l;
     private String selectedClub;
     private DefaultListModel<String> clubList;
-    private LigaDBMapper dao = new LigaDBMapper();
-    private List<Liga> ligas;
-    private int ligaRemID;
+    private Map<Integer, Liga> ligas;
+    private int targetLigaId;
 
     public ClubAddExistingController(ClubAddExistingView view, Liga l) {
         this.view = view;
@@ -39,37 +37,39 @@ public class ClubAddExistingController implements ActionListener, MouseListener,
         this.view.getLigaClubList().addMouseListener(this);
         clubList = new DefaultListModel<>();
         this.view.getLigaClubList().setModel(clubList);
-        this.ligas = dao.getLigas();
+        this.ligas = MainController.getLigas();
         adaptViewToLiga();
 
     }
 
     private void adaptViewToLiga() {
-        // TODO Club View Anpassen
-        if (l.getId() == 1) {
-            String[] ligen = new String[1];
-            ligen[0] = "Liga 2";
-            DefaultComboBoxModel<String> dfC = new DefaultComboBoxModel<>(ligen);
-            view.setLigaComboModel(dfC);
-            populateComboBox();
+        String[] ligen;
+        DefaultComboBoxModel<String> dfC;
+        switch (l.getId()) {
+            case 1:
+                ligen = new String[1];
+                ligen[0] = "Liga 2";
+                dfC = new DefaultComboBoxModel<>(ligen);
+                view.setLigaComboModel(dfC);
+                populateComboBox();
 
+                break;
+            case 2:
+                ligen = new String[2];
+                ligen[0] = "Liga 1";
+                ligen[1] = "Liga 3";
+                dfC = new DefaultComboBoxModel<>(ligen);
+                view.setLigaComboModel(dfC);
+                populateComboBox();
+                break;
+            case 3:
+                ligen = new String[1];
+                ligen[0] = "Liga 2";
+                dfC = new DefaultComboBoxModel<>(ligen);
+                view.setLigaComboModel(dfC);
+                populateComboBox();
+                break;
         }
-        if (l.getId() == 2) {
-            String[] ligen = new String[2];
-            ligen[0] = "Liga 1";
-            ligen[1] = "Liga 3";
-            DefaultComboBoxModel<String> dfC = new DefaultComboBoxModel<>(ligen);
-            view.setLigaComboModel(dfC);
-            populateComboBox();
-        }
-        if (l.getId() == 3) {
-            String[] ligen = new String[1];
-            ligen[0] = "Liga 2";
-            DefaultComboBoxModel<String> dfC = new DefaultComboBoxModel<>(ligen);
-            view.setLigaComboModel(dfC);
-            populateComboBox();
-        }
-
         view.repaint();
         view.revalidate();
     }
@@ -78,31 +78,20 @@ public class ClubAddExistingController implements ActionListener, MouseListener,
     public void actionPerformed(ActionEvent evt) {
         switch (evt.getActionCommand()) {
             case "clubAddLiga":
-
                 int confirm = JOptionPane.showConfirmDialog(view, "Wollen Sie den Club zur Liga hinzufuegen ?",
                         "Club Hinzufuegen", JOptionPane.YES_NO_OPTION);
-                if (confirm == JOptionPane.YES_OPTION) {
+                if (confirm == JOptionPane.YES_OPTION && selectedClub != null) {
                     LOGGER.log(Level.INFO, "Club: {0} zur Liga hinzugefuegt", selectedClub);
-                    // TODO Transfer
-                    if (selectedClub != null) {
-                        // l.removeClub(selectedClub);
-                        // l.addClub(c)
-                        Club remClub = ligas.get(this.ligaRemID).removeClub(selectedClub);
-                        // dao.updateLiga(ligas.get(this.ligaRemID));
-                        ligas.get(l.getId() - 1).addClub(remClub);
-                        // dao.updateLiga(ligas.get(l.getId() - 1));
+                    Liga origin = ligas.get(this.targetLigaId);
+                    Liga target = ligas.get(l.getId());
 
-                        if (MainController.reloadFromDB()) {
-                            JOptionPane.showMessageDialog(view, "Transfer war erfolgreich");
-                            LOGGER.log(Level.INFO, "Club Transfer finished successfully");
-                        } else {
-                            JOptionPane.showMessageDialog(view,
-                                    "Potenzieller Fehler bei Transaktion. Bitte Daten kontrolieren.");
-                            LOGGER.log(Level.SEVERE, "Club Transfer finished with errors");
-                        }
+                    Club remClub = origin.removeClub(selectedClub);
+                    target.addClub(remClub);
 
-                        view.dispose();
-                    }
+                    JOptionPane.showMessageDialog(view, "Transfer war erfolgreich");
+                    LOGGER.log(Level.INFO, "Club Transfer finished successful");
+
+                    view.dispose();
                 }
                 break;
         }
@@ -162,26 +151,26 @@ public class ClubAddExistingController implements ActionListener, MouseListener,
         clubList.removeAllElements();
         if (ligStr.contains("1")) {
             // TODO Clubs Aufzaehlen aus der Liga
-            for (Club c : ligas.get(0).getClubs()) {
+            for (Club c : ligas.get(1).getClubs()) {
                 clubList.addElement(c.getName());
             }
-            this.ligaRemID = 0;
+            this.targetLigaId = 1;
 
         }
         if (ligStr.contains("2")) {
             // TODO Clubs Aufzaehlen aus der Liga
-            for (Club c : ligas.get(1).getClubs()) {
+            for (Club c : ligas.get(2).getClubs()) {
                 clubList.addElement(c.getName());
             }
-            this.ligaRemID = 1;
+            this.targetLigaId = 2;
 
         }
         if (ligStr.contains("3")) {
             // TODO Clubs Aufzaehlen aus der Liga
-            for (Club c : ligas.get(2).getClubs()) {
+            for (Club c : ligas.get(3).getClubs()) {
                 clubList.addElement(c.getName());
             }
-            this.ligaRemID = 2;
+            this.targetLigaId = 3;
         }
     }
 

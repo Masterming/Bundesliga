@@ -65,7 +65,7 @@ public class RowPopupClubController implements ActionListener {
                     if (newName != null) {
                         newName = newName.trim();
                         if (!newName.isEmpty()) {
-                            LOGGER.log(Level.INFO, "Rename Club {0} to {1}", new String[]{name, newName});
+                            LOGGER.log(Level.INFO, "Rename Club {0} to {1}", new String[] { name, newName });
                             l.changeClubName(name, newName);
                         }
                     }

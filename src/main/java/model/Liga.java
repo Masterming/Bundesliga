@@ -1,6 +1,5 @@
 package model;
 
-import controller.MainController;
 import java.io.Serializable;
 import java.util.*;
 import javax.persistence.*;
@@ -98,12 +97,12 @@ public class Liga extends Observable implements Serializable {
         return null;
     }
 
-    public boolean updateClub(String name, Club c) {
+    public boolean updateClub(Club c) {
         boolean sucess = false;
         ListIterator<Club> iterator = clubs.listIterator();
         while (iterator.hasNext()) {
             Club next = iterator.next();
-            if (next.getName().equals(name)) {
+            if (next.equals(c)) {
                 // Replace element
                 iterator.set(c);
                 sucess = true;

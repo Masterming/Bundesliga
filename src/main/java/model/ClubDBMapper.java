@@ -12,7 +12,7 @@ public class ClubDBMapper {
     private final static Logger LOGGER = Logger.getLogger(ClubDBMapper.class.getName());
 
     public int addClub(Club club) {
-        EntityManager em = ManagerFactory.createEntityManager();
+        EntityManager em = ManagerFactory.getEntityManager();
         EntityTransaction et = null;
         int id = -1;
 
@@ -28,13 +28,13 @@ public class ClubDBMapper {
             }
             LOGGER.log(Level.SEVERE, ex.getLocalizedMessage());
         } finally {
-            em.close();
+            // em.close();
         }
         return id;
     }
 
     public Club getClub(int id) {
-        EntityManager em = ManagerFactory.createEntityManager();
+        EntityManager em = ManagerFactory.getEntityManager();
         String query = "SELECT c FROM Club c WHERE c.id = :id";
         TypedQuery<Club> tq = em.createQuery(query, Club.class);
         tq.setParameter("id", id);
@@ -48,13 +48,13 @@ public class ClubDBMapper {
         } catch (Exception ex) {
             LOGGER.log(Level.SEVERE, ex.getLocalizedMessage());
         } finally {
-            em.close();
+            // em.close();
         }
         return cust;
     }
 
     public List<Club> getAllClubs() {
-        EntityManager em = ManagerFactory.createEntityManager();
+        EntityManager em = ManagerFactory.getEntityManager();
         String strQuery = "SELECT c FROM Club c WHERE c.id IS NOT NULL";
         TypedQuery<Club> tq = em.createQuery(strQuery, Club.class);
         List<Club> custs = new ArrayList<>();
@@ -67,13 +67,13 @@ public class ClubDBMapper {
         } catch (Exception ex) {
             LOGGER.log(Level.SEVERE, ex.getLocalizedMessage());
         } finally {
-            em.close();
+            // em.close();
         }
         return custs;
     }
 
     public int reset() {
-        EntityManager em = ManagerFactory.createEntityManager();
+        EntityManager em = ManagerFactory.getEntityManager();
         EntityTransaction et = null;
 
         String strQuery = "DELETE FROM Club";
@@ -90,14 +90,14 @@ public class ClubDBMapper {
             }
             LOGGER.log(Level.SEVERE, ex.getLocalizedMessage());
         } finally {
-            em.close();
+            // em.close();
         }
         return i;
     }
 
     public boolean deleteClub(Club c) {
         boolean bSuccess = true;
-        EntityManager em = ManagerFactory.createEntityManager();
+        EntityManager em = ManagerFactory.getEntityManager();
         EntityTransaction et = null;
 
         try {
@@ -112,14 +112,14 @@ public class ClubDBMapper {
             bSuccess = false;
             LOGGER.log(Level.SEVERE, ex.getLocalizedMessage());
         } finally {
-            em.close();
+            // em.close();
         }
         return bSuccess;
     }
 
     public boolean updateClub(Club c) {
         boolean bSuccess = true;
-        EntityManager em = ManagerFactory.createEntityManager();
+        EntityManager em = ManagerFactory.getEntityManager();
         EntityTransaction et = null;
 
         try {
@@ -132,8 +132,9 @@ public class ClubDBMapper {
                 et.rollback();
             }
             bSuccess = false;
+            LOGGER.log(Level.SEVERE, ex.getLocalizedMessage());
         } finally {
-            em.close();
+            // em.close();
         }
 
         LOGGER.log(Level.INFO, "Update: {0}", c);

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import java.awt.event.ActionEvent;
@@ -59,7 +54,7 @@ public class SpielerAddController implements ActionListener {
             LOGGER.log(Level.INFO, "Spieler hinzugefuegt");
             Player P = new Player(name, anzTor);
             club.addPlayer(P);
-            l.updateClub(club.getName(), club);
+            l.updateClub(club);
         }
     }
 

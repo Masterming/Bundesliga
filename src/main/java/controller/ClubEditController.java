@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import java.awt.Color;
@@ -26,7 +21,6 @@ public class ClubEditController implements ActionListener {
 
     private final static Logger LOGGER = Logger.getLogger(ClubEditController.class.getName());
     private ClubEditView cev;
-    private String team;
     private Club club;
     private JFrame master;
     private Liga l;
@@ -34,9 +28,9 @@ public class ClubEditController implements ActionListener {
     public ClubEditController(ClubEditView CeV, Club c, Liga l, JFrame master) {
         this.cev = CeV;
         this.cev.setClubName(c.getName());
-        this.club=c;
-        this.l=l;
-        this.master=master;
+        this.club = c;
+        this.l = l;
+        this.master = master;
         this.cev.getKaderBtn().addActionListener(this);
         this.cev.getTransBtn().addActionListener(this);
         this.cev.getAddSpielerBtn().addActionListener(this);
@@ -56,7 +50,7 @@ public class ClubEditController implements ActionListener {
             cev.getClubEditContent().revalidate();
 
             KaderView kdw2 = new KaderView();
-            KaderController kDc = new KaderController(kdw2, club, this.master,this.l);
+            KaderController kDc = new KaderController(kdw2, club, this.master, this.l);
             cev.getClubEditContent().add(kdw2);
             cev.getClubEditContent().repaint();
             cev.getClubEditContent().revalidate();
@@ -88,7 +82,7 @@ public class ClubEditController implements ActionListener {
             cev.getClubEditContent().repaint();
             cev.getClubEditContent().revalidate();
             SpielerAddView spV = new SpielerAddView();
-            SpielerAddController spAC = new SpielerAddController(spV,club,l);
+            SpielerAddController spAC = new SpielerAddController(spV, club, l);
             cev.getClubEditContent().add(spV);
             cev.getClubEditContent().repaint();
             cev.getClubEditContent().revalidate();

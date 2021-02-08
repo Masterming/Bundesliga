@@ -1,22 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.List;
+import java.util.Map;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import java.util.logging.*;
-import model.Club;
-import model.ClubDBMapper;
-import model.Player;
 
+import model.Club;
+import model.Liga;
+import model.Player;
 import view.TransactionView;
 
 /**
@@ -31,11 +26,10 @@ public class TransactionController implements ActionListener, MouseListener {
     private String selectedTeam;
     private DefaultListModel<String> listModelUrsprung;
     private DefaultListModel<String> listModelSend;
-    private ClubDBMapper dao = new ClubDBMapper();
-    private List<Club> clubs;
+    private Map<Integer, Liga> ligas;
 
-    public TransactionController(TransactionView trV, Club club) {
-        this.view = trV;
+    public TransactionController(TransactionView view, Club club) {
+        this.view = view;
         this.view.getAddToTransBtn().addActionListener(this);
         this.view.getRemoveFromTransBtn().addActionListener(this);
         this.view.getSuchenBtn().addActionListener(this);
@@ -46,7 +40,7 @@ public class TransactionController implements ActionListener, MouseListener {
         listModelSend = new DefaultListModel<>();
         this.view.getListeTransKader().setModel(listModelSend);
         this.club = club;
-        clubs = dao.getAllClubs();
+        ligas = MainController.getLigas();
     }
 
     @Override
@@ -72,10 +66,12 @@ public class TransactionController implements ActionListener, MouseListener {
         view.getErgListTeam().removeAll();
         String searchTerm = view.getReceivingTeamInput().getText();
         DefaultListModel<String> listModel = new DefaultListModel<>();
-        for (Club c : clubs) {
-            if ((searchTerm.equals("Erhaltendes Team") || c.getName().toLowerCase().contains(searchTerm.toLowerCase()))
-                    && !c.equals(club)) {
-                listModel.addElement(c.getName());
+        for (Liga l : ligas.values()) {
+            for (Club c : l.getClubs()) {
+                if ((searchTerm.equals("Erhaltendes Team")
+                        || c.getName().toLowerCase().contains(searchTerm.toLowerCase())) && !c.equals(club)) {
+                    listModel.addElement(c.getName());
+                }
             }
         }
         view.getErgListTeam().setModel(listModel);
@@ -117,8 +113,10 @@ public class TransactionController implements ActionListener, MouseListener {
         int confirm = JOptionPane.showConfirmDialog(view, "Wollen Sie die Transaktion abschliessen", "Bestaetigen",
                 JOptionPane.YES_NO_OPTION);
         Player removedPlayer;
-        Club target = null;
-        Club origin = null;
+        Club originC = null;
+        Club targetC = null;
+        Liga originL = null;
+        Liga targetL = null;
 
         if (confirm == JOptionPane.YES_OPTION) {
             if (listModelSend.getSize() == 0) {
@@ -127,31 +125,29 @@ public class TransactionController implements ActionListener, MouseListener {
                 return;
             }
 
-            for (Club c : clubs) {
-                if (c.getName().equals(selectedTeam)) {
-                    target = c;
+            for (Liga l : ligas.values()) {
+                if (l.getClub(club.getName()) != null) {
+                    originC = l.getClub(club.getName());
+                    originL = l;
                 }
-                if (c.equals(club)) {
-                    origin = c;
+                if (l.getClub(selectedTeam) != null) {
+                    targetC = l.getClub(selectedTeam);
+                    targetL = l;
                 }
             }
 
             for (int i = 0; i < listModelSend.getSize(); i++) {
-                if (listModelSend.getElementAt(i) != null && target != null && origin != null) {
-                    removedPlayer = origin.removePlayer(listModelSend.getElementAt(i));
-                    target.addPlayer(removedPlayer);
+                if (listModelSend.getElementAt(i) != null && targetC != null && originC != null) {
+                    removedPlayer = originC.removePlayer(listModelSend.getElementAt(i));
+                    targetC.addPlayer(removedPlayer);
                 }
             }
 
-            // dao.updateClub(origin);
-            // dao.updateClub(target);
-            if (MainController.reloadFromDB()) {
-                JOptionPane.showMessageDialog(view, "Transfer war erfolgreich");
-                LOGGER.log(Level.INFO, "Player Transfer finished successfully");
-            } else {
-                JOptionPane.showMessageDialog(view, "Potenzieller Fehler bei Transaktion. Bitte Daten kontrolieren.");
-                LOGGER.log(Level.SEVERE, "Player Transfer finished with errors");
-            }
+            originL.updateClub(originC);
+            targetL.updateClub(targetC);
+
+            JOptionPane.showMessageDialog(view, "Transfer war erfolgreich");
+            LOGGER.log(Level.INFO, "Player Transfer finished successfully");
         }
     }
 
