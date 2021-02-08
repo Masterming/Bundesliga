@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import java.awt.event.ActionEvent;
@@ -17,7 +12,6 @@ import model.Player;
 import view.SpielerAddView;
 
 /**
- *
  * @author z003ywys
  */
 public class SpielerAddController implements ActionListener {
@@ -25,20 +19,19 @@ public class SpielerAddController implements ActionListener {
     private final static Logger LOGGER = Logger.getLogger(SpielerAddController.class.getName());
     private SpielerAddView spAV;
     private Club club;
-    private Liga lig;
+    private Liga l;
 
     public SpielerAddController(SpielerAddView spAV, Club cl, Liga l) {
         this.spAV = spAV;
         this.spAV.getAddSpielerBtn().addActionListener(this);
-        this.club=cl;
-        this.lig=l;
+        this.club = cl;
+        this.l = l;
     }
 
     @Override
     public void actionPerformed(ActionEvent evt) {
         switch (evt.getActionCommand()) {
             case "addSpieler":
-                LOGGER.log(Level.INFO, "Spieler hinzugefuegt");
                 addSpieler();
                 break;
         }
@@ -51,18 +44,17 @@ public class SpielerAddController implements ActionListener {
         boolean inputOk = true;
         try {
             anzTor = Integer.parseInt(anzTorStr);
-        } catch (Exception ex) {
-            LOGGER.log(Level.WARNING, "Es wurden keine ganzen Zahlen eingeben");
+        } catch (NumberFormatException ex) {
             JFrame f = new JFrame();
             JOptionPane.showMessageDialog(f, "Es wurden keine ganzen Zahlen eingeben! Bitte versuchen Sie es erneut");
+            LOGGER.log(Level.WARNING, "Es wurden keine ganzen Zahlen eingeben");
             inputOk = false;
         }
         if (inputOk) {
-            // TODO Spieler in DB Schreiben
+            LOGGER.log(Level.INFO, "Spieler hinzugefuegt");
             Player P = new Player(name, anzTor);
             club.addPlayer(P);
-            lig.updateClub(club.getName(), club);
-            
+            l.updateClub(club);
         }
     }
 

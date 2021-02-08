@@ -1,6 +1,5 @@
 package model;
 
-import controller.MainController;
 import java.io.Serializable;
 import java.util.*;
 import javax.persistence.*;
@@ -22,7 +21,7 @@ public class Liga extends Observable implements Serializable {
     private String name;
 
     @LazyCollection(LazyCollectionOption.FALSE)
-    @OneToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(joinColumns = @JoinColumn(name = "ligaId"), inverseJoinColumns = @JoinColumn(name = "clubId"))
     private List<Club> clubs;
 
@@ -79,7 +78,7 @@ public class Liga extends Observable implements Serializable {
         Club temp = null;
         for (Club c : clubs) {
             if (c.getName().equals(name)) {
-                temp =c;
+                temp = c;
                 clubs.remove(c);
                 setChanged();
                 notifyObservers(this);
@@ -98,12 +97,12 @@ public class Liga extends Observable implements Serializable {
         return null;
     }
 
-    public boolean updateClub(String name, Club c) {
+    public boolean updateClub(Club c) {
         boolean sucess = false;
         ListIterator<Club> iterator = clubs.listIterator();
         while (iterator.hasNext()) {
             Club next = iterator.next();
-            if (next.getName().equals(name)) {
+            if (next.equals(c)) {
                 // Replace element
                 iterator.set(c);
                 sucess = true;
@@ -141,6 +140,7 @@ public class Liga extends Observable implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+        notifyObservers(this);
     }
 
     public boolean copy(Liga other) {
@@ -178,7 +178,6 @@ public class Liga extends Observable implements Serializable {
     public boolean equals(Object o) {
         // self check
         if (this == o) {
-            System.out.println("Liga mismatch");
             return true;
         }
         // null check
@@ -192,6 +191,13 @@ public class Liga extends Observable implements Serializable {
         Liga l = (Liga) o;
         // field comparison
         return this.ligaId == l.ligaId;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 89 * hash + this.ligaId;
+        return hash;
     }
 
     @Override

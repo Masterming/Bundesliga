@@ -1,20 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.logging.Level;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
 import model.Club;
 import model.Liga;
-import static org.hibernate.bytecode.BytecodeLogger.LOGGER;
 import view.RowPopupPlayerView;
 
 /**
@@ -58,7 +52,7 @@ public class RowPopupPlayerController implements ActionListener {
                     if (confirm == JOptionPane.YES_OPTION) {
                         // LOGGER.log(Level.INFO, "Remove Club " + name);
                         cl.removePlayer(name);
-                        liga.updateClub(cl.getName(), cl);
+                        liga.updateClub(cl);
                         DefaultTableModel tbm = (DefaultTableModel) this.table.getModel();
                         tbm.removeRow(row);
                     }
@@ -77,7 +71,7 @@ public class RowPopupPlayerController implements ActionListener {
                             // LOGGER.log(Level.INFO, "Rename Club " + name + " to " + newName);
                             cl.changePlayerName(name, newName);
                             //
-                            liga.updateClub(cl.getName(), cl);
+                            liga.updateClub(cl);
                             this.table.getModel().setValueAt(newName, row, 0);
                             this.table.repaint();
                             this.table.revalidate();
@@ -90,7 +84,7 @@ public class RowPopupPlayerController implements ActionListener {
                     try {
                         goalsN = Integer.parseInt(newGoals);
                         cl.changePlayerGoals(name, goalsN);
-                        liga.updateClub(cl.getName(), cl);
+                        liga.updateClub(cl);
                         this.table.getModel().setValueAt(newGoals, row, 1);
                         this.table.repaint();
                         this.table.revalidate();

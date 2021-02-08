@@ -93,6 +93,13 @@ public class Player implements Serializable {
     }
 
     @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 43 * hash + this.playerId;
+        return hash;
+    }
+
+    @Override
     public String toString() {
         return "Player: " + name;
     }

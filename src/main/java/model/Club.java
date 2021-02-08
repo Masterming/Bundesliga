@@ -30,7 +30,7 @@ public class Club implements Serializable {
     private int receivedGoals;
 
     @LazyCollection(LazyCollectionOption.FALSE)
-    @OneToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(joinColumns = @JoinColumn(name = "clubId"), inverseJoinColumns = @JoinColumn(name = "playerId"))
     private List<Player> players;
 
@@ -246,6 +246,13 @@ public class Club implements Serializable {
         Club c = (Club) o;
         // field comparison
         return this.clubId == c.clubId;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 29 * hash + this.clubId;
+        return hash;
     }
 
     @Override

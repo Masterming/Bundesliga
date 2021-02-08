@@ -51,7 +51,7 @@ public class RowPopupClubController implements ActionListener {
                             "Wollen Sie den Club " + name + " wirklich loeschen?", "Club Loeschen",
                             JOptionPane.YES_NO_OPTION);
                     if (confirm == JOptionPane.YES_OPTION) {
-                        LOGGER.log(Level.INFO, "Remove Club " + name);
+                        LOGGER.log(Level.INFO, "Remove Club {0}", name);
                         l.removeClub(name);
                     }
                 }
@@ -65,7 +65,7 @@ public class RowPopupClubController implements ActionListener {
                     if (newName != null) {
                         newName = newName.trim();
                         if (!newName.isEmpty()) {
-                            LOGGER.log(Level.INFO, "Rename Club " + name + " to " + newName);
+                            LOGGER.log(Level.INFO, "Rename Club {0} to {1}", new String[]{name, newName});
                             l.changeClubName(name, newName);
                         }
                     }
@@ -75,7 +75,7 @@ public class RowPopupClubController implements ActionListener {
                     if (stadionName != null) {
                         stadionName = stadionName.trim();
                         if (!stadionName.isEmpty()) {
-                            LOGGER.log(Level.INFO, "Change stadion to " + stadionName);
+                            LOGGER.log(Level.INFO, "Change stadion to {0}", stadionName);
                             l.changeClubStadion(name, stadionName);
                         }
                     }

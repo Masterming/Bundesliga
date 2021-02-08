@@ -47,7 +47,7 @@ public class ClubController implements MouseListener, ActionListener {
         this.l = l;
         this.view = view;
         this.setData();
-        
+
     }
 
     public void addPlayer(String player) {
@@ -63,10 +63,10 @@ public class ClubController implements MouseListener, ActionListener {
             int row = temp.getSelectedRow();
             int column = 0;
             String team = temp.getValueAt(row, column).toString();
-            
+
             Club c = l.getClub(team);
             ClubEditView cbV = new ClubEditView(view.getmaster(), true);
-            new ClubEditController(cbV, c,l,master);
+            new ClubEditController(cbV, c, l, master);
             cbV.setVisible(true);
         }
         if (SwingUtilities.isRightMouseButton(evt)) {

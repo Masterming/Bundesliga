@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import java.awt.event.ActionEvent;
@@ -15,7 +10,6 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.util.logging.*;
 
-import model.Liga;
 import model.PlanModel;
 import view.ErgebnisInputView;
 
@@ -44,8 +38,8 @@ public class ErgebnisInputController implements ActionListener {
         this.ergDialog.getTeamASubGoalForPlayer().addActionListener(this);
         this.ergDialog.getTeamBAddGoalForPlayer().addActionListener(this);
         this.ergDialog.getTeamBSubGoalForPlayer().addActionListener(this);
-        scoreTeamA = new ArrayList<List<String>>();
-        scoreTeamB = new ArrayList<List<String>>();
+        scoreTeamA = new ArrayList<>();
+        scoreTeamB = new ArrayList<>();
         getData();
         teamAErg = -1;
         teamBErg = -1;

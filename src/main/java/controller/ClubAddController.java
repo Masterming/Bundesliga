@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import java.awt.event.ActionEvent;
@@ -49,8 +44,8 @@ public class ClubAddController implements ActionListener {
         String clubName = "";
         String stadion = "";
         if (cAv.getClubNameTxt().getText() != null && cAv.getClubStadionTxt().getText() != null) {
-            clubName = cAv.getClubNameTxt().getText().toString();
-            stadion = cAv.getClubStadionTxt().getText().toString();
+            clubName = cAv.getClubNameTxt().getText();
+            stadion = cAv.getClubStadionTxt().getText();
             clubName = clubName.trim();
             stadion = stadion.trim();
             if (clubName.length() > 0 && stadion.length() > 0) {
@@ -59,12 +54,11 @@ public class ClubAddController implements ActionListener {
         }
         if (!eingabe) {
             JFrame f = new JFrame();
-            JOptionPane.showMessageDialog(f, "Bitte geben sie etwas fuer Clubname und Stadion erin");
+            JOptionPane.showMessageDialog(f, "Bitte geben sie etwas fuer Clubname und Stadion ein");
         } else {
-            // TODO Hinzufuegen zur DB
             Club temp = new Club(clubName, stadion);
             l.addClub(temp);
-            LOGGER.log(Level.INFO, "Club Hinzugefuegt: " + clubName);
+            LOGGER.log(Level.INFO, "Club Hinzugefuegt: {0}", clubName);
             master.repaint();
             master.revalidate();
             cAv.dispose();

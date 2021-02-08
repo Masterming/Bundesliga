@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import java.awt.Color;
@@ -14,9 +9,7 @@ import java.util.Observer;
 import javax.swing.JScrollPane;
 import java.util.logging.*;
 
-import model.Liga;
-import model.LigaDBMapper;
-import model.PlanModel;
+import model.*;
 import view.ClubView;
 import view.MainView;
 import view.PlanView;
@@ -33,7 +26,7 @@ public class MainController implements ActionListener, Observer {
     // Es wird 3 Ligen Model geben jeweils eins pro Liga
     // --> werden beim ersten klick auf LigaButtons gesetzt
     private static Map<Integer, Liga> ligas;
-    private static LigaDBMapper dao;
+    private LigaDBMapper dao;
 
     private static MainView view;
     private static int ligaId = 1;
@@ -56,7 +49,7 @@ public class MainController implements ActionListener, Observer {
         view.getPlanBtn().addActionListener(this);
         view.getTableBtn().addActionListener(this);
         view.setVisible(true);
-        this.view = view;
+        MainController.view = view;
         renderView();
     }
 
@@ -142,23 +135,19 @@ public class MainController implements ActionListener, Observer {
     @Override
     public void update(Observable o, Object arg1) {
         if (o instanceof Liga) {
-            Liga temp = (Liga) o;
-            dao.updateLiga(temp);
-            ligas.put(temp.getId(), temp);
+            Liga l = (Liga) o;
+            int id = l.getId();
+            Liga temp = dao.updateLiga(l);
+
+            if (!ligas.get(id).copy(temp)) {
+                LOGGER.log(Level.WARNING, "Mismatch in copy of {0}", ligas.get(id));
+            }
 
             renderView();
         }
     }
 
-    public static boolean reloadFromDB() {
-        boolean success = true;
-        for (int i = 1; i <= 3; i++) {
-            if (!ligas.get(i).copy(dao.getLiga(i))) {
-                LOGGER.log(Level.WARNING, "Mismatch in copy of {0}", ligas.get(i));
-                success = false;
-            }
-        }
-        renderView();
-        return success;
+    public static Map<Integer, Liga> getLigas() {
+        return ligas;
     }
 }

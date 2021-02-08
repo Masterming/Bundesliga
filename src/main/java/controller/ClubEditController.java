@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import java.awt.Color;
@@ -26,7 +21,6 @@ public class ClubEditController implements ActionListener {
 
     private final static Logger LOGGER = Logger.getLogger(ClubEditController.class.getName());
     private ClubEditView cev;
-    private String team;
     private Club club;
     private JFrame master;
     private Liga l;
@@ -34,9 +28,9 @@ public class ClubEditController implements ActionListener {
     public ClubEditController(ClubEditView CeV, Club c, Liga l, JFrame master) {
         this.cev = CeV;
         this.cev.setClubName(c.getName());
-        this.club=c;
-        this.l=l;
-        this.master=master;
+        this.club = c;
+        this.l = l;
+        this.master = master;
         this.cev.getKaderBtn().addActionListener(this);
         this.cev.getTransBtn().addActionListener(this);
         this.cev.getAddSpielerBtn().addActionListener(this);
@@ -45,7 +39,7 @@ public class ClubEditController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent evt) {
         LOGGER.log(Level.INFO, "Button wurde gedrueckt");
-        if (evt.getActionCommand() == "kader") {
+        if ("kader".equals(evt.getActionCommand())) {
             cev.getKaderBtn().setBackground(Color.white);
             cev.getTransBtn().setBackground(Color.lightGray);
             cev.getAddSpielerBtn().setBackground(Color.lightGray);
@@ -56,13 +50,13 @@ public class ClubEditController implements ActionListener {
             cev.getClubEditContent().revalidate();
 
             KaderView kdw2 = new KaderView();
-            KaderController kDc = new KaderController(kdw2, club, this.master,this.l);
+            KaderController kDc = new KaderController(kdw2, club, this.master, this.l);
             cev.getClubEditContent().add(kdw2);
             cev.getClubEditContent().repaint();
             cev.getClubEditContent().revalidate();
 
         }
-        if (evt.getActionCommand() == "trans") {
+        if ("trans".equals(evt.getActionCommand())) {
             LOGGER.log(Level.INFO, "Trans");
             cev.getTransBtn().setBackground(Color.white);
             cev.getKaderBtn().setBackground(Color.lightGray);
@@ -79,7 +73,7 @@ public class ClubEditController implements ActionListener {
             LOGGER.log(Level.INFO, "Revalidate()");
 
         }
-        if (evt.getActionCommand() == "spieler") {
+        if ("spieler".equals(evt.getActionCommand())) {
             LOGGER.log(Level.INFO, "Spieler");
             cev.getTransBtn().setBackground(Color.lightGray);
             cev.getKaderBtn().setBackground(Color.lightGray);
@@ -88,7 +82,7 @@ public class ClubEditController implements ActionListener {
             cev.getClubEditContent().repaint();
             cev.getClubEditContent().revalidate();
             SpielerAddView spV = new SpielerAddView();
-            SpielerAddController spAC = new SpielerAddController(spV,club,l);
+            SpielerAddController spAC = new SpielerAddController(spV, club, l);
             cev.getClubEditContent().add(spV);
             cev.getClubEditContent().repaint();
             cev.getClubEditContent().revalidate();

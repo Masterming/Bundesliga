@@ -11,15 +11,15 @@ public class LigaDBMapper {
 
     private final static Logger LOGGER = Logger.getLogger(LigaDBMapper.class.getName());
 
-    public int addLiga(Liga liga) {
-        EntityManager em = ManagerFactory.createEntityManager();
+    public int addLiga(Liga l) {
+        EntityManager em = ManagerFactory.getEntityManager();
         EntityTransaction et = null;
         int id = -1;
 
         try {
             et = em.getTransaction();
             et.begin();
-            Liga merge = em.merge(liga);
+            Liga merge = em.merge(l);
             id = merge.getId();
             et.commit();
         } catch (Exception ex) {
@@ -28,13 +28,13 @@ public class LigaDBMapper {
             }
             LOGGER.log(Level.SEVERE, ex.getLocalizedMessage());
         } finally {
-            em.close();
+            // em.close();
         }
         return id;
     }
 
     public Liga getLiga(int id) {
-        EntityManager em = ManagerFactory.createEntityManager();
+        EntityManager em = ManagerFactory.getEntityManager();
         String query = "SELECT l FROM Liga l WHERE l.id = :id";
         TypedQuery<Liga> tq = em.createQuery(query, Liga.class);
         tq.setParameter("id", id);
@@ -48,13 +48,13 @@ public class LigaDBMapper {
         } catch (Exception ex) {
             LOGGER.log(Level.SEVERE, ex.getLocalizedMessage());
         } finally {
-            em.close();
+            // em.close();
         }
         return liga;
     }
 
     public List<Liga> getLigas() {
-        EntityManager em = ManagerFactory.createEntityManager();
+        EntityManager em = ManagerFactory.getEntityManager();
         String strQuery = "SELECT l FROM Liga l WHERE l.id IS NOT NULL";
         TypedQuery<Liga> tq = em.createQuery(strQuery, Liga.class);
         List<Liga> ligas = new ArrayList<>();
@@ -67,13 +67,13 @@ public class LigaDBMapper {
         } catch (Exception ex) {
             LOGGER.log(Level.SEVERE, ex.getLocalizedMessage());
         } finally {
-            em.close();
+            // em.close();
         }
         return ligas;
     }
 
     public int reset() {
-        EntityManager em = ManagerFactory.createEntityManager();
+        EntityManager em = ManagerFactory.getEntityManager();
         EntityTransaction et = null;
 
         String strQuery = "DELETE FROM Liga";
@@ -90,17 +90,18 @@ public class LigaDBMapper {
             }
             LOGGER.log(Level.SEVERE, ex.getLocalizedMessage());
         } finally {
-            em.close();
+            // em.close();
         }
         return i;
     }
 
     public boolean deleteLiga(Liga l) {
         boolean bSuccess = true;
-        EntityManager em = ManagerFactory.createEntityManager();
+        EntityManager em = ManagerFactory.getEntityManager();
         EntityTransaction et = null;
 
         try {
+            LOGGER.log(Level.INFO, "Deleting {0}", l.toString());
             et = em.getTransaction();
             et.begin();
             em.remove(l);
@@ -112,30 +113,31 @@ public class LigaDBMapper {
             bSuccess = false;
             LOGGER.log(Level.SEVERE, ex.getLocalizedMessage());
         } finally {
-            em.close();
+            // em.close();
         }
         return bSuccess;
     }
 
-    public boolean updateLiga(Liga l) {
-        boolean bSuccess = true;
-        EntityManager em = ManagerFactory.createEntityManager();
+    public Liga updateLiga(Liga l) {
+        Liga ret = null;
+        EntityManager em = ManagerFactory.getEntityManager();
         EntityTransaction et = null;
+        LOGGER.log(Level.INFO, "Update: {0}", l.toString());
 
         try {
             et = em.getTransaction();
             et.begin();
-            em.merge(l);
+            // ret = em.merge(l);
+            ret = em.merge(l);
             et.commit();
         } catch (Exception ex) {
             if (et != null) {
                 et.rollback();
             }
-            bSuccess = false;
             LOGGER.log(Level.SEVERE, ex.getLocalizedMessage());
         } finally {
-            em.close();
+            // em.close();
         }
-        return bSuccess;
+        return ret;
     }
 }

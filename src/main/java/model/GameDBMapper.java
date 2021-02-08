@@ -12,7 +12,7 @@ public class GameDBMapper {
     private final static Logger LOGGER = Logger.getLogger(GameDBMapper.class.getName());
 
     public int addGame(Game game) {
-        EntityManager em = ManagerFactory.createEntityManager();
+        EntityManager em = ManagerFactory.getEntityManager();
         EntityTransaction et = null;
         int id = -1;
 
@@ -28,13 +28,13 @@ public class GameDBMapper {
             }
             LOGGER.log(Level.SEVERE, ex.getLocalizedMessage());
         } finally {
-            em.close();
+            // em.close();
         }
         return id;
     }
 
     public Game getGame(int id) {
-        EntityManager em = ManagerFactory.createEntityManager();
+        EntityManager em = ManagerFactory.getEntityManager();
         String query = "SELECT g FROM Game g WHERE g.id = :id";
         TypedQuery<Game> tq = em.createQuery(query, Game.class);
         tq.setParameter("id", id);
@@ -48,13 +48,13 @@ public class GameDBMapper {
         } catch (Exception ex) {
             LOGGER.log(Level.SEVERE, ex.getLocalizedMessage());
         } finally {
-            em.close();
+            // em.close();
         }
         return game;
     }
 
     public List<Game> getAllGames() {
-        EntityManager em = ManagerFactory.createEntityManager();
+        EntityManager em = ManagerFactory.getEntityManager();
         String strQuery = "SELECT g FROM Game c WHERE g.id IS NOT NULL";
         TypedQuery<Game> tq = em.createQuery(strQuery, Game.class);
         List<Game> games = new ArrayList<>();
@@ -67,13 +67,13 @@ public class GameDBMapper {
         } catch (Exception ex) {
             LOGGER.log(Level.SEVERE, ex.getLocalizedMessage());
         } finally {
-            em.close();
+            // em.close();
         }
         return games;
     }
 
     public int reset() {
-        EntityManager em = ManagerFactory.createEntityManager();
+        EntityManager em = ManagerFactory.getEntityManager();
         EntityTransaction et = null;
 
         String strQuery = "DELETE FROM Game";
@@ -90,14 +90,14 @@ public class GameDBMapper {
             }
             LOGGER.log(Level.SEVERE, ex.getLocalizedMessage());
         } finally {
-            em.close();
+            // em.close();
         }
         return i;
     }
 
     public boolean deleteGame(Game g) {
         boolean bSuccess = true;
-        EntityManager em = ManagerFactory.createEntityManager();
+        EntityManager em = ManagerFactory.getEntityManager();
         EntityTransaction et = null;
 
         try {
@@ -112,14 +112,14 @@ public class GameDBMapper {
             bSuccess = false;
             LOGGER.log(Level.SEVERE, ex.getLocalizedMessage());
         } finally {
-            em.close();
+            // em.close();
         }
         return bSuccess;
     }
 
     public boolean updateGame(Game g) {
         boolean bSuccess = true;
-        EntityManager em = ManagerFactory.createEntityManager();
+        EntityManager em = ManagerFactory.getEntityManager();
         EntityTransaction et = null;
 
         try {
@@ -134,7 +134,7 @@ public class GameDBMapper {
             bSuccess = false;
             LOGGER.log(Level.SEVERE, ex.getLocalizedMessage());
         } finally {
-            em.close();
+            // em.close();
         }
         return bSuccess;
     }

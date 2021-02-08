@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import java.awt.event.ActionEvent;
@@ -37,7 +32,7 @@ public class KaderController implements ActionListener, MouseListener {
         this.team = team;
         // Tabelle mit Rechtsklick -> Namen aendern und Spieler Loeschen
         this.kdV.getPlayerTable().addMouseListener(this);
-        this.master=mas;
+        this.master = mas;
         this.li = l;
         this.setTableData();
     }
@@ -54,7 +49,7 @@ public class KaderController implements ActionListener, MouseListener {
 
     private String[][] getData() {
         String[][] data = new String[team.getPlayers().size()][];
-         int count = 0;
+        int count = 0;
 
         for (Player p : team.getPlayers()) {
             String[] temp = new String[2];
@@ -81,9 +76,10 @@ public class KaderController implements ActionListener, MouseListener {
             LOGGER.log(Level.INFO, "kontext Menue");
             LOGGER.log(Level.INFO, "Rechts klick");
             // Kontext Menue mit Spieler Loeschen und name aendern ueber Pop up Item
-            
+
             RowPopupPlayerView kontext = new RowPopupPlayerView(kdV.getPlayerTable());
-            RowPopupPlayerController rPoPPlC = new RowPopupPlayerController(kontext,this.team,this.kdV.getPlayerTable(),master,this.li);
+            RowPopupPlayerController rPoPPlC = new RowPopupPlayerController(kontext, this.team,
+                    this.kdV.getPlayerTable(), master, this.li);
             kontext.show(kdV.getPlayerTable(), evt.getX(), evt.getY());
         }
     }

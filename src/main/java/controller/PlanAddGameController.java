@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import java.awt.event.ActionEvent;
@@ -123,8 +118,8 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
     public void itemStateChanged(ItemEvent arg0) {
         //
         boolean change = false;
-        if (paGV.getTeamALigaList().getSelectedItem().toString() != selectedALiga
-                || paGV.getTeamBLigaList().getSelectedItem().toString() != selectedBLiga) {
+        if (!paGV.getTeamALigaList().getSelectedItem().toString().equals(selectedALiga)
+                || !paGV.getTeamBLigaList().getSelectedItem().toString().equals(selectedBLiga)) {
             change = true;
         }
         selectedALiga = paGV.getTeamALigaList().getSelectedItem().toString();
@@ -165,7 +160,7 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
         if (paGV.getTeamBList().getSelectedItem() != null) {
             teamB = paGV.getTeamBList().getSelectedItem().toString();
         }
-        if (teamA != teamB) {
+        if (!teamA.equals(teamB)) {
             paGV.setTeamALbl(teamA);
             paGV.setTeamBLbl(teamB);
         } else {
