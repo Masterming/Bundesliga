@@ -1,14 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import java.util.logging.*;
+
+import model.Club;
+import model.Liga;
 import view.ClubAddView;
 
 /**
@@ -16,13 +15,18 @@ import view.ClubAddView;
  * @author z003ywys
  */
 public class ClubAddController implements ActionListener {
-    private JFrame mainView;
-    private ClubAddView cAv;
 
-    public ClubAddController(JFrame mainView, ClubAddView cAv) {
-        this.mainView = mainView;
+    private final static Logger LOGGER = Logger.getLogger(ClubAddController.class.getName());
+    private JFrame master;
+    private ClubAddView cAv;
+    private Liga l;
+    // private ClubDB
+
+    public ClubAddController(JFrame master, ClubAddView cAv, Liga L) {
+        this.master = master;
         this.cAv = cAv;
         this.cAv.getClubAddBtn().addActionListener(this);
+        this.l = L;
     }
 
     @Override
@@ -30,7 +34,6 @@ public class ClubAddController implements ActionListener {
         String comm = evt.getActionCommand();
         switch (comm) {
             case "clubAdd":
-                System.out.println("Club Hinzugefuegt");
                 addClub();
                 break;
         }
@@ -40,9 +43,9 @@ public class ClubAddController implements ActionListener {
         boolean eingabe = false;
         String clubName = "";
         String stadion = "";
-        if (this.cAv.getClubNameTxt().getText() != null && this.cAv.getClubStadionTxt().getText() != null) {
-            clubName = this.cAv.getClubNameTxt().getText().toString();
-            stadion = this.cAv.getClubStadionTxt().getText().toString();
+        if (cAv.getClubNameTxt().getText() != null && cAv.getClubStadionTxt().getText() != null) {
+            clubName = cAv.getClubNameTxt().getText();
+            stadion = cAv.getClubStadionTxt().getText();
             clubName = clubName.trim();
             stadion = stadion.trim();
             if (clubName.length() > 0 && stadion.length() > 0) {
@@ -51,11 +54,14 @@ public class ClubAddController implements ActionListener {
         }
         if (!eingabe) {
             JFrame f = new JFrame();
-            JOptionPane.showMessageDialog(f, "Bitte geben sie etwas fuer Clubname und Stadion erin");
+            JOptionPane.showMessageDialog(f, "Bitte geben sie etwas fuer Clubname und Stadion ein");
         } else {
-            // TODO Hinzufuegen zur DB
-            System.out.println(stadion);
-            System.out.println(clubName);
+            Club temp = new Club(clubName, stadion);
+            l.addClub(temp);
+            LOGGER.log(Level.INFO, "Club Hinzugefuegt: {0}", clubName);
+            master.repaint();
+            master.revalidate();
+            cAv.dispose();
 
         }
 

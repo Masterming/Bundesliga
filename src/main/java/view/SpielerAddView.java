@@ -17,7 +17,7 @@ public class SpielerAddView extends javax.swing.JPanel {
         /**
          *
          */
-        private static final long serialVersionUID = 111L;
+        private static final long serialVersionUID = 19L;
 
         public SpielerAddView() {
         initComponents();

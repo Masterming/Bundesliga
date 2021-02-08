@@ -6,38 +6,38 @@
 package view;
 
 import java.awt.Color;
-import java.awt.Dimension;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+
+import java.util.logging.*;
 
 /**
  *
  * @author z003ywys
  */
-public class TableView extends javax.swing.JPanel {
-    private static final long serialVersionUID = 14L;
+public class TableView extends JPanel {
+
+    private final static Logger LOGGER = Logger.getLogger(TableView.class.getName());
+    private static final long serialVersionUID = 20L;
     JScrollPane jScrollPane1;
     JTable table;
 
     // JLabel jLabel1;
     private void initComponents() {
-        jScrollPane1 = new javax.swing.JScrollPane();
-        table = new javax.swing.JTable() {
+        jScrollPane1 = new JScrollPane();
+        table = new JTable() {
             public boolean editCellAt(int row, int column, java.util.EventObject e) {
                 return false;
             }
         };
-        // jLabel1 = new javax.swing.JLabel();
+        // jLabel1 = new JLabel();
 
         // ggf. extra Tabellen Modell als extra Klasse erstellen erstellen in dem man
         // Eigenschaften wie Editable relaisiert
-        table.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {}, new String[] { "Platz", "Club",
-                "Spiele", "Punkte", "Siege", "Unentschieden", "Niederlagen", "Torverhaeltnisse" }
-
+        table.setModel(new DefaultTableModel(new Object[][]{}, new String[]{"Platz", "Club",
+            "Spiele", "Punkte", "Siege", "Unentschieden", "Niederlagen", "Torverhaeltnis"}
         ));
         table.setRowSelectionAllowed(false);
         table.setColumnSelectionAllowed(false);
@@ -46,13 +46,13 @@ public class TableView extends javax.swing.JPanel {
         this.setBackground(backGround);
         jScrollPane1.setViewportView(table);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
-        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE));
-        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE));
+        layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup().addComponent(jScrollPane1,
-                        javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        GroupLayout.PREFERRED_SIZE, 309, GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)));
 
     }
@@ -76,11 +76,9 @@ public class TableView extends javax.swing.JPanel {
     // public JLabel getjLabel1() {
     // return jLabel1;
     // }
-
     // public void setjLabel1(String liga) {
     // this.jLabel1.setText(liga);
     // }
-
     public void setTableContent(TableModel tbm) {
         this.table.setModel(tbm);
     }
@@ -89,22 +87,17 @@ public class TableView extends javax.swing.JPanel {
         initComponents();
         try {
 
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException | IllegalAccessException | InstantiationException
+                | ClassNotFoundException ex) {
+            LOGGER.log(Level.SEVERE, ex.getLocalizedMessage());
+            this.setVisible(true);
         }
-        this.setVisible(true);
     }
 
 }

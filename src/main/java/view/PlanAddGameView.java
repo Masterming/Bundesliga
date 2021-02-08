@@ -19,7 +19,7 @@ public class PlanAddGameView extends javax.swing.JDialog {
         /**
          *
          */
-        private static final long serialVersionUID = 104L;
+        private static final long serialVersionUID = 14L;
 
         public PlanAddGameView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);

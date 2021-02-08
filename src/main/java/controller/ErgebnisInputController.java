@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import java.awt.event.ActionEvent;
@@ -11,10 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.Liga;
+import java.util.logging.*;
+
 import model.PlanModel;
 import view.ErgebnisInputView;
 
@@ -24,39 +19,14 @@ import view.ErgebnisInputView;
  */
 public class ErgebnisInputController implements ActionListener {
 
+    private final static Logger LOGGER = Logger.getLogger(ErgebnisInputController.class.getName());
+
     private ErgebnisInputView ergDialog;
     private PlanModel plm;
     private List<List<String>> scoreTeamA;
     private List<List<String>> scoreTeamB;
     int teamAErg;
     int teamBErg;
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        // String a = this.ergDialog.getErg1().getText();
-        // String b = this.ergDialog.getErg2().getText();
-        String nameA = this.ergDialog.getTeamAPlayerList().getSelectedValue();
-        String nameB = this.ergDialog.getTeamBPlayerList().getSelectedValue();
-        switch (e.getActionCommand()) {
-            case "scoreTeamA":
-                scoreTeam(nameA, this.scoreTeamA);
-                break;
-            case "descoreTeamA":
-                descoreTeam(nameA, this.scoreTeamA);
-                break;
-            case "scoreTeamB":
-                scoreTeam(nameB, this.scoreTeamB);
-                break;
-            case "descoreTeamB":
-                descoreTeam(nameB, this.scoreTeamB);
-                break;
-            case "save":
-                System.out.println("save");
-                save();
-                break;
-        }
-        updateView();
-    }
 
     public ErgebnisInputController(ErgebnisInputView ergDialog, String teamA, String teamB, PlanModel plmEx) {
         this.ergDialog = ergDialog;
@@ -68,12 +38,39 @@ public class ErgebnisInputController implements ActionListener {
         this.ergDialog.getTeamASubGoalForPlayer().addActionListener(this);
         this.ergDialog.getTeamBAddGoalForPlayer().addActionListener(this);
         this.ergDialog.getTeamBSubGoalForPlayer().addActionListener(this);
-        scoreTeamA = new ArrayList<List<String>>();
-        scoreTeamB = new ArrayList<List<String>>();
+        scoreTeamA = new ArrayList<>();
+        scoreTeamB = new ArrayList<>();
         getData();
         teamAErg = -1;
         teamBErg = -1;
 
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // String a = ergDialog.getErg1().getText();
+        // String b = ergDialog.getErg2().getText();
+        String nameA = ergDialog.getTeamAPlayerList().getSelectedValue();
+        String nameB = ergDialog.getTeamBPlayerList().getSelectedValue();
+        switch (e.getActionCommand()) {
+            case "scoreTeamA":
+                scoreTeam(nameA, scoreTeamA);
+                break;
+            case "descoreTeamA":
+                descoreTeam(nameA, scoreTeamA);
+                break;
+            case "scoreTeamB":
+                scoreTeam(nameB, scoreTeamB);
+                break;
+            case "descoreTeamB":
+                descoreTeam(nameB, scoreTeamB);
+                break;
+            case "save":
+                LOGGER.log(Level.INFO, "save");
+                save();
+                break;
+        }
+        updateView();
     }
 
     private void getData() {
@@ -85,9 +82,9 @@ public class ErgebnisInputController implements ActionListener {
         listModelTeamA.addElement("Thomas Mueller");
         listModelTeamA.addElement("Philipp Lahm");
 
-        this.ergDialog.setTeamAPlayerList(listModelTeamA);
-        this.ergDialog.repaint();
-        this.ergDialog.revalidate();
+        ergDialog.setTeamAPlayerList(listModelTeamA);
+        ergDialog.repaint();
+        ergDialog.revalidate();
     }
 
     private void scoreTeam(String name, List<List<String>> dataSet) {
@@ -119,7 +116,7 @@ public class ErgebnisInputController implements ActionListener {
     }
 
     private void descoreTeam(String name, List<List<String>> dataSet) {
-        System.out.println("Descore Team A");
+        LOGGER.log(Level.INFO, "Descore Team A");
         int index = -1;
         boolean found = false;
         for (int i = 0; i < dataSet.size(); i++) {
@@ -144,7 +141,7 @@ public class ErgebnisInputController implements ActionListener {
     }
 
     private void updateView() {
-        DefaultTableModel tbmA = (DefaultTableModel) this.ergDialog.getScoredPlayerTeamA().getModel();
+        DefaultTableModel tbmA = (DefaultTableModel) ergDialog.getScoredPlayerTeamA().getModel();
 
         for (int i = tbmA.getRowCount() - 1; i >= 0; i--) {
             tbmA.removeRow(i);
@@ -157,9 +154,9 @@ public class ErgebnisInputController implements ActionListener {
                 tbmA.addRow(temp);
             }
         }
-        this.ergDialog.setScoredPlayerTeamA(tbmA);
+        ergDialog.setScoredPlayerTeamA(tbmA);
 
-        DefaultTableModel tbmB = (DefaultTableModel) this.ergDialog.getScoredPlayerTeamB().getModel();
+        DefaultTableModel tbmB = (DefaultTableModel) ergDialog.getScoredPlayerTeamB().getModel();
         for (int i = tbmB.getRowCount() - 1; i >= 0; i--) {
             tbmB.removeRow(i);
         }
@@ -169,13 +166,13 @@ public class ErgebnisInputController implements ActionListener {
                 tbmB.addRow(temp);
             }
         }
-        this.ergDialog.setScoredPlayerTeamB(tbmB);
+        ergDialog.setScoredPlayerTeamB(tbmB);
 
         // Den spielstand aktualisieren
-        teamAErg = getSpielStand(this.scoreTeamA);
-        teamBErg = getSpielStand(this.scoreTeamB);
-        this.ergDialog.setErgTeamALbl(String.valueOf(teamAErg));
-        this.ergDialog.setErgTeamBLbl1(String.valueOf(teamBErg));
+        teamAErg = getSpielStand(scoreTeamA);
+        teamBErg = getSpielStand(scoreTeamB);
+        ergDialog.setErgTeamALbl(String.valueOf(teamAErg));
+        ergDialog.setErgTeamBLbl1(String.valueOf(teamBErg));
     }
 
     private int getSpielStand(List<List<String>> inPutData) {
@@ -195,14 +192,13 @@ public class ErgebnisInputController implements ActionListener {
         if (teamAErg == -1 || teamBErg == -1) {
             JFrame f = new JFrame();
             JOptionPane.showMessageDialog(f, "Bitte fuegen Sie Ergebnisse hinzu");
-            System.out.println("Spielstand: " + teamAErg + " zu " + teamBErg);
+            LOGGER.log(Level.INFO, "Spielstand: " + teamAErg + " zu " + teamBErg);
         } else {
             // TODO in DB Schreiben und Model aendern
-            System.out.println(this.scoreTeamA);
-            System.out.println(this.scoreTeamB);
-            // this.plm.setlM(this.plm.getlM());
-            this.plm.setlM(new Liga("Liga 4"));
-            this.ergDialog.dispose();
+            LOGGER.log(Level.INFO, scoreTeamA.toString());
+            LOGGER.log(Level.INFO, scoreTeamB.toString());
+
+            ergDialog.dispose();
         }
     }
 

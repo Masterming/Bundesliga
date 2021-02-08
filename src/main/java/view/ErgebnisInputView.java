@@ -7,10 +7,8 @@ package view;
 
 import javax.swing.AbstractListModel;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.table.TableModel;
 
 /**
@@ -18,7 +16,7 @@ import javax.swing.table.TableModel;
  * @author z003ywys
  */
 public class ErgebnisInputView extends javax.swing.JDialog {
-    private static final long serialVersionUID = 9L;
+    private static final long serialVersionUID = 10L;
 
     public ErgebnisInputView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);

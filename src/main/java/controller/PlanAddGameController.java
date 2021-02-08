@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import java.awt.event.ActionEvent;
@@ -13,12 +8,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import java.util.logging.*;
+
 import model.Liga;
 import model.PlanModel;
 import view.PlanAddGameView;
@@ -28,7 +22,9 @@ import view.PlanAddGameView;
  * @author z003ywys
  */
 public class PlanAddGameController implements ActionListener, ItemListener, MouseListener {
-    private JFrame mainView;
+
+    private final static Logger LOGGER = Logger.getLogger(PlanAddGameController.class.getName());
+    private JFrame master;
     private PlanAddGameView paGV;
     private PlanModel plM;
     private Liga l;
@@ -37,8 +33,8 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
     private String teamA;
     private String teamB;
 
-    public PlanAddGameController(JFrame mainView, PlanAddGameView PagV, PlanModel plM, Liga l) {
-        this.mainView = mainView;
+    public PlanAddGameController(JFrame master, PlanAddGameView PagV, PlanModel plM, Liga l) {
+        this.master = master;
         this.paGV = PagV;
         this.plM = plM;
         this.l = l;
@@ -54,34 +50,34 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
     }
 
     private void adaptViewToLiga() {
-        if (this.l.getName().contains("1")) {
+        if (l.getId() == 1) {
             String[] ligen = new String[2];
             ligen[0] = "Liga 1";
             ligen[1] = "Liga 2";
             DefaultComboBoxModel<String> dfC = new DefaultComboBoxModel<>(ligen);
             DefaultComboBoxModel<String> dfB = new DefaultComboBoxModel<>(ligen);
-            this.paGV.setTeamALigaList(dfC);
-            this.paGV.setTeamBLigaList(dfB);
+            paGV.setTeamALigaList(dfC);
+            paGV.setTeamBLigaList(dfB);
             // TODO Teams Holen pro liga
         }
-        if (this.l.getName().contains("2")) {
+        if (l.getId() == 2) {
             String[] ligen = new String[3];
             ligen[0] = "Liga 1";
             ligen[1] = "Liga 2";
             ligen[2] = "Liga 3";
             DefaultComboBoxModel<String> dfC = new DefaultComboBoxModel<>(ligen);
             DefaultComboBoxModel<String> dfB = new DefaultComboBoxModel<>(ligen);
-            this.paGV.setTeamALigaList(dfC);
-            this.paGV.setTeamBLigaList(dfB);
+            paGV.setTeamALigaList(dfC);
+            paGV.setTeamBLigaList(dfB);
         }
-        if (this.l.getName().contains("3")) {
+        if (l.getId() == 3) {
             String[] ligen = new String[2];
             ligen[0] = "Liga 2";
             ligen[1] = "Liga 3";
             DefaultComboBoxModel<String> dfC = new DefaultComboBoxModel<>(ligen);
             DefaultComboBoxModel<String> dfB = new DefaultComboBoxModel<>(ligen);
-            this.paGV.setTeamALigaList(dfC);
-            this.paGV.setTeamBLigaList(dfB);
+            paGV.setTeamALigaList(dfC);
+            paGV.setTeamBLigaList(dfB);
         }
     }
 
@@ -90,32 +86,30 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
         String comm = evt.getActionCommand();
         switch (comm) {
             case "addGame":
-                System.out.println("Spiel hinzugefuegt");
+                LOGGER.log(Level.INFO, "Spiel hinzugefuegt");
                 addGame();
                 break;
         }
     }
 
     private void addGame() {
-        String dateTemp = this.paGV.getDateInputTxt().getText();
+        String dateTemp = paGV.getDateInputTxt().getText();
         DateTimeFormatter f = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
         LocalDateTime dtGame = LocalDateTime.now();
         boolean ok = true;
         try {
             dtGame = LocalDateTime.from(f.parse(dateTemp));
         } catch (Exception e) {
-            System.out.println("Bitte Datum im richtigen Format eingeben");
+            LOGGER.log(Level.WARNING, "Bitte Datum im richtigen Format eingeben");
             JOptionPane.showMessageDialog(null, "Bitte Datum im richtigen Format eingeben");
             ok = false;
         }
         if (ok) {
-            System.out.println(dtGame);
-            System.out.println(this.teamA);
-            System.out.println(this.teamB);
+            LOGGER.log(Level.INFO, dtGame.toString());
+            LOGGER.log(Level.INFO, teamA);
+            LOGGER.log(Level.INFO, teamB);
             // TODO Spiel in DB Schreiben und Model aktualisieren
-            this.plM.setlM(new Liga("Test"));
-            // this.l.setName(this.l.getName());
-            this.paGV.dispose();
+            paGV.dispose();
 
         }
     }
@@ -124,118 +118,116 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
     public void itemStateChanged(ItemEvent arg0) {
         //
         boolean change = false;
-        if (this.paGV.getTeamALigaList().getSelectedItem().toString() != selectedALiga
-                || this.paGV.getTeamBLigaList().getSelectedItem().toString() != selectedBLiga) {
+        if (!paGV.getTeamALigaList().getSelectedItem().toString().equals(selectedALiga)
+                || !paGV.getTeamBLigaList().getSelectedItem().toString().equals(selectedBLiga)) {
             change = true;
         }
-        selectedALiga = this.paGV.getTeamALigaList().getSelectedItem().toString();
-        selectedBLiga = this.paGV.getTeamBLigaList().getSelectedItem().toString();
+        selectedALiga = paGV.getTeamALigaList().getSelectedItem().toString();
+        selectedBLiga = paGV.getTeamBLigaList().getSelectedItem().toString();
         if (selectedALiga.contains("1")) {
             if (selectedBLiga.contains("3")) {
                 // Fehlermeldung
                 JOptionPane.showMessageDialog(null, "Gewuenschte Ligakombination nicht auswaehlbar");
-                this.paGV.getTeamALigaList().setSelectedIndex(1);
-                this.paGV.repaint();
-                this.paGV.revalidate();
+                paGV.getTeamALigaList().setSelectedIndex(1);
+                paGV.repaint();
+                paGV.revalidate();
             }
         }
         if (selectedALiga.contains("3")) {
             if (selectedBLiga.contains("1")) {
                 // Fehlermeldung
                 JOptionPane.showMessageDialog(null, "Gewuenschte Ligakombination nicht auswaehlbar");
-                this.paGV.getTeamALigaList().setSelectedIndex(1);
-                this.paGV.repaint();
-                this.paGV.revalidate();
+                paGV.getTeamALigaList().setSelectedIndex(1);
+                paGV.repaint();
+                paGV.revalidate();
             }
         }
         if (selectedBLiga.contains("3")) {
             if (selectedBLiga.contains("1")) {
                 // Fehlermeldung
                 JOptionPane.showMessageDialog(null, "Gewuenschte Ligakombination nicht auswaehlbar");
-                this.paGV.getTeamALigaList().setSelectedIndex(1);
-                this.paGV.repaint();
-                this.paGV.revalidate();
+                paGV.getTeamALigaList().setSelectedIndex(1);
+                paGV.repaint();
+                paGV.revalidate();
             }
         }
         if (change) {
             getListData();
         }
-        if (this.paGV.getTeamAList().getSelectedItem() != null) {
-            teamA = this.paGV.getTeamAList().getSelectedItem().toString();
+        if (paGV.getTeamAList().getSelectedItem() != null) {
+            teamA = paGV.getTeamAList().getSelectedItem().toString();
         }
-        if (this.paGV.getTeamBList().getSelectedItem() != null) {
-            teamB = this.paGV.getTeamBList().getSelectedItem().toString();
+        if (paGV.getTeamBList().getSelectedItem() != null) {
+            teamB = paGV.getTeamBList().getSelectedItem().toString();
         }
-        if (teamA != teamB) {
-            this.paGV.setTeamALbl(teamA);
-            this.paGV.setTeamBLbl(teamB);
+        if (!teamA.equals(teamB)) {
+            paGV.setTeamALbl(teamA);
+            paGV.setTeamBLbl(teamB);
         } else {
             JOptionPane.showMessageDialog(null, "Die Teams die gegeneinander Spielen muessen verschieden sein");
         }
-
     }
 
     private void getListData() {
-        System.out.println(selectedALiga);
-        System.out.println(selectedBLiga);
+        LOGGER.log(Level.INFO, selectedALiga);
+        LOGGER.log(Level.INFO, selectedBLiga);
         // Club Liste an die jeweiige Liga angepasst werden
         // TODO --> Daten aus DB holen
         DefaultComboBoxModel<String> listModelTeamA = new DefaultComboBoxModel<>();
         DefaultComboBoxModel<String> listModelTeamB = new DefaultComboBoxModel<>();
 
         // TODO List Model befuellen
-        if (this.selectedALiga.contains("1")) {
-            this.paGV.getTeamAList().removeAll();
+        if (selectedALiga.contains("1")) {
+            paGV.getTeamAList().removeAll();
             listModelTeamA.addElement("RB Leipzig");
             listModelTeamA.addElement("FC Bayern Muenchen");
         }
-        if (this.selectedBLiga.contains("1")) {
-            this.paGV.getTeamBList().removeAll();
+        if (selectedBLiga.contains("1")) {
+            paGV.getTeamBList().removeAll();
             listModelTeamB.addElement("RB Leipzig");
             listModelTeamB.addElement("FC Bayern Muenchen");
         }
 
-        if (this.selectedALiga.contains("2")) {
+        if (selectedALiga.contains("2")) {
             // TODO List Model befuellen
-            this.paGV.getTeamAList().removeAll();
+            paGV.getTeamAList().removeAll();
             listModelTeamA.addElement("FC Erzgevirge Aue");
             listModelTeamA.addElement("HSV Hamburg");
         }
-        if (this.selectedBLiga.contains("2")) {
-            this.paGV.getTeamBList().removeAll();
+        if (selectedBLiga.contains("2")) {
+            paGV.getTeamBList().removeAll();
             listModelTeamB.addElement("FC Erzgevirge Aue");
             listModelTeamB.addElement("HSV Hamburg");
         }
-        if (this.selectedALiga.contains("3")) {
+        if (selectedALiga.contains("3")) {
             // TODO List Model befuellen
-            this.paGV.getTeamAList().removeAll();
+            paGV.getTeamAList().removeAll();
             listModelTeamA.addElement("Ingolstadt");
             listModelTeamA.addElement("Dynamo Dresden");
         }
-        if (this.selectedBLiga.contains("3")) {
-            this.paGV.getTeamBList().removeAll();
+        if (selectedBLiga.contains("3")) {
+            paGV.getTeamBList().removeAll();
             listModelTeamB.addElement("Ingolstadt");
             listModelTeamB.addElement("Dynamo Dresden");
         }
-
-        this.paGV.setTeamAList(listModelTeamA);
-        this.paGV.setTeamBList(listModelTeamB);
-        this.paGV.repaint();
-        this.paGV.revalidate();
+        paGV.setTeamAList(listModelTeamA);
+        paGV.setTeamBList(listModelTeamB);
+        paGV.repaint();
+        paGV.revalidate();
     }
 
     @Override
     public void mouseClicked(MouseEvent arg0) {
         // throw new UnsupportedOperationException("Not supported yet."); //To change
         // body of generated methods, choose Tools | Templates.
-        String liga1 = this.paGV.getTeamALigaList().getSelectedItem().toString();
+        String liga1 = paGV.getTeamALigaList().getSelectedItem().toString();
         if (liga1.contains("1")) {
             // Nur nOch liga 2 oder liga 1 bei
             String[] disLiga = new String[2];
             disLiga[0] = "Liga 1";
             disLiga[2] = "Liga 2";
             DefaultComboBoxModel<String> dfC = new DefaultComboBoxModel<>(disLiga);
-            this.paGV.setTeamBLigaList(dfC);
+            paGV.setTeamBLigaList(dfC);
         }
     }
 

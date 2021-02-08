@@ -11,9 +11,9 @@ import org.hibernate.annotations.LazyCollectionOption;
  */
 @Entity
 @Table(name = "ligas")
-public class Liga implements Serializable {
+public class Liga extends Observable implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 3L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,6 +49,7 @@ public class Liga implements Serializable {
 
     public void setId(int id) {
         ligaId = id;
+        notifyObservers(this);
     }
 
     public String getName() {
@@ -60,15 +61,143 @@ public class Liga implements Serializable {
     }
 
     public boolean addClub(Club c) {
-        return clubs.add(c);
+        boolean sucess = clubs.add(c);
+        setChanged();
+        notifyObservers(this);
+        return sucess;
     }
 
     public boolean removeClub(Club c) {
-        return clubs.remove(c);
+        boolean sucess = clubs.remove(c);
+        setChanged();
+        notifyObservers(this);
+        return sucess;
+    }
+
+    public Club removeClub(String name) {
+        Club temp = null;
+        for (Club c : clubs) {
+            if (c.getName().equals(name)) {
+                temp = c;
+                clubs.remove(c);
+                setChanged();
+                notifyObservers(this);
+                break;
+            }
+        }
+        return temp;
+    }
+
+    public Club getClub(String name) {
+        for (Club c : clubs) {
+            if (c.getName().equals(name)) {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    public boolean updateClub(Club c) {
+        boolean sucess = false;
+        ListIterator<Club> iterator = clubs.listIterator();
+        while (iterator.hasNext()) {
+            Club next = iterator.next();
+            if (next.equals(c)) {
+                // Replace element
+                iterator.set(c);
+                sucess = true;
+                setChanged();
+                notifyObservers(this);
+                break;
+            }
+        }
+        return sucess;
+    }
+
+    public boolean changeClubName(String name, String newName) {
+        for (Club c : clubs) {
+            if (c.getName().equals(name)) {
+                c.setName(newName);
+                setChanged();
+                notifyObservers(this);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean changeClubStadion(String name, String newName) {
+        for (Club c : clubs) {
+            if (c.getName().equals(name)) {
+                c.setStadion(newName);
+                setChanged();
+                notifyObservers(this);
+                return true;
+            }
+        }
+        return false;
     }
 
     public void setName(String name) {
         this.name = name;
+        notifyObservers(this);
+    }
+
+    public boolean copy(Liga other) {
+        boolean success = true;
+        if (!equals(other)) {
+            success = false;
+        }
+
+        this.name = other.name;
+
+        List<Integer> ids = new ArrayList<>();
+        for (Club c : other.clubs) {
+            ids.add(c.getId());
+            if (clubs.contains(c)) {
+                if (!clubs.get(clubs.indexOf(c)).copy(c)) {
+                    success = false;
+                }
+            } else {
+                clubs.add(c);
+            }
+        }
+        List<Club> toRemove = new ArrayList<>();
+        for (Club c : clubs) {
+            if (!ids.contains(c.getId())) {
+                toRemove.add(c);
+            }
+        }
+        for (Club c : toRemove) {
+            clubs.remove(c);
+        }
+        return success;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        // self check
+        if (this == o) {
+            return true;
+        }
+        // null check
+        if (o == null) {
+            return false;
+        }
+        // type check and cast
+        if (getClass() != o.getClass()) {
+            return false;
+        }
+        Liga l = (Liga) o;
+        // field comparison
+        return this.ligaId == l.ligaId;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 89 * hash + this.ligaId;
+        return hash;
     }
 
     @Override

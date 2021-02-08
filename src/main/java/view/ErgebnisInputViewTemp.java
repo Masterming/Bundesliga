@@ -5,16 +5,16 @@
  */
 package view;
 
+import java.util.logging.*;
+
 /**
  *
  * @author z003ywys
  */
 public class ErgebnisInputViewTemp extends javax.swing.JDialog {
 
-        /**
-         *
-         */
-        private static final long serialVersionUID = 103L;
+        private final static Logger LOGGER = Logger.getLogger(PlanView.class.getName());
+        private static final long serialVersionUID = 11L;
 
         /**
          * Creates new form ErgebnisInputViewTemp
@@ -252,17 +252,13 @@ public class ErgebnisInputViewTemp extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ErgebnisInputViewTemp.class.getName())
-                    .log(java.util.logging.Level.SEVERE, null, ex);
+                LOGGER.log(java.util.logging.Level.SEVERE, ex.getLocalizedMessage());
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ErgebnisInputViewTemp.class.getName())
-                    .log(java.util.logging.Level.SEVERE, null, ex);
+                LOGGER.log(java.util.logging.Level.SEVERE, ex.getLocalizedMessage());
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ErgebnisInputViewTemp.class.getName())
-                    .log(java.util.logging.Level.SEVERE, null, ex);
+                LOGGER.log(java.util.logging.Level.SEVERE, ex.getLocalizedMessage());
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ErgebnisInputViewTemp.class.getName())
-                    .log(java.util.logging.Level.SEVERE, null, ex);
+                LOGGER.log(java.util.logging.Level.SEVERE, ex.getLocalizedMessage());
         }
         // </editor-fold>
 

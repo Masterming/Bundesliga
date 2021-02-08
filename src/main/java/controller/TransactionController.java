@@ -1,19 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 import javax.swing.DefaultListModel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
+import java.util.logging.*;
+
+import model.Club;
+import model.Liga;
+import model.Player;
 import view.TransactionView;
 
 /**
@@ -21,22 +19,28 @@ import view.TransactionView;
  * @author z003ywys
  */
 public class TransactionController implements ActionListener, MouseListener {
-    private TransactionView trV;
+
+    private final static Logger LOGGER = Logger.getLogger(TransactionController.class.getName());
+    private TransactionView view;
+    private Club club;
     private String selectedTeam;
     private DefaultListModel<String> listModelUrsprung;
     private DefaultListModel<String> listModelSend;
+    private Map<Integer, Liga> ligas;
 
-    public TransactionController(TransactionView trV) {
-        this.trV = trV;
-        this.trV.getAddToTransBtn().addActionListener(this);
-        this.trV.getRemoveFromTransBtn().addActionListener(this);
-        this.trV.getSuchenBtn().addActionListener(this);
-        this.trV.getTransFinishBtn().addActionListener(this);
-        this.trV.getErgListTeam().addMouseListener(this);
+    public TransactionController(TransactionView view, Club club) {
+        this.view = view;
+        this.view.getAddToTransBtn().addActionListener(this);
+        this.view.getRemoveFromTransBtn().addActionListener(this);
+        this.view.getSuchenBtn().addActionListener(this);
+        this.view.getTransFinishBtn().addActionListener(this);
+        this.view.getErgListTeam().addMouseListener(this);
         listModelUrsprung = new DefaultListModel<>();
-        this.trV.getListEigenerKader().setModel(listModelUrsprung);
+        this.view.getListEigenerKader().setModel(listModelUrsprung);
         listModelSend = new DefaultListModel<>();
-        this.trV.getListeTransKader().setModel(listModelSend);
+        this.view.getListeTransKader().setModel(listModelSend);
+        this.club = club;
+        ligas = MainController.getLigas();
     }
 
     @Override
@@ -44,107 +48,128 @@ public class TransactionController implements ActionListener, MouseListener {
         String command = evt.getActionCommand();
         switch (command) {
             case "suchen":
-                System.out.println("suchen");
                 suchen();
                 break;
             case "trans_finish":
-                System.out.println("trans_finish");
                 transFinish();
                 break;
             case "add":
-                System.out.println("add");
                 add();
                 break;
             case "rem":
-                System.out.println("rem");
                 remove();
                 break;
         }
     }
 
     private void suchen() {
-        this.trV.getErgListTeam().removeAll();
-        String suchAnfrage = this.trV.getReceivingTeamInput().getText();
-        // Such ergebnisse als Liste o.ae. engezigt bekommen
+        view.getErgListTeam().removeAll();
+        String searchTerm = view.getReceivingTeamInput().getText();
         DefaultListModel<String> listModel = new DefaultListModel<>();
-        this.trV.getErgListTeam().setModel(listModel);
-        listModel.addElement(suchAnfrage);
+        for (Liga l : ligas.values()) {
+            for (Club c : l.getClubs()) {
+                if ((searchTerm.equals("Erhaltendes Team")
+                        || c.getName().toLowerCase().contains(searchTerm.toLowerCase())) && !c.equals(club)) {
+                    listModel.addElement(c.getName());
+                }
+            }
+        }
+        view.getErgListTeam().setModel(listModel);
 
-        this.trV.repaint();
-        this.trV.revalidate();
+        LOGGER.log(Level.INFO, "Search \"{0}\"", searchTerm);
+
+        view.repaint();
+        view.revalidate();
     }
 
     private void add() {
-        String eigenerK = this.trV.getListEigenerKader().getSelectedValue();
+        String player = view.getListEigenerKader().getSelectedValue();
 
-        listModelUrsprung.removeElement(eigenerK);
+        if (player != null) {
+            listModelUrsprung.removeElement(player);
+            listModelSend.addElement(player);
+            LOGGER.log(Level.INFO, "Add {0}", player);
 
-        listModelSend.addElement(eigenerK);
-
-        this.trV.repaint();
-        this.trV.revalidate();
+            view.repaint();
+            view.revalidate();
+        }
 
     }
 
     private void remove() {
-        String eigenerK = this.trV.getListeTransKader().getSelectedValue();
+        String player = view.getListeTransKader().getSelectedValue();
 
-        listModelSend.removeElement(eigenerK);
+        if (player != null) {
+            listModelSend.removeElement(player);
+            listModelUrsprung.addElement(player);
+            LOGGER.log(Level.INFO, "Remove {0}", player);
 
-        listModelUrsprung.addElement(eigenerK);
-
-        this.trV.repaint();
-        this.trV.revalidate();
+            view.repaint();
+            view.revalidate();
+        }
     }
 
     private void transFinish() {
-        int best = JOptionPane.showConfirmDialog(null, "Wollen Sie die Transaktion abschliessen");
-        boolean nullIncluded = false;
-        if (best == 0) {
-            System.out.println("True");
-            List<String> transferPlayer = new ArrayList<>();
+        int confirm = JOptionPane.showConfirmDialog(view, "Wollen Sie die Transaktion abschliessen", "Bestaetigen",
+                JOptionPane.YES_NO_OPTION);
+        Player removedPlayer;
+        Club originC = null;
+        Club targetC = null;
+        Liga originL = null;
+        Liga targetL = null;
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            if (listModelSend.getSize() == 0) {
+                LOGGER.log(Level.WARNING, "No players selected");
+                JOptionPane.showMessageDialog(view, "Bitte Waehlen Sie die zu uebertragenden Teams aus");
+                return;
+            }
+
+            for (Liga l : ligas.values()) {
+                if (l.getClub(club.getName()) != null) {
+                    originC = l.getClub(club.getName());
+                    originL = l;
+                }
+                if (l.getClub(selectedTeam) != null) {
+                    targetC = l.getClub(selectedTeam);
+                    targetL = l;
+                }
+            }
+
             for (int i = 0; i < listModelSend.getSize(); i++) {
-                if (listModelSend.getElementAt(i) != null) {
-                    transferPlayer.add(listModelSend.getElementAt(i).toString());
-                } else {
-                    nullIncluded = true;
+                if (listModelSend.getElementAt(i) != null && targetC != null && originC != null) {
+                    removedPlayer = originC.removePlayer(listModelSend.getElementAt(i));
+                    targetC.addPlayer(removedPlayer);
                 }
             }
-            // Transaktion mit den Spielern passieren
-            if (nullIncluded == false && transferPlayer.size() > 0) {
-                // Transaktion durchfuehren
-                System.out.println("trans Finish");
-                for (String st : transferPlayer) {
-                    if (st != null) {
-                        System.out.println("uebertragende Objekte " + st);
-                    }
-                }
-                JOptionPane.showMessageDialog(this.trV, "Transfer War erfolgreich");
 
+            boolean updateOrigin = originL.updateClub(originC);
+            boolean updateTarget = targetL.updateClub(targetC);
+
+            if (updateOrigin && updateTarget) {
+                JOptionPane.showMessageDialog(view, "Transfer war erfolgreich");
+                LOGGER.log(Level.INFO, "Player Transfer finished successfully");
             } else {
-                System.out.println("Bitte Waehlen Sie die zu uebertragenden Teams aus");
-                JOptionPane.showMessageDialog(this.trV, "Bitte Waehlen Sie die zu uebertragenden Teams aus");
+                JOptionPane.showMessageDialog(view, "Transfer fehlgeschlagen");
+                LOGGER.log(Level.INFO, "Player Transfer failed");
+
             }
-
-        } else {
-            System.out.println("False");
         }
-
     }
 
     @Override
     public void mouseClicked(MouseEvent evt) {
         if (evt.getClickCount() == 1) {
-            System.out.println("Item in Liste geklickt");
-            selectedTeam = this.trV.getErgListTeam().getSelectedValue();
-            this.trV.setReceiveTeamLbl(selectedTeam);
+            LOGGER.log(Level.INFO, "Item in Liste geklickt");
+            selectedTeam = view.getErgListTeam().getSelectedValue();
+            view.setReceiveTeamLbl(selectedTeam);
             listModelUrsprung.removeAllElements();
             listModelSend.removeAllElements();
 
             // Eigenen Kader Anpassen
-            listModelUrsprung.addElement("Item 1");
-            listModelUrsprung.addElement("Item 2");
-
+            for (Player p : club.getPlayers()) {
+                listModelUrsprung.addElement(p.getName());
+            }
         }
 
     }

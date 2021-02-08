@@ -5,16 +5,16 @@
  */
 package view;
 
+import java.util.logging.*;
+
 /**
  *
  * @author z003ywys
  */
 public class ClubAddExistingTemp extends javax.swing.JDialog {
 
-    /**
-     *
-     */
-    private static final long serialVersionUID = 101L;
+    private final static Logger LOGGER = Logger.getLogger(ClubAddExistingTemp.class.getName());
+    private static final long serialVersionUID = 6L;
 
     /**
      * Creates new form ClubAddExistingTemp
@@ -117,17 +117,13 @@ public class ClubAddExistingTemp extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ClubAddExistingTemp.class.getName()).log(java.util.logging.Level.SEVERE,
-                    null, ex);
+            LOGGER.log(java.util.logging.Level.SEVERE, ex.getLocalizedMessage());
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ClubAddExistingTemp.class.getName()).log(java.util.logging.Level.SEVERE,
-                    null, ex);
+            LOGGER.log(java.util.logging.Level.SEVERE, ex.getLocalizedMessage());
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ClubAddExistingTemp.class.getName()).log(java.util.logging.Level.SEVERE,
-                    null, ex);
+            LOGGER.log(java.util.logging.Level.SEVERE, ex.getLocalizedMessage());
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ClubAddExistingTemp.class.getName()).log(java.util.logging.Level.SEVERE,
-                    null, ex);
+            LOGGER.log(java.util.logging.Level.SEVERE, ex.getLocalizedMessage());
         }
         // </editor-fold>
 

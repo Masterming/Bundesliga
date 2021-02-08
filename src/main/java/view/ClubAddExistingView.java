@@ -16,6 +16,9 @@ import javax.swing.JList;
  * @author z003ywys
  */
 public class ClubAddExistingView extends javax.swing.JDialog {
+    
+    private static final long serialVersionUID = 22L;
+
     public ClubAddExistingView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();

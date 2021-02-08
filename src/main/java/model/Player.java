@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Table(name = "players")
 public class Player implements Serializable {
 
-    private static final long serialVersionUID = 4L;
+    private static final long serialVersionUID = 5L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +21,6 @@ public class Player implements Serializable {
     public Player() {
         this.playerId = -1;
         this.name = "";
-        this.goals = 0;
     }
 
     public Player(String name, int goals) {
@@ -56,8 +55,52 @@ public class Player implements Serializable {
         goals++;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setGoals(int goals) {
+        this.goals = goals;
+    }
+
+    public boolean copy(Player other) {
+        if (!equals(other)) {
+            System.out.println("Player mismatch");
+            return false;
+        }
+        this.name = other.name;
+        this.goals = other.goals;
+        return true;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        // self check
+        if (this == o) {
+            return true;
+        }
+        // null check
+        if (o == null) {
+            return false;
+        }
+        // type check and cast
+        if (getClass() != o.getClass()) {
+            return false;
+        }
+        Player p = (Player) o;
+        // field comparison
+        return this.playerId == p.playerId;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 43 * hash + this.playerId;
+        return hash;
+    }
+
     @Override
     public String toString() {
-        return "Player: " + name + ": " + goals + " goals";
+        return "Player: " + name;
     }
 }

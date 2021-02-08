@@ -32,11 +32,19 @@ public class ExtendedLogger {
         }
     }
 
-    static public void disableConsole() {
+    static public void useConsole(boolean b) {
         Logger logger = Logger.getLogger("");
         Handler[] handlers = logger.getHandlers();
         if (handlers[0] instanceof ConsoleHandler) {
             logger.removeHandler(handlers[0]);
         }
+        if (b) {
+            ConsoleHandler handler = new ConsoleHandler();
+            logger.addHandler(handler);
+            Formatter formatter = new ConsoleFormatter();
+            handler.setFormatter(formatter);
+
+        }
+
     }
 }

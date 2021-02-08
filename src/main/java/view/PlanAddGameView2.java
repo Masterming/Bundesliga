@@ -5,16 +5,16 @@
  */
 package view;
 
+import java.util.logging.*;
+
 /**
  *
  * @author z003ywys
  */
 public class PlanAddGameView2 extends javax.swing.JDialog {
 
-        /**
-         *
-         */
-        private static final long serialVersionUID = 106L;
+        private final static Logger LOGGER = Logger.getLogger(PlanAddGameView2.class.getName());
+        private static final long serialVersionUID = 15L;
 
         /**
          * Creates new form PlanAddGameView2
@@ -226,17 +226,13 @@ public class PlanAddGameView2 extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PlanAddGameView2.class.getName()).log(java.util.logging.Level.SEVERE,
-                    null, ex);
+                LOGGER.log(java.util.logging.Level.SEVERE, ex.getLocalizedMessage());
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PlanAddGameView2.class.getName()).log(java.util.logging.Level.SEVERE,
-                    null, ex);
+                LOGGER.log(java.util.logging.Level.SEVERE, ex.getLocalizedMessage());
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PlanAddGameView2.class.getName()).log(java.util.logging.Level.SEVERE,
-                    null, ex);
+                LOGGER.log(java.util.logging.Level.SEVERE, ex.getLocalizedMessage());
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PlanAddGameView2.class.getName()).log(java.util.logging.Level.SEVERE,
-                    null, ex);
+                LOGGER.log(java.util.logging.Level.SEVERE, ex.getLocalizedMessage());
         }
         // </editor-fold>
 

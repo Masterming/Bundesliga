@@ -25,6 +25,7 @@
             <version>10.14.2.0</version>
             <scope>runtime</scope>
         </dependency>
+        
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -32,11 +33,12 @@
             <scope>test</scope>
             <type>jar</type>
         </dependency>
+        
         <dependency>
             <groupId>org.netbeans.external</groupId>
             <artifactId>AbsoluteLayout</artifactId>
             <version>RELEASE120</version>
-        </dependency>
+        </dependency>        
     </dependencies>
     
     <properties>

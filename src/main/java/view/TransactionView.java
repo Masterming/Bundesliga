@@ -16,7 +16,8 @@ import javax.swing.JTextField;
  * @author z003ywys
  */
 public class TransactionView extends javax.swing.JPanel {
-    private static final long serialVersionUID = 7L;
+
+    private static final long serialVersionUID = 21L;
     private javax.swing.JButton addToTransBtn;
     private javax.swing.JList<String> ergListTeam;
     private javax.swing.JCheckBox jCheckBox1;
@@ -73,7 +74,7 @@ public class TransactionView extends javax.swing.JPanel {
         suchenBtn.setActionCommand("suchen");
 
         ergListTeam.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1" };
+            String[] strings = {};
 
             public int getSize() {
                 return strings.length;
@@ -88,7 +89,7 @@ public class TransactionView extends javax.swing.JPanel {
         selectedTeam.setText("Empfaengerteam:");
 
         listEigenerKader.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", " " };
+            String[] strings = {"Item 1", "Item 2", " "};
 
             public int getSize() {
                 return strings.length;
@@ -110,7 +111,7 @@ public class TransactionView extends javax.swing.JPanel {
         removeFromTransBtn.setActionCommand("rem");
 
         listeTransKader.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", " " };
+            String[] strings = {"Item 1", "Item 2", " "};
 
             public int getSize() {
                 return strings.length;
@@ -158,8 +159,8 @@ public class TransactionView extends javax.swing.JPanel {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(jLabel2).addComponent(jScrollPane3,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE, 134,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                javax.swing.GroupLayout.PREFERRED_SIZE, 134,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addContainerGap(29, Short.MAX_VALUE)));
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout
                 .createSequentialGroup().addContainerGap()
@@ -187,28 +188,21 @@ public class TransactionView extends javax.swing.JPanel {
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 89,
                                 javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addComponent(transFinishBtn,
-                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap()));
     }// </editor-fold>
 
-    private void receivingTeamInputFocusLost(java.awt.event.FocusEvent evt) {
-        // TODO add your handling code here:
-        String a = this.receivingTeamInput.getText().trim();
-        this.receivingTeamInput.setText(a);
-
-        if (this.receivingTeamInput.getText().equals("")) {
-            this.receivingTeamInput.setText("Erhaltendes Team");
-            this.receivingTeamInput.setForeground(Color.lightGray);
-        }
-    }
-
     private void receivingTeamInputFocusGained(java.awt.event.FocusEvent evt) {
-        // TODO add your handling code here:
-        String a = this.receivingTeamInput.getText().trim();
-        this.receivingTeamInput.setText(a);
         if (this.receivingTeamInput.getText().equals("Erhaltendes Team")) {
             this.receivingTeamInput.setText("");
             this.receivingTeamInput.setForeground(Color.BLACK);
+        }
+    }
+
+    private void receivingTeamInputFocusLost(java.awt.event.FocusEvent evt) {
+        if (this.receivingTeamInput.getText().isBlank()) {
+            this.receivingTeamInput.setText("Erhaltendes Team");
+            this.receivingTeamInput.setForeground(Color.lightGray);
         }
     }
 

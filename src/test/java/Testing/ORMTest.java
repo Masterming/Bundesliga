@@ -6,14 +6,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import program.ExtendedLogger;
-import model.Player;
-import model.PlayerDBMapper;
-import model.Club;
-import model.ClubDBMapper;
-import model.Liga;
-import model.LigaDBMapper;
-import model.Game;
-import model.GameDBMapper;
+import model.*;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -30,12 +23,14 @@ public class ORMTest {
     private static Club c1;
     private static Club c2;
     private static Liga l1;
+    private static Liga l2;
+    private static Liga l3;
     private static Game g1;
 
     @BeforeClass
     public static void setUp() {
         try {
-            ExtendedLogger.disableConsole();
+            ExtendedLogger.useConsole(true);
             ExtendedLogger.enableHtml();
             ExtendedLogger.setDebugLevel(Level.INFO);
         } catch (IOException ex) {
@@ -99,11 +94,15 @@ public class ORMTest {
     public static void testAddLiga() {
         LOGGER.log(Level.INFO, "Test 3: Add Liga");
         l1 = new Liga("1. Bundesliga");
+        l2 = new Liga("2. Bundesliga");
+        l3 = new Liga("3. Liga");
         l1.addClub(c1);
         l1.addClub(c2);
 
         LigaDBMapper dao = new LigaDBMapper();
         l1.setId(dao.addLiga(l1));
+        l2.setId(dao.addLiga(l2));
+        l3.setId(dao.addLiga(l3));
         LOGGER.log(Level.INFO, "Liga ID: {0}", l1.getId());
     }
 

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import java.awt.event.ActionEvent;
@@ -14,77 +9,89 @@ import java.awt.event.MouseListener;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import java.util.Map;
+import java.util.logging.*;
+
+import model.Club;
 import model.Liga;
 import view.ClubAddExistingView;
 
 /**
- *
  * @author z003ywys
  */
 public class ClubAddExistingController implements ActionListener, MouseListener, ItemListener {
-    private ClubAddExistingView cAeV;
+
+    private final static Logger LOGGER = Logger.getLogger(ClubAddExistingController.class.getName());
+    private ClubAddExistingView view;
     private Liga l;
-    private String selectedLiga;
     private String selectedClub;
     private DefaultListModel<String> clubList;
+    private Map<Integer, Liga> ligas;
+    private int targetLigaId;
 
-    public ClubAddExistingController(ClubAddExistingView cAeV, Liga l) {
-        this.cAeV = cAeV;
+    public ClubAddExistingController(ClubAddExistingView view, Liga l) {
+        this.view = view;
         this.l = l;
-        this.cAeV.getAdClubToLigaBtn().addActionListener(this);
-        this.cAeV.getSelectedLiga().addItemListener(this);
-        this.cAeV.getLigaClubList().addMouseListener(this);
+        this.view.getAdClubToLigaBtn().addActionListener(this);
+        this.view.getSelectedLiga().addItemListener(this);
+        this.view.getLigaClubList().addMouseListener(this);
         clubList = new DefaultListModel<>();
-        this.cAeV.getLigaClubList().setModel(clubList);
-        // Elemente fuer die Erste Liga hinzufuegen
+        this.view.getLigaClubList().setModel(clubList);
+        this.ligas = MainController.getLigas();
         adaptViewToLiga();
+
     }
 
     private void adaptViewToLiga() {
-        // TODO Club View Anpassen
-        if (this.l.getName().contains("1")) {
-            String[] ligen = new String[1];
-            ligen[0] = "Liga 2";
-            DefaultComboBoxModel<String> dfC = new DefaultComboBoxModel<>(ligen);
-            this.cAeV.setLigaComboModel(dfC);
-            // Club Liste Setzen
-            this.clubList.addElement("FC Erzgebirge Aue");
+        String[] ligen;
+        DefaultComboBoxModel<String> dfC;
+        switch (l.getId()) {
+            case 1:
+                ligen = new String[1];
+                ligen[0] = "Liga 2";
+                dfC = new DefaultComboBoxModel<>(ligen);
+                view.setLigaComboModel(dfC);
+                populateComboBox();
+
+                break;
+            case 2:
+                ligen = new String[2];
+                ligen[0] = "Liga 1";
+                ligen[1] = "Liga 3";
+                dfC = new DefaultComboBoxModel<>(ligen);
+                view.setLigaComboModel(dfC);
+                populateComboBox();
+                break;
+            case 3:
+                ligen = new String[1];
+                ligen[0] = "Liga 2";
+                dfC = new DefaultComboBoxModel<>(ligen);
+                view.setLigaComboModel(dfC);
+                populateComboBox();
+                break;
         }
-        if (this.l.getName().contains("2")) {
-            String[] ligen = new String[2];
-            ligen[0] = "Liga 1";
-            ligen[1] = "Liga 3";
-            DefaultComboBoxModel<String> dfC = new DefaultComboBoxModel<>(ligen);
-            this.cAeV.setLigaComboModel(dfC);
-            // Club Liste Setzen -->
-            this.clubList.addElement("FC Bayern Muenchen");
-            this.clubList.addElement("RB Leipzig");
-        }
-        if (this.l.getName().contains("3")) {
-            String[] ligen = new String[1];
-            ligen[0] = "Liga 2";
-            DefaultComboBoxModel<String> dfC = new DefaultComboBoxModel<>(ligen);
-            this.cAeV.setLigaComboModel(dfC);
-            // Club Liste Setzen
-            this.clubList.addElement("Ingolstadt");
-        }
-        this.cAeV.repaint();
-        this.cAeV.revalidate();
+        view.repaint();
+        view.revalidate();
     }
 
     @Override
     public void actionPerformed(ActionEvent evt) {
         switch (evt.getActionCommand()) {
             case "clubAddLiga":
+                int confirm = JOptionPane.showConfirmDialog(view, "Wollen Sie den Club zur Liga hinzufuegen ?",
+                        "Club Hinzufuegen", JOptionPane.YES_NO_OPTION);
+                if (confirm == JOptionPane.YES_OPTION && selectedClub != null) {
+                    LOGGER.log(Level.INFO, "Club: {0} zur Liga hinzugefuegt", selectedClub);
+                    Liga origin = ligas.get(this.targetLigaId);
+                    Liga target = ligas.get(l.getId());
 
-                System.out.println("CLub: " + this.selectedClub);
-                int best = JOptionPane.showConfirmDialog(this.cAeV, "Wollen Sie den Club zur Liga hinzufuegen ?");
-                if (best == 0) {
-                    System.out.println("true");
-                    System.out.println("Club zur Liga hinzugefuegt");
-                    // TODO Transfer
+                    Club remClub = origin.removeClub(selectedClub);
+                    target.addClub(remClub);
 
-                    JOptionPane.showMessageDialog(this.cAeV, "Transfer war erfolgreich");
+                    JOptionPane.showMessageDialog(view, "Transfer war erfolgreich");
+                    LOGGER.log(Level.INFO, "Club Transfer finished successful");
+
+                    view.dispose();
                 }
                 break;
         }
@@ -92,21 +99,19 @@ public class ClubAddExistingController implements ActionListener, MouseListener,
 
     @Override
     public void mouseClicked(MouseEvent evt) {
-        System.out.println("Item in Liste geklickt");
         // 1. Liga auswahl
         if (evt.getClickCount() == 1) {
-            System.out.println("Item in Liste geklickt");
-            selectedLiga = this.cAeV.getSelectedLiga().getSelectedItem().toString();
             try {
-                selectedClub = this.cAeV.getLigaClubList().getSelectedValue().toString();
+                selectedClub = view.getLigaClubList().getSelectedValue();
                 if (selectedClub != null) {
-                    this.cAeV.getToAddClubLbl().setText(selectedClub);
+                    view.getToAddClubLbl().setText(selectedClub);
+
                 } else {
-                    this.cAeV.getToAddClubLbl().setText("");
+                    view.getToAddClubLbl().setText("");
                 }
             } catch (Exception e) {
-                System.out.println(e);
-                this.cAeV.getToAddClubLbl().setText("");
+                LOGGER.log(Level.SEVERE, e.getLocalizedMessage());
+                view.getToAddClubLbl().setText("");
             }
 
         }
@@ -138,23 +143,34 @@ public class ClubAddExistingController implements ActionListener, MouseListener,
 
     @Override
     public void itemStateChanged(ItemEvent evt) {
-        System.out.println("Liga Selected");
-        String ligStr = this.cAeV.getSelectedLiga().getSelectedItem().toString();
-        System.out.println(ligStr);
-        this.clubList.removeAllElements();
+        populateComboBox();
+    }
+
+    private void populateComboBox() {
+        String ligStr = view.getSelectedLiga().getSelectedItem().toString();
+        clubList.removeAllElements();
         if (ligStr.contains("1")) {
             // TODO Clubs Aufzaehlen aus der Liga
-            this.clubList.addElement("FC Bayern Muenchen");
-            this.clubList.addElement("RB Leipzig");
+            for (Club c : ligas.get(1).getClubs()) {
+                clubList.addElement(c.getName());
+            }
+            this.targetLigaId = 1;
 
         }
         if (ligStr.contains("2")) {
             // TODO Clubs Aufzaehlen aus der Liga
-            this.clubList.addElement("FC Erzgebirge Aue");
+            for (Club c : ligas.get(2).getClubs()) {
+                clubList.addElement(c.getName());
+            }
+            this.targetLigaId = 2;
+
         }
         if (ligStr.contains("3")) {
             // TODO Clubs Aufzaehlen aus der Liga
-            this.clubList.addElement("Ingolstadt");
+            for (Club c : ligas.get(3).getClubs()) {
+                clubList.addElement(c.getName());
+            }
+            this.targetLigaId = 3;
         }
     }
 
