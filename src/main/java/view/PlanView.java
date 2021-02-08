@@ -137,4 +137,9 @@ public class PlanView extends JPanel {
 //
 //        }
 //    }
+
+    public JPanel getPlanContent() {
+        return planContent;
+    }
+    
 }

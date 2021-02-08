@@ -9,6 +9,9 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.util.logging.*;
+import model.Game;
+import model.Liga;
+import model.Player;
 
 import view.ErgebnisInputView;
 
@@ -25,6 +28,8 @@ public class ErgebnisInputController implements ActionListener {
     private List<List<String>> scoreTeamB;
     int teamAErg;
     int teamBErg;
+    private Game game;
+    private Liga lig;
 
     public ErgebnisInputController(ErgebnisInputView ergDialog, String teamA, String teamB) {
         this.ergDialog = ergDialog;
@@ -41,6 +46,24 @@ public class ErgebnisInputController implements ActionListener {
         teamAErg = -1;
         teamBErg = -1;
 
+    }
+    
+    public ErgebnisInputController(ErgebnisInputView ergDialog, Game g, Liga l){
+        game = g;
+        this.ergDialog = ergDialog;
+        this.ergDialog.setTeamALbl(g.getClub1().getName());
+        this.ergDialog.setTeamBLbl(g.getClub2().getName());
+        //Möglicherweise noch schöner formatieren
+        this.ergDialog.setDateLbl(g.getStart().toString());
+        this.ergDialog.getSaveBtn().addActionListener(this);
+        this.ergDialog.getTeamAAddGoalForPlayer().addActionListener(this);
+        this.ergDialog.getTeamASubGoalForPlayer().addActionListener(this);
+        this.ergDialog.getTeamBAddGoalForPlayer().addActionListener(this);
+        this.ergDialog.getTeamBSubGoalForPlayer().addActionListener(this);
+        scoreTeamA = new ArrayList<>();
+        scoreTeamB = new ArrayList<>();
+        this.lig=l;
+        getData();
     }
 
     @Override
@@ -72,14 +95,18 @@ public class ErgebnisInputController implements ActionListener {
 
     private void getData() {
         // TODO daten aus DB holen
-        List<String> spieler = new ArrayList<>();
-        spieler.add("Thomas Mueller");
-        spieler.add("Philipp Lahm");
+        List<Player> spielerClub1 = game.getClub1().getPlayers();
+        List<Player>spielerClub2 = game.getClub2().getPlayers();
         DefaultListModel<String> listModelTeamA = new DefaultListModel<>();
-        listModelTeamA.addElement("Thomas Mueller");
-        listModelTeamA.addElement("Philipp Lahm");
-
+        for(Player p: spielerClub1){
+            listModelTeamA.addElement(p.getName());
+        }
+        DefaultListModel<String> listModelTeamB = new DefaultListModel<>();
+                for(Player p: spielerClub2){
+            listModelTeamB.addElement(p.getName());
+        }
         ergDialog.setTeamAPlayerList(listModelTeamA);
+        ergDialog.setTeamBPlayerList(listModelTeamB);
         ergDialog.repaint();
         ergDialog.revalidate();
     }
@@ -194,7 +221,9 @@ public class ErgebnisInputController implements ActionListener {
             // TODO in DB Schreiben und Model aendern
             LOGGER.log(Level.INFO, scoreTeamA.toString());
             LOGGER.log(Level.INFO, scoreTeamB.toString());
-
+            this.game.setFinished(true);
+            //Über Liga Objekt Game updaten ?
+            this.lig.updateGame(game);
             ergDialog.dispose();
         }
     }

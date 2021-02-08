@@ -7,6 +7,7 @@ package view;
 
 import javax.swing.AbstractListModel;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JTable;
 import javax.swing.table.TableModel;
@@ -324,4 +325,9 @@ public class ErgebnisInputView extends javax.swing.JDialog {
         this.ergTeamBLbl1.setText(ergTeamBLbl1);
     }
 
+    public void setDateLbl(String date) {
+        this.dateLbl.setText(date);
+        
+    }
+    
 }

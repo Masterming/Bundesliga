@@ -34,18 +34,21 @@ public class Liga extends Observable implements Serializable {
         this.ligaId = -1;
         this.name = "";
         clubs = new ArrayList<>();
+        this.games = new ArrayList<>();
     }
 
     public Liga(String name) {
         this.ligaId = -1;
         this.name = name;
         this.clubs = new ArrayList<>();
+        this.games = new ArrayList<>();
     }
 
     public Liga(int id, String name) {
         this.ligaId = id;
         this.name = name;
         this.clubs = new ArrayList<>();
+        this.games = new ArrayList<>();
     }
 
     public int getId() {
@@ -213,4 +216,13 @@ public class Liga extends Observable implements Serializable {
     public List<Game> getGames() {
         return games;
     }
+    public void updateGame(Game g){
+        if(!this.games.contains(g)){
+            this.games.add(g);
+            setChanged();
+            notifyObservers(this);
+        }
+        
+    }
+    
 }

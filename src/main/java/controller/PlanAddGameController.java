@@ -50,6 +50,7 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
         this.ligas = MainController.getLigas();
 
         adaptViewToLiga();
+        getListData();
 
     }
 
@@ -114,8 +115,16 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
             LOGGER.log(Level.INFO, teamB);
             // TODO Spiel in DB Schreiben und Model aktualisieren
             //Ligas holen
-            Game g1 = new Game(this.ligaA.getClub(teamA), this.ligaB.getClub(teamB), dtGame);
-
+            Club c1 = this.ligaA.getClub(paGV.getTeamALbl().getText());
+            Club c2 = this.ligaB.getClub(paGV.getTeamBLbl().getText());
+            Game g1 = new Game(c1, c2, dtGame, this.ligaA, this.ligaB);
+            if (this.ligaA.getId() != this.ligaB.getId()) {
+                this.ligaA.updateGame(g1);
+                this.ligaB.updateGame(g1);
+            } else {
+                this.ligaA.updateGame(g1);
+            }
+            
             paGV.dispose();
 
         }
@@ -124,6 +133,8 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
     @Override
     public void itemStateChanged(ItemEvent arg0) {
         //
+        String teamAtemp="";
+        String teamBtemp="";
         boolean change = false;
         if (!paGV.getTeamALigaList().getSelectedItem().toString().equals(selectedALiga)
                 || !paGV.getTeamBLigaList().getSelectedItem().toString().equals(selectedBLiga)) {
@@ -162,16 +173,23 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
             getListData();
         }
         if (paGV.getTeamAList().getSelectedItem() != null) {
-            teamA = paGV.getTeamAList().getSelectedItem().toString();
+            teamAtemp = paGV.getTeamAList().getSelectedItem().toString();
         }
         if (paGV.getTeamBList().getSelectedItem() != null) {
-            teamB = paGV.getTeamBList().getSelectedItem().toString();
+            teamBtemp = paGV.getTeamBList().getSelectedItem().toString();
         }
-        if (!teamA.equals(teamB)) {
+        if (!teamAtemp.equals(teamBtemp) && !teamAtemp.isEmpty() && !teamBtemp.isEmpty()) {
+            teamA = teamAtemp;
+            teamB = teamBtemp;
             paGV.setTeamALbl(teamA);
             paGV.setTeamBLbl(teamB);
+            paGV.repaint();
+            paGV.revalidate();
         } else {
             JOptionPane.showMessageDialog(null, "Die Teams die gegeneinander Spielen muessen verschieden sein");
+            //Kombobox zuürcksetzen
+            paGV.getTeamAList().setSelectedItem(teamA);
+            paGV.getTeamBList().setSelectedItem(teamB);
         }
     }
 
@@ -184,6 +202,13 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
         DefaultComboBoxModel<String> listModelTeamB = new DefaultComboBoxModel<>();
 
         // TODO List Model befuellen
+        if(selectedALiga == null){
+            selectedALiga = "Liga 1";
+        }
+        if(selectedBLiga == null){
+            selectedBLiga = "Liga 1";
+        }
+        
         if (selectedALiga.contains("1")) {
             paGV.getTeamAList().removeAll();
             for (Club c : ligas.get(1).getClubs()) {
@@ -230,6 +255,7 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
             }
             this.ligaB = this.ligas.get(3);
         }
+        
         paGV.setTeamAList(listModelTeamA);
         paGV.setTeamBList(listModelTeamB);
         paGV.repaint();

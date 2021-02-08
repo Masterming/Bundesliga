@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 import org.hibernate.annotations.LazyCollection;
@@ -38,19 +39,36 @@ public class Game implements Serializable {
     private int score1;
     private int score2;
     private LocalDateTime startTime;
+    
 
     public Game() {
         this.gameId = -1;
     }
 
     public Game(Club club1, Club club2, LocalDateTime start) {
+        ligas = new ArrayList();
         this.gameId = -1;
         this.club1 = club1;
         this.club2 = club2;
         this.startTime = start;
     }
+    public Game(Club club1, Club club2, LocalDateTime start, Liga l1, Liga l2){
+        ligas = new ArrayList();
+        this.gameId = -1;
+        this.club1 = club1;
+        this.club2 = club2;
+        this.startTime = start;
+        if(l1.getId() == l2.getId()){
+            ligas.add(l1);
+        }
+        else{
+            ligas.add(l1);
+            ligas.add(l2);
+        }
+    }
 
     public Game(int id, Club club1, Club club2, LocalDateTime start) {
+        ligas = new ArrayList();
         this.gameId = id;
         this.club1 = club1;
         this.club2 = club2;
