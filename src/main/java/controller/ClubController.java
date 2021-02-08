@@ -57,7 +57,7 @@ public class ClubController implements MouseListener, ActionListener {
     @Override
     public void mouseClicked(MouseEvent evt) {
         if (evt.getClickCount() == 2 && SwingUtilities.isLeftMouseButton(evt)) {
-            LOGGER.log(Level.INFO, "Tabelle wurde 2 mal geklcikt im ClubController");
+            // LOGGER.log(Level.INFO, "Tabelle wurde 2 mal geklcikt im ClubController");
             // Neues Fenster geht auf --> Neuen Controller + View
             JTable temp = (JTable) evt.getSource();
             int row = temp.getSelectedRow();
@@ -66,13 +66,13 @@ public class ClubController implements MouseListener, ActionListener {
 
             Club c = l.getClub(team);
             ClubEditView cbV = new ClubEditView(view.getmaster(), true);
-            new ClubEditController(cbV, c, l, master);
+            ClubEditController clubEditController = new ClubEditController(cbV, c, l, master);
             cbV.setVisible(true);
         }
         if (SwingUtilities.isRightMouseButton(evt)) {
             // Kontext Menue mit Spieler Loeschen und name aendern ueber Pop up Item
             RowPopupClubView kontext = new RowPopupClubView();
-            new RowPopupClubController(master, kontext, l, view.getClubTable());
+            RowPopupClubController rowPopupClubController = new RowPopupClubController(master, kontext, l, view.getClubTable());
             kontext.show(view.getClubTable(), evt.getX(), evt.getY());
         }
 
@@ -81,8 +81,10 @@ public class ClubController implements MouseListener, ActionListener {
     @Override
     public void mousePressed(MouseEvent e) {
         int r = view.getClubTable().rowAtPoint(e.getPoint());
+        int c = view.getClubTable().columnAtPoint(e.getPoint());
         if (r >= 0 && r < view.getClubTable().getRowCount()) {
             view.getClubTable().setRowSelectionInterval(r, r);
+            view.getClubTable().setColumnSelectionInterval(c, c);
         } else {
             view.getClubTable().clearSelection();
         }
@@ -91,8 +93,10 @@ public class ClubController implements MouseListener, ActionListener {
     @Override
     public void mouseReleased(MouseEvent e) {
         int r = view.getClubTable().rowAtPoint(e.getPoint());
+        int c = view.getClubTable().columnAtPoint(e.getPoint());
         if (r >= 0 && r < view.getClubTable().getRowCount()) {
             view.getClubTable().setRowSelectionInterval(r, r);
+            view.getClubTable().setColumnSelectionInterval(c, c);
         } else {
             view.getClubTable().clearSelection();
         }
@@ -130,8 +134,8 @@ public class ClubController implements MouseListener, ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent evt) {
-        switch (evt.getActionCommand()) {
+    public void actionPerformed(ActionEvent e) {
+        switch (e.getActionCommand()) {
             case "addClub":
                 LOGGER.log(Level.INFO, "Club Hinzufuegen button gedrueckt");
                 ClubAddView caV = new ClubAddView(master, true);
