@@ -16,6 +16,7 @@ import javax.swing.table.TableModel;
  * @author z003ywys
  */
 public class ErgebnisInputView extends javax.swing.JDialog {
+
     private static final long serialVersionUID = 10L;
 
     public ErgebnisInputView(java.awt.Frame parent, boolean modal) {
@@ -67,8 +68,8 @@ public class ErgebnisInputView extends javax.swing.JDialog {
         jLabel1.setText(":");
 
         teamBPlayerList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 1", "Item 2", "Item 3",
-                    "Item 4", "Item 5", "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = {"Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 1", "Item 2", "Item 3",
+                "Item 4", "Item 5", "Item 1", "Item 2", "Item 3", "Item 4", "Item 5"};
 
             public int getSize() {
                 return strings.length;
@@ -81,8 +82,8 @@ public class ErgebnisInputView extends javax.swing.JDialog {
         jScrollPane1.setViewportView(teamBPlayerList);
 
         teamAPlayerList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 1", "Item 2", "Item 3",
-                    "Item 4", "Item 5" };
+            String[] strings = {"Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 1", "Item 2", "Item 3",
+                "Item 4", "Item 5"};
 
             public int getSize() {
                 return strings.length;
@@ -124,11 +125,11 @@ public class ErgebnisInputView extends javax.swing.JDialog {
         dateLbl.setText("Datum");
 
         scoredPlayerTeamB.setModel(
-                new javax.swing.table.DefaultTableModel(new Object[][] {}, new String[] { "Spieler", "Toranzahl" }));
+                new javax.swing.table.DefaultTableModel(new Object[][]{}, new String[]{"Spieler", "Toranzahl"}));
         jScrollPane3.setViewportView(scoredPlayerTeamB);
 
         scoredPlayerTeamA.setModel(
-                new javax.swing.table.DefaultTableModel(new Object[][] {}, new String[] { "Spieler", "Toranzahl" }));
+                new javax.swing.table.DefaultTableModel(new Object[][]{}, new String[]{"Spieler", "Toranzahl"}));
         jScrollPane4.setViewportView(scoredPlayerTeamA);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -171,8 +172,8 @@ public class ErgebnisInputView extends javax.swing.JDialog {
                                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 31,
                                                         javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(33, 33, 33).addComponent(ergTeamBLbl1,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE, 31,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                javax.swing.GroupLayout.PREFERRED_SIZE, 31,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31,
                                                 javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(layout.createSequentialGroup().addGap(306, 306, 306).addComponent(dateLbl,
@@ -226,7 +227,7 @@ public class ErgebnisInputView extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel4).addComponent(ergTeamALbl).addComponent(ergTeamBLbl1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addComponent(saveBtn,
-                                javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(35, 35, 35)));
 
         pack();

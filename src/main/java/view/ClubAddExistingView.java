@@ -16,7 +16,7 @@ import javax.swing.JList;
  * @author z003ywys
  */
 public class ClubAddExistingView extends javax.swing.JDialog {
-    
+
     private static final long serialVersionUID = 22L;
 
     public ClubAddExistingView(java.awt.Frame parent, boolean modal) {
@@ -35,10 +35,10 @@ public class ClubAddExistingView extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        selectedLiga.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Liga 1", "Liga 2", "Liga 3" }));
+        selectedLiga.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Liga 1", "Liga 2", "Liga 3"}));
 
         ligaClubList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Leipzig", "Bayern", "Hamburg" };
+            String[] strings = {"Leipzig", "Bayern", "Hamburg"};
 
             public int getSize() {
                 return strings.length;
@@ -84,7 +84,7 @@ public class ClubAddExistingView extends javax.swing.JDialog {
                         .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE,
                                 javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18).addComponent(adClubToLigaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30,
-                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(21, Short.MAX_VALUE)));
 
         pack();

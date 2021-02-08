@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view;
 
 import javax.swing.DefaultComboBoxModel;
@@ -16,12 +11,10 @@ import javax.swing.JTextField;
  * @author z003ywys
  */
 public class PlanAddGameView extends javax.swing.JDialog {
-        /**
-         *
-         */
-        private static final long serialVersionUID = 14L;
 
-        public PlanAddGameView(java.awt.Frame parent, boolean modal) {
+    private static final long serialVersionUID = 14L;
+
+    public PlanAddGameView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -62,16 +55,16 @@ public class PlanAddGameView extends javax.swing.JDialog {
         jLabel6.setText("Liga: ");
 
         teamALigaList.setModel(
-                new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+                new javax.swing.DefaultComboBoxModel<>(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
 
         teamBLigaList.setModel(
-                new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+                new javax.swing.DefaultComboBoxModel<>(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
 
         teamAList.setModel(
-                new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+                new javax.swing.DefaultComboBoxModel<>(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
 
         teamBList.setModel(
-                new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+                new javax.swing.DefaultComboBoxModel<>(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
 
         teamALbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         teamALbl.setText("TeamA");
@@ -88,16 +81,16 @@ public class PlanAddGameView extends javax.swing.JDialog {
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
                         layout.createSequentialGroup().addContainerGap(53, Short.MAX_VALUE).addGroup(layout
                                 .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                                        layout.createSequentialGroup()
-                                                .addComponent(teamALbl, javax.swing.GroupLayout.PREFERRED_SIZE, 162,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(
-                                                        jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 31,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(teamBLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 150,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
+                                layout.createSequentialGroup()
+                                        .addComponent(teamALbl, javax.swing.GroupLayout.PREFERRED_SIZE, 162,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(
+                                                jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 31,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(teamBLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 150,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addComponent(addSpielBtn, javax.swing.GroupLayout.DEFAULT_SIZE,
                                                 javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

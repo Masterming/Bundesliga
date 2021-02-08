@@ -11,7 +11,7 @@ import javax.swing.JTable;
 public class RowPopupPlayerView extends JPopupMenu {
 
     private static final long serialVersionUID = 18L;
-    
+
     private JMenuItem loeschen;
     private JMenuItem bearbeiten;
 
