@@ -79,7 +79,7 @@ public class Liga extends Observable implements Serializable {
         Club temp = null;
         for (Club c : clubs) {
             if (c.getName().equals(name)) {
-                temp =c;
+                temp = c;
                 clubs.remove(c);
                 setChanged();
                 notifyObservers(this);
@@ -141,6 +141,7 @@ public class Liga extends Observable implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+        notifyObservers(this);
     }
 
     public boolean copy(Liga other) {

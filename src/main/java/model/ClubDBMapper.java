@@ -132,7 +132,6 @@ public class ClubDBMapper {
                 et.rollback();
             }
             bSuccess = false;
-            LOGGER.log(Level.SEVERE, ex.getLocalizedMessage());
         } finally {
             em.close();
         }

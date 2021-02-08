@@ -11,7 +11,7 @@ public class LigaDBMapper {
 
     private final static Logger LOGGER = Logger.getLogger(LigaDBMapper.class.getName());
 
-    public int addLiga(Liga liga) {
+    public int addLiga(Liga l) {
         EntityManager em = ManagerFactory.createEntityManager();
         EntityTransaction et = null;
         int id = -1;
@@ -19,7 +19,7 @@ public class LigaDBMapper {
         try {
             et = em.getTransaction();
             et.begin();
-            Liga merge = em.merge(liga);
+            Liga merge = em.merge(l);
             id = merge.getId();
             et.commit();
         } catch (Exception ex) {
@@ -101,6 +101,7 @@ public class LigaDBMapper {
         EntityTransaction et = null;
 
         try {
+            LOGGER.log(Level.INFO, "Deleting {0}", l.toString());
             et = em.getTransaction();
             et.begin();
             em.remove(l);
@@ -117,25 +118,24 @@ public class LigaDBMapper {
         return bSuccess;
     }
 
-    public boolean updateLiga(Liga l) {
-        boolean bSuccess = true;
+    public Liga updateLiga(Liga l) {
+        Liga ret = null;
         EntityManager em = ManagerFactory.createEntityManager();
         EntityTransaction et = null;
+        LOGGER.log(Level.INFO, "Update: {0}", l.toString());
 
         try {
             et = em.getTransaction();
             et.begin();
-            em.merge(l);
+            ret = em.merge(l);
             et.commit();
         } catch (Exception ex) {
             if (et != null) {
                 et.rollback();
             }
-            bSuccess = false;
-            LOGGER.log(Level.SEVERE, ex.getLocalizedMessage());
         } finally {
             em.close();
         }
-        return bSuccess;
+        return ret;
     }
 }

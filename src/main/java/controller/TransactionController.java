@@ -116,7 +116,8 @@ public class TransactionController implements ActionListener, MouseListener {
         int confirm = JOptionPane.showConfirmDialog(trV, "Wollen Sie die Transaktion abschliessen", "Bestaetigen",
                 JOptionPane.YES_NO_OPTION);
         Player removedPlayer;
-        Club targetClub = null;
+        Club target = null;
+        Club origin = null;
 
         if (confirm == JOptionPane.YES_OPTION) {
             if (listModelSend.getSize() == 0) {
@@ -127,18 +128,22 @@ public class TransactionController implements ActionListener, MouseListener {
 
             for (Club c : clubs) {
                 if (c.getName().equals(selectedTeam)) {
-                    targetClub = c;
+                    target = c;
+                }
+                if (c.equals(club)) {
+                    origin = c;
                 }
             }
 
             for (int i = 0; i < listModelSend.getSize(); i++) {
-                if (listModelSend.getElementAt(i) != null) {
-                    removedPlayer = club.removePlayer(listModelSend.getElementAt(i));
-                    targetClub.addPlayer(removedPlayer);
+                if (listModelSend.getElementAt(i) != null && target != null && origin != null) {
+                    removedPlayer = origin.removePlayer(listModelSend.getElementAt(i));
+                    target.addPlayer(removedPlayer);
                 }
             }
-            dao.updateClub(club);
-            dao.updateClub(targetClub);
+
+            dao.updateClub(origin);
+            dao.updateClub(target);
             if (MainController.reloadFromDB()) {
                 JOptionPane.showMessageDialog(trV, "Transfer war erfolgreich");
                 LOGGER.log(Level.INFO, "Transfer finished successfully");
