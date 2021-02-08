@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import java.util.logging.*;
+import model.Liga;
 
 import model.PlanModel;
 import view.PlanAddGameView;
@@ -20,12 +21,13 @@ public class PlanController implements ActionListener {
     private PlanModel plm;
     private PlanView plv;
     private JFrame master;
+    private Liga lig;
 
-    public PlanController(JFrame master, PlanView plx, PlanModel plmx) {
+    public PlanController(JFrame master, PlanView plx, PlanModel plmx, Liga l) {
         this.plm = plmx;
         this.plv = plx;
         this.master = master;
-        this.plm.addObserver(this.plv);
+        this.lig = l;
         this.plv.getAddSpielBtn().addActionListener(this);
         // this.plv.getjButton1().addActionListener(this);
         // Problem: Durch MVC- Beobahcter Pattern wird View erst durch die Veraenderung
@@ -41,7 +43,7 @@ public class PlanController implements ActionListener {
             case "addSpiel":
                 LOGGER.log(Level.INFO, "Plan Controller angekommen");
                 PlanAddGameView pagV = new PlanAddGameView(master, true);
-                PlanAddGameController pagC = new PlanAddGameController(master, pagV, plm, plm.getLiga());
+                PlanAddGameController pagC = new PlanAddGameController(master, pagV, lig);
                 pagV.setVisible(true);
                 break;
         }

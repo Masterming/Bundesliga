@@ -112,7 +112,7 @@ public class MainController implements ActionListener, Observer {
             case 2:
                 PlanView plv = new PlanView(view);
                 PlanModel plm = new PlanModel(ligas.get(ligaId));
-                PlanController plc = new PlanController(view, plv, plm);
+                PlanController plc = new PlanController(view, plv, plm, ligas.get(ligaId));
                 JScrollPane scroll = new JScrollPane(plv);
 
                 view.getPlanBtn().setBackground(Color.white);
@@ -142,9 +142,10 @@ public class MainController implements ActionListener, Observer {
             if (!ligas.get(id).copy(temp)) {
                 LOGGER.log(Level.WARNING, "Mismatch in copy of {0}", ligas.get(id));
             }
-
+            
             renderView();
         }
+        
     }
 
     public static Map<Integer, Liga> getLigas() {

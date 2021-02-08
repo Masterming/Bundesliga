@@ -24,7 +24,7 @@ public class Liga extends Observable implements Serializable {
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(joinColumns = @JoinColumn(name = "ligaId"), inverseJoinColumns = @JoinColumn(name = "clubId"))
     private List<Club> clubs;
-
+    private List<Game> games;
     public Liga() {
         this.ligaId = -1;
         this.name = "";
@@ -203,5 +203,9 @@ public class Liga extends Observable implements Serializable {
     @Override
     public String toString() {
         return "Liga: " + name;
+    }
+
+    public List<Game> getGames() {
+        return games;
     }
 }

@@ -8,10 +8,13 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Map;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.util.logging.*;
+import model.Club;
+import model.Game;
 
 import model.Liga;
 import model.PlanModel;
@@ -26,17 +29,18 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
     private final static Logger LOGGER = Logger.getLogger(PlanAddGameController.class.getName());
     private JFrame master;
     private PlanAddGameView paGV;
-    private PlanModel plM;
     private Liga l;
+    private Liga ligaA;
+    private Liga ligaB;
     private String selectedALiga;
     private String selectedBLiga;
     private String teamA;
     private String teamB;
+    private Map<Integer, Liga> ligas;
 
-    public PlanAddGameController(JFrame master, PlanAddGameView PagV, PlanModel plM, Liga l) {
+    public PlanAddGameController(JFrame master, PlanAddGameView PagV, Liga l) {
         this.master = master;
         this.paGV = PagV;
-        this.plM = plM;
         this.l = l;
         // this.paGV.get
         this.paGV.getAddSpielBtn().addActionListener(this);
@@ -44,6 +48,7 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
         this.paGV.getTeamBLigaList().addItemListener(this);
         this.paGV.getTeamAList().addItemListener(this);
         this.paGV.getTeamBList().addItemListener(this);
+        this.ligas = MainController.getLigas();
 
         adaptViewToLiga();
 
@@ -109,6 +114,10 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
             LOGGER.log(Level.INFO, teamA);
             LOGGER.log(Level.INFO, teamB);
             // TODO Spiel in DB Schreiben und Model aktualisieren
+            //Ligas holen
+            Game g1 = new Game(this.ligaA.getClub(teamA),this.ligaB.getClub(teamB),dtGame);
+            
+            
             paGV.dispose();
 
         }
@@ -179,36 +188,49 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
         // TODO List Model befuellen
         if (selectedALiga.contains("1")) {
             paGV.getTeamAList().removeAll();
-            listModelTeamA.addElement("RB Leipzig");
-            listModelTeamA.addElement("FC Bayern Muenchen");
+            for (Club c : ligas.get(1).getClubs()) {
+                listModelTeamA.addElement(c.getName());
+            }
+            this.ligaA = this.ligas.get(1);
+            //this.targetLigaId = 1;
         }
         if (selectedBLiga.contains("1")) {
             paGV.getTeamBList().removeAll();
-            listModelTeamB.addElement("RB Leipzig");
-            listModelTeamB.addElement("FC Bayern Muenchen");
+            for (Club c : ligas.get(1).getClubs()) {
+                listModelTeamB.addElement(c.getName());
+            }
+            this.ligaB = this.ligas.get(1);
         }
 
         if (selectedALiga.contains("2")) {
             // TODO List Model befuellen
             paGV.getTeamAList().removeAll();
-            listModelTeamA.addElement("FC Erzgevirge Aue");
-            listModelTeamA.addElement("HSV Hamburg");
+            for (Club c : ligas.get(2).getClubs()) {
+                listModelTeamA.addElement(c.getName());
+            }
+            this.ligaA = this.ligas.get(2);
         }
         if (selectedBLiga.contains("2")) {
             paGV.getTeamBList().removeAll();
-            listModelTeamB.addElement("FC Erzgevirge Aue");
-            listModelTeamB.addElement("HSV Hamburg");
+            for (Club c : ligas.get(2).getClubs()) {
+                listModelTeamB.addElement(c.getName());
+            }
+            this.ligaB = this.ligas.get(2);
         }
         if (selectedALiga.contains("3")) {
             // TODO List Model befuellen
             paGV.getTeamAList().removeAll();
-            listModelTeamA.addElement("Ingolstadt");
-            listModelTeamA.addElement("Dynamo Dresden");
+            for (Club c : ligas.get(3).getClubs()) {
+                listModelTeamA.addElement(c.getName());
+            }
+            this.ligaA = this.ligas.get(3);
         }
         if (selectedBLiga.contains("3")) {
             paGV.getTeamBList().removeAll();
-            listModelTeamB.addElement("Ingolstadt");
-            listModelTeamB.addElement("Dynamo Dresden");
+            for (Club c : ligas.get(3).getClubs()) {
+                listModelTeamB.addElement(c.getName());
+            }
+            this.ligaB = this.ligas.get(3);
         }
         paGV.setTeamAList(listModelTeamA);
         paGV.setTeamBList(listModelTeamB);

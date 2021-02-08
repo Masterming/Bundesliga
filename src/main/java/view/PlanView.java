@@ -22,51 +22,51 @@ import model.PlanModel;
  *
  * @author z003ywys
  */
-public class PlanView extends JPanel implements Observer {
+public class PlanView extends JPanel {
 
     private final static Logger LOGGER = Logger.getLogger(PlanView.class.getName());
 
     private static final long serialVersionUID = 16L;
 
-    @Override
-    public void update(Observable o, Object arg1) {
-        // Hier landet man wenn man im Model was veraendert hat durch norifyObservers
-        this.planContent.setLayout(new BoxLayout(this.planContent, BoxLayout.Y_AXIS));
-        if (o instanceof PlanModel) {
-            // To change body of generated methods, choose Tools | Templates.
-            // javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-            // this.setLayout(layout);
-            planContent.removeAll();
-            plm = (PlanModel) o;
-            int count = 1;
-            if (plm.getLiga().getId() == 1) {
-                count = 5;
-            }
-            if (plm.getLiga().getId() == 2) {
-                count = 10;
-            }
-            if (plm.getLiga().getId() == 3) {
-                count = 15;
-            }
-            for (int i = 0; i < count; i++) {
-                JLabel test = new JLabel(plm.getLiga().getName());
-                JButton testBtn = new JButton("TestBTN " + i);
-                test.setBackground(java.awt.Color.lightGray);
-                test.setAlignmentX(Component.CENTER_ALIGNMENT);
-                testBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
-                testBtn.setActionCommand(String.valueOf(i) + "RB Leipzig");
-                testBtn.addActionListener((java.awt.event.ActionEvent evt) -> {
-                    action(evt);
-                });
-                this.planContent.add(test);
-                this.planContent.add(testBtn);
-            }
-            this.planContent.revalidate();
-            this.planContent.repaint();
-            this.planContent.setVisible(true);
-
-        }
-    }
+//    @Override
+//    public void update(Observable o, Object arg1) {
+//        // Hier landet man wenn man im Model was veraendert hat durch norifyObservers
+//        this.planContent.setLayout(new BoxLayout(this.planContent, BoxLayout.Y_AXIS));
+//        if (o instanceof PlanModel) {
+//            // To change body of generated methods, choose Tools | Templates.
+//            // javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+//            // this.setLayout(layout);
+//            planContent.removeAll();
+//            plm = (PlanModel) o;
+//            int count = 1;
+//            if (plm.getLiga().getId() == 1) {
+//                count = 5;
+//            }
+//            if (plm.getLiga().getId() == 2) {
+//                count = 10;
+//            }
+//            if (plm.getLiga().getId() == 3) {
+//                count = 15;
+//            }
+//            for (int i = 0; i < count; i++) {
+//                JLabel test = new JLabel(plm.getLiga().getName());
+//                JButton testBtn = new JButton("TestBTN " + i);
+//                test.setBackground(java.awt.Color.lightGray);
+//                test.setAlignmentX(Component.CENTER_ALIGNMENT);
+//                testBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+//                testBtn.setActionCommand(String.valueOf(i) + "RB Leipzig");
+//                testBtn.addActionListener((java.awt.event.ActionEvent evt) -> {
+//                    action(evt);
+//                });
+//                this.planContent.add(test);
+//                this.planContent.add(testBtn);
+//            }
+//            this.planContent.revalidate();
+//            this.planContent.repaint();
+//            this.planContent.setVisible(true);
+//
+//        }
+//    }
 
     public PlanView(JFrame master) {
         initComponents();
