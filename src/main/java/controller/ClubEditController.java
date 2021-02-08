@@ -39,7 +39,7 @@ public class ClubEditController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent evt) {
         LOGGER.log(Level.INFO, "Button wurde gedrueckt");
-        if (evt.getActionCommand() == "kader") {
+        if ("kader".equals(evt.getActionCommand())) {
             cev.getKaderBtn().setBackground(Color.white);
             cev.getTransBtn().setBackground(Color.lightGray);
             cev.getAddSpielerBtn().setBackground(Color.lightGray);
@@ -56,7 +56,7 @@ public class ClubEditController implements ActionListener {
             cev.getClubEditContent().revalidate();
 
         }
-        if (evt.getActionCommand() == "trans") {
+        if ("trans".equals(evt.getActionCommand())) {
             LOGGER.log(Level.INFO, "Trans");
             cev.getTransBtn().setBackground(Color.white);
             cev.getKaderBtn().setBackground(Color.lightGray);
@@ -73,7 +73,7 @@ public class ClubEditController implements ActionListener {
             LOGGER.log(Level.INFO, "Revalidate()");
 
         }
-        if (evt.getActionCommand() == "spieler") {
+        if ("spieler".equals(evt.getActionCommand())) {
             LOGGER.log(Level.INFO, "Spieler");
             cev.getTransBtn().setBackground(Color.lightGray);
             cev.getKaderBtn().setBackground(Color.lightGray);

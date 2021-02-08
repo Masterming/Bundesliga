@@ -33,7 +33,7 @@ public class TableController implements ActionListener {
         switch (ae.getActionCommand()) {
             case "test":
                 LOGGER.log(Level.INFO, "Table Controller Button/ Aktion erfolgreich");
-                LOGGER.log(Level.INFO, "Gezeigte Liga: " + l.getName());
+                LOGGER.log(Level.INFO, "Gezeigte Liga: {0}", l.getName());
                 break;
         }
     }

@@ -26,7 +26,7 @@ public class MainController implements ActionListener, Observer {
     // Es wird 3 Ligen Model geben jeweils eins pro Liga
     // --> werden beim ersten klick auf LigaButtons gesetzt
     private static Map<Integer, Liga> ligas;
-    private static LigaDBMapper dao;
+    private LigaDBMapper dao;
 
     private static MainView view;
     private static int ligaId = 1;
@@ -49,7 +49,7 @@ public class MainController implements ActionListener, Observer {
         view.getPlanBtn().addActionListener(this);
         view.getTableBtn().addActionListener(this);
         view.setVisible(true);
-        this.view = view;
+        MainController.view = view;
         renderView();
     }
 

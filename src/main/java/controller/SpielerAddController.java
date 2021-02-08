@@ -44,7 +44,7 @@ public class SpielerAddController implements ActionListener {
         boolean inputOk = true;
         try {
             anzTor = Integer.parseInt(anzTorStr);
-        } catch (Exception ex) {
+        } catch (NumberFormatException ex) {
             JFrame f = new JFrame();
             JOptionPane.showMessageDialog(f, "Es wurden keine ganzen Zahlen eingeben! Bitte versuchen Sie es erneut");
             LOGGER.log(Level.WARNING, "Es wurden keine ganzen Zahlen eingeben");

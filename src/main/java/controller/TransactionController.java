@@ -143,11 +143,17 @@ public class TransactionController implements ActionListener, MouseListener {
                 }
             }
 
-            originL.updateClub(originC);
-            targetL.updateClub(targetC);
+            boolean updateOrigin = originL.updateClub(originC);
+            boolean updateTarget = targetL.updateClub(targetC);
 
-            JOptionPane.showMessageDialog(view, "Transfer war erfolgreich");
-            LOGGER.log(Level.INFO, "Player Transfer finished successfully");
+            if (updateOrigin && updateTarget) {
+                JOptionPane.showMessageDialog(view, "Transfer war erfolgreich");
+                LOGGER.log(Level.INFO, "Player Transfer finished successfully");
+            } else {
+                JOptionPane.showMessageDialog(view, "Transfer fehlgeschlagen");
+                LOGGER.log(Level.INFO, "Player Transfer failed");
+
+            }
         }
     }
 
