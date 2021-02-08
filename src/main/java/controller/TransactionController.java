@@ -30,6 +30,8 @@ public class TransactionController implements ActionListener, MouseListener {
 
     public TransactionController(TransactionView view, Club club) {
         this.view = view;
+        this.club = club;
+        ligas = MainController.getLigas();
         this.view.getAddToTransBtn().addActionListener(this);
         this.view.getRemoveFromTransBtn().addActionListener(this);
         this.view.getSuchenBtn().addActionListener(this);
@@ -39,8 +41,6 @@ public class TransactionController implements ActionListener, MouseListener {
         this.view.getListEigenerKader().setModel(listModelUrsprung);
         listModelSend = new DefaultListModel<>();
         this.view.getListeTransKader().setModel(listModelSend);
-        this.club = club;
-        ligas = MainController.getLigas();
     }
 
     @Override

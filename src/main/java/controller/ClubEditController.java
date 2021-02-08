@@ -20,72 +20,72 @@ import view.TransactionView;
 public class ClubEditController implements ActionListener {
 
     private final static Logger LOGGER = Logger.getLogger(ClubEditController.class.getName());
-    private ClubEditView cev;
+    private ClubEditView view;
     private Club club;
     private JFrame master;
-    private Liga l;
+    private Liga liga;
 
-    public ClubEditController(ClubEditView CeV, Club c, Liga l, JFrame master) {
-        this.cev = CeV;
-        this.cev.setClubName(c.getName());
-        this.club = c;
-        this.l = l;
+    public ClubEditController(ClubEditView view, Club club, Liga liga, JFrame master) {
+        this.view = view;
         this.master = master;
-        this.cev.getKaderBtn().addActionListener(this);
-        this.cev.getTransBtn().addActionListener(this);
-        this.cev.getAddSpielerBtn().addActionListener(this);
+        this.liga = liga;
+        this.club = club;
+        this.view.setClubName(club.getName());
+        this.view.getKaderBtn().addActionListener(this);
+        this.view.getTransBtn().addActionListener(this);
+        this.view.getAddSpielerBtn().addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent evt) {
         // LOGGER.log(Level.INFO, "Button wurde gedrueckt");
         if ("kader".equals(evt.getActionCommand())) {
-            cev.getKaderBtn().setBackground(Color.white);
-            cev.getTransBtn().setBackground(Color.lightGray);
-            cev.getAddSpielerBtn().setBackground(Color.lightGray);
+            view.getKaderBtn().setBackground(Color.white);
+            view.getTransBtn().setBackground(Color.lightGray);
+            view.getAddSpielerBtn().setBackground(Color.lightGray);
             // cev.getClubName().setText("Button Kader wurde geklickt");
             // LOGGER.log(Level.INFO, "Kader");
-            cev.getClubEditContent().removeAll();
-            cev.getClubEditContent().repaint();
-            cev.getClubEditContent().revalidate();
+            view.getClubEditContent().removeAll();
+            view.getClubEditContent().repaint();
+            view.getClubEditContent().revalidate();
 
             KaderView kdw2 = new KaderView();
-            KaderController kDc = new KaderController(kdw2, club, this.master, this.l);
-            cev.getClubEditContent().add(kdw2);
-            cev.getClubEditContent().repaint();
-            cev.getClubEditContent().revalidate();
+            KaderController kDc = new KaderController(kdw2, club, this.master, this.liga);
+            view.getClubEditContent().add(kdw2);
+            view.getClubEditContent().repaint();
+            view.getClubEditContent().revalidate();
 
         }
         if ("trans".equals(evt.getActionCommand())) {
             LOGGER.log(Level.INFO, "Trans");
-            cev.getTransBtn().setBackground(Color.white);
-            cev.getKaderBtn().setBackground(Color.lightGray);
-            cev.getAddSpielerBtn().setBackground(Color.lightGray);
+            view.getTransBtn().setBackground(Color.white);
+            view.getKaderBtn().setBackground(Color.lightGray);
+            view.getAddSpielerBtn().setBackground(Color.lightGray);
             TransactionView tranView = new TransactionView();
             TransactionController tr = new TransactionController(tranView, club);
             // Layout setzen ?
-            cev.getClubEditContent().removeAll();
-            cev.getClubEditContent().add(tranView);
+            view.getClubEditContent().removeAll();
+            view.getClubEditContent().add(tranView);
             // LOGGER.log(Level.INFO, "Content hizugefuegt");
-            cev.getClubEditContent().repaint();
+            view.getClubEditContent().repaint();
             // LOGGER.log(Level.INFO, "Repaint()");
-            cev.getClubEditContent().revalidate();
+            view.getClubEditContent().revalidate();
             // LOGGER.log(Level.INFO, "Revalidate()");
 
         }
         if ("spieler".equals(evt.getActionCommand())) {
             // LOGGER.log(Level.INFO, "Spieler");
-            cev.getTransBtn().setBackground(Color.lightGray);
-            cev.getKaderBtn().setBackground(Color.lightGray);
-            cev.getAddSpielerBtn().setBackground(Color.white);
-            cev.getClubEditContent().removeAll();
-            cev.getClubEditContent().repaint();
-            cev.getClubEditContent().revalidate();
+            view.getTransBtn().setBackground(Color.lightGray);
+            view.getKaderBtn().setBackground(Color.lightGray);
+            view.getAddSpielerBtn().setBackground(Color.white);
+            view.getClubEditContent().removeAll();
+            view.getClubEditContent().repaint();
+            view.getClubEditContent().revalidate();
             SpielerAddView spV = new SpielerAddView();
-            SpielerAddController spAC = new SpielerAddController(spV, club, l);
-            cev.getClubEditContent().add(spV);
-            cev.getClubEditContent().repaint();
-            cev.getClubEditContent().revalidate();
+            SpielerAddController spAC = new SpielerAddController(spV, club, liga);
+            view.getClubEditContent().add(spV);
+            view.getClubEditContent().repaint();
+            view.getClubEditContent().revalidate();
         }
     }
 }

@@ -27,10 +27,10 @@ public class KaderController implements ActionListener, MouseListener {
     private JFrame master;
     private Liga liga;
 
-    public KaderController(KaderView view, Club club, JFrame mas, Liga l) {
+    public KaderController(KaderView view, Club club, JFrame mas, Liga liga) {
         this.view = view;
         this.master = mas;
-        this.liga = l;
+        this.liga = liga;
         this.club = club;
         this.view.getPlayerTable().addMouseListener(this);
         this.setTableData();

@@ -26,26 +26,25 @@ public class ClubController implements MouseListener, ActionListener {
     private final static Logger LOGGER = Logger.getLogger(ClubController.class.getName());
 
     private ClubView view;
-    private Liga l;
+    private Liga liga;
     private JFrame master;
 
-    public ClubController(JFrame master, ClubView view, Liga l) {
-        view.getClubTable().addMouseListener(this);
-        view.getAddClubBtn().addActionListener(this);
-        view.getAddExistingClubBtn().addActionListener(this);
-        // ueberlegen ob man Buttons ausgraut
-        if (l.getId() == 1 || l.getId() == 2) {
-            view.getAddClubBtn().setVisible(false);
-            view.getAddExistingClubBtn().setVisible(true);
-        } else {
-            view.getAddClubBtn().setVisible(true);
-            view.getAddExistingClubBtn().setVisible(true);
-        }
-        view.repaint();
-        view.revalidate();
-        this.master = master;
-        this.l = l;
+    public ClubController(JFrame master, ClubView view, Liga liga) {
         this.view = view;
+        this.master = master;
+        this.liga = liga;
+        this.view.getClubTable().addMouseListener(this);
+        this.view.getAddClubBtn().addActionListener(this);
+        this.view.getAddExistingClubBtn().addActionListener(this);
+        if (liga.getId() == 1 || liga.getId() == 2) {
+            this.view.getAddClubBtn().setVisible(false);
+            this.view.getAddExistingClubBtn().setVisible(true);
+        } else {
+            this.view.getAddClubBtn().setVisible(true);
+            this.view.getAddExistingClubBtn().setVisible(true);
+        }
+        this.view.repaint();
+        this.view.revalidate();
         this.setData();
 
     }
@@ -64,15 +63,15 @@ public class ClubController implements MouseListener, ActionListener {
             int column = 0;
             String team = temp.getValueAt(row, column).toString();
 
-            Club c = l.getClub(team);
+            Club c = liga.getClub(team);
             ClubEditView cbV = new ClubEditView(view.getmaster(), true);
-            ClubEditController clubEditController = new ClubEditController(cbV, c, l, master);
+            ClubEditController clubEditController = new ClubEditController(cbV, c, liga, master);
             cbV.setVisible(true);
         }
         if (SwingUtilities.isRightMouseButton(evt)) {
             // Kontext Menue mit Spieler Loeschen und name aendern ueber Pop up Item
             RowPopupClubView kontext = new RowPopupClubView();
-            RowPopupClubController rowPopupClubController = new RowPopupClubController(master, kontext, l, view.getClubTable());
+            RowPopupClubController rowPopupClubController = new RowPopupClubController(master, kontext, liga, view.getClubTable());
             kontext.show(view.getClubTable(), evt.getX(), evt.getY());
         }
 
@@ -121,9 +120,9 @@ public class ClubController implements MouseListener, ActionListener {
     }
 
     private String[][] getData() {
-        String[][] data = new String[l.getClubs().size()][];
+        String[][] data = new String[liga.getClubs().size()][];
         int count = 0;
-        for (Club c : l.getClubs()) {
+        for (Club c : liga.getClubs()) {
             String[] temp = new String[2];
             temp[0] = c.getName();
             temp[1] = c.getStadion();
@@ -139,7 +138,7 @@ public class ClubController implements MouseListener, ActionListener {
             case "addClub":
                 LOGGER.log(Level.INFO, "Club Hinzufuegen button gedrueckt");
                 ClubAddView caV = new ClubAddView(master, true);
-                new ClubAddController(master, caV, l);
+                new ClubAddController(master, caV, liga);
                 caV.setVisible(true);
                 break;
             case "addExistClub":
@@ -150,7 +149,7 @@ public class ClubController implements MouseListener, ActionListener {
                 // Down menue ausgewaehlt wurde
                 // in Liste: mehrfach auswahl moeglich
                 ClubAddExistingView caEV = new ClubAddExistingView(master, true);
-                ClubAddExistingController caEC = new ClubAddExistingController(caEV, l);
+                ClubAddExistingController caEC = new ClubAddExistingController(caEV, liga);
                 caEV.setVisible(true);
                 break;
 

@@ -27,15 +27,14 @@ public class RowPopupPlayerController implements ActionListener {
 
     private final static Logger LOGGER = Logger.getLogger(RowPopupPlayerController.class.getName());
 
-    public RowPopupPlayerController(RowPopupPlayerView view, Club c, JTable table, JFrame master, Liga l) {
+    public RowPopupPlayerController(RowPopupPlayerView view, Club club, JTable table, JFrame master, Liga liga) {
         this.view = view;
         this.master = master;
-        this.club = c;
-        this.liga = l;
+        this.liga = liga;
+        this.club = club;
         this.table = table;
         this.view.getBearbeiten().addActionListener(this);
         this.view.getLoeschen().addActionListener(this);
-
     }
 
     @Override

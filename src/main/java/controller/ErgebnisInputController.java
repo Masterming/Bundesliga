@@ -20,26 +20,26 @@ public class ErgebnisInputController implements ActionListener {
 
     private final static Logger LOGGER = Logger.getLogger(ErgebnisInputController.class.getName());
 
-    private ErgebnisInputView ergDialog;
+    private ErgebnisInputView view;
     private List<List<String>> scoreTeamA;
     private List<List<String>> scoreTeamB;
-    int teamAErg;
-    int teamBErg;
+    int clubAErg;
+    int clubBErg;
 
-    public ErgebnisInputController(ErgebnisInputView ergDialog, String teamA, String teamB) {
-        this.ergDialog = ergDialog;
-        this.ergDialog.setTeamALbl(teamA);
-        this.ergDialog.setTeamBLbl(teamB);
-        this.ergDialog.getSaveBtn().addActionListener(this);
-        this.ergDialog.getTeamAAddGoalForPlayer().addActionListener(this);
-        this.ergDialog.getTeamASubGoalForPlayer().addActionListener(this);
-        this.ergDialog.getTeamBAddGoalForPlayer().addActionListener(this);
-        this.ergDialog.getTeamBSubGoalForPlayer().addActionListener(this);
+    public ErgebnisInputController(ErgebnisInputView view, String clubA, String clubB) {
+        this.view = view;
+        this.view.setTeamALbl(clubA);
+        this.view.setTeamBLbl(clubB);
+        this.view.getSaveBtn().addActionListener(this);
+        this.view.getTeamAAddGoalForPlayer().addActionListener(this);
+        this.view.getTeamASubGoalForPlayer().addActionListener(this);
+        this.view.getTeamBAddGoalForPlayer().addActionListener(this);
+        this.view.getTeamBSubGoalForPlayer().addActionListener(this);
         scoreTeamA = new ArrayList<>();
         scoreTeamB = new ArrayList<>();
         getData();
-        teamAErg = -1;
-        teamBErg = -1;
+        clubAErg = -1;
+        clubBErg = -1;
 
     }
 
@@ -47,8 +47,8 @@ public class ErgebnisInputController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         // String a = ergDialog.getErg1().getText();
         // String b = ergDialog.getErg2().getText();
-        String nameA = ergDialog.getTeamAPlayerList().getSelectedValue();
-        String nameB = ergDialog.getTeamBPlayerList().getSelectedValue();
+        String nameA = view.getTeamAPlayerList().getSelectedValue();
+        String nameB = view.getTeamBPlayerList().getSelectedValue();
         switch (e.getActionCommand()) {
             case "scoreTeamA":
                 scoreTeam(nameA, scoreTeamA);
@@ -79,9 +79,9 @@ public class ErgebnisInputController implements ActionListener {
         listModelTeamA.addElement("Thomas Mueller");
         listModelTeamA.addElement("Philipp Lahm");
 
-        ergDialog.setTeamAPlayerList(listModelTeamA);
-        ergDialog.repaint();
-        ergDialog.revalidate();
+        view.setTeamAPlayerList(listModelTeamA);
+        view.repaint();
+        view.revalidate();
     }
 
     private void scoreTeam(String name, List<List<String>> dataSet) {
@@ -138,7 +138,7 @@ public class ErgebnisInputController implements ActionListener {
     }
 
     private void updateView() {
-        DefaultTableModel tbmA = (DefaultTableModel) ergDialog.getScoredPlayerTeamA().getModel();
+        DefaultTableModel tbmA = (DefaultTableModel) view.getScoredPlayerTeamA().getModel();
 
         for (int i = tbmA.getRowCount() - 1; i >= 0; i--) {
             tbmA.removeRow(i);
@@ -151,9 +151,9 @@ public class ErgebnisInputController implements ActionListener {
                 tbmA.addRow(temp);
             }
         }
-        ergDialog.setScoredPlayerTeamA(tbmA);
+        view.setScoredPlayerTeamA(tbmA);
 
-        DefaultTableModel tbmB = (DefaultTableModel) ergDialog.getScoredPlayerTeamB().getModel();
+        DefaultTableModel tbmB = (DefaultTableModel) view.getScoredPlayerTeamB().getModel();
         for (int i = tbmB.getRowCount() - 1; i >= 0; i--) {
             tbmB.removeRow(i);
         }
@@ -163,13 +163,13 @@ public class ErgebnisInputController implements ActionListener {
                 tbmB.addRow(temp);
             }
         }
-        ergDialog.setScoredPlayerTeamB(tbmB);
+        view.setScoredPlayerTeamB(tbmB);
 
         // Den spielstand aktualisieren
-        teamAErg = getSpielStand(scoreTeamA);
-        teamBErg = getSpielStand(scoreTeamB);
-        ergDialog.setErgTeamALbl(String.valueOf(teamAErg));
-        ergDialog.setErgTeamBLbl1(String.valueOf(teamBErg));
+        clubAErg = getSpielStand(scoreTeamA);
+        clubBErg = getSpielStand(scoreTeamB);
+        view.setErgTeamALbl(String.valueOf(clubAErg));
+        view.setErgTeamBLbl1(String.valueOf(clubBErg));
     }
 
     private int getSpielStand(List<List<String>> inPutData) {
@@ -186,16 +186,16 @@ public class ErgebnisInputController implements ActionListener {
     }
 
     private void save() {
-        if (teamAErg == -1 || teamBErg == -1) {
+        if (clubAErg == -1 || clubBErg == -1) {
             JFrame f = new JFrame();
             JOptionPane.showMessageDialog(f, "Bitte fuegen Sie Ergebnisse hinzu");
-            LOGGER.log(Level.INFO, "Spielstand: " + teamAErg + " zu " + teamBErg);
+            LOGGER.log(Level.INFO, "Spielstand: " + clubAErg + " zu " + clubBErg);
         } else {
             // TODO in DB Schreiben und Model aendern
             LOGGER.log(Level.INFO, scoreTeamA.toString());
             LOGGER.log(Level.INFO, scoreTeamB.toString());
 
-            ergDialog.dispose();
+            view.dispose();
         }
     }
 

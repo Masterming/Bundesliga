@@ -23,29 +23,28 @@ public class ClubAddExistingController implements ActionListener, MouseListener,
 
     private final static Logger LOGGER = Logger.getLogger(ClubAddExistingController.class.getName());
     private ClubAddExistingView view;
-    private Liga l;
+    private Liga liga;
     private String selectedClub;
     private DefaultListModel<String> clubList;
     private Map<Integer, Liga> ligas;
     private int targetLigaId;
 
-    public ClubAddExistingController(ClubAddExistingView view, Liga l) {
+    public ClubAddExistingController(ClubAddExistingView view, Liga liga) {
         this.view = view;
-        this.l = l;
-        this.view.getAdClubToLigaBtn().addActionListener(this);
-        this.view.getSelectedLiga().addItemListener(this);
-        this.view.getLigaClubList().addMouseListener(this);
+        this.liga = liga;
         clubList = new DefaultListModel<>();
         this.view.getLigaClubList().setModel(clubList);
         this.ligas = MainController.getLigas();
+        this.view.getAdClubToLigaBtn().addActionListener(this);
+        this.view.getSelectedLiga().addItemListener(this);
+        this.view.getLigaClubList().addMouseListener(this);
         adaptViewToLiga();
-
     }
 
     private void adaptViewToLiga() {
         String[] ligen;
         DefaultComboBoxModel<String> dfC;
-        switch (l.getId()) {
+        switch (liga.getId()) {
             case 1:
                 ligen = new String[1];
                 ligen[0] = "Liga 2";
@@ -83,7 +82,7 @@ public class ClubAddExistingController implements ActionListener, MouseListener,
                 if (confirm == JOptionPane.YES_OPTION && selectedClub != null) {
                     LOGGER.log(Level.INFO, "Club: {0} zur Liga hinzugefuegt", selectedClub);
                     Liga origin = ligas.get(this.targetLigaId);
-                    Liga target = ligas.get(l.getId());
+                    Liga target = ligas.get(liga.getId());
 
                     Club remClub = origin.removeClub(selectedClub);
                     target.addClub(remClub);

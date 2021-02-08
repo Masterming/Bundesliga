@@ -17,15 +17,15 @@ import view.SpielerAddView;
 public class SpielerAddController implements ActionListener {
 
     private final static Logger LOGGER = Logger.getLogger(SpielerAddController.class.getName());
-    private SpielerAddView spAV;
+    private SpielerAddView view;
     private Club club;
-    private Liga l;
+    private Liga liga;
 
-    public SpielerAddController(SpielerAddView spAV, Club cl, Liga l) {
-        this.spAV = spAV;
-        this.spAV.getAddSpielerBtn().addActionListener(this);
-        this.club = cl;
-        this.l = l;
+    public SpielerAddController(SpielerAddView view, Club club, Liga liga) {
+        this.view = view;
+        this.liga = liga;
+        this.club = club;
+        this.view.getAddSpielerBtn().addActionListener(this);
     }
 
     @Override
@@ -38,8 +38,8 @@ public class SpielerAddController implements ActionListener {
     }
 
     private void addSpieler() {
-        String name = spAV.getPlayerNameTxt().getText();
-        String anzTorStr = spAV.getAnzToreTxt().getText();
+        String name = view.getPlayerNameTxt().getText();
+        String anzTorStr = view.getAnzToreTxt().getText();
         int anzTor = -1;
         boolean inputOk = true;
         try {
@@ -54,7 +54,7 @@ public class SpielerAddController implements ActionListener {
             LOGGER.log(Level.INFO, "Spieler hinzugefuegt");
             Player P = new Player(name, anzTor);
             club.addPlayer(P);
-            l.updateClub(club);
+            liga.updateClub(club);
         }
     }
 

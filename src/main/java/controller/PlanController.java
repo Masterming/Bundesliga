@@ -17,15 +17,15 @@ public class PlanController implements ActionListener {
 
     private final static Logger LOGGER = Logger.getLogger(PlanController.class.getName());
 
-    private PlanView plv;
+    private PlanView view;
     private JFrame master;
-    private Liga lig;
+    private Liga liga;
 
-    public PlanController(JFrame master, PlanView plx, Liga l) {
-        this.plv = plx;
+    public PlanController(JFrame master, PlanView view, Liga liga) {
+        this.view = view;
         this.master = master;
-        this.lig = l;
-        this.plv.getAddSpielBtn().addActionListener(this);
+        this.liga = liga;
+        this.view.getAddSpielBtn().addActionListener(this);
         // this.plv.getjButton1().addActionListener(this);
         // Problem: Durch MVC- Beobahcter Pattern wird View erst durch die Veraenderung
         // des Models initialisert -->
@@ -40,7 +40,7 @@ public class PlanController implements ActionListener {
             case "addSpiel":
                 LOGGER.log(Level.INFO, "Plan Controller angekommen");
                 PlanAddGameView pagV = new PlanAddGameView(master, true);
-                PlanAddGameController pagC = new PlanAddGameController(master, pagV, lig);
+                PlanAddGameController pagC = new PlanAddGameController(master, pagV, liga);
                 pagV.setVisible(true);
                 break;
         }
