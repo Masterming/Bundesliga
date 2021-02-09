@@ -33,9 +33,9 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                 <Group type="102" alignment="0" attributes="0">
-                  <Component id="teamAAddGoalForPlayer" min="-2" max="-2" attributes="0"/>
+                  <Component id="clubAAddGoalForPlayer" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="teamASubGoalForPlayer" min="-2" max="-2" attributes="0"/>
+                  <Component id="clubASubGoalForPlayer" min="-2" max="-2" attributes="0"/>
                 </Group>
                 <Component id="jLabel2" alignment="0" min="-2" pref="62" max="-2" attributes="0"/>
                 <Component id="jScrollPane2" min="-2" pref="121" max="-2" attributes="0"/>
@@ -46,9 +46,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                 <Component id="jLabel3" alignment="0" min="-2" pref="62" max="-2" attributes="0"/>
                 <Group type="102" alignment="0" attributes="0">
-                  <Component id="teamBAddGoalForPlayer" min="-2" max="-2" attributes="0"/>
+                  <Component id="clubBAddGoalForPlayer" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="teamBSubGoalForPlayer" min="-2" max="-2" attributes="0"/>
+                  <Component id="clubBSubGoalForPlayer" min="-2" max="-2" attributes="0"/>
                 </Group>
                 <Group type="102" alignment="0" attributes="0">
                   <Component id="jScrollPane1" min="-2" pref="139" max="-2" attributes="0"/>
@@ -61,12 +61,12 @@
               <Group type="103" groupAlignment="0" attributes="0">
                 <Group type="102" attributes="0">
                   <EmptySpace min="-2" pref="284" max="-2" attributes="0"/>
-                  <Component id="ergTeamALbl" min="-2" pref="31" max="-2" attributes="0"/>
+                  <Component id="ergClubALbl" min="-2" pref="31" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                 </Group>
                 <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="teamALbl" min="-2" pref="187" max="-2" attributes="0"/>
+                  <Component id="clubALbl" min="-2" pref="187" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
                 </Group>
               </Group>
@@ -74,12 +74,12 @@
                 <Group type="102" attributes="0">
                   <Component id="jLabel4" min="-2" pref="31" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                  <Component id="ergTeamBLbl1" min="-2" pref="31" max="-2" attributes="0"/>
+                  <Component id="ergClubBLbl1" min="-2" pref="31" max="-2" attributes="0"/>
                 </Group>
                 <Group type="102" alignment="0" attributes="0">
                   <Component id="jLabel1" min="-2" pref="31" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="113" max="-2" attributes="0"/>
-                  <Component id="teamBLbl" min="-2" pref="199" max="-2" attributes="0"/>
+                  <Component id="clubBLbl" min="-2" pref="199" max="-2" attributes="0"/>
                 </Group>
               </Group>
             </Group>
@@ -99,16 +99,16 @@
           <Component id="dateLbl" min="-2" pref="13" max="-2" attributes="0"/>
           <EmptySpace max="-2" attributes="0"/>
           <Group type="103" groupAlignment="3" attributes="0">
-            <Component id="teamBLbl" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-            <Component id="teamALbl" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+            <Component id="clubBLbl" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+            <Component id="clubALbl" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
             <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
           </Group>
           <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
           <Group type="103" groupAlignment="0" attributes="0">
             <Group type="102" alignment="0" attributes="0">
               <Group type="103" groupAlignment="3" attributes="0">
-                <Component id="teamBAddGoalForPlayer" alignment="3" min="-2" max="-2" attributes="0"/>
-                <Component id="teamBSubGoalForPlayer" alignment="3" min="-2" max="-2" attributes="0"/>
+                <Component id="clubBAddGoalForPlayer" alignment="3" min="-2" max="-2" attributes="0"/>
+                <Component id="clubBSubGoalForPlayer" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel3" min="-2" pref="15" max="-2" attributes="0"/>
@@ -120,8 +120,8 @@
             </Group>
             <Group type="102" alignment="0" attributes="0">
               <Group type="103" groupAlignment="3" attributes="0">
-                <Component id="teamAAddGoalForPlayer" alignment="3" min="-2" max="-2" attributes="0"/>
-                <Component id="teamASubGoalForPlayer" alignment="3" min="-2" max="-2" attributes="0"/>
+                <Component id="clubAAddGoalForPlayer" alignment="3" min="-2" max="-2" attributes="0"/>
+                <Component id="clubASubGoalForPlayer" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" pref="15" max="-2" attributes="0"/>
@@ -135,8 +135,8 @@
           <EmptySpace type="separate" max="-2" attributes="0"/>
           <Group type="103" groupAlignment="0" attributes="0">
             <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-            <Component id="ergTeamALbl" min="-2" max="-2" attributes="0"/>
-            <Component id="ergTeamBLbl1" alignment="0" min="-2" max="-2" attributes="0"/>
+            <Component id="ergClubALbl" min="-2" max="-2" attributes="0"/>
+            <Component id="ergClubBLbl1" alignment="0" min="-2" max="-2" attributes="0"/>
           </Group>
           <EmptySpace type="unrelated" max="-2" attributes="0"/>
           <Component id="saveBtn" min="-2" pref="43" max="-2" attributes="0"/>
@@ -146,16 +146,16 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="teamBLbl">
+    <Component class="javax.swing.JLabel" name="clubBLbl">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Team B"/>
+        <Property name="text" type="java.lang.String" value="Club B"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="teamALbl">
+    <Component class="javax.swing.JLabel" name="clubALbl">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Team A"/>
+        <Property name="text" type="java.lang.String" value="Club A"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
@@ -171,7 +171,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JList" name="teamBPlayerList">
+        <Component class="javax.swing.JList" name="clubBPlayerList">
           <Properties>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
               <StringArray count="5">
@@ -196,7 +196,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JList" name="teamAPlayerList">
+        <Component class="javax.swing.JList" name="clubAPlayerList">
           <Properties>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
               <StringArray count="5">
@@ -214,28 +214,28 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="teamBSubGoalForPlayer">
+    <Component class="javax.swing.JButton" name="clubBSubGoalForPlayer">
       <Properties>
         <Property name="text" type="java.lang.String" value="-"/>
-        <Property name="actionCommand" type="java.lang.String" value="descoreTeamB"/>
+        <Property name="actionCommand" type="java.lang.String" value="descoreClubB"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="teamAAddGoalForPlayer">
+    <Component class="javax.swing.JButton" name="clubAAddGoalForPlayer">
       <Properties>
         <Property name="text" type="java.lang.String" value="+"/>
-        <Property name="actionCommand" type="java.lang.String" value="scoreTeamA"/>
+        <Property name="actionCommand" type="java.lang.String" value="scoreClubA"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="teamBAddGoalForPlayer">
+    <Component class="javax.swing.JButton" name="clubBAddGoalForPlayer">
       <Properties>
         <Property name="text" type="java.lang.String" value="+"/>
-        <Property name="actionCommand" type="java.lang.String" value="scoreTeamB"/>
+        <Property name="actionCommand" type="java.lang.String" value="scoreClubB"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="teamASubGoalForPlayer">
+    <Component class="javax.swing.JButton" name="clubASubGoalForPlayer">
       <Properties>
         <Property name="text" type="java.lang.String" value="-"/>
-        <Property name="actionCommand" type="java.lang.String" value="descoreTeamA"/>
+        <Property name="actionCommand" type="java.lang.String" value="descoreClubA"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
@@ -254,12 +254,12 @@
         <Property name="text" type="java.lang.String" value=":"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="ergTeamALbl">
+    <Component class="javax.swing.JLabel" name="ergClubALbl">
       <Properties>
         <Property name="text" type="java.lang.String" value="-1"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="ergTeamBLbl1">
+    <Component class="javax.swing.JLabel" name="ergClubBLbl1">
       <Properties>
         <Property name="text" type="java.lang.String" value="-1"/>
       </Properties>
@@ -282,7 +282,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="scoredPlayerTeamB">
+        <Component class="javax.swing.JTable" name="scoredPlayerClubB">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="2" rowCount="4">
@@ -318,7 +318,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="scoredPlayerTeamA">
+        <Component class="javax.swing.JTable" name="scoredPlayerClubA">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="2" rowCount="4">

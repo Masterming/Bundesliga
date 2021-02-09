@@ -25,8 +25,8 @@ public class ErgebnisInputController implements ActionListener {
     private final static Logger LOGGER = Logger.getLogger(ErgebnisInputController.class.getName());
 
     private ErgebnisInputView view;
-    private List<List<String>> scoreTeamA;
-    private List<List<String>> scoreTeamB;
+    private List<List<String>> scoreClubA;
+    private List<List<String>> scoreClubB;
     private Map<Integer, Liga> ligas;
     private Game game;
     private Liga liga;
@@ -35,15 +35,15 @@ public class ErgebnisInputController implements ActionListener {
 
     public ErgebnisInputController(ErgebnisInputView view, String clubA, String clubB) {
         this.view = view;
-        this.view.setTeamALbl(clubA);
-        this.view.setTeamBLbl(clubB);
+        this.view.setClubALbl(clubA);
+        this.view.setClubBLbl(clubB);
         this.view.getSaveBtn().addActionListener(this);
-        this.view.getTeamAAddGoalForPlayer().addActionListener(this);
-        this.view.getTeamASubGoalForPlayer().addActionListener(this);
-        this.view.getTeamBAddGoalForPlayer().addActionListener(this);
-        this.view.getTeamBSubGoalForPlayer().addActionListener(this);
-        scoreTeamA = new ArrayList<>();
-        scoreTeamB = new ArrayList<>();
+        this.view.getClubAAddGoalForPlayer().addActionListener(this);
+        this.view.getClubASubGoalForPlayer().addActionListener(this);
+        this.view.getClubBAddGoalForPlayer().addActionListener(this);
+        this.view.getClubBSubGoalForPlayer().addActionListener(this);
+        scoreClubA = new ArrayList<>();
+        scoreClubB = new ArrayList<>();
         getData();
         clubAErg = 0;
         clubBErg = 0;
@@ -54,8 +54,8 @@ public class ErgebnisInputController implements ActionListener {
     public ErgebnisInputController(ErgebnisInputView ergDialog, Game game, Liga l) {
         this.game = game;
         this.view = ergDialog;
-        this.view.setTeamALbl(game.getClub1().getName());
-        this.view.setTeamBLbl(game.getClub2().getName());
+        this.view.setClubALbl(game.getClub1().getName());
+        this.view.setClubBLbl(game.getClub2().getName());
 
         String day = String.valueOf(game.getStart().getDayOfMonth());
         String mounth = String.valueOf(game.getStart().getMonthValue());
@@ -65,12 +65,12 @@ public class ErgebnisInputController implements ActionListener {
         String labelText = day + "." + mounth + "." + year + " um " + hour + ":" + minute + " Uhr ";
         this.view.setDateLbl(labelText);
         this.view.getSaveBtn().addActionListener(this);
-        this.view.getTeamAAddGoalForPlayer().addActionListener(this);
-        this.view.getTeamASubGoalForPlayer().addActionListener(this);
-        this.view.getTeamBAddGoalForPlayer().addActionListener(this);
-        this.view.getTeamBSubGoalForPlayer().addActionListener(this);
-        scoreTeamA = new ArrayList<>();
-        scoreTeamB = new ArrayList<>();
+        this.view.getClubAAddGoalForPlayer().addActionListener(this);
+        this.view.getClubASubGoalForPlayer().addActionListener(this);
+        this.view.getClubBAddGoalForPlayer().addActionListener(this);
+        this.view.getClubBSubGoalForPlayer().addActionListener(this);
+        scoreClubA = new ArrayList<>();
+        scoreClubB = new ArrayList<>();
         this.liga = l;
         getData();
     }
@@ -79,20 +79,20 @@ public class ErgebnisInputController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         // String a = ergDialog.getErg1().getText();
         // String b = ergDialog.getErg2().getText();
-        String nameA = view.getTeamAPlayerList().getSelectedValue();
-        String nameB = view.getTeamBPlayerList().getSelectedValue();
+        String nameA = view.getClubAPlayerList().getSelectedValue();
+        String nameB = view.getClubBPlayerList().getSelectedValue();
         switch (e.getActionCommand()) {
-            case "scoreTeamA":
-                scoreTeam(nameA, scoreTeamA);
+            case "scoreClubA":
+                scoreClub(nameA, scoreClubA);
                 break;
-            case "descoreTeamA":
-                descoreTeam(nameA, scoreTeamA);
+            case "descoreClubA":
+                descoreClub(nameA, scoreClubA);
                 break;
-            case "scoreTeamB":
-                scoreTeam(nameB, scoreTeamB);
+            case "scoreClubB":
+                scoreClub(nameB, scoreClubB);
                 break;
-            case "descoreTeamB":
-                descoreTeam(nameB, scoreTeamB);
+            case "descoreClubB":
+                descoreClub(nameB, scoreClubB);
                 break;
             case "save":
                 LOGGER.log(Level.INFO, "save");
@@ -106,21 +106,21 @@ public class ErgebnisInputController implements ActionListener {
         // TODO daten aus DB holen
         List<Player> spielerClub1 = game.getClub1().getPlayers();
         List<Player> spielerClub2 = game.getClub2().getPlayers();
-        DefaultListModel<String> listModelTeamA = new DefaultListModel<>();
+        DefaultListModel<String> listModelClubA = new DefaultListModel<>();
         for (Player p : spielerClub1) {
-            listModelTeamA.addElement(p.getName());
+            listModelClubA.addElement(p.getName());
         }
-        DefaultListModel<String> listModelTeamB = new DefaultListModel<>();
+        DefaultListModel<String> listModelClubB = new DefaultListModel<>();
         for (Player p : spielerClub2) {
-            listModelTeamB.addElement(p.getName());
+            listModelClubB.addElement(p.getName());
         }
-        view.setTeamAPlayerList(listModelTeamA);
-        view.setTeamBPlayerList(listModelTeamB);
+        view.setClubAPlayerList(listModelClubA);
+        view.setClubBPlayerList(listModelClubB);
         view.repaint();
         view.revalidate();
     }
 
-    private void scoreTeam(String name, List<List<String>> dataSet) {
+    private void scoreClub(String name, List<List<String>> dataSet) {
         int index = -1;
         boolean found = false;
         for (int i = 0; i < dataSet.size(); i++) {
@@ -148,8 +148,8 @@ public class ErgebnisInputController implements ActionListener {
 
     }
 
-    private void descoreTeam(String name, List<List<String>> dataSet) {
-        LOGGER.log(Level.INFO, "Descore Team A");
+    private void descoreClub(String name, List<List<String>> dataSet) {
+        LOGGER.log(Level.INFO, "Descore Club A");
         int index = -1;
         boolean found = false;
         for (int i = 0; i < dataSet.size(); i++) {
@@ -174,38 +174,38 @@ public class ErgebnisInputController implements ActionListener {
     }
 
     private void updateView() {
-        DefaultTableModel tbmA = (DefaultTableModel) view.getScoredPlayerTeamA().getModel();
+        DefaultTableModel tbmA = (DefaultTableModel) view.getScoredPlayerClubA().getModel();
 
         for (int i = tbmA.getRowCount() - 1; i >= 0; i--) {
             tbmA.removeRow(i);
         }
-        // Team A
-        for (List<String> strName : scoreTeamA) {
+        // Club A
+        for (List<String> strName : scoreClubA) {
 
             if (!strName.get(1).equals("0")) {
                 Object[] temp = strName.toArray();
                 tbmA.addRow(temp);
             }
         }
-        view.setScoredPlayerTeamA(tbmA);
+        view.setScoredPlayerClubA(tbmA);
 
-        DefaultTableModel tbmB = (DefaultTableModel) view.getScoredPlayerTeamB().getModel();
+        DefaultTableModel tbmB = (DefaultTableModel) view.getScoredPlayerClubB().getModel();
         for (int i = tbmB.getRowCount() - 1; i >= 0; i--) {
             tbmB.removeRow(i);
         }
-        for (List<String> strName : scoreTeamB) {
+        for (List<String> strName : scoreClubB) {
             if (!strName.get(1).equals("0")) {
                 Object[] temp = strName.toArray();
                 tbmB.addRow(temp);
             }
         }
-        view.setScoredPlayerTeamB(tbmB);
+        view.setScoredPlayerClubB(tbmB);
 
         // Den spielstand aktualisieren
-        clubAErg = getSpielStand(scoreTeamA);
-        clubBErg = getSpielStand(scoreTeamB);
-        view.setErgTeamALbl(String.valueOf(clubAErg));
-        view.setErgTeamBLbl1(String.valueOf(clubBErg));
+        clubAErg = getSpielStand(scoreClubA);
+        clubBErg = getSpielStand(scoreClubB);
+        view.setErgClubALbl(String.valueOf(clubAErg));
+        view.setErgClubBLbl1(String.valueOf(clubBErg));
     }
 
     private int getSpielStand(List<List<String>> inPutData) {
@@ -228,11 +228,11 @@ public class ErgebnisInputController implements ActionListener {
             LOGGER.log(Level.INFO, "Spielstand: " + clubAErg + " zu " + clubBErg);
         } else {
             // TODO in DB Schreiben und Model aendern
-            LOGGER.log(Level.INFO, scoreTeamA.toString());
-            LOGGER.log(Level.INFO, scoreTeamB.toString());
+            LOGGER.log(Level.INFO, scoreClubA.toString());
+            LOGGER.log(Level.INFO, scoreClubB.toString());
 
             view.dispose();
-            // Score für teams Setzem
+            // Score für clubs Setzem
             this.game.setFinished(true);
             this.game.setScore1(clubAErg);
             this.game.setScore2(clubBErg);

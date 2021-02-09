@@ -14,7 +14,7 @@ public class TransactionView extends javax.swing.JPanel {
 
     private static final long serialVersionUID = 21L;
     private javax.swing.JButton addToTransBtn;
-    private javax.swing.JList<String> ergListTeam;
+    private javax.swing.JList<String> ergListClub;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -23,21 +23,21 @@ public class TransactionView extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JList<String> listEigenerKader;
     private javax.swing.JList<String> listeTransKader;
-    private javax.swing.JLabel receiveTeamLbl;
-    private javax.swing.JTextField receivingTeamInput;
+    private javax.swing.JLabel receiveClubLbl;
+    private javax.swing.JTextField receivingClubInput;
     private javax.swing.JButton removeFromTransBtn;
-    private javax.swing.JLabel selectedTeam;
+    private javax.swing.JLabel selectedClub;
     private javax.swing.JButton suchenBtn;
     private javax.swing.JButton transFinishBtn;
 
     private void initComponents() {
 
         jCheckBox1 = new javax.swing.JCheckBox();
-        receivingTeamInput = new javax.swing.JTextField();
+        receivingClubInput = new javax.swing.JTextField();
         suchenBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        ergListTeam = new javax.swing.JList<>();
-        selectedTeam = new javax.swing.JLabel();
+        ergListClub = new javax.swing.JList<>();
+        selectedClub = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         listEigenerKader = new javax.swing.JList<>();
         transFinishBtn = new javax.swing.JButton();
@@ -45,7 +45,7 @@ public class TransactionView extends javax.swing.JPanel {
         removeFromTransBtn = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         listeTransKader = new javax.swing.JList<>();
-        receiveTeamLbl = new javax.swing.JLabel();
+        receiveClubLbl = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -53,22 +53,22 @@ public class TransactionView extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(0, 258));
 
-        receivingTeamInput.setForeground(java.awt.Color.lightGray);
-        receivingTeamInput.setText("Erhaltendes Team");
-        receivingTeamInput.addFocusListener(new java.awt.event.FocusAdapter() {
+        receivingClubInput.setForeground(java.awt.Color.lightGray);
+        receivingClubInput.setText("Erhaltendes Club");
+        receivingClubInput.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                receivingTeamInputFocusGained(evt);
+                receivingClubInputFocusGained(evt);
             }
 
             public void focusLost(java.awt.event.FocusEvent evt) {
-                receivingTeamInputFocusLost(evt);
+                receivingClubInputFocusLost(evt);
             }
         });
 
         suchenBtn.setText("Suchen");
         suchenBtn.setActionCommand("suchen");
 
-        ergListTeam.setModel(new javax.swing.AbstractListModel<String>() {
+        ergListClub.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = {};
 
             public int getSize() {
@@ -79,9 +79,9 @@ public class TransactionView extends javax.swing.JPanel {
                 return strings[i];
             }
         });
-        jScrollPane1.setViewportView(ergListTeam);
+        jScrollPane1.setViewportView(ergListClub);
 
-        selectedTeam.setText("Empfaengerteam:");
+        selectedClub.setText("Empfaengerclub:");
 
         listEigenerKader.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = {"Item 1", "Item 2", " "};
@@ -118,7 +118,7 @@ public class TransactionView extends javax.swing.JPanel {
         });
         jScrollPane3.setViewportView(listeTransKader);
 
-        receiveTeamLbl.setText("RB Leipzig");
+        receiveClubLbl.setText("RB Leipzig");
 
         jLabel1.setText("Eigene Spieler");
 
@@ -130,15 +130,15 @@ public class TransactionView extends javax.swing.JPanel {
                 .addGroup(layout.createSequentialGroup().addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jScrollPane1)
-                                .addGroup(layout.createSequentialGroup().addComponent(selectedTeam)
+                                .addGroup(layout.createSequentialGroup().addComponent(selectedClub)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(receiveTeamLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 99,
+                                        .addComponent(receiveClubLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 99,
                                                 javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(transFinishBtn, javax.swing.GroupLayout.DEFAULT_SIZE,
                                         javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createSequentialGroup()
                                         .addComponent(
-                                                receivingTeamInput, javax.swing.GroupLayout.PREFERRED_SIZE, 170,
+                                                receivingClubInput, javax.swing.GroupLayout.PREFERRED_SIZE, 170,
                                                 javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18).addComponent(suchenBtn))
                                 .addGroup(layout.createSequentialGroup().addGroup(layout
@@ -160,16 +160,16 @@ public class TransactionView extends javax.swing.JPanel {
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout
                 .createSequentialGroup().addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup().addGap(1, 1, 1).addComponent(receivingTeamInput))
+                        .addGroup(layout.createSequentialGroup().addGap(1, 1, 1).addComponent(receivingClubInput))
                         .addComponent(suchenBtn))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 73,
                         javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(selectedTeam, javax.swing.GroupLayout.DEFAULT_SIZE,
+                        .addComponent(selectedClub, javax.swing.GroupLayout.DEFAULT_SIZE,
                                 javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(receiveTeamLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 20,
+                        .addComponent(receiveClubLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 20,
                                 javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(3, 3, 3)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(jLabel1)
@@ -187,17 +187,17 @@ public class TransactionView extends javax.swing.JPanel {
                 .addContainerGap()));
     }// </editor-fold>
 
-    private void receivingTeamInputFocusGained(java.awt.event.FocusEvent evt) {
-        if (this.receivingTeamInput.getText().equals("Erhaltendes Team")) {
-            this.receivingTeamInput.setText("");
-            this.receivingTeamInput.setForeground(Color.BLACK);
+    private void receivingClubInputFocusGained(java.awt.event.FocusEvent evt) {
+        if (this.receivingClubInput.getText().equals("Erhaltendes Club")) {
+            this.receivingClubInput.setText("");
+            this.receivingClubInput.setForeground(Color.BLACK);
         }
     }
 
-    private void receivingTeamInputFocusLost(java.awt.event.FocusEvent evt) {
-        if (this.receivingTeamInput.getText().isBlank()) {
-            this.receivingTeamInput.setText("Erhaltendes Team");
-            this.receivingTeamInput.setForeground(Color.lightGray);
+    private void receivingClubInputFocusLost(java.awt.event.FocusEvent evt) {
+        if (this.receivingClubInput.getText().isBlank()) {
+            this.receivingClubInput.setText("Erhaltendes Club");
+            this.receivingClubInput.setForeground(Color.lightGray);
         }
     }
 
@@ -205,16 +205,16 @@ public class TransactionView extends javax.swing.JPanel {
         initComponents();
     }
 
-    public JTextField getReceivingTeamInput() {
-        return receivingTeamInput;
+    public JTextField getReceivingClubInput() {
+        return receivingClubInput;
     }
 
-    public JList<String> getErgListTeam() {
-        return ergListTeam;
+    public JList<String> getErgListClub() {
+        return ergListClub;
     }
 
-    public void setErgListTeam(JList<String> ergListTeam) {
-        this.ergListTeam = ergListTeam;
+    public void setErgListClub(JList<String> ergListClub) {
+        this.ergListClub = ergListClub;
     }
 
     public JList<String> getListEigenerKader() {
@@ -233,12 +233,12 @@ public class TransactionView extends javax.swing.JPanel {
         this.listeTransKader = listeTransKader;
     }
 
-    public JLabel getReceiveTeamLbl() {
-        return receiveTeamLbl;
+    public JLabel getReceiveClubLbl() {
+        return receiveClubLbl;
     }
 
-    public void setReceiveTeamLbl(String receiveTeamLbl) {
-        this.receiveTeamLbl.setText(receiveTeamLbl);
+    public void setReceiveClubLbl(String receiveClubLbl) {
+        this.receiveClubLbl.setText(receiveClubLbl);
     }
 
     public JButton getAddToTransBtn() {

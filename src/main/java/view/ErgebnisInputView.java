@@ -26,27 +26,27 @@ public class ErgebnisInputView extends javax.swing.JDialog {
     }
 
     private void initComponents() {
-        teamBLbl = new javax.swing.JLabel();
-        teamALbl = new javax.swing.JLabel();
+        clubBLbl = new javax.swing.JLabel();
+        clubALbl = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        teamBPlayerList = new javax.swing.JList<>();
+        clubBPlayerList = new javax.swing.JList<>();
         jScrollPane2 = new javax.swing.JScrollPane();
-        teamAPlayerList = new javax.swing.JList<>();
-        teamBSubGoalForPlayer = new javax.swing.JButton();
-        teamAAddGoalForPlayer = new javax.swing.JButton();
-        teamBAddGoalForPlayer = new javax.swing.JButton();
-        teamASubGoalForPlayer = new javax.swing.JButton();
+        clubAPlayerList = new javax.swing.JList<>();
+        clubBSubGoalForPlayer = new javax.swing.JButton();
+        clubAAddGoalForPlayer = new javax.swing.JButton();
+        clubBAddGoalForPlayer = new javax.swing.JButton();
+        clubASubGoalForPlayer = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
-        ergTeamALbl = new javax.swing.JLabel() {
+        ergClubALbl = new javax.swing.JLabel() {
             public boolean editCellAt(int row, int column, java.util.EventObject e) {
                 return false;
             }
         };
-        ergTeamBLbl1 = new javax.swing.JLabel() {
+        ergClubBLbl1 = new javax.swing.JLabel() {
             public boolean editCellAt(int row, int column, java.util.EventObject e) {
                 return false;
             }
@@ -54,22 +54,22 @@ public class ErgebnisInputView extends javax.swing.JDialog {
         saveBtn = new javax.swing.JButton();
         dateLbl = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        scoredPlayerTeamB = new javax.swing.JTable();
+        scoredPlayerClubB = new javax.swing.JTable();
         jScrollPane4 = new javax.swing.JScrollPane();
-        scoredPlayerTeamA = new javax.swing.JTable();
+        scoredPlayerClubA = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        teamBLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        teamBLbl.setText("Team B");
+        clubBLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        clubBLbl.setText("Club B");
 
-        teamALbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        teamALbl.setText("Team A");
+        clubALbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        clubALbl.setText("Club A");
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText(":");
 
-        teamBPlayerList.setModel(new javax.swing.AbstractListModel<String>() {
+        clubBPlayerList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
 
             public int getSize() {
@@ -80,9 +80,9 @@ public class ErgebnisInputView extends javax.swing.JDialog {
                 return strings[i];
             }
         });
-        jScrollPane1.setViewportView(teamBPlayerList);
+        jScrollPane1.setViewportView(clubBPlayerList);
 
-        teamAPlayerList.setModel(new javax.swing.AbstractListModel<String>() {
+        clubAPlayerList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
 
             public int getSize() {
@@ -93,19 +93,19 @@ public class ErgebnisInputView extends javax.swing.JDialog {
                 return strings[i];
             }
         });
-        jScrollPane2.setViewportView(teamAPlayerList);
+        jScrollPane2.setViewportView(clubAPlayerList);
 
-        teamBSubGoalForPlayer.setText("-");
-        teamBSubGoalForPlayer.setActionCommand("descoreTeamB");
+        clubBSubGoalForPlayer.setText("-");
+        clubBSubGoalForPlayer.setActionCommand("descoreClubB");
 
-        teamAAddGoalForPlayer.setText("+");
-        teamAAddGoalForPlayer.setActionCommand("scoreTeamA");
+        clubAAddGoalForPlayer.setText("+");
+        clubAAddGoalForPlayer.setActionCommand("scoreClubA");
 
-        teamBAddGoalForPlayer.setText("+");
-        teamBAddGoalForPlayer.setActionCommand("scoreTeamB");
+        clubBAddGoalForPlayer.setText("+");
+        clubBAddGoalForPlayer.setActionCommand("scoreClubB");
 
-        teamASubGoalForPlayer.setText("-");
-        teamASubGoalForPlayer.setActionCommand("descoreTeamA");
+        clubASubGoalForPlayer.setText("-");
+        clubASubGoalForPlayer.setActionCommand("descoreClubA");
 
         jLabel2.setText("Spielerliste:");
 
@@ -114,9 +114,9 @@ public class ErgebnisInputView extends javax.swing.JDialog {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText(":");
 
-        ergTeamALbl.setText("0");
+        ergClubALbl.setText("0");
 
-        ergTeamBLbl1.setText("0");
+        ergClubBLbl1.setText("0");
 
         saveBtn.setText("Speichern");
         saveBtn.setActionCommand("save");
@@ -124,13 +124,13 @@ public class ErgebnisInputView extends javax.swing.JDialog {
         dateLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         dateLbl.setText("Datum");
 
-        scoredPlayerTeamB.setModel(
+        scoredPlayerClubB.setModel(
                 new javax.swing.table.DefaultTableModel(new Object[][] {}, new String[] { "Spieler", "Toranzahl" }));
-        jScrollPane3.setViewportView(scoredPlayerTeamB);
+        jScrollPane3.setViewportView(scoredPlayerClubB);
 
-        scoredPlayerTeamA.setModel(
+        scoredPlayerClubA.setModel(
                 new javax.swing.table.DefaultTableModel(new Object[][] {}, new String[] { "Spieler", "Toranzahl" }));
-        jScrollPane4.setViewportView(scoredPlayerTeamA);
+        jScrollPane4.setViewportView(scoredPlayerClubA);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -141,9 +141,9 @@ public class ErgebnisInputView extends javax.swing.JDialog {
                                 javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createSequentialGroup().addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup().addComponent(teamAAddGoalForPlayer)
+                                        .addGroup(layout.createSequentialGroup().addComponent(clubAAddGoalForPlayer)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(teamASubGoalForPlayer))
+                                                .addComponent(clubASubGoalForPlayer))
                                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 62,
                                                 javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 121,
@@ -155,9 +155,9 @@ public class ErgebnisInputView extends javax.swing.JDialog {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 62,
                                                 javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(layout.createSequentialGroup().addComponent(teamBAddGoalForPlayer)
+                                        .addGroup(layout.createSequentialGroup().addComponent(clubBAddGoalForPlayer)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(teamBSubGoalForPlayer))
+                                                .addComponent(clubBSubGoalForPlayer))
                                         .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 139,
                                                         javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -167,25 +167,25 @@ public class ErgebnisInputView extends javax.swing.JDialog {
                         .addGroup(layout.createSequentialGroup().addGroup(layout
                                 .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup().addGap(284, 284, 284)
-                                        .addComponent(ergTeamALbl, javax.swing.GroupLayout.PREFERRED_SIZE, 31,
+                                        .addComponent(ergClubALbl, javax.swing.GroupLayout.PREFERRED_SIZE, 31,
                                                 javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(27, 27, 27))
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
                                         layout.createSequentialGroup().addContainerGap()
-                                                .addComponent(teamALbl, javax.swing.GroupLayout.PREFERRED_SIZE, 187,
+                                                .addComponent(clubALbl, javax.swing.GroupLayout.PREFERRED_SIZE, 187,
                                                         javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(62, 62, 62)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 31,
                                                         javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(33, 33, 33).addComponent(ergTeamBLbl1,
+                                                .addGap(33, 33, 33).addComponent(ergClubBLbl1,
                                                         javax.swing.GroupLayout.PREFERRED_SIZE, 31,
                                                         javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31,
                                                         javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(113, 113, 113).addComponent(teamBLbl,
+                                                .addGap(113, 113, 113).addComponent(clubBLbl,
                                                         javax.swing.GroupLayout.PREFERRED_SIZE, 199,
                                                         javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGroup(layout.createSequentialGroup().addGap(249, 249, 249).addComponent(dateLbl,
@@ -197,16 +197,16 @@ public class ErgebnisInputView extends javax.swing.JDialog {
                                 javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(teamBLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 36,
+                                .addComponent(clubBLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 36,
                                         javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(teamALbl, javax.swing.GroupLayout.PREFERRED_SIZE, 36,
+                                .addComponent(clubALbl, javax.swing.GroupLayout.PREFERRED_SIZE, 36,
                                         javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel1))
                         .addGap(5, 5, 5)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout
                                 .createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(teamBAddGoalForPlayer).addComponent(teamBSubGoalForPlayer))
+                                        .addComponent(clubBAddGoalForPlayer).addComponent(clubBSubGoalForPlayer))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 15,
                                         javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -218,8 +218,8 @@ public class ErgebnisInputView extends javax.swing.JDialog {
                                                         Short.MAX_VALUE)))
                                 .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                .addComponent(teamAAddGoalForPlayer)
-                                                .addComponent(teamASubGoalForPlayer))
+                                                .addComponent(clubAAddGoalForPlayer)
+                                                .addComponent(clubASubGoalForPlayer))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 15,
                                                 javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -232,7 +232,7 @@ public class ErgebnisInputView extends javax.swing.JDialog {
                                                         Short.MAX_VALUE))))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel4).addComponent(ergTeamALbl).addComponent(ergTeamBLbl1))
+                                .addComponent(jLabel4).addComponent(ergClubALbl).addComponent(ergClubBLbl1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addComponent(saveBtn,
                                 javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)));
@@ -242,8 +242,8 @@ public class ErgebnisInputView extends javax.swing.JDialog {
     }// </editor-fold>
 
     private javax.swing.JLabel dateLbl;
-    private javax.swing.JLabel ergTeamALbl;
-    private javax.swing.JLabel ergTeamBLbl1;
+    private javax.swing.JLabel ergClubALbl;
+    private javax.swing.JLabel ergClubBLbl1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -253,83 +253,83 @@ public class ErgebnisInputView extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JButton saveBtn;
-    private javax.swing.JTable scoredPlayerTeamA;
-    private javax.swing.JTable scoredPlayerTeamB;
-    private javax.swing.JButton teamAAddGoalForPlayer;
-    private javax.swing.JLabel teamALbl;
-    private javax.swing.JList<String> teamAPlayerList;
-    private javax.swing.JButton teamASubGoalForPlayer;
-    private javax.swing.JButton teamBAddGoalForPlayer;
-    private javax.swing.JLabel teamBLbl;
-    private javax.swing.JList<String> teamBPlayerList;
-    private javax.swing.JButton teamBSubGoalForPlayer;
+    private javax.swing.JTable scoredPlayerClubA;
+    private javax.swing.JTable scoredPlayerClubB;
+    private javax.swing.JButton clubAAddGoalForPlayer;
+    private javax.swing.JLabel clubALbl;
+    private javax.swing.JList<String> clubAPlayerList;
+    private javax.swing.JButton clubASubGoalForPlayer;
+    private javax.swing.JButton clubBAddGoalForPlayer;
+    private javax.swing.JLabel clubBLbl;
+    private javax.swing.JList<String> clubBPlayerList;
+    private javax.swing.JButton clubBSubGoalForPlayer;
 
     public JButton getSaveBtn() {
         return saveBtn;
     }
 
-    public void setTeamALbl(String teamALbl) {
-        this.teamALbl.setText(teamALbl);
+    public void setClubALbl(String clubALbl) {
+        this.clubALbl.setText(clubALbl);
     }
 
-    public void setTeamBLbl(String teamBLbl) {
-        this.teamBLbl.setText(teamBLbl);
+    public void setClubBLbl(String clubBLbl) {
+        this.clubBLbl.setText(clubBLbl);
     }
 
-    public JTable getScoredPlayerTeamA() {
-        return scoredPlayerTeamA;
+    public JTable getScoredPlayerClubA() {
+        return scoredPlayerClubA;
     }
 
-    public void setScoredPlayerTeamA(TableModel scoredPlayerTeamA) {
-        this.scoredPlayerTeamA.setModel(scoredPlayerTeamA);
+    public void setScoredPlayerClubA(TableModel scoredPlayerClubA) {
+        this.scoredPlayerClubA.setModel(scoredPlayerClubA);
     }
 
-    public void setScoredPlayerTeamB(TableModel scoredPlayerTeamB) {
-        this.scoredPlayerTeamB.setModel(scoredPlayerTeamB);
+    public void setScoredPlayerClubB(TableModel scoredPlayerClubB) {
+        this.scoredPlayerClubB.setModel(scoredPlayerClubB);
     }
 
-    public JTable getScoredPlayerTeamB() {
-        return scoredPlayerTeamB;
+    public JTable getScoredPlayerClubB() {
+        return scoredPlayerClubB;
     }
 
-    public JButton getTeamAAddGoalForPlayer() {
-        return teamAAddGoalForPlayer;
+    public JButton getClubAAddGoalForPlayer() {
+        return clubAAddGoalForPlayer;
     }
 
-    public JList<String> getTeamAPlayerList() {
-        return teamAPlayerList;
+    public JList<String> getClubAPlayerList() {
+        return clubAPlayerList;
     }
 
-    public JButton getTeamASubGoalForPlayer() {
-        return teamASubGoalForPlayer;
+    public JButton getClubASubGoalForPlayer() {
+        return clubASubGoalForPlayer;
     }
 
-    public JButton getTeamBAddGoalForPlayer() {
-        return teamBAddGoalForPlayer;
+    public JButton getClubBAddGoalForPlayer() {
+        return clubBAddGoalForPlayer;
     }
 
-    public JList<String> getTeamBPlayerList() {
-        return teamBPlayerList;
+    public JList<String> getClubBPlayerList() {
+        return clubBPlayerList;
     }
 
-    public JButton getTeamBSubGoalForPlayer() {
-        return teamBSubGoalForPlayer;
+    public JButton getClubBSubGoalForPlayer() {
+        return clubBSubGoalForPlayer;
     }
 
-    public void setTeamAPlayerList(AbstractListModel<String> teamAPlayerList) {
-        this.teamAPlayerList.setModel(teamAPlayerList);
+    public void setClubAPlayerList(AbstractListModel<String> clubAPlayerList) {
+        this.clubAPlayerList.setModel(clubAPlayerList);
     }
 
-    public void setTeamBPlayerList(AbstractListModel<String> teamBPlayerList) {
-        this.teamBPlayerList.setModel(teamBPlayerList);
+    public void setClubBPlayerList(AbstractListModel<String> clubBPlayerList) {
+        this.clubBPlayerList.setModel(clubBPlayerList);
     }
 
-    public void setErgTeamALbl(String ergTeamALbl) {
-        this.ergTeamALbl.setText(ergTeamALbl);
+    public void setErgClubALbl(String ergClubALbl) {
+        this.ergClubALbl.setText(ergClubALbl);
     }
 
-    public void setErgTeamBLbl1(String ergTeamBLbl1) {
-        this.ergTeamBLbl1.setText(ergTeamBLbl1);
+    public void setErgClubBLbl1(String ergClubBLbl1) {
+        this.ergClubBLbl1.setText(ergClubBLbl1);
     }
 
     public void setDateLbl(String date) {

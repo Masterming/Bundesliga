@@ -61,9 +61,9 @@ public class ClubController implements MouseListener, ActionListener {
             JTable temp = (JTable) evt.getSource();
             int row = temp.getSelectedRow();
             int column = 0;
-            String team = temp.getValueAt(row, column).toString();
+            String club = temp.getValueAt(row, column).toString();
 
-            Club c = liga.getClub(team);
+            Club c = liga.getClub(club);
             ClubEditView cbV = new ClubEditView(view.getmaster(), true);
             ClubEditController clubEditController = new ClubEditController(cbV, c, liga, master);
             cbV.setVisible(true);

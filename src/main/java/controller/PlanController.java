@@ -44,7 +44,7 @@ public class PlanController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand() == "addSpiel") {
-            LOGGER.log(Level.INFO, "Plan Controller angekommen");
+            // LOGGER.log(Level.INFO, "Plan Controller angekommen");
             PlanAddGameView pagV = new PlanAddGameView(master, true);
             PlanAddGameController pagC = new PlanAddGameController(master, pagV, liga);
             pagV.setVisible(true);
