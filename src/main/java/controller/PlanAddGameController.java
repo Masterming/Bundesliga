@@ -49,6 +49,7 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
         this.ligas = MainController.getLigas();
 
         adaptViewToLiga();
+        getListData();
 
     }
 
@@ -112,8 +113,16 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
             LOGGER.log(Level.INFO, teamA);
             LOGGER.log(Level.INFO, teamB);
             // TODO Spiel in DB Schreiben und Model aktualisieren
-            //Ligas holen
-            Game g1 = new Game(this.ligaA.getClub(teamA), this.ligaB.getClub(teamB), dtGame);
+            // Ligas holen
+            Club c1 = this.ligaA.getClub(view.getTeamALbl().getText());
+            Club c2 = this.ligaB.getClub(view.getTeamBLbl().getText());
+            Game g1 = new Game(c1, c2, dtGame, this.ligaA, this.ligaB);
+            if (this.ligaA.getId() != this.ligaB.getId()) {
+                this.ligaA.updateGame(g1);
+                this.ligaB.updateGame(g1);
+            } else {
+                this.ligaA.updateGame(g1);
+            }
 
             view.dispose();
 
@@ -123,6 +132,8 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
     @Override
     public void itemStateChanged(ItemEvent arg0) {
         //
+        String teamAtemp = "";
+        String teamBtemp = "";
         boolean change = false;
         if (!view.getTeamALigaList().getSelectedItem().toString().equals(selectedALiga)
                 || !view.getTeamBLigaList().getSelectedItem().toString().equals(selectedBLiga)) {
@@ -157,20 +168,32 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
                 view.revalidate();
             }
         }
+        if (selectedBLiga.contains("2") && selectedALiga.contains("2")) {
+            JOptionPane.showMessageDialog(null, "Gewuenschte Ligakombination nicht auswaehlbar");
+            view.getTeamALigaList().setSelectedIndex(3);
+            view.getTeamBLigaList().setSelectedIndex(3);
+        }
         if (change) {
             getListData();
         }
         if (view.getTeamAList().getSelectedItem() != null) {
-            teamA = view.getTeamAList().getSelectedItem().toString();
+            teamAtemp = view.getTeamAList().getSelectedItem().toString();
         }
         if (view.getTeamBList().getSelectedItem() != null) {
-            teamB = view.getTeamBList().getSelectedItem().toString();
+            teamBtemp = view.getTeamBList().getSelectedItem().toString();
         }
-        if (!teamA.equals(teamB)) {
+        if (!teamAtemp.equals(teamBtemp) && !teamAtemp.isEmpty() && !teamBtemp.isEmpty()) {
+            teamA = teamAtemp;
+            teamB = teamBtemp;
             view.setTeamALbl(teamA);
             view.setTeamBLbl(teamB);
-        } else {
-            JOptionPane.showMessageDialog(view, "Die Teams die gegeneinander Spielen muessen verschieden sein");
+            view.repaint();
+            view.revalidate();
+        } else if (!teamAtemp.isEmpty() && !teamBtemp.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Die Teams die gegeneinander Spielen muessen verschieden sein");
+            // Kombobox zuürcksetzen
+            view.getTeamAList().setSelectedItem(teamA);
+            view.getTeamBList().setSelectedItem(teamB);
         }
     }
 
@@ -183,6 +206,13 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
         DefaultComboBoxModel<String> listModelTeamB = new DefaultComboBoxModel<>();
 
         // TODO List Model befuellen
+        if(selectedALiga == null){
+            selectedALiga = "Liga 1";
+        }
+        if(selectedBLiga == null){
+            selectedBLiga = "Liga 1";
+        }
+        
         if (selectedALiga.contains("1")) {
             view.getTeamAList().removeAll();
             for (Club c : ligas.get(1).getClubs()) {
@@ -229,6 +259,7 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
             }
             this.ligaB = this.ligas.get(3);
         }
+        
         view.setTeamAList(listModelTeamA);
         view.setTeamBList(listModelTeamB);
         view.repaint();

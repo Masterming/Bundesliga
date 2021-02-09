@@ -4,11 +4,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.util.logging.*;
+import model.Game;
+import model.Liga;
+import model.Player;
 
 import view.ErgebnisInputView;
 
@@ -23,6 +27,9 @@ public class ErgebnisInputController implements ActionListener {
     private ErgebnisInputView view;
     private List<List<String>> scoreTeamA;
     private List<List<String>> scoreTeamB;
+    private Map<Integer, Liga> ligas;
+    private Game game;
+    private Liga liga;
     int clubAErg;
     int clubBErg;
 
@@ -38,9 +45,34 @@ public class ErgebnisInputController implements ActionListener {
         scoreTeamA = new ArrayList<>();
         scoreTeamB = new ArrayList<>();
         getData();
-        clubAErg = -1;
-        clubBErg = -1;
+        clubAErg = 0;
+        clubBErg = 0;
+        this.ligas = MainController.getLigas();
 
+    }
+
+    public ErgebnisInputController(ErgebnisInputView ergDialog, Game game, Liga l) {
+        this.game = game;
+        this.view = ergDialog;
+        this.view.setTeamALbl(game.getClub1().getName());
+        this.view.setTeamBLbl(game.getClub2().getName());
+
+        String day = String.valueOf(game.getStart().getDayOfMonth());
+        String mounth = String.valueOf(game.getStart().getMonthValue());
+        String year = String.valueOf(game.getStart().getYear());
+        String hour = String.valueOf(game.getStart().getHour());
+        String minute = String.valueOf(game.getStart().getMinute());
+        String labelText = day + "." + mounth + "." + year + " um " + hour + ":" + minute + " Uhr ";
+        this.view.setDateLbl(labelText);
+        this.view.getSaveBtn().addActionListener(this);
+        this.view.getTeamAAddGoalForPlayer().addActionListener(this);
+        this.view.getTeamASubGoalForPlayer().addActionListener(this);
+        this.view.getTeamBAddGoalForPlayer().addActionListener(this);
+        this.view.getTeamBSubGoalForPlayer().addActionListener(this);
+        scoreTeamA = new ArrayList<>();
+        scoreTeamB = new ArrayList<>();
+        this.liga = l;
+        getData();
     }
 
     @Override
@@ -72,14 +104,18 @@ public class ErgebnisInputController implements ActionListener {
 
     private void getData() {
         // TODO daten aus DB holen
-        List<String> spieler = new ArrayList<>();
-        spieler.add("Thomas Mueller");
-        spieler.add("Philipp Lahm");
+        List<Player> spielerClub1 = game.getClub1().getPlayers();
+        List<Player> spielerClub2 = game.getClub2().getPlayers();
         DefaultListModel<String> listModelTeamA = new DefaultListModel<>();
-        listModelTeamA.addElement("Thomas Mueller");
-        listModelTeamA.addElement("Philipp Lahm");
-
+        for (Player p : spielerClub1) {
+            listModelTeamA.addElement(p.getName());
+        }
+        DefaultListModel<String> listModelTeamB = new DefaultListModel<>();
+        for (Player p : spielerClub2) {
+            listModelTeamB.addElement(p.getName());
+        }
         view.setTeamAPlayerList(listModelTeamA);
+        view.setTeamBPlayerList(listModelTeamB);
         view.repaint();
         view.revalidate();
     }
@@ -195,6 +231,17 @@ public class ErgebnisInputController implements ActionListener {
             LOGGER.log(Level.INFO, scoreTeamA.toString());
             LOGGER.log(Level.INFO, scoreTeamB.toString());
 
+            view.dispose();
+            // Score für teams Setzem
+            this.game.setFinished(true);
+            this.game.setScore1(clubAErg);
+            this.game.setScore2(clubBErg);
+
+            // Über Liga Objekt Game updaten ?
+            // TO DO bei spielen in 2 Ligen beide Ligen updaten --> Game Braucht Liste mit
+            // Ligen
+            // TO DO Liegen herausfinden und beide Ligen aktualsieiren
+            this.liga.updateGame(game);
             view.dispose();
         }
     }
