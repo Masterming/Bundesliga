@@ -33,8 +33,6 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
     private Liga ligaB;
     private String selectedALiga;
     private String selectedBLiga;
-    private String clubA;
-    private String clubB;
     private Map<Integer, Liga> ligas;
 
     public PlanAddGameController(JFrame master, PlanAddGameView view, Liga liga) {
@@ -152,31 +150,19 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
     }
 
     private void updateOverview() {
-        String clubAtemp = "";
-        String clubBtemp = "";
-        boolean change = false;
         if (!view.getClubALigaList().getSelectedItem().toString().equals(selectedALiga)
                 || !view.getClubBLigaList().getSelectedItem().toString().equals(selectedBLiga)) {
-            change = true;
-        }
-        selectedALiga = view.getClubALigaList().getSelectedItem().toString();
-        selectedBLiga = view.getClubBLigaList().getSelectedItem().toString();
-
-        if (change) {
             getListData();
+            selectedALiga = view.getClubALigaList().getSelectedItem().toString();
+            selectedBLiga = view.getClubBLigaList().getSelectedItem().toString();
         }
         if (view.getClubAList().getSelectedItem() != null) {
-            clubAtemp = view.getClubAList().getSelectedItem().toString();
+            view.setClubALbl(view.getClubAList().getSelectedItem().toString());
         }
         if (view.getClubBList().getSelectedItem() != null) {
-            clubBtemp = view.getClubBList().getSelectedItem().toString();
+            view.setClubBLbl(view.getClubBList().getSelectedItem().toString());
         }
-        if (!clubAtemp.isEmpty() && !clubBtemp.isEmpty()) {
-            clubA = clubAtemp;
-            clubB = clubBtemp;
-            view.setClubALbl(clubA);
-            view.setClubBLbl(clubB);
-        }
+
         view.repaint();
         view.revalidate();
     }
