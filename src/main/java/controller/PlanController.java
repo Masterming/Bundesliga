@@ -38,12 +38,6 @@ public class PlanController implements ActionListener {
         this.view.getAddSpielBtn().addActionListener(this);
         this.listButtons = new ArrayList();
         this.unfinishedGames = new ArrayList();
-        // this.plv.getjButton1().addActionListener(this);
-        // Problem: Durch MVC- Beobahcter Pattern wird View erst durch die Veraenderung
-        // des Models initialisert -->
-        // zum Zeitpunkt der Controller erstellung ist nicht bekannt welche Buttons es
-        // geben wird --> Kann keine Action verlinkt werden
-        // this.setUpPlanView();
         getDataAndAdaptView();
     }
 
@@ -64,7 +58,7 @@ public class PlanController implements ActionListener {
                     break;
                 }
             }
-            Game g = this.unfinishedGames.get(count);
+            Game g = unfinishedGames.get(count);
             // Hier nochmal schleuife durchfgehen
             ErgebnisInputController ergC = new ErgebnisInputController(ergV, g, liga);
             ergV.setVisible(true);

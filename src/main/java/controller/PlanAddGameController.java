@@ -48,6 +48,9 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
         this.view.getTeamBList().addItemListener(this);
         this.ligas = MainController.getLigas();
 
+        DateTimeFormatter f = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+        view.getDateInputTxt().setText(LocalDateTime.now().format(f));
+
         adaptViewToLiga();
         getListData();
 
@@ -104,7 +107,7 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
         try {
             dtGame = LocalDateTime.from(f.parse(dateTemp));
         } catch (Exception e) {
-            LOGGER.log(Level.WARNING, "Bitte Datum im richtigen Format eingeben");
+            LOGGER.log(Level.WARNING, "Wrong datetime format");
             JOptionPane.showMessageDialog(view, "Bitte Datum im richtigen Format eingeben");
             ok = false;
         }
@@ -112,16 +115,12 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
             LOGGER.log(Level.INFO, dtGame.toString());
             LOGGER.log(Level.INFO, teamA);
             LOGGER.log(Level.INFO, teamB);
-            // TODO Spiel in DB Schreiben und Model aktualisieren
-            // Ligas holen
-            Club c1 = this.ligaA.getClub(view.getTeamALbl().getText());
-            Club c2 = this.ligaB.getClub(view.getTeamBLbl().getText());
-            Game g1 = new Game(c1, c2, dtGame, this.ligaA, this.ligaB);
-            if (this.ligaA.getId() != this.ligaB.getId()) {
-                this.ligaA.updateGame(g1);
-                this.ligaB.updateGame(g1);
-            } else {
-                this.ligaA.updateGame(g1);
+            Club c1 = ligaA.getClub(view.getTeamALbl().getText());
+            Club c2 = ligaB.getClub(view.getTeamBLbl().getText());
+            Game g1 = new Game(c1, c2, dtGame, ligaA, ligaB);
+            ligaA.updateGame(g1);
+            if (ligaA.getId() != ligaB.getId()) {
+                ligaB.updateGame(g1);
             }
 
             view.dispose();
@@ -130,8 +129,7 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
     }
 
     @Override
-    public void itemStateChanged(ItemEvent arg0) {
-        //
+    public void itemStateChanged(ItemEvent e) {
         String teamAtemp = "";
         String teamBtemp = "";
         boolean change = false;
@@ -143,7 +141,6 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
         selectedBLiga = view.getTeamBLigaList().getSelectedItem().toString();
         if (selectedALiga.contains("1")) {
             if (selectedBLiga.contains("3")) {
-                // Fehlermeldung
                 JOptionPane.showMessageDialog(view, "Gewuenschte Ligakombination nicht auswaehlbar");
                 view.getTeamALigaList().setSelectedIndex(1);
                 view.repaint();
@@ -152,7 +149,6 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
         }
         if (selectedALiga.contains("3")) {
             if (selectedBLiga.contains("1")) {
-                // Fehlermeldung
                 JOptionPane.showMessageDialog(view, "Gewuenschte Ligakombination nicht auswaehlbar");
                 view.getTeamALigaList().setSelectedIndex(1);
                 view.repaint();
@@ -161,7 +157,6 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
         }
         if (selectedBLiga.contains("3")) {
             if (selectedBLiga.contains("1")) {
-                // Fehlermeldung
                 JOptionPane.showMessageDialog(view, "Gewuenschte Ligakombination nicht auswaehlbar");
                 view.getTeamALigaList().setSelectedIndex(1);
                 view.repaint();
@@ -191,7 +186,6 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
             view.revalidate();
         } else if (!teamAtemp.isEmpty() && !teamBtemp.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Die Teams die gegeneinander Spielen muessen verschieden sein");
-            // Kombobox zuürcksetzen
             view.getTeamAList().setSelectedItem(teamA);
             view.getTeamBList().setSelectedItem(teamB);
         }
@@ -200,66 +194,60 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
     private void getListData() {
         LOGGER.log(Level.INFO, selectedALiga);
         LOGGER.log(Level.INFO, selectedBLiga);
-        // Club Liste an die jeweiige Liga angepasst werden
-        // TODO --> Daten aus DB holen
         DefaultComboBoxModel<String> listModelTeamA = new DefaultComboBoxModel<>();
         DefaultComboBoxModel<String> listModelTeamB = new DefaultComboBoxModel<>();
 
-        // TODO List Model befuellen
-        if(selectedALiga == null){
+        if (selectedALiga == null) {
             selectedALiga = "Liga 1";
         }
-        if(selectedBLiga == null){
+        if (selectedBLiga == null) {
             selectedBLiga = "Liga 1";
         }
-        
+
         if (selectedALiga.contains("1")) {
             view.getTeamAList().removeAll();
             for (Club c : ligas.get(1).getClubs()) {
                 listModelTeamA.addElement(c.getName());
             }
-            this.ligaA = this.ligas.get(1);
-            //this.targetLigaId = 1;
+            ligaA = this.ligas.get(1);
         }
         if (selectedBLiga.contains("1")) {
             view.getTeamBList().removeAll();
             for (Club c : ligas.get(1).getClubs()) {
                 listModelTeamB.addElement(c.getName());
             }
-            this.ligaB = this.ligas.get(1);
+            ligaB = ligas.get(1);
         }
 
         if (selectedALiga.contains("2")) {
-            // TODO List Model befuellen
             view.getTeamAList().removeAll();
             for (Club c : ligas.get(2).getClubs()) {
                 listModelTeamA.addElement(c.getName());
             }
-            this.ligaA = this.ligas.get(2);
+            ligaA = ligas.get(2);
         }
         if (selectedBLiga.contains("2")) {
             view.getTeamBList().removeAll();
             for (Club c : ligas.get(2).getClubs()) {
                 listModelTeamB.addElement(c.getName());
             }
-            this.ligaB = this.ligas.get(2);
+            ligaB = ligas.get(2);
         }
         if (selectedALiga.contains("3")) {
-            // TODO List Model befuellen
             view.getTeamAList().removeAll();
             for (Club c : ligas.get(3).getClubs()) {
                 listModelTeamA.addElement(c.getName());
             }
-            this.ligaA = this.ligas.get(3);
+            ligaA = ligas.get(3);
         }
         if (selectedBLiga.contains("3")) {
             view.getTeamBList().removeAll();
             for (Club c : ligas.get(3).getClubs()) {
                 listModelTeamB.addElement(c.getName());
             }
-            this.ligaB = this.ligas.get(3);
+            ligaB = ligas.get(3);
         }
-        
+
         view.setTeamAList(listModelTeamA);
         view.setTeamBList(listModelTeamB);
         view.repaint();
@@ -267,12 +255,9 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
     }
 
     @Override
-    public void mouseClicked(MouseEvent arg0) {
-        // throw new UnsupportedOperationException("Not supported yet."); //To change
-        // body of generated methods, choose Tools | Templates.
+    public void mouseClicked(MouseEvent e) {
         String liga1 = view.getTeamALigaList().getSelectedItem().toString();
         if (liga1.contains("1")) {
-            // Nur nOch liga 2 oder liga 1 bei
             String[] disLiga = new String[2];
             disLiga[0] = "Liga 1";
             disLiga[2] = "Liga 2";
@@ -282,25 +267,25 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
     }
 
     @Override
-    public void mousePressed(MouseEvent arg0) {
+    public void mousePressed(MouseEvent e) {
         // throw new UnsupportedOperationException("Not supported yet."); //To change
         // body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void mouseReleased(MouseEvent arg0) {
+    public void mouseReleased(MouseEvent e) {
         // throw new UnsupportedOperationException("Not supported yet."); //To change
         // body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void mouseEntered(MouseEvent arg0) {
+    public void mouseEntered(MouseEvent e) {
         // throw new UnsupportedOperationException("Not supported yet."); //To change
         // body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void mouseExited(MouseEvent arg0) {
+    public void mouseExited(MouseEvent e) {
         // throw new UnsupportedOperationException("Not supported yet."); //To change
         // body of generated methods, choose Tools | Templates.
     }

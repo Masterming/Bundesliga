@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 import javax.persistence.*;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -15,7 +13,7 @@ import org.hibernate.annotations.LazyCollectionOption;
  */
 @Entity
 @Table(name = "games")
-public class Game extends Observable implements Serializable {
+public class Game implements Serializable {
 
     private static final long serialVersionUID = 2L;
 
@@ -41,7 +39,6 @@ public class Game extends Observable implements Serializable {
     private int score1;
     private int score2;
     private LocalDateTime startTime;
-    
 
     public Game() {
         this.gameId = -1;
@@ -54,16 +51,16 @@ public class Game extends Observable implements Serializable {
         this.club2 = club2;
         this.startTime = start;
     }
-    public Game(Club club1, Club club2, LocalDateTime start, Liga l1, Liga l2){
+
+    public Game(Club club1, Club club2, LocalDateTime start, Liga l1, Liga l2) {
         ligas = new ArrayList();
         this.gameId = -1;
         this.club1 = club1;
         this.club2 = club2;
         this.startTime = start;
-        if(l1.getId() == l2.getId()){
+        if (l1.getId() == l2.getId()) {
             ligas.add(l1);
-        }
-        else{
+        } else {
             ligas.add(l1);
             ligas.add(l2);
         }
@@ -141,6 +138,5 @@ public class Game extends Observable implements Serializable {
     public List<Liga> getLigas() {
         return ligas;
     }
-    
-    
+
 }

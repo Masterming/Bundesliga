@@ -89,39 +89,19 @@ public class Liga extends Observable implements Serializable {
             if (c.getName().equals(name)) {
                 temp = c;
                 clubs.remove(c);
-                
+
                 setChanged();
                 notifyObservers(this);
                 break;
             }
         }
-        if(temp==null){
+        if (temp == null) {
             return temp;
         }
         removeGames(temp);
         return temp;
     }
-    private void removeGames(Club temp){
-        List<Game> gamesToRemove = new ArrayList();
-        for(Game g : games){
-            if(!g.isFinished()&&(g.getClub1().equals(temp)||g.getClub2().equals(temp))){
-                gamesToRemove.add(g);
-            }
-        }
-        for(Game g: gamesToRemove){
-            List<Liga> ligTemp = g.getLigas();
-            for(Liga l: ligTemp){
-                l.removeGame(g);
-                System.out.println(l);
-            }
-        }
-    }
-    
-    private void removeGame(Game g){
-        setChanged();
-        notifyObservers(this);
-        games.remove(g);
-    }
+
     public Club getClub(String name) {
         for (Club c : clubs) {
             if (c.getName().equals(name)) {
@@ -175,6 +155,43 @@ public class Liga extends Observable implements Serializable {
     public void setName(String name) {
         this.name = name;
         notifyObservers(this);
+    }
+
+    public List<Game> getGames() {
+        return games;
+    }
+
+    public void updateGame(Game g) {
+        if (!this.games.contains(g)) {
+            this.games.add(g);
+            setChanged();
+            notifyObservers(this);
+        } else {
+            setChanged();
+            notifyObservers(this);
+        }
+    }
+
+    private void removeGames(Club temp) {
+        List<Game> gamesToRemove = new ArrayList();
+        for (Game g : games) {
+            if (!g.isFinished() && (g.getClub1().equals(temp) || g.getClub2().equals(temp))) {
+                gamesToRemove.add(g);
+            }
+        }
+        for (Game g : gamesToRemove) {
+            List<Liga> ligTemp = g.getLigas();
+            for (Liga l : ligTemp) {
+                l.removeGame(g);
+                System.out.println(l);
+            }
+        }
+    }
+
+    private void removeGame(Game g) {
+        setChanged();
+        notifyObservers(this);
+        games.remove(g);
     }
 
     public boolean copy(Liga other) {
@@ -238,21 +255,4 @@ public class Liga extends Observable implements Serializable {
     public String toString() {
         return "Liga: " + name;
     }
-
-    public List<Game> getGames() {
-        return games;
-    }
-    public void updateGame(Game g){
-        if(!this.games.contains(g)){
-            this.games.add(g);
-            setChanged();
-            notifyObservers(this);
-        }
-        else{
-            setChanged();
-            notifyObservers(this);
-        }
-        
-    }
-    
 }

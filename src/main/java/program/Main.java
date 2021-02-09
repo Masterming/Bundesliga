@@ -60,7 +60,6 @@ public class Main {
         Liga l1;
         Liga l2;
         Liga l3;
-        Game g1;
 
         p1 = new Player("Thomas Mueller", 0);
         p2 = new Player("Luca Schuler", 0);
@@ -85,9 +84,5 @@ public class Main {
         l1.setId(dao_l.addLiga(l1));
         l2.setId(dao_l.addLiga(l2));
         l3.setId(dao_l.addLiga(l3));
-
-        g1 = new Game(c1, c2, LocalDateTime.now());
-        GameDBMapper dao_g = new GameDBMapper();
-        g1.setId(dao_g.addGame(g1));
     }
 }
