@@ -105,7 +105,7 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
         Club c2 = ligaB.getClub(view.getClubBLbl().getText());
 
         if (c1 == null || c2 == null) {
-            JOptionPane.showMessageDialog(view, "Keine validen Clubs ausgewaehlt");
+            JOptionPane.showMessageDialog(view, "Einer der Clubs ist invalide");
             return;
         }
 
@@ -152,9 +152,9 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
     private void updateOverview() {
         if (!view.getClubALigaList().getSelectedItem().toString().equals(selectedALiga)
                 || !view.getClubBLigaList().getSelectedItem().toString().equals(selectedBLiga)) {
-            getListData();
             selectedALiga = view.getClubALigaList().getSelectedItem().toString();
             selectedBLiga = view.getClubBLigaList().getSelectedItem().toString();
+            getListData();
         }
         if (view.getClubAList().getSelectedItem() != null) {
             view.setClubALbl(view.getClubAList().getSelectedItem().toString());
