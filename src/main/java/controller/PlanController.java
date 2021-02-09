@@ -29,6 +29,7 @@ public class PlanController implements ActionListener {
     private JFrame master;
     private Liga lig;
     private List<JButton> listButtons;
+    private List<Game>unfinishedGames;
 
     public PlanController(JFrame master, PlanView plx, Liga l) {
         this.plv = plx;
@@ -36,6 +37,7 @@ public class PlanController implements ActionListener {
         this.lig = l;
         this.plv.getAddSpielBtn().addActionListener(this);
         this.listButtons = new ArrayList();
+        this.unfinishedGames = new ArrayList();
         // this.plv.getjButton1().addActionListener(this);
         // Problem: Durch MVC- Beobahcter Pattern wird View erst durch die Veraenderung
         // des Models initialisert -->
@@ -63,7 +65,8 @@ public class PlanController implements ActionListener {
                     break;
                 }
             }
-            Game g = this.lig.getGames().get(count);
+            Game g = this.unfinishedGames.get(count);
+            //Hier nochmal schleuife durchfgehen
             ErgebnisInputController ergC = new  ErgebnisInputController(ergV,g,lig);
             ergV.setVisible(true);
         }
@@ -75,7 +78,12 @@ public class PlanController implements ActionListener {
             this.plv.getPlanContent().setLayout(new BoxLayout(this.plv.getPlanContent(), BoxLayout.Y_AXIS));
             if(g.isFinished()==false){
                 JLabel test = new JLabel();
-                String labelText = g.getStart().toString();
+                String day = String.valueOf(g.getStart().getDayOfMonth());
+                String mounth = String.valueOf(g.getStart().getMonthValue());
+                String year = String.valueOf(g.getStart().getYear());
+                String hour = String.valueOf(g.getStart().getHour());
+                String minute = String.valueOf(g.getStart().getMinute());
+                String labelText = day + "." + mounth  + "." + year + " um " + hour + ":" + minute + " Uhr ";
                 test.setText(labelText);
                 JButton testBtn = new JButton();
                 String labelButton = g.getClub1().getName() + " - "+ g.getClub2().getName();
@@ -97,6 +105,7 @@ public class PlanController implements ActionListener {
                 this.plv.getPlanContent().repaint();
                 this.plv.getPlanContent().revalidate();
                 this.listButtons.add(testBtn);
+                this.unfinishedGames.add(g);
             }
         }
     }

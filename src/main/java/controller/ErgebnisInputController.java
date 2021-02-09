@@ -43,8 +43,8 @@ public class ErgebnisInputController implements ActionListener {
         scoreTeamA = new ArrayList<>();
         scoreTeamB = new ArrayList<>();
         getData();
-        teamAErg = -1;
-        teamBErg = -1;
+        teamAErg = 0;
+        teamBErg = 0;
 
     }
     
@@ -53,8 +53,14 @@ public class ErgebnisInputController implements ActionListener {
         this.ergDialog = ergDialog;
         this.ergDialog.setTeamALbl(g.getClub1().getName());
         this.ergDialog.setTeamBLbl(g.getClub2().getName());
-        //Möglicherweise noch schöner formatieren
-        this.ergDialog.setDateLbl(g.getStart().toString());
+        
+        String day = String.valueOf(g.getStart().getDayOfMonth());
+        String mounth = String.valueOf(g.getStart().getMonthValue());
+        String year = String.valueOf(g.getStart().getYear());
+        String hour = String.valueOf(g.getStart().getHour());
+        String minute = String.valueOf(g.getStart().getMinute());
+        String labelText = day + "." + mounth  + "." + year + " um " + hour + ":" + minute + " Uhr ";
+        this.ergDialog.setDateLbl(labelText);
         this.ergDialog.getSaveBtn().addActionListener(this);
         this.ergDialog.getTeamAAddGoalForPlayer().addActionListener(this);
         this.ergDialog.getTeamASubGoalForPlayer().addActionListener(this);
@@ -221,7 +227,10 @@ public class ErgebnisInputController implements ActionListener {
             // TODO in DB Schreiben und Model aendern
             LOGGER.log(Level.INFO, scoreTeamA.toString());
             LOGGER.log(Level.INFO, scoreTeamB.toString());
+            //Score für teams Setzem
             this.game.setFinished(true);
+            this.game.setScore1(teamAErg);
+            this.game.setScore2(teamBErg);
             //Über Liga Objekt Game updaten ?
             this.lig.updateGame(game);
             ergDialog.dispose();

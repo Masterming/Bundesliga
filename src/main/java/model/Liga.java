@@ -222,6 +222,10 @@ public class Liga extends Observable implements Serializable {
             setChanged();
             notifyObservers(this);
         }
+        else{
+            setChanged();
+            notifyObservers(this);
+        }
         
     }
     

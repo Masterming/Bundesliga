@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 import javax.persistence.*;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -13,7 +15,7 @@ import org.hibernate.annotations.LazyCollectionOption;
  */
 @Entity
 @Table(name = "games")
-public class Game implements Serializable {
+public class Game extends Observable implements Serializable {
 
     private static final long serialVersionUID = 2L;
 
@@ -127,4 +129,14 @@ public class Game implements Serializable {
     public void setFinished(boolean finished) {
         this.finished = finished;
     }
+
+    public void setScore1(int score1) {
+        this.score1 = score1;
+    }
+
+    public void setScore2(int score2) {
+        this.score2 = score2;
+    }
+    
+    
 }

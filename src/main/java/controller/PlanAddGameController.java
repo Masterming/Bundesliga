@@ -185,7 +185,8 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
             paGV.setTeamBLbl(teamB);
             paGV.repaint();
             paGV.revalidate();
-        } else {
+        } 
+        else if(!teamAtemp.isEmpty() && !teamBtemp.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Die Teams die gegeneinander Spielen muessen verschieden sein");
             //Kombobox zuürcksetzen
             paGV.getTeamAList().setSelectedItem(teamA);
