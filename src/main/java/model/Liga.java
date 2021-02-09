@@ -179,12 +179,16 @@ public class Liga extends Observable implements Serializable {
                 gamesToRemove.add(g);
             }
         }
-        for (Game g : gamesToRemove) {
+
+        // Use Iterator to remove the games from all appropiate lists
+        Iterator<Game> iter = gamesToRemove.iterator();
+        while (iter.hasNext()) {
+            Game g = iter.next();
             List<Liga> ligTemp = g.getLigas();
-            for (Liga l : ligTemp) {
-                l.removeGame(g);
-                System.out.println(l);
+            if (ligTemp.size() == 2) {
+                ligTemp.get(1).removeGame(g);
             }
+            ligTemp.get(0).removeGame(g);
         }
     }
 

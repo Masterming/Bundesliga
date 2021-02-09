@@ -58,7 +58,7 @@ public class Game implements Serializable {
             gameId = -1;
         }
         String id = LocalDateTime.now().format(f);
-        id += String.format("%02d%02d", club1.getId(), club1.getId());
+        id += String.format("%02d%02d", club1.getId(), club2.getId());
         gameId = Integer.parseInt(id);
         System.out.println(id);
         this.club1 = club1;
