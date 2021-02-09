@@ -101,27 +101,30 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
     private void addGame() {
         String dateTemp = view.getDateInputTxt().getText();
         DateTimeFormatter f = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
-        LocalDateTime dtGame = LocalDateTime.now();
+        LocalDateTime dtGame;
+
+        Club c1 = ligaA.getClub(view.getClubALbl().getText());
+        Club c2 = ligaB.getClub(view.getClubBLbl().getText());
+
+        if (c1 == null || c2 == null) {
+            JOptionPane.showMessageDialog(view, "Keine validen Clubs ausgewaehlt");
+            return;
+        }
+
+        if (c1.equals(c2)) {
+            JOptionPane.showMessageDialog(view, "Die Clubs die gegeneinander Spielen muessen verschieden sein");
+            return;
+        }
 
         try {
             dtGame = LocalDateTime.from(f.parse(dateTemp));
         } catch (Exception e) {
-            LOGGER.log(Level.WARNING, "Wrong datetime format");
             JOptionPane.showMessageDialog(view, "Bitte Datum im richtigen Format eingeben");
             return;
         }
+
         if ((selectedALiga.contains("1") && selectedBLiga.contains("3")) || (selectedALiga.contains("3") && selectedBLiga.contains("1"))) {
             JOptionPane.showMessageDialog(view, "Gewuenschte Ligakombination nicht auswaehlbar");
-            return;
-        }
-        Club c1 = ligaA.getClub(view.getClubALbl().getText());
-        Club c2 = ligaB.getClub(view.getClubBLbl().getText());
-        if(c1 == null || c2 == null){
-            JOptionPane.showMessageDialog(view, "Keine validen Clubs ausgewaehlt");
-            return;
-        }
-        if (c1.equals(c2)) {
-            JOptionPane.showMessageDialog(view, "Die Clubs die gegeneinander Spielen muessen verschieden sein");
             return;
         }
 
@@ -132,7 +135,6 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
         LOGGER.log(Level.INFO, c2.toString());
         LOGGER.log(Level.INFO, dtGame.toString());
          */
-        
         Game game = new Game(c1, c2, dtGame, ligaA, ligaB);
         ligaA.updateGame(game);
         if (ligaA.getId() != ligaB.getId()) {
