@@ -74,8 +74,13 @@ public class PlanController implements ActionListener {
     
     private void getDataAndAdaptView(){
         int counter =0;
+        //TODO: gelöschte Clubs ? --> wie finden wir die raus
+        
         for(Game g : this.lig.getGames()){
+            
             this.plv.getPlanContent().setLayout(new BoxLayout(this.plv.getPlanContent(), BoxLayout.Y_AXIS));
+            
+            
             if(g.isFinished()==false){
                 JLabel test = new JLabel();
                 String day = String.valueOf(g.getStart().getDayOfMonth());
@@ -107,6 +112,7 @@ public class PlanController implements ActionListener {
                 this.listButtons.add(testBtn);
                 this.unfinishedGames.add(g);
             }
+            
         }
     }
     // Alternatuve Lösung: PlanController implementiert Observer und wird

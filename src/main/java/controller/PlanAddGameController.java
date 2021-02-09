@@ -169,6 +169,11 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
                 paGV.revalidate();
             }
         }
+        if(selectedBLiga.contains("2") && selectedALiga.contains("2")){
+            JOptionPane.showMessageDialog(null, "Gewuenschte Ligakombination nicht auswaehlbar");
+            paGV.getTeamALigaList().setSelectedIndex(3);
+            paGV.getTeamBLigaList().setSelectedIndex(3);
+        }
         if (change) {
             getListData();
         }

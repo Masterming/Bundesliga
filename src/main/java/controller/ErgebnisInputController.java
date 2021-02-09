@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -30,6 +31,7 @@ public class ErgebnisInputController implements ActionListener {
     int teamBErg;
     private Game game;
     private Liga lig;
+    private Map<Integer, Liga>ligas;
 
     public ErgebnisInputController(ErgebnisInputView ergDialog, String teamA, String teamB) {
         this.ergDialog = ergDialog;
@@ -45,6 +47,7 @@ public class ErgebnisInputController implements ActionListener {
         getData();
         teamAErg = 0;
         teamBErg = 0;
+        this.ligas = MainController.getLigas();
 
     }
     
@@ -231,7 +234,10 @@ public class ErgebnisInputController implements ActionListener {
             this.game.setFinished(true);
             this.game.setScore1(teamAErg);
             this.game.setScore2(teamBErg);
+            
             //Über Liga Objekt Game updaten ?
+            //TO DO bei spielen in 2 Ligen beide Ligen updaten --> Game Braucht Liste mit Ligen
+            //TO DO Liegen herausfinden und beide Ligen aktualsieiren
             this.lig.updateGame(game);
             ergDialog.dispose();
         }

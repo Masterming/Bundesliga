@@ -137,6 +137,10 @@ public class Game extends Observable implements Serializable {
     public void setScore2(int score2) {
         this.score2 = score2;
     }
+
+    public List<Liga> getLigas() {
+        return ligas;
+    }
     
     
 }
