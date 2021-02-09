@@ -2,11 +2,13 @@ package model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  * @author Rene
@@ -18,7 +20,8 @@ public class Game implements Serializable {
     private static final long serialVersionUID = 2L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GenericGenerator(name = "GameIdGenerator", strategy = "model.GameIdGenerator")
+    @GeneratedValue(generator = "GameIdGenerator")
     private int gameId;
 
     private boolean finished = false;
@@ -44,17 +47,20 @@ public class Game implements Serializable {
         this.gameId = -1;
     }
 
-    public Game(Club club1, Club club2, LocalDateTime start) {
-        ligas = new ArrayList();
-        this.gameId = -1;
-        this.club1 = club1;
-        this.club2 = club2;
-        this.startTime = start;
-    }
-
     public Game(Club club1, Club club2, LocalDateTime start, Liga l1, Liga l2) {
         ligas = new ArrayList();
-        this.gameId = -1;
+        DateTimeFormatter f = DateTimeFormatter.ofPattern("yyMMdd");
+        try {
+            String id = LocalDateTime.now().format(f);
+            id += String.format("%02d%02d", club1.getId(), club1.getId());
+            gameId = Integer.parseInt(id);
+        } catch (NumberFormatException e) {
+            gameId = -1;
+        }
+        String id = LocalDateTime.now().format(f);
+        id += String.format("%02d%02d", club1.getId(), club1.getId());
+        gameId = Integer.parseInt(id);
+        System.out.println(id);
         this.club1 = club1;
         this.club2 = club2;
         this.startTime = start;

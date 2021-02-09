@@ -108,7 +108,7 @@ public class ORMTest {
 
     public static void testAddGame() {
         LOGGER.log(Level.INFO, "Test 4: Add Game");
-        g1 = new Game(c1, c2, LocalDateTime.now());
+        g1 = new Game(c1, c2, LocalDateTime.now(), l1, l1);
 
         GameDBMapper dao = new GameDBMapper();
         g1.setId(dao.addGame(g1));
