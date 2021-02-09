@@ -17,14 +17,14 @@ public class TableController implements ActionListener {
 
     private final static Logger LOGGER = Logger.getLogger(TableController.class.getName());
 
-    private TableView tableView;
-    private Liga l;
+    private TableView view;
+    private Liga liga;
 
-    public TableController(TableView tbv, Liga l) {
-        this.tableView = tbv;
-        // this.tableView.getjButton1().addActionListener(this);
-        this.l = l;
-        // this.tableView.setjLabel1(l.getName());
+    public TableController(TableView view, Liga liga) {
+        this.view = view;
+        this.liga = liga;
+        // this.view.setjLabel1(liga.getName());
+        // this.view.getjButton1().addActionListener(this);
         this.setTableData();
     }
 
@@ -33,7 +33,7 @@ public class TableController implements ActionListener {
         switch (ae.getActionCommand()) {
             case "test":
                 LOGGER.log(Level.INFO, "Table Controller Button/ Aktion erfolgreich");
-                LOGGER.log(Level.INFO, "Gezeigte Liga: {0}", l.getName());
+                LOGGER.log(Level.INFO, "Gezeigte Liga: {0}", liga.getName());
                 break;
         }
     }
@@ -41,7 +41,7 @@ public class TableController implements ActionListener {
     private void setTableData() {
         // Neues TableModel erstellen je nach Liga
         // Aufrufen der SetTableContentMethode der Tabelle
-        DefaultTableModel tbm = (DefaultTableModel) tableView.getjTable1().getModel();
+        DefaultTableModel tbm = (DefaultTableModel) view.getjTable1().getModel();
 
         // Bekomme list mit CLub Objkete mit Daten
         // Sample Data
@@ -50,15 +50,15 @@ public class TableController implements ActionListener {
             tbm.addRow(d);
         }
 
-        tableView.setTableContent(tbm);
+        view.setTableContent(tbm);
     }
 
     private String[][] getData() {
         // TODO Daten Holen
-        String[][] data = new String[l.getClubs().size()][];
+        String[][] data = new String[liga.getClubs().size()][];
         int count = 0;
 
-        for (Club c : l.getClubs()) {
+        for (Club c : liga.getClubs()) {
             String[] temp = new String[8];
             temp[0] = "1";
             temp[1] = c.getName();

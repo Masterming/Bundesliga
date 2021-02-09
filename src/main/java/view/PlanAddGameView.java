@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view;
 
 import javax.swing.DefaultComboBoxModel;
@@ -16,12 +11,10 @@ import javax.swing.JTextField;
  * @author z003ywys
  */
 public class PlanAddGameView extends javax.swing.JDialog {
-        /**
-         *
-         */
-        private static final long serialVersionUID = 14L;
 
-        public PlanAddGameView(java.awt.Frame parent, boolean modal) {
+    private static final long serialVersionUID = 14L;
+
+    public PlanAddGameView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -36,19 +29,19 @@ public class PlanAddGameView extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        teamALigaList = new javax.swing.JComboBox<>();
-        teamBLigaList = new javax.swing.JComboBox<>();
-        teamAList = new javax.swing.JComboBox<>();
-        teamBList = new javax.swing.JComboBox<>();
-        teamALbl = new javax.swing.JLabel();
+        clubALigaList = new javax.swing.JComboBox<>();
+        clubBLigaList = new javax.swing.JComboBox<>();
+        clubAList = new javax.swing.JComboBox<>();
+        clubBList = new javax.swing.JComboBox<>();
+        clubALbl = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        teamBLbl = new javax.swing.JLabel();
+        clubBLbl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel2.setText("Datum: ");
 
-        jLabel1.setText("Team B:");
+        jLabel1.setText("Club B:");
 
         jLabel3.setText("Liga");
 
@@ -57,30 +50,30 @@ public class PlanAddGameView extends javax.swing.JDialog {
 
         jLabel4.setText("Format: dd.MM.yyyy HH:mm");
 
-        jLabel5.setText("Team A:");
+        jLabel5.setText("Club A:");
 
         jLabel6.setText("Liga: ");
 
-        teamALigaList.setModel(
-                new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        clubALigaList.setModel(
+                new javax.swing.DefaultComboBoxModel<>(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
 
-        teamBLigaList.setModel(
-                new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        clubBLigaList.setModel(
+                new javax.swing.DefaultComboBoxModel<>(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
 
-        teamAList.setModel(
-                new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        clubAList.setModel(
+                new javax.swing.DefaultComboBoxModel<>(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
 
-        teamBList.setModel(
-                new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        clubBList.setModel(
+                new javax.swing.DefaultComboBoxModel<>(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
 
-        teamALbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        teamALbl.setText("TeamA");
+        clubALbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        clubALbl.setText("ClubA");
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText(":");
 
-        teamBLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        teamBLbl.setText("TeamA");
+        clubBLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        clubBLbl.setText("ClubA");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -88,16 +81,16 @@ public class PlanAddGameView extends javax.swing.JDialog {
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
                         layout.createSequentialGroup().addContainerGap(53, Short.MAX_VALUE).addGroup(layout
                                 .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                                        layout.createSequentialGroup()
-                                                .addComponent(teamALbl, javax.swing.GroupLayout.PREFERRED_SIZE, 162,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(
-                                                        jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 31,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(teamBLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 150,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
+                                layout.createSequentialGroup()
+                                        .addComponent(clubALbl, javax.swing.GroupLayout.PREFERRED_SIZE, 162,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(
+                                                jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 31,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(clubBLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 150,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addComponent(addSpielBtn, javax.swing.GroupLayout.DEFAULT_SIZE,
                                                 javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -120,7 +113,7 @@ public class PlanAddGameView extends javax.swing.JDialog {
                                                                 jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40,
                                                                 javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(
                                                                         javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                                .addComponent(teamALigaList,
+                                                                .addComponent(clubALigaList,
                                                                         javax.swing.GroupLayout.PREFERRED_SIZE, 92,
                                                                         javax.swing.GroupLayout.PREFERRED_SIZE))
                                                         .addGroup(layout.createSequentialGroup().addComponent(
@@ -128,7 +121,7 @@ public class PlanAddGameView extends javax.swing.JDialog {
                                                                 javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                 .addPreferredGap(
                                                                         javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                                .addComponent(teamBLigaList,
+                                                                .addComponent(clubBLigaList,
                                                                         javax.swing.GroupLayout.PREFERRED_SIZE, 92,
                                                                         javax.swing.GroupLayout.PREFERRED_SIZE)))
                                                         .addGap(33, 33, 33)
@@ -144,10 +137,10 @@ public class PlanAddGameView extends javax.swing.JDialog {
                                                         .addGroup(layout
                                                                 .createParallelGroup(
                                                                         javax.swing.GroupLayout.Alignment.LEADING)
-                                                                .addComponent(teamAList,
+                                                                .addComponent(clubAList,
                                                                         javax.swing.GroupLayout.PREFERRED_SIZE, 133,
                                                                         javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addComponent(teamBList,
+                                                                .addComponent(clubBList,
                                                                         javax.swing.GroupLayout.PREFERRED_SIZE, 133,
                                                                         javax.swing.GroupLayout.PREFERRED_SIZE))))))
                                 .addGap(48, 48, 48)));
@@ -158,33 +151,33 @@ public class PlanAddGameView extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 41,
                                         javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(teamALigaList, javax.swing.GroupLayout.PREFERRED_SIZE, 23,
+                                .addComponent(clubALigaList, javax.swing.GroupLayout.PREFERRED_SIZE, 23,
                                         javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 41,
                                         javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(teamBLigaList)))
+                                .addComponent(clubBLigaList)))
                         .addGroup(
                                 layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 41,
                                                         javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(teamAList, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                .addComponent(clubAList, javax.swing.GroupLayout.PREFERRED_SIZE,
                                                         javax.swing.GroupLayout.DEFAULT_SIZE,
                                                         javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41,
                                                         javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(teamBList, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                .addComponent(clubBList, javax.swing.GroupLayout.PREFERRED_SIZE,
                                                         javax.swing.GroupLayout.DEFAULT_SIZE,
                                                         javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(jLabel7)
-                        .addComponent(teamBLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 29,
+                        .addComponent(clubBLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 29,
                                 javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(teamALbl, javax.swing.GroupLayout.PREFERRED_SIZE, 27,
+                        .addComponent(clubALbl, javax.swing.GroupLayout.PREFERRED_SIZE, 27,
                                 javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -209,12 +202,12 @@ public class PlanAddGameView extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel teamALbl;
-    private javax.swing.JComboBox<String> teamALigaList;
-    private javax.swing.JComboBox<String> teamAList;
-    private javax.swing.JLabel teamBLbl;
-    private javax.swing.JComboBox<String> teamBLigaList;
-    private javax.swing.JComboBox<String> teamBList;
+    private javax.swing.JLabel clubALbl;
+    private javax.swing.JComboBox<String> clubALigaList;
+    private javax.swing.JComboBox<String> clubAList;
+    private javax.swing.JLabel clubBLbl;
+    private javax.swing.JComboBox<String> clubBLigaList;
+    private javax.swing.JComboBox<String> clubBList;
 
     public JTextField getDateInputTxt() {
         return dateInputTxt;
@@ -224,52 +217,52 @@ public class PlanAddGameView extends javax.swing.JDialog {
         return addSpielBtn;
     }
 
-    public JLabel getTeamALbl() {
-        return teamALbl;
+    public JLabel getClubALbl() {
+        return clubALbl;
     }
 
-    public JComboBox<String> getTeamALigaList() {
-        return teamALigaList;
+    public JComboBox<String> getClubALigaList() {
+        return clubALigaList;
     }
 
-    public JComboBox<String> getTeamAList() {
-        return teamAList;
+    public JComboBox<String> getClubAList() {
+        return clubAList;
     }
 
-    public JLabel getTeamBLbl() {
-        return teamBLbl;
+    public JLabel getClubBLbl() {
+        return clubBLbl;
     }
 
-    public JComboBox<String> getTeamBLigaList() {
-        return teamBLigaList;
+    public JComboBox<String> getClubBLigaList() {
+        return clubBLigaList;
     }
 
-    public JComboBox<String> getTeamBList() {
-        return teamBList;
+    public JComboBox<String> getClubBList() {
+        return clubBList;
     }
 
-    public void setTeamALigaList(DefaultComboBoxModel<String> teamALigaList) {
-        this.teamALigaList.setModel(teamALigaList);
+    public void setClubALigaList(DefaultComboBoxModel<String> clubALigaList) {
+        this.clubALigaList.setModel(clubALigaList);
     }
 
-    public void setTeamAList(DefaultComboBoxModel<String> teamAList) {
-        this.teamAList.setModel(teamAList);
+    public void setClubAList(DefaultComboBoxModel<String> clubAList) {
+        this.clubAList.setModel(clubAList);
     }
 
-    public void setTeamBLigaList(DefaultComboBoxModel<String> teamBLigaList) {
-        this.teamBLigaList.setModel(teamBLigaList);
+    public void setClubBLigaList(DefaultComboBoxModel<String> clubBLigaList) {
+        this.clubBLigaList.setModel(clubBLigaList);
     }
 
-    public void setTeamBList(DefaultComboBoxModel<String> teamBList) {
-        this.teamBList.setModel(teamBList);
+    public void setClubBList(DefaultComboBoxModel<String> clubBList) {
+        this.clubBList.setModel(clubBList);
     }
 
-    public void setTeamALbl(String teamALbl) {
-        this.teamALbl.setText(teamALbl);
+    public void setClubALbl(String clubALbl) {
+        this.clubALbl.setText(clubALbl);
     }
 
-    public void setTeamBLbl(String teamBLbl) {
-        this.teamBLbl.setText(teamBLbl);
+    public void setClubBLbl(String clubBLbl) {
+        this.clubBLbl.setText(clubBLbl);
     }
 
 }

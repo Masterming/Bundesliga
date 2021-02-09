@@ -14,7 +14,7 @@ import javax.swing.JTextField;
  * @author z003ywys
  */
 public class ClubAddView extends javax.swing.JDialog {
-    
+
     private static final long serialVersionUID = 23L;
 
     public ClubAddView(Frame owner, boolean modal) {

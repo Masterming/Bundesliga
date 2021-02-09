@@ -12,6 +12,7 @@ import javax.swing.table.TableModel;
  * @author Rene
  */
 public class ClubView extends JPanel {
+
     private static final long serialVersionUID = 8L;
     private javax.swing.JButton addClubBtn;
     private javax.swing.JButton addExistingClubBtn;
@@ -31,7 +32,7 @@ public class ClubView extends JPanel {
         addExistingClubBtn.setText("Vorhandenen Club Hinzufuegen");
         addExistingClubBtn.setActionCommand("addExistClub");
 
-        clubTable.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Club", "Stadion" }) {
+        clubTable.setModel(new DefaultTableModel(new Object[][]{}, new String[]{"Club", "Stadion"}) {
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return false;
             }

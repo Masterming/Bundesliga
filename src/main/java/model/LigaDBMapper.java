@@ -122,7 +122,7 @@ public class LigaDBMapper {
         Liga ret = null;
         EntityManager em = ManagerFactory.getEntityManager();
         EntityTransaction et = null;
-        LOGGER.log(Level.INFO, "Update: {0}", l.toString());
+        // LOGGER.log(Level.INFO, "Update: {0}", l.toString());
 
         try {
             et = em.getTransaction();

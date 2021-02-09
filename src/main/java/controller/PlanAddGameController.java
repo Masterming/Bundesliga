@@ -8,13 +8,15 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Map;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.util.logging.*;
 
+import model.Club;
+import model.Game;
 import model.Liga;
-import model.PlanModel;
 import view.PlanAddGameView;
 
 /**
@@ -25,59 +27,62 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
 
     private final static Logger LOGGER = Logger.getLogger(PlanAddGameController.class.getName());
     private JFrame master;
-    private PlanAddGameView paGV;
-    private PlanModel plM;
-    private Liga l;
+    private PlanAddGameView view;
+    private Liga liga;
+    private Liga ligaA;
+    private Liga ligaB;
     private String selectedALiga;
     private String selectedBLiga;
-    private String teamA;
-    private String teamB;
+    private Map<Integer, Liga> ligas;
 
-    public PlanAddGameController(JFrame master, PlanAddGameView PagV, PlanModel plM, Liga l) {
+    public PlanAddGameController(JFrame master, PlanAddGameView view, Liga liga) {
+        this.view = view;
         this.master = master;
-        this.paGV = PagV;
-        this.plM = plM;
-        this.l = l;
-        // this.paGV.get
-        this.paGV.getAddSpielBtn().addActionListener(this);
-        this.paGV.getTeamALigaList().addItemListener(this);
-        this.paGV.getTeamBLigaList().addItemListener(this);
-        this.paGV.getTeamAList().addItemListener(this);
-        this.paGV.getTeamBList().addItemListener(this);
+        this.liga = liga;
+        this.view.getAddSpielBtn().addActionListener(this);
+        this.view.getClubALigaList().addItemListener(this);
+        this.view.getClubBLigaList().addItemListener(this);
+        this.view.getClubAList().addItemListener(this);
+        this.view.getClubBList().addItemListener(this);
+        this.ligas = MainController.getLigas();
+
+        DateTimeFormatter f = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+        view.getDateInputTxt().setText(LocalDateTime.now().format(f));
 
         adaptViewToLiga();
-
+        getListData();
+        updateOverview();
     }
 
     private void adaptViewToLiga() {
-        if (l.getId() == 1) {
+        if (liga.getId() == 1) {
             String[] ligen = new String[2];
             ligen[0] = "Liga 1";
             ligen[1] = "Liga 2";
             DefaultComboBoxModel<String> dfC = new DefaultComboBoxModel<>(ligen);
             DefaultComboBoxModel<String> dfB = new DefaultComboBoxModel<>(ligen);
-            paGV.setTeamALigaList(dfC);
-            paGV.setTeamBLigaList(dfB);
-            // TODO Teams Holen pro liga
+            view.setClubALigaList(dfC);
+            view.setClubBLigaList(dfB);
+            // TODO Clubs Holen pro liga
         }
-        if (l.getId() == 2) {
+        if (liga.getId() == 2) {
             String[] ligen = new String[3];
             ligen[0] = "Liga 1";
             ligen[1] = "Liga 2";
             ligen[2] = "Liga 3";
             DefaultComboBoxModel<String> dfC = new DefaultComboBoxModel<>(ligen);
             DefaultComboBoxModel<String> dfB = new DefaultComboBoxModel<>(ligen);
-            paGV.setTeamALigaList(dfC);
-            paGV.setTeamBLigaList(dfB);
+            view.setClubALigaList(dfC);
+            view.setClubBLigaList(dfB);
         }
-        if (l.getId() == 3) {
+        if (liga.getId() == 3) {
             String[] ligen = new String[2];
             ligen[0] = "Liga 2";
             ligen[1] = "Liga 3";
             DefaultComboBoxModel<String> dfC = new DefaultComboBoxModel<>(ligen);
             DefaultComboBoxModel<String> dfB = new DefaultComboBoxModel<>(ligen);
-            paGV.setTeamALigaList(dfC);
-            paGV.setTeamBLigaList(dfB);
+            view.setClubALigaList(dfC);
+            view.setClubBLigaList(dfB);
         }
     }
 
@@ -86,171 +91,175 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
         String comm = evt.getActionCommand();
         switch (comm) {
             case "addGame":
-                LOGGER.log(Level.INFO, "Spiel hinzugefuegt");
                 addGame();
                 break;
         }
     }
 
     private void addGame() {
-        String dateTemp = paGV.getDateInputTxt().getText();
+        String dateTemp = view.getDateInputTxt().getText();
         DateTimeFormatter f = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
-        LocalDateTime dtGame = LocalDateTime.now();
-        boolean ok = true;
+        LocalDateTime dtGame;
+
+        Club c1 = ligaA.getClub(view.getClubALbl().getText());
+        Club c2 = ligaB.getClub(view.getClubBLbl().getText());
+
+        if (c1 == null || c2 == null) {
+            JOptionPane.showMessageDialog(view, "Einer der Clubs ist invalide");
+            return;
+        }
+
+        if (c1.equals(c2)) {
+            JOptionPane.showMessageDialog(view, "Die Clubs die gegeneinander Spielen muessen verschieden sein");
+            return;
+        }
+
         try {
             dtGame = LocalDateTime.from(f.parse(dateTemp));
         } catch (Exception e) {
-            LOGGER.log(Level.WARNING, "Bitte Datum im richtigen Format eingeben");
-            JOptionPane.showMessageDialog(null, "Bitte Datum im richtigen Format eingeben");
-            ok = false;
+            JOptionPane.showMessageDialog(view, "Bitte Datum im richtigen Format eingeben");
+            return;
         }
-        if (ok) {
-            LOGGER.log(Level.INFO, dtGame.toString());
-            LOGGER.log(Level.INFO, teamA);
-            LOGGER.log(Level.INFO, teamB);
-            // TODO Spiel in DB Schreiben und Model aktualisieren
-            paGV.dispose();
 
+        if ((selectedALiga.contains("1") && selectedBLiga.contains("3")) || (selectedALiga.contains("3") && selectedBLiga.contains("1"))) {
+            JOptionPane.showMessageDialog(view, "Gewuenschte Ligakombination nicht auswaehlbar");
+            return;
         }
+
+        /*
+        LOGGER.log(Level.INFO, ligaA.toString());
+        LOGGER.log(Level.INFO, ligaB.toString());
+        LOGGER.log(Level.INFO, c1.toString());
+        LOGGER.log(Level.INFO, c2.toString());
+        LOGGER.log(Level.INFO, dtGame.toString());
+         */
+        Game game = new Game(c1, c2, dtGame, ligaA, ligaB);
+        ligaA.updateGame(game);
+        if (ligaA.getId() != ligaB.getId()) {
+            ligaB.updateGame(game);
+        }
+        LOGGER.log(Level.INFO, "Setup of {0} successful", game);
+
+        view.dispose();
+
     }
 
     @Override
-    public void itemStateChanged(ItemEvent arg0) {
-        //
-        boolean change = false;
-        if (!paGV.getTeamALigaList().getSelectedItem().toString().equals(selectedALiga)
-                || !paGV.getTeamBLigaList().getSelectedItem().toString().equals(selectedBLiga)) {
-            change = true;
-        }
-        selectedALiga = paGV.getTeamALigaList().getSelectedItem().toString();
-        selectedBLiga = paGV.getTeamBLigaList().getSelectedItem().toString();
-        if (selectedALiga.contains("1")) {
-            if (selectedBLiga.contains("3")) {
-                // Fehlermeldung
-                JOptionPane.showMessageDialog(null, "Gewuenschte Ligakombination nicht auswaehlbar");
-                paGV.getTeamALigaList().setSelectedIndex(1);
-                paGV.repaint();
-                paGV.revalidate();
-            }
-        }
-        if (selectedALiga.contains("3")) {
-            if (selectedBLiga.contains("1")) {
-                // Fehlermeldung
-                JOptionPane.showMessageDialog(null, "Gewuenschte Ligakombination nicht auswaehlbar");
-                paGV.getTeamALigaList().setSelectedIndex(1);
-                paGV.repaint();
-                paGV.revalidate();
-            }
-        }
-        if (selectedBLiga.contains("3")) {
-            if (selectedBLiga.contains("1")) {
-                // Fehlermeldung
-                JOptionPane.showMessageDialog(null, "Gewuenschte Ligakombination nicht auswaehlbar");
-                paGV.getTeamALigaList().setSelectedIndex(1);
-                paGV.repaint();
-                paGV.revalidate();
-            }
-        }
-        if (change) {
+    public void itemStateChanged(ItemEvent e) {
+        updateOverview();
+    }
+
+    private void updateOverview() {
+        if (!view.getClubALigaList().getSelectedItem().toString().equals(selectedALiga)
+                || !view.getClubBLigaList().getSelectedItem().toString().equals(selectedBLiga)) {
+            selectedALiga = view.getClubALigaList().getSelectedItem().toString();
+            selectedBLiga = view.getClubBLigaList().getSelectedItem().toString();
             getListData();
         }
-        if (paGV.getTeamAList().getSelectedItem() != null) {
-            teamA = paGV.getTeamAList().getSelectedItem().toString();
+        if (view.getClubAList().getSelectedItem() != null) {
+            view.setClubALbl(view.getClubAList().getSelectedItem().toString());
         }
-        if (paGV.getTeamBList().getSelectedItem() != null) {
-            teamB = paGV.getTeamBList().getSelectedItem().toString();
+        if (view.getClubBList().getSelectedItem() != null) {
+            view.setClubBLbl(view.getClubBList().getSelectedItem().toString());
         }
-        if (!teamA.equals(teamB)) {
-            paGV.setTeamALbl(teamA);
-            paGV.setTeamBLbl(teamB);
-        } else {
-            JOptionPane.showMessageDialog(null, "Die Teams die gegeneinander Spielen muessen verschieden sein");
-        }
+
+        view.repaint();
+        view.revalidate();
     }
 
     private void getListData() {
-        LOGGER.log(Level.INFO, selectedALiga);
-        LOGGER.log(Level.INFO, selectedBLiga);
-        // Club Liste an die jeweiige Liga angepasst werden
-        // TODO --> Daten aus DB holen
-        DefaultComboBoxModel<String> listModelTeamA = new DefaultComboBoxModel<>();
-        DefaultComboBoxModel<String> listModelTeamB = new DefaultComboBoxModel<>();
+        DefaultComboBoxModel<String> listModelClubA = new DefaultComboBoxModel<>();
+        DefaultComboBoxModel<String> listModelClubB = new DefaultComboBoxModel<>();
 
-        // TODO List Model befuellen
+        if (selectedALiga == null) {
+            selectedALiga = "Liga 1";
+        }
+        if (selectedBLiga == null) {
+            selectedBLiga = "Liga 1";
+        }
+
         if (selectedALiga.contains("1")) {
-            paGV.getTeamAList().removeAll();
-            listModelTeamA.addElement("RB Leipzig");
-            listModelTeamA.addElement("FC Bayern Muenchen");
+            view.getClubAList().removeAll();
+            for (Club c : ligas.get(1).getClubs()) {
+                listModelClubA.addElement(c.getName());
+            }
+            ligaA = this.ligas.get(1);
         }
         if (selectedBLiga.contains("1")) {
-            paGV.getTeamBList().removeAll();
-            listModelTeamB.addElement("RB Leipzig");
-            listModelTeamB.addElement("FC Bayern Muenchen");
+            view.getClubBList().removeAll();
+            for (Club c : ligas.get(1).getClubs()) {
+                listModelClubB.addElement(c.getName());
+            }
+            ligaB = ligas.get(1);
         }
 
         if (selectedALiga.contains("2")) {
-            // TODO List Model befuellen
-            paGV.getTeamAList().removeAll();
-            listModelTeamA.addElement("FC Erzgevirge Aue");
-            listModelTeamA.addElement("HSV Hamburg");
+            view.getClubAList().removeAll();
+            for (Club c : ligas.get(2).getClubs()) {
+                listModelClubA.addElement(c.getName());
+            }
+            ligaA = ligas.get(2);
         }
         if (selectedBLiga.contains("2")) {
-            paGV.getTeamBList().removeAll();
-            listModelTeamB.addElement("FC Erzgevirge Aue");
-            listModelTeamB.addElement("HSV Hamburg");
+            view.getClubBList().removeAll();
+            for (Club c : ligas.get(2).getClubs()) {
+                listModelClubB.addElement(c.getName());
+            }
+            ligaB = ligas.get(2);
         }
         if (selectedALiga.contains("3")) {
-            // TODO List Model befuellen
-            paGV.getTeamAList().removeAll();
-            listModelTeamA.addElement("Ingolstadt");
-            listModelTeamA.addElement("Dynamo Dresden");
+            view.getClubAList().removeAll();
+            for (Club c : ligas.get(3).getClubs()) {
+                listModelClubA.addElement(c.getName());
+            }
+            ligaA = ligas.get(3);
         }
         if (selectedBLiga.contains("3")) {
-            paGV.getTeamBList().removeAll();
-            listModelTeamB.addElement("Ingolstadt");
-            listModelTeamB.addElement("Dynamo Dresden");
+            view.getClubBList().removeAll();
+            for (Club c : ligas.get(3).getClubs()) {
+                listModelClubB.addElement(c.getName());
+            }
+            ligaB = ligas.get(3);
         }
-        paGV.setTeamAList(listModelTeamA);
-        paGV.setTeamBList(listModelTeamB);
-        paGV.repaint();
-        paGV.revalidate();
+
+        view.setClubAList(listModelClubA);
+        view.setClubBList(listModelClubB);
+        view.repaint();
+        view.revalidate();
     }
 
     @Override
-    public void mouseClicked(MouseEvent arg0) {
-        // throw new UnsupportedOperationException("Not supported yet."); //To change
-        // body of generated methods, choose Tools | Templates.
-        String liga1 = paGV.getTeamALigaList().getSelectedItem().toString();
+    public void mouseClicked(MouseEvent e) {
+        String liga1 = view.getClubALigaList().getSelectedItem().toString();
         if (liga1.contains("1")) {
-            // Nur nOch liga 2 oder liga 1 bei
             String[] disLiga = new String[2];
             disLiga[0] = "Liga 1";
             disLiga[2] = "Liga 2";
             DefaultComboBoxModel<String> dfC = new DefaultComboBoxModel<>(disLiga);
-            paGV.setTeamBLigaList(dfC);
+            view.setClubBLigaList(dfC);
         }
     }
 
     @Override
-    public void mousePressed(MouseEvent arg0) {
+    public void mousePressed(MouseEvent e) {
         // throw new UnsupportedOperationException("Not supported yet."); //To change
         // body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void mouseReleased(MouseEvent arg0) {
+    public void mouseReleased(MouseEvent e) {
         // throw new UnsupportedOperationException("Not supported yet."); //To change
         // body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void mouseEntered(MouseEvent arg0) {
+    public void mouseEntered(MouseEvent e) {
         // throw new UnsupportedOperationException("Not supported yet."); //To change
         // body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void mouseExited(MouseEvent arg0) {
+    public void mouseExited(MouseEvent e) {
         // throw new UnsupportedOperationException("Not supported yet."); //To change
         // body of generated methods, choose Tools | Templates.
     }

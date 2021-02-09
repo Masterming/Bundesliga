@@ -2,10 +2,12 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import java.util.logging.*;
 
 import model.Club;
 import model.Liga;
@@ -17,83 +19,72 @@ import view.RowPopupPlayerView;
  */
 public class RowPopupPlayerController implements ActionListener {
 
-    private RowPopupPlayerView rPoPV;
-    private Club cl;
+    private RowPopupPlayerView view;
+    private Liga liga;
+    private Club club;
     private JTable table;
     private JFrame master;
-    private Liga liga;
 
-    public RowPopupPlayerController(RowPopupPlayerView rPoPV, Club cl, JTable table, JFrame master, Liga l) {
-        this.rPoPV = rPoPV;
-        this.cl = cl;
-        this.table = table;
+    private final static Logger LOGGER = Logger.getLogger(RowPopupPlayerController.class.getName());
+
+    public RowPopupPlayerController(RowPopupPlayerView view, Club club, JTable table, JFrame master, Liga liga) {
+        this.view = view;
         this.master = master;
-        this.liga = l;
-        this.rPoPV.getBearbeiten().addActionListener(this);
-        this.rPoPV.getLoeschen().addActionListener(this);
-
+        this.liga = liga;
+        this.club = club;
+        this.table = table;
+        this.view.getBearbeiten().addActionListener(this);
+        this.view.getLoeschen().addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent evt) {
-        String name;
-        String goals;
-        int row;
+        int row = table.getSelectedRow();
+        if (row == -1) {
+            return;
+        }
+        String name = table.getValueAt(row, 0).toString();
+        String goals = table.getValueAt(row, 1).toString();
         DefaultTableModel dtm = (DefaultTableModel) table.getModel();
         switch (evt.getActionCommand()) {
             case "loeschen":
-                row = table.getSelectedRow();
-                name = table.getValueAt(row, 0).toString();
-
-                if (name != null) {
-                    int confirm = JOptionPane.showConfirmDialog(master,
-                            "Wollen Sie den Spieler " + name + " wirklich loeschen?", "Spieler Loeschen",
-                            JOptionPane.YES_NO_OPTION);
-                    if (confirm == JOptionPane.YES_OPTION) {
-                        // LOGGER.log(Level.INFO, "Remove Club " + name);
-                        cl.removePlayer(name);
-                        liga.updateClub(cl);
-                        DefaultTableModel tbm = (DefaultTableModel) this.table.getModel();
-                        tbm.removeRow(row);
-                    }
+                int confirm = JOptionPane.showConfirmDialog(master,
+                        "Wollen Sie den Spieler " + name + " wirklich loeschen?", "Spieler Loeschen",
+                        JOptionPane.YES_NO_OPTION);
+                if (confirm == JOptionPane.YES_OPTION) {
+                    LOGGER.log(Level.INFO, "Remove Player {0}", name);
+                    club.removePlayer(name);
+                    liga.updateClub(club);
+                    dtm.removeRow(row);
                 }
                 break;
+
             case "bearbeiten":
-                row = table.getSelectedRow();
-                name = table.getValueAt(row, 0).toString();
-                goals = table.getValueAt(row, 1).toString();
-
-                if (name != null && table.getSelectedColumn() == 0) {
-                    String newName = JOptionPane.showInputDialog(master, "Neuen Namen eingeben", name);
-                    if (newName != null) {
-                        newName = newName.trim();
-                        if (!newName.isEmpty()) {
-                            // LOGGER.log(Level.INFO, "Rename Club " + name + " to " + newName);
-                            cl.changePlayerName(name, newName);
-                            //
-                            liga.updateClub(cl);
-                            this.table.getModel().setValueAt(newName, row, 0);
-                            this.table.repaint();
-                            this.table.revalidate();
+                switch (table.getSelectedColumn()) {
+                    case 0:
+                        String newName = JOptionPane.showInputDialog(master, "Neuen Namen eingeben", name);
+                        if (newName != null && !newName.isBlank()) {
+                            LOGGER.log(Level.INFO, "Rename Club {0} to {1}", new Object[]{name, newName.trim()});
+                            club.changePlayerName(name, newName);
+                            liga.updateClub(club);
+                            dtm.setValueAt(newName, row, 0);
                         }
-                    }
-                }
-                if (goals != null && table.getSelectedColumn() == 1) {
-                    String newGoals = JOptionPane.showInputDialog(master, "Neuen Toranzahl eingeben", goals);
-                    int goalsN;
-                    try {
-                        goalsN = Integer.parseInt(newGoals);
-                        cl.changePlayerGoals(name, goalsN);
-                        liga.updateClub(cl);
-                        this.table.getModel().setValueAt(newGoals, row, 1);
-                        this.table.repaint();
-                        this.table.revalidate();
-                    } catch (NumberFormatException n) {
-                        goalsN = -1;
-                    }
+                        break;
+                    case 1:
+                        String newGoals = JOptionPane.showInputDialog(master, "Neuen Toranzahl eingeben", goals);
+                        int goalsN;
+                        try {
+                            goalsN = Integer.parseInt(newGoals);
+                            club.changePlayerGoals(name, goalsN);
+                            liga.updateClub(club);
+                            dtm.setValueAt(newGoals, row, 1);
+                        } catch (NumberFormatException n) {
+                        }
                 }
                 break;
-        }
-    }
 
+        }
+        table.repaint();
+        table.revalidate();
+    }
 }

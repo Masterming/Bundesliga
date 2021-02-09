@@ -23,24 +23,24 @@ public class TransactionController implements ActionListener, MouseListener {
     private final static Logger LOGGER = Logger.getLogger(TransactionController.class.getName());
     private TransactionView view;
     private Club club;
-    private String selectedTeam;
+    private String selectedClub;
     private DefaultListModel<String> listModelUrsprung;
     private DefaultListModel<String> listModelSend;
     private Map<Integer, Liga> ligas;
 
     public TransactionController(TransactionView view, Club club) {
         this.view = view;
+        this.club = club;
+        ligas = MainController.getLigas();
         this.view.getAddToTransBtn().addActionListener(this);
         this.view.getRemoveFromTransBtn().addActionListener(this);
         this.view.getSuchenBtn().addActionListener(this);
         this.view.getTransFinishBtn().addActionListener(this);
-        this.view.getErgListTeam().addMouseListener(this);
+        this.view.getErgListClub().addMouseListener(this);
         listModelUrsprung = new DefaultListModel<>();
         this.view.getListEigenerKader().setModel(listModelUrsprung);
         listModelSend = new DefaultListModel<>();
         this.view.getListeTransKader().setModel(listModelSend);
-        this.club = club;
-        ligas = MainController.getLigas();
     }
 
     @Override
@@ -63,18 +63,18 @@ public class TransactionController implements ActionListener, MouseListener {
     }
 
     private void suchen() {
-        view.getErgListTeam().removeAll();
-        String searchTerm = view.getReceivingTeamInput().getText();
+        view.getErgListClub().removeAll();
+        String searchTerm = view.getReceivingClubInput().getText();
         DefaultListModel<String> listModel = new DefaultListModel<>();
         for (Liga l : ligas.values()) {
             for (Club c : l.getClubs()) {
-                if ((searchTerm.equals("Erhaltendes Team")
+                if ((searchTerm.equals("Erhaltendes Club")
                         || c.getName().toLowerCase().contains(searchTerm.toLowerCase())) && !c.equals(club)) {
                     listModel.addElement(c.getName());
                 }
             }
         }
-        view.getErgListTeam().setModel(listModel);
+        view.getErgListClub().setModel(listModel);
 
         LOGGER.log(Level.INFO, "Search \"{0}\"", searchTerm);
 
@@ -121,7 +121,7 @@ public class TransactionController implements ActionListener, MouseListener {
         if (confirm == JOptionPane.YES_OPTION) {
             if (listModelSend.getSize() == 0) {
                 LOGGER.log(Level.WARNING, "No players selected");
-                JOptionPane.showMessageDialog(view, "Bitte Waehlen Sie die zu uebertragenden Teams aus");
+                JOptionPane.showMessageDialog(view, "Bitte Waehlen Sie die zu uebertragenden Clubs aus");
                 return;
             }
 
@@ -130,8 +130,8 @@ public class TransactionController implements ActionListener, MouseListener {
                     originC = l.getClub(club.getName());
                     originL = l;
                 }
-                if (l.getClub(selectedTeam) != null) {
-                    targetC = l.getClub(selectedTeam);
+                if (l.getClub(selectedClub) != null) {
+                    targetC = l.getClub(selectedClub);
                     targetL = l;
                 }
             }
@@ -161,8 +161,8 @@ public class TransactionController implements ActionListener, MouseListener {
     public void mouseClicked(MouseEvent evt) {
         if (evt.getClickCount() == 1) {
             LOGGER.log(Level.INFO, "Item in Liste geklickt");
-            selectedTeam = view.getErgListTeam().getSelectedValue();
-            view.setReceiveTeamLbl(selectedTeam);
+            selectedClub = view.getErgListClub().getSelectedValue();
+            view.setReceiveClubLbl(selectedClub);
             listModelUrsprung.removeAllElements();
             listModelSend.removeAllElements();
 

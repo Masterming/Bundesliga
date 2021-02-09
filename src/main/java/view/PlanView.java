@@ -1,72 +1,26 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view;
 
 import controller.ErgebnisInputController;
-import java.awt.Component;
 import java.awt.event.ActionEvent;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.logging.Logger;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import model.PlanModel;
 
 /**
  *
  * @author z003ywys
  */
-public class PlanView extends JPanel implements Observer {
+public class PlanView extends JPanel {
 
     private final static Logger LOGGER = Logger.getLogger(PlanView.class.getName());
 
     private static final long serialVersionUID = 16L;
 
-    @Override
-    public void update(Observable o, Object arg1) {
-        // Hier landet man wenn man im Model was veraendert hat durch norifyObservers
-        this.planContent.setLayout(new BoxLayout(this.planContent, BoxLayout.Y_AXIS));
-        if (o instanceof PlanModel) {
-            // To change body of generated methods, choose Tools | Templates.
-            // javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-            // this.setLayout(layout);
-            planContent.removeAll();
-            plm = (PlanModel) o;
-            int count = 1;
-            if (plm.getLiga().getId() == 1) {
-                count = 5;
-            }
-            if (plm.getLiga().getId() == 2) {
-                count = 10;
-            }
-            if (plm.getLiga().getId() == 3) {
-                count = 15;
-            }
-            for (int i = 0; i < count; i++) {
-                JLabel test = new JLabel(plm.getLiga().getName());
-                JButton testBtn = new JButton("TestBTN " + i);
-                test.setBackground(java.awt.Color.lightGray);
-                test.setAlignmentX(Component.CENTER_ALIGNMENT);
-                testBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
-                testBtn.setActionCommand(String.valueOf(i) + "RB Leipzig");
-                testBtn.addActionListener((java.awt.event.ActionEvent evt) -> {
-                    action(evt);
-                });
-                this.planContent.add(test);
-                this.planContent.add(testBtn);
-            }
-            this.planContent.revalidate();
-            this.planContent.repaint();
-            this.planContent.setVisible(true);
-
-        }
-    }
+    private javax.swing.JButton addSpielBtn;
+    private javax.swing.JPanel btnContainer;
+    private javax.swing.JPanel planContent;
+    private JFrame master;
 
     public PlanView(JFrame master) {
         initComponents();
@@ -101,10 +55,10 @@ public class PlanView extends JPanel implements Observer {
         btnContainer.setLayout(btnContainerLayout);
         btnContainerLayout.setHorizontalGroup(btnContainerLayout
                 .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(btnContainerLayout
-                        .createSequentialGroup().addComponent(addSpielBtn).addGap(0, 273, Short.MAX_VALUE)));
+                .createSequentialGroup().addComponent(addSpielBtn).addGap(0, 273, Short.MAX_VALUE)));
         btnContainerLayout.setVerticalGroup(btnContainerLayout
                 .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(btnContainerLayout
-                        .createSequentialGroup().addComponent(addSpielBtn).addGap(0, 13, Short.MAX_VALUE)));
+                .createSequentialGroup().addComponent(addSpielBtn).addGap(0, 13, Short.MAX_VALUE)));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -127,12 +81,6 @@ public class PlanView extends JPanel implements Observer {
                         .addContainerGap()));
     }
 
-    private javax.swing.JButton addSpielBtn;
-    private javax.swing.JPanel btnContainer;
-    private javax.swing.JPanel planContent;
-    private JFrame master;
-    private PlanModel plm;
-
     public JButton getAddSpielBtn() {
         return addSpielBtn;
     }
@@ -141,8 +89,52 @@ public class PlanView extends JPanel implements Observer {
         String a = e.getActionCommand();
         // Neues Pop Up fenster + Controller --> bekommt z.B. Spiel Model mit
         ErgebnisInputView pop = new ErgebnisInputView(this.master, true);
-        ErgebnisInputController con = new ErgebnisInputController(pop, a, a, this.plm);
+        ErgebnisInputController con = new ErgebnisInputController(pop, a, a);
         pop.setVisible(true);
     }
 
+//    @Override
+//    public void update(Observable o, Object arg1) {
+//        // Hier landet man wenn man im Model was veraendert hat durch norifyObservers
+//        this.planContent.setLayout(new BoxLayout(this.planContent, BoxLayout.Y_AXIS));
+//        if (o instanceof PlanModel) {
+//            // To change body of generated methods, choose Tools | Templates.
+//            // javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+//            // this.setLayout(layout);
+//            planContent.removeAll();
+//            plm = (PlanModel) o;
+//            int count = 1;
+//            if (plm.getLiga().getId() == 1) {
+//                count = 5;
+//            }
+//            if (plm.getLiga().getId() == 2) {
+//                count = 10;
+//            }
+//            if (plm.getLiga().getId() == 3) {
+//                count = 15;
+//            }
+//            for (int i = 0; i < count; i++) {
+//                JLabel test = new JLabel(plm.getLiga().getName());
+//                JButton testBtn = new JButton("TestBTN " + i);
+//                test.setBackground(java.awt.Color.lightGray);
+//                test.setAlignmentX(Component.CENTER_ALIGNMENT);
+//                testBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+//                testBtn.setActionCommand(String.valueOf(i) + "RB Leipzig");
+//                testBtn.addActionListener((java.awt.event.ActionEvent evt) -> {
+//                    action(evt);
+//                });
+//                this.planContent.add(test);
+//                this.planContent.add(testBtn);
+//            }
+//            this.planContent.revalidate();
+//            this.planContent.repaint();
+//            this.planContent.setVisible(true);
+//
+//        }
+//    }
+
+    public JPanel getPlanContent() {
+        return planContent;
+    }
+    
 }

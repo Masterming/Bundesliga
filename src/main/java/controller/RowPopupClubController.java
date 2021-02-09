@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 import java.util.logging.*;
 
 import model.Liga;
@@ -20,65 +19,57 @@ public class RowPopupClubController implements ActionListener {
 
     private final static Logger LOGGER = Logger.getLogger(RowPopupClubController.class.getName());
 
-    private RowPopupClubView rPCV;
-    private Liga l;
+    private RowPopupClubView view;
+    private Liga liga;
     private JTable table;
     private JFrame master;
 
-    public RowPopupClubController(JFrame master, RowPopupClubView rPCV, Liga c, JTable tab) {
+    public RowPopupClubController(JFrame master, RowPopupClubView view, Liga l, JTable table) {
+        this.view = view;
         this.master = master;
-        this.rPCV = rPCV;
-        this.l = c;
-        this.rPCV.getBearbeiten().addActionListener(this);
-        this.rPCV.getLoeschen().addActionListener(this);
-        this.table = tab;
+        this.liga = l;
+        this.table = table;
+        this.view.getBearbeiten().addActionListener(this);
+        this.view.getLoeschen().addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent evt) {
-        String name;
-        String stadion;
-        int row;
-        DefaultTableModel dtm = (DefaultTableModel) table.getModel();
+        int row = table.getSelectedRow();
+        if (row == -1) {
+            return;
+        }
+        String name = table.getValueAt(row, 0).toString();
+        String stadion = table.getValueAt(row, 1).toString();
 
         switch (evt.getActionCommand()) {
             case "loeschen":
-                row = table.getSelectedRow();
-                name = table.getValueAt(row, 0).toString();
-
-                if (name != null) {
-                    int confirm = JOptionPane.showConfirmDialog(master,
-                            "Wollen Sie den Club " + name + " wirklich loeschen?", "Club Loeschen",
-                            JOptionPane.YES_NO_OPTION);
-                    if (confirm == JOptionPane.YES_OPTION) {
-                        LOGGER.log(Level.INFO, "Remove Club {0}", name);
-                        l.removeClub(name);
-                    }
+                int confirm = JOptionPane.showConfirmDialog(master,
+                        "Wollen Sie den Club " + name + " wirklich loeschen?", "Club Loeschen",
+                        JOptionPane.YES_NO_OPTION);
+                if (confirm == JOptionPane.YES_OPTION) {
+                    LOGGER.log(Level.INFO, "Remove Club {0}", name);
+                    liga.removeClub(name);
                 }
                 break;
+
             case "bearbeiten":
-                row = table.getSelectedRow();
-                name = table.getValueAt(row, 0).toString();
-                stadion = table.getValueAt(row, 1).toString();
-                if (name != null && table.getSelectedColumn() == 0) {
-                    String newName = JOptionPane.showInputDialog(master, "Neuen Namen eingeben", name);
-                    if (newName != null) {
-                        newName = newName.trim();
-                        if (!newName.isEmpty()) {
-                            LOGGER.log(Level.INFO, "Rename Club {0} to {1}", new String[]{name, newName});
-                            l.changeClubName(name, newName);
+                switch (table.getSelectedColumn()) {
+                    case 0:
+                        String newName = JOptionPane.showInputDialog(master, "Neuen Namen eingeben", name);
+                        if (newName != null && !newName.isBlank()) {
+                            LOGGER.log(Level.INFO, "Rename Club {0} to {1}", new String[]{name, newName.trim()});
+                            liga.changeClubName(name, newName);
                         }
-                    }
-                }
-                if (stadion != null && table.getSelectedColumn() == 1) {
-                    String stadionName = JOptionPane.showInputDialog(master, "Neuen Stadionname eingeben", stadion);
-                    if (stadionName != null) {
-                        stadionName = stadionName.trim();
+                        break;
+                    case 1:
+                        String stadionName = JOptionPane.showInputDialog(master, "Neuen Stadionname eingeben", stadion).trim();
                         if (!stadionName.isEmpty()) {
                             LOGGER.log(Level.INFO, "Change stadion to {0}", stadionName);
-                            l.changeClubStadion(name, stadionName);
+                            liga.changeClubStadion(name, stadionName);
                         }
-                    }
+                        break;
+
                 }
                 break;
         }

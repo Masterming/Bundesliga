@@ -18,15 +18,15 @@ public class ClubAddController implements ActionListener {
 
     private final static Logger LOGGER = Logger.getLogger(ClubAddController.class.getName());
     private JFrame master;
-    private ClubAddView cAv;
-    private Liga l;
+    private ClubAddView view;
+    private Liga liga;
     // private ClubDB
 
-    public ClubAddController(JFrame master, ClubAddView cAv, Liga L) {
+    public ClubAddController(JFrame master, ClubAddView view, Liga liga) {
+        this.view = view;
         this.master = master;
-        this.cAv = cAv;
-        this.cAv.getClubAddBtn().addActionListener(this);
-        this.l = L;
+        this.liga = liga;
+        this.view.getClubAddBtn().addActionListener(this);
     }
 
     @Override
@@ -43,9 +43,9 @@ public class ClubAddController implements ActionListener {
         boolean eingabe = false;
         String clubName = "";
         String stadion = "";
-        if (cAv.getClubNameTxt().getText() != null && cAv.getClubStadionTxt().getText() != null) {
-            clubName = cAv.getClubNameTxt().getText();
-            stadion = cAv.getClubStadionTxt().getText();
+        if (view.getClubNameTxt().getText() != null && view.getClubStadionTxt().getText() != null) {
+            clubName = view.getClubNameTxt().getText();
+            stadion = view.getClubStadionTxt().getText();
             clubName = clubName.trim();
             stadion = stadion.trim();
             if (clubName.length() > 0 && stadion.length() > 0) {
@@ -57,11 +57,11 @@ public class ClubAddController implements ActionListener {
             JOptionPane.showMessageDialog(f, "Bitte geben sie etwas fuer Clubname und Stadion ein");
         } else {
             Club temp = new Club(clubName, stadion);
-            l.addClub(temp);
+            liga.addClub(temp);
             LOGGER.log(Level.INFO, "Club Hinzugefuegt: {0}", clubName);
             master.repaint();
             master.revalidate();
-            cAv.dispose();
+            view.dispose();
 
         }
 

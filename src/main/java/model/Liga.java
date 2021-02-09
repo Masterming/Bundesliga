@@ -25,22 +25,30 @@ public class Liga extends Observable implements Serializable {
     @JoinTable(joinColumns = @JoinColumn(name = "ligaId"), inverseJoinColumns = @JoinColumn(name = "clubId"))
     private List<Club> clubs;
 
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(joinColumns = @JoinColumn(name = "ligaId"), inverseJoinColumns = @JoinColumn(name = "gameId"))
+    private List<Game> games;
+
     public Liga() {
         this.ligaId = -1;
         this.name = "";
         clubs = new ArrayList<>();
+        this.games = new ArrayList<>();
     }
 
     public Liga(String name) {
         this.ligaId = -1;
         this.name = name;
         this.clubs = new ArrayList<>();
+        this.games = new ArrayList<>();
     }
 
     public Liga(int id, String name) {
         this.ligaId = id;
         this.name = name;
         this.clubs = new ArrayList<>();
+        this.games = new ArrayList<>();
     }
 
     public int getId() {
@@ -71,6 +79,7 @@ public class Liga extends Observable implements Serializable {
         boolean sucess = clubs.remove(c);
         setChanged();
         notifyObservers(this);
+        removeGames(c);
         return sucess;
     }
 
@@ -80,11 +89,16 @@ public class Liga extends Observable implements Serializable {
             if (c.getName().equals(name)) {
                 temp = c;
                 clubs.remove(c);
+
                 setChanged();
                 notifyObservers(this);
                 break;
             }
         }
+        if (temp == null) {
+            return temp;
+        }
+        removeGames(temp);
         return temp;
     }
 
@@ -141,6 +155,47 @@ public class Liga extends Observable implements Serializable {
     public void setName(String name) {
         this.name = name;
         notifyObservers(this);
+    }
+
+    public List<Game> getGames() {
+        return games;
+    }
+
+    public void updateGame(Game g) {
+        if (!this.games.contains(g)) {
+            this.games.add(g);
+            setChanged();
+            notifyObservers(this);
+        } else {
+            setChanged();
+            notifyObservers(this);
+        }
+    }
+
+    private void removeGames(Club temp) {
+        List<Game> gamesToRemove = new ArrayList();
+        for (Game g : games) {
+            if (!g.isFinished() && (g.getClub1().equals(temp) || g.getClub2().equals(temp))) {
+                gamesToRemove.add(g);
+            }
+        }
+
+        // Use Iterator to remove the games from all appropiate lists
+        Iterator<Game> iter = gamesToRemove.iterator();
+        while (iter.hasNext()) {
+            Game g = iter.next();
+            List<Liga> ligTemp = g.getLigas();
+            if (ligTemp.size() == 2) {
+                ligTemp.get(1).removeGame(g);
+            }
+            ligTemp.get(0).removeGame(g);
+        }
+    }
+
+    private void removeGame(Game g) {
+        setChanged();
+        notifyObservers(this);
+        games.remove(g);
     }
 
     public boolean copy(Liga other) {

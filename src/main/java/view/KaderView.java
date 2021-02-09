@@ -13,6 +13,7 @@ import javax.swing.table.TableModel;
  * @author z003ywys
  */
 public class KaderView extends javax.swing.JPanel {
+
     private static final long serialVersionUID = 12L;
 
     public KaderView() {
@@ -32,7 +33,7 @@ public class KaderView extends javax.swing.JPanel {
         };
         // playerTable = new javax.swing.JTable();
         playerTable.setModel(
-                new javax.swing.table.DefaultTableModel(new Object[][] {}, new String[] { "Spieler", "Tore", }));
+                new javax.swing.table.DefaultTableModel(new Object[][]{}, new String[]{"Spieler", "Tore",}));
         jScrollPane1.setViewportView(playerTable);
         playerTable.setRowSelectionAllowed(true);
         playerTable.setColumnSelectionAllowed(true);
