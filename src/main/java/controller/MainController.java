@@ -111,8 +111,8 @@ public class MainController implements ActionListener, Observer {
                 view.getContentView().add(tv);
                 break;
             case 2:
-                //PlanView plv = new PlanView(view);
-                PlanViewTemp plv = new PlanViewTemp();
+                PlanView plv = new PlanView(view);
+                //PlanViewTemp plv = new PlanViewTemp();
                 PlanController plc = new PlanController(view, plv, ligas.get(ligaId));
                 JScrollPane scroll = new JScrollPane(plv);
 

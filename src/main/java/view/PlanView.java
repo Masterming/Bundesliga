@@ -17,9 +17,10 @@ public class PlanView extends JPanel {
 
     private static final long serialVersionUID = 16L;
 
-    private javax.swing.JButton addSpielBtn;
-    private javax.swing.JPanel btnContainer;
-    private javax.swing.JPanel planContent;
+    public javax.swing.JButton addSpielBtn;
+    public javax.swing.JButton createGames;
+    public javax.swing.JPanel planContent;
+    public javax.swing.JButton setResult;
     private JFrame master;
 
     public PlanView(JFrame master) {
@@ -42,47 +43,67 @@ public class PlanView extends JPanel {
 
     private void initComponents() {
 
-        planContent = new javax.swing.JPanel();
-        btnContainer = new javax.swing.JPanel();
+ planContent = new javax.swing.JPanel();
         addSpielBtn = new javax.swing.JButton();
+        createGames = new javax.swing.JButton();
+        setResult = new javax.swing.JButton();
 
         planContent.setLayout(new javax.swing.BoxLayout(planContent, javax.swing.BoxLayout.LINE_AXIS));
 
-        addSpielBtn.setText("Spiel hinzufuegen");
+        addSpielBtn.setText("Spiel hinzufügen");
         addSpielBtn.setActionCommand("addSpiel");
 
-        javax.swing.GroupLayout btnContainerLayout = new javax.swing.GroupLayout(btnContainer);
-        btnContainer.setLayout(btnContainerLayout);
-        btnContainerLayout.setHorizontalGroup(btnContainerLayout
-                .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(btnContainerLayout
-                .createSequentialGroup().addComponent(addSpielBtn).addGap(0, 273, Short.MAX_VALUE)));
-        btnContainerLayout.setVerticalGroup(btnContainerLayout
-                .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(btnContainerLayout
-                .createSequentialGroup().addComponent(addSpielBtn).addGap(0, 13, Short.MAX_VALUE)));
+        createGames.setText("Spiele automatisch erstellen");
+        createGames.setActionCommand("addSpielAuto");
+
+        setResult.setText("Ergebnisse automatisch setzen");
+        setResult.setActionCommand("setResultAuto");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
-        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout
-                .createSequentialGroup().addContainerGap()
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(planContent, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnContainer, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 62, Short.MAX_VALUE)))
-                .addContainerGap()));
-        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup().addContainerGap()
-                        .addComponent(btnContainer, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(planContent, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-                        .addContainerGap()));
+                    .addComponent(planContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(addSpielBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(createGames)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(setResult)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(16, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addSpielBtn)
+                    .addComponent(createGames)
+                    .addComponent(setResult))
+                .addGap(18, 18, 18)
+                .addComponent(planContent, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
     }
 
     public JButton getAddSpielBtn() {
         return addSpielBtn;
+    }
+
+    public JButton getCreateGames() {
+        return createGames;
+    }
+
+    public JPanel getPlanContent() {
+        return planContent;
+    }
+
+    public JButton getSetResult() {
+        return setResult;
     }
 
     private void action(ActionEvent e) {
@@ -133,8 +154,6 @@ public class PlanView extends JPanel {
 //        }
 //    }
 
-    public JPanel getPlanContent() {
-        return planContent;
-    }
+
     
 }
