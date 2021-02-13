@@ -13,6 +13,7 @@ import model.*;
 import view.ClubView;
 import view.MainView;
 import view.PlanView;
+import view.PlanViewTemp;
 import view.TableView;
 
 /**
@@ -110,7 +111,8 @@ public class MainController implements ActionListener, Observer {
                 view.getContentView().add(tv);
                 break;
             case 2:
-                PlanView plv = new PlanView(view);
+                //PlanView plv = new PlanView(view);
+                PlanViewTemp plv = new PlanViewTemp();
                 PlanController plc = new PlanController(view, plv, ligas.get(ligaId));
                 JScrollPane scroll = new JScrollPane(plv);
 

@@ -16,6 +16,7 @@ import view.ErgebnisInputView;
 
 import view.PlanAddGameView;
 import view.PlanView;
+import view.PlanViewTemp;
 
 /**
  *
@@ -25,17 +26,19 @@ public class PlanController implements ActionListener {
 
     private final static Logger LOGGER = Logger.getLogger(PlanController.class.getName());
 
-    private PlanView view;
+    private PlanViewTemp view;
     private JFrame master;
     private Liga liga;
     private List<JButton> listButtons;
     private List<Game> unfinishedGames;
 
-    public PlanController(JFrame master, PlanView view, Liga liga) {
+    public PlanController(JFrame master, PlanViewTemp view, Liga liga) {
         this.view = view;
         this.master = master;
         this.liga = liga;
         this.view.getAddSpielBtn().addActionListener(this);
+        this.view.getCreateGames().addActionListener(this);
+        this.view.getSetResult().addActionListener(this);
         this.listButtons = new ArrayList();
         this.unfinishedGames = new ArrayList();
         getDataAndAdaptView();
@@ -48,7 +51,17 @@ public class PlanController implements ActionListener {
             PlanAddGameView pagV = new PlanAddGameView(master, true);
             PlanAddGameController pagC = new PlanAddGameController(master, pagV, liga);
             pagV.setVisible(true);
-        } else {
+        }
+        else if (e.getActionCommand()=="addSpielAuto"){
+            System.out.println("SPielplan wird automatisch erstellt");
+            //TODO Spielplan automatisch erstellen und Liga Model aktualiseiren
+            
+        }
+        else if(e.getActionCommand()=="setResultAuto"){
+            System.out.println("Spielergebnisse werden automatisch erstellt");
+            //TO Do Ergebnisse für vorhandene Spiele autoamtisch setzen und Liga Modell aktualisieren
+        }
+        else {
             ErgebnisInputView ergV = new ErgebnisInputView(master, true);
             JButton temp = (JButton) e.getSource();
             int count = 0;
@@ -95,6 +108,7 @@ public class PlanController implements ActionListener {
                 // action(evt);
                 // });
                 testBtn.addActionListener(this);
+                
                 view.getPlanContent().add(test);
                 view.getPlanContent().add(testBtn);
                 view.getPlanContent().setVisible(true);
