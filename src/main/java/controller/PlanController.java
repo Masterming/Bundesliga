@@ -39,6 +39,7 @@ public class PlanController implements ActionListener {
         this.view.getAddSpielBtn().addActionListener(this);
         this.view.getCreateGames().addActionListener(this);
         this.view.getSetResult().addActionListener(this);
+        this.view.getRestartSeasonBtn().addActionListener(this);
         this.listButtons = new ArrayList();
         this.unfinishedGames = new ArrayList();
         getDataAndAdaptView();
@@ -60,6 +61,9 @@ public class PlanController implements ActionListener {
         else if(e.getActionCommand()=="setResultAuto"){
             System.out.println("Spielergebnisse werden automatisch erstellt");
             //TO Do Ergebnisse für vorhandene Spiele autoamtisch setzen und Liga Modell aktualisieren
+        }
+        else if (e.getActionCommand()=="restartSeason"){
+            System.out.println("Restart Season");
         }
         else {
             ErgebnisInputView ergV = new ErgebnisInputView(master, true);

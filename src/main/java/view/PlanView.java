@@ -20,6 +20,7 @@ public class PlanView extends JPanel {
     public javax.swing.JButton addSpielBtn;
     public javax.swing.JButton createGames;
     public javax.swing.JPanel planContent;
+    private javax.swing.JButton restartSeasonBtn;
     public javax.swing.JButton setResult;
     private JFrame master;
 
@@ -42,11 +43,11 @@ public class PlanView extends JPanel {
     }
 
     private void initComponents() {
-
- planContent = new javax.swing.JPanel();
+               planContent = new javax.swing.JPanel();
         addSpielBtn = new javax.swing.JButton();
         createGames = new javax.swing.JButton();
         setResult = new javax.swing.JButton();
+        restartSeasonBtn = new javax.swing.JButton();
 
         planContent.setLayout(new javax.swing.BoxLayout(planContent, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -59,6 +60,9 @@ public class PlanView extends JPanel {
         setResult.setText("Ergebnisse automatisch setzen");
         setResult.setActionCommand("setResultAuto");
 
+        restartSeasonBtn.setText("Saison neustarten");
+        restartSeasonBtn.setActionCommand("restartSeason");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -69,23 +73,26 @@ public class PlanView extends JPanel {
                     .addComponent(planContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(addSpielBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(setResult, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(createGames)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(setResult)
+                        .addComponent(createGames, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(restartSeasonBtn)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addSpielBtn)
-                    .addComponent(createGames)
-                    .addComponent(setResult))
+                    .addComponent(restartSeasonBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(createGames, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(setResult, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addSpielBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(planContent, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(planContent, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }
@@ -104,14 +111,6 @@ public class PlanView extends JPanel {
 
     public JButton getSetResult() {
         return setResult;
-    }
-
-    private void action(ActionEvent e) {
-        String a = e.getActionCommand();
-        // Neues Pop Up fenster + Controller --> bekommt z.B. Spiel Model mit
-        ErgebnisInputView pop = new ErgebnisInputView(this.master, true);
-        ErgebnisInputController con = new ErgebnisInputController(pop, a, a);
-        pop.setVisible(true);
     }
 
 //    @Override
@@ -153,6 +152,10 @@ public class PlanView extends JPanel {
 //
 //        }
 //    }
+
+    public JButton getRestartSeasonBtn() {
+        return restartSeasonBtn;
+    }
 
 
     
