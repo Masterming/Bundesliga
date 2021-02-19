@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
 import java.util.logging.*;
+import java.util.Random;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -60,7 +61,25 @@ public class PlanController implements ActionListener {
         }
         else if(e.getActionCommand()=="setResultAuto"){
             System.out.println("Spielergebnisse werden automatisch erstellt");
-            //TO Do Ergebnisse für vorhandene Spiele autoamtisch setzen und Liga Modell aktualisieren
+            Random rand = new Random();
+            for(Game g : liga.getGames()){
+                //Tordurchschnitt Bundesliga zwischen 2,5 und 3,5.
+                int goals = rand.nextInt(6);
+                for (int i = 0; i < goals; i++){
+                    int det = rand.nextInt(2);
+                    switch(det){
+                        case 1:
+                            g.increaseScore1();
+                            g.getClub1().getPlayers().get(rand.nextInt(g.getClub1().getPlayers().size())).increaseGoals();
+                        case 2:
+                            g.increaseScore2();
+                            g.getClub2().getPlayers().get(rand.nextInt(g.getClub2().getPlayers().size())).increaseGoals();
+                        default:
+                    }
+                }
+                g.setFinished(true);
+            }
+            //TODO Liga Modell aktualisieren
         }
         else if (e.getActionCommand()=="restartSeason"){
             System.out.println("Restart Season");

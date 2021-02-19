@@ -289,7 +289,7 @@ public class Club implements Serializable, Comparable {
         //total result from direct comparison
         int tot1 = 0; //total score for this team
         int tot2 = 0; //total score for other team
-        for (int i = 0; i < 3; i++){
+        for (int i = 1; i < 3; i++){
             if(MainController.getLigas().get(i).getClubs().contains(this)){
                 List<Game> tmp = MainController.getLigas().get(i).getGames(); //get all games from own league
                 for(Game g : tmp){ //find all games with both teams in them
@@ -312,7 +312,8 @@ public class Club implements Serializable, Comparable {
         dafür müssten wir aber die Heimmannschaft im Game-Objekt tracken.
         Passiert eh fast nie, wird also (erstmal) weggelassen.
         */
-        LOGGER.log(Level.INFO, "Two games needed final comparison criterion");
+        if(this.gamesCount != 0)
+            LOGGER.log(Level.INFO, "Two games needed final comparison criterion");
         return 0;
     }
 }
