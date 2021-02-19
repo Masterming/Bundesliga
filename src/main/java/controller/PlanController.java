@@ -52,7 +52,7 @@ public class PlanController implements ActionListener {
             PlanAddGameView pagV = new PlanAddGameView(master, true);
             PlanAddGameController pagC = new PlanAddGameController(master, pagV, liga);
             pagV.setVisible(true);
-        }
+        } 
         else if (e.getActionCommand()=="addSpielAuto"){
             System.out.println("SPielplan wird automatisch erstellt");
             //TODO Spielplan automatisch erstellen und Liga Model aktualiseiren
@@ -64,6 +64,7 @@ public class PlanController implements ActionListener {
         }
         else if (e.getActionCommand()=="restartSeason"){
             System.out.println("Restart Season");
+            // TO DO Tabelle mit den Spielen komplett löschen und alles andere auch
         }
         else {
             ErgebnisInputView ergV = new ErgebnisInputView(master, true);
