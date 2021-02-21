@@ -236,7 +236,6 @@ public class ErgebnisInputController implements ActionListener {
             this.game.setFinished(true);
             this.game.setScore1(clubAErg);
             this.game.setScore2(clubBErg);
-
             // Über Liga Objekt Game updaten ?
             // TO DO bei spielen in 2 Ligen beide Ligen updaten --> Game Braucht Liste mit
             // Ligen

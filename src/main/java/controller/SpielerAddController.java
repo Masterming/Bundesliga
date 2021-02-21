@@ -53,6 +53,11 @@ public class SpielerAddController implements ActionListener {
         if (inputOk) {
             LOGGER.log(Level.INFO, "Spieler hinzugefuegt");
             Player P = new Player(name, anzTor);
+            //To DO: 
+            JFrame f = new JFrame();
+            JOptionPane.showMessageDialog(f,"Spieler wurde erfolgreich hinzugefügt");
+            this.view.getAnzToreTxt().setText("");
+            this.view.getPlayerNameTxt().setText("");
             club.addPlayer(P);
             liga.updateClub(club);
         }
