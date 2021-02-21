@@ -308,12 +308,11 @@ public class Club implements Serializable, Comparable {
         if(tot1 != tot2)
             return (tot1 > tot2 ? 1 : -1);
         /*
-        Hier wird theoretisch noch ausgewertet, wer im direkten vergleich mehr Tore erzielt hat,
+        Hier wird theoretisch noch ausgewertet, wer im direkten vergleich mehr Auswärts-Tore erzielt hat,
         dafür müssten wir aber die Heimmannschaft im Game-Objekt tracken.
         Passiert eh fast nie, wird also (erstmal) weggelassen.
+        -> Heimteam immer Club1 im Game Objekt!! -> TODO
         */
-        if(this.gamesCount != 0)
-            LOGGER.log(Level.INFO, "Two games needed final comparison criterion");
         return 0;
     }
 }

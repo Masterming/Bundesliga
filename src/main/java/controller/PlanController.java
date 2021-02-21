@@ -83,6 +83,7 @@ public class PlanController implements ActionListener {
         }
         else if (e.getActionCommand()=="restartSeason"){
             System.out.println("Restart Season");
+            //TODO Saison-Daten zurücksetzen (Spieler mit Toranzahl und Teams bleiben, alles andere geht)
         }
         else {
             ErgebnisInputView ergV = new ErgebnisInputView(master, true);
@@ -116,7 +117,7 @@ public class PlanController implements ActionListener {
                 String year = String.valueOf(g.getStart().getYear());
                 String hour = String.valueOf(g.getStart().getHour());
                 String minute = String.valueOf(g.getStart().getMinute());
-                String labelText = day + "." + mounth + "." + year + " um " + hour + ":" + minute + " Uhr ";
+                String labelText = day + "." + mounth + "." + year + " um " + String.format("%02d", Integer.parseInt(hour)) + ":" + String.format("%02d", Integer.parseInt(minute)) + " Uhr ";
                 test.setText(labelText);
                 JButton testBtn = new JButton();
                 String labelButton = g.getClub1().getName() + " - " + g.getClub2().getName();
