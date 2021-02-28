@@ -122,6 +122,10 @@ public class Club implements Serializable, Comparable<Club> {
         }
         return ret;
     }
+    
+    public int getSize(){
+        return players.size();
+    }
 
     public int getGamesCount() {
         return gamesCount;
@@ -214,11 +218,20 @@ public class Club implements Serializable, Comparable<Club> {
     public boolean addPlayerGoals(String name, int count) {
         for (Player p : players) {
             if (p.getName().equals(name)) {
-                p.setGoals(p.getGoals() + count);
+                p.addGoals(count);
                 return true;
             }
         }
         return false;
+    }
+
+    public boolean addPlayerGoals(int id, int count) {
+        try {
+            players.get(id).addGoals(count);
+            return true;
+        } catch (IndexOutOfBoundsException e) {
+            return false;
+        }
     }
 
     public boolean copy(Club other) {
@@ -294,20 +307,24 @@ public class Club implements Serializable, Comparable<Club> {
     @Override
     public int compareTo(Club c) {
         // null check
-        if (c == null)
+        if (c == null) {
             throw new NullPointerException("comparing " + this.name + " to null");
+        }
         // equality check
-        if (this.equals(c))
+        if (this.equals(c)) {
             return 0;
+        }
         // comparisons
         // points
-        if (points != c.points)
+        if (points != c.points) {
             return (points > c.points ? 1 : -1);
+        }
         // goal difference
         int diff1 = madeGoals - receivedGoals;
         int diff2 = c.madeGoals - c.receivedGoals;
-        if (diff1 != diff2)
+        if (diff1 != diff2) {
             return (diff1 > diff2 ? 1 : -1);
+        }
         // total result from direct comparison
         int tot1 = 0; // total score for this team
         int tot2 = 0; // total score for other team
@@ -315,19 +332,20 @@ public class Club implements Serializable, Comparable<Club> {
             if (MainController.getLigas().get(i).getClubs().contains(this)) {
                 List<Game> tmp = MainController.getLigas().get(i).getGames(); // get all games from own league
                 for (Game g : tmp) { // find all games with both teams in them
-                    if (this.equals(g.getClub1()) && c.equals(g.getClub2())) {
-                        tot1 += g.getScore1(); // add game score to according total score
-                        tot2 += g.getScore2();
-                    } else if (this.equals(g.getClub2()) && c.equals(g.getClub1())) {
-                        tot1 += g.getScore2();
-                        tot2 += g.getScore1();
+                    if (this.equals(g.getClub(0)) && c.equals(g.getClub(1))) {
+                        tot1 += g.getScore(0); // add game score to according total score
+                        tot2 += g.getScore(1);
+                    } else if (this.equals(g.getClub(1)) && c.equals(g.getClub(0))) {
+                        tot1 += g.getScore(1);
+                        tot2 += g.getScore(0);
                     }
                 }
                 break;
             }
         }
-        if (tot1 != tot2)
+        if (tot1 != tot2) {
             return (tot1 > tot2 ? 1 : -1);
+        }
         /*
          * Hier wird theoretisch noch ausgewertet, wer im direkten vergleich mehr
          * Auswärts-Tore erzielt hat, dafür müssten wir aber die Heimmannschaft im

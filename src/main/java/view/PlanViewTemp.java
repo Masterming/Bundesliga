@@ -38,10 +38,10 @@ public class PlanViewTemp extends javax.swing.JPanel {
         planContent.setLayout(new javax.swing.BoxLayout(planContent, javax.swing.BoxLayout.LINE_AXIS));
 
         addSpielBtn.setText("Spiel hinzufügen");
-        addSpielBtn.setActionCommand("addSpiel");
+        addSpielBtn.setActionCommand("addGame");
 
         createGames.setText("Spiele automatisch erstellen");
-        createGames.setActionCommand("addSpielAuto");
+        createGames.setActionCommand("addGameAuto");
 
         setResult.setText("Ergebnisse automatisch setzen");
         setResult.setActionCommand("setResultAuto");

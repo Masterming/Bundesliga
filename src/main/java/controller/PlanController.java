@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.BoxLayout;
@@ -46,65 +47,57 @@ public class PlanController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if ("addSpiel".equals(e.getActionCommand())) {
-            // LOGGER.log(Level.INFO, "Plan Controller angekommen");
-            PlanAddGameView pagV = new PlanAddGameView(master, true);
-            PlanAddGameController pagC = new PlanAddGameController(master, pagV, liga);
-            pagV.setVisible(true);
-        } else if ("addSpielAuto".equals(e.getActionCommand())) {
-            System.out.println("SPielplan wird automatisch erstellt");
-            //TODO Spielplan automatisch erstellen und Liga Model aktualiseiren
-
-        } else if ("setResultAuto".equals(e.getActionCommand())) {
-            System.out.println("Spielergebnisse werden automatisch erstellt");
-            Random rand = new Random();
-            for (Game g : liga.getGames()) {
-                //Tordurchschnitt Bundesliga zwischen 2,5 und 3,5.
-                if (!g.isFinished()) {
-                    int goals = rand.nextInt(6);
-                    for (int i = 0; i < goals; i++) {
-                        int det = rand.nextInt(2);
-                        switch (det) {
-                            case 0:
-                                g.increaseScore1();
-                                g.getClub1().addMadeGoals(1);
-                                g.getClub2().addReceivedGoals(1);
-                                g.getClub1().getPlayers().get(rand.nextInt(g.getClub1().getPlayers().size())).increaseGoals();
-                                break;
-                            case 1:
-                                g.increaseScore2();
-                                g.getClub2().addMadeGoals(1);
-                                g.getClub1().addReceivedGoals(1);
-                                g.getClub2().getPlayers().get(rand.nextInt(g.getClub2().getPlayers().size())).increaseGoals();
-                                break;
-                            default:
+        switch (e.getActionCommand()) {
+            case "addGame":
+                LOGGER.log(Level.INFO, "Spiel hinzufuegen");
+                PlanAddGameView pagV = new PlanAddGameView(master, true);
+                PlanAddGameController pagC = new PlanAddGameController(master, pagV, liga);
+                pagV.setVisible(true);
+                break;
+            case "addGameAuto":
+                LOGGER.log(Level.INFO, "Spielplan wird automatisch erstellt");
+                //TODO Spielplan automatisch erstellen und Liga Model aktualiseiren
+                break;
+            case "setResultAuto":
+                LOGGER.log(Level.INFO, "Spielergebnisse werden automatisch erstellt");
+                //Tordurchschnitt Bundesliga zwischen 2.5 & 3.5
+                Random rand = new Random();
+                for (Game game : liga.getGames()) {
+                    if (!game.isFinished()) {
+                        int goals = rand.nextInt(6);
+                        int clubScore[] = {0, 0};
+                        for (int i = 0; i < goals; i++) {
+                            int det = rand.nextInt(2);
+                            clubScore[det]++;
+                            game.getClub(det).addPlayerGoals(rand.nextInt(game.getClub(det).getSize()), 1);
                         }
+                        game.setResults(clubScore[0], clubScore[1]);
                     }
-                    g.setFinished(true);
                 }
-            }
-            liga.updateGames(liga.getGames());
-            //TODO Liga Modell aktualisieren
-        } else if ("restartSeason".equals(e.getActionCommand())) {
-            System.out.println("Restart Season");
-            //TODO Saison-Daten zurücksetzen (Spieler mit Toranzahl und Teams bleiben, alles andere geht)
-            for (Liga l : MainController.getLigas().values()) {
-                l.reset();
-            }
-        } else {
-            ErgebnisInputView ergV = new ErgebnisInputView(master, true);
-            JButton temp = (JButton) e.getSource();
-            int count = 0;
-            for (JButton jB : listButtons) {
-                if (temp == jB) {
-                    count = listButtons.indexOf(jB);
-                    break;
+                liga.updateGames(liga.getGames());
+                break;
+            case "restartSeason":
+                LOGGER.log(Level.INFO, "Restart Season");
+                //TODO Saison-Daten zurücksetzen (Spieler mit Toranzahl und Teams bleiben, alles andere geht)
+                for (Liga l : MainController.getLigas().values()) {
+                    l.reset();
                 }
-            }
-            Game g = unfinishedGames.get(count);
-            // Hier nochmal schleuife durchfgehen
-            ErgebnisInputController ergC = new ErgebnisInputController(master, ergV, g, liga);
-            ergV.setVisible(true);
+                break;
+            default:
+                ErgebnisInputView ergV = new ErgebnisInputView(master, true);
+                JButton temp = (JButton) e.getSource();
+                int count = 0;
+                for (JButton jB : listButtons) {
+                    if (temp == jB) {
+                        count = listButtons.indexOf(jB);
+                        break;
+                    }
+                }
+                Game g = unfinishedGames.get(count);
+                // Hier nochmal schleuife durchgehen
+                ErgebnisInputController ergC = new ErgebnisInputController(master, ergV, g, liga);
+                ergV.setVisible(true);
+                break;
         }
     }
 
@@ -126,7 +119,7 @@ public class PlanController implements ActionListener {
                 String labelText = day + "." + mounth + "." + year + " um " + String.format("%02d", Integer.parseInt(hour)) + ":" + String.format("%02d", Integer.parseInt(minute)) + " Uhr ";
                 test.setText(labelText);
                 JButton testBtn = new JButton();
-                String labelButton = g.getClub1().getName() + " - " + g.getClub2().getName();
+                String labelButton = g.getClub(0).getName() + " - " + g.getClub(1).getName();
                 testBtn.setText(labelButton);
                 test.setBackground(java.awt.Color.lightGray);
                 test.setAlignmentX(Component.CENTER_ALIGNMENT);

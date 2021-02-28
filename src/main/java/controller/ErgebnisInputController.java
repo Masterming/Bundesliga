@@ -29,8 +29,8 @@ public class ErgebnisInputController implements ActionListener {
     private Game game;
     private List<List<String>> scoreClubA;
     private List<List<String>> scoreClubB;
-    int clubAErg;
-    int clubBErg;
+    int clubAScore;
+    int clubBScore;
 
     public ErgebnisInputController(JFrame master, ErgebnisInputView view, String clubA, String clubB) {
         this.view = view;
@@ -45,8 +45,8 @@ public class ErgebnisInputController implements ActionListener {
         scoreClubA = new ArrayList<>();
         scoreClubB = new ArrayList<>();
         getData();
-        clubAErg = 0;
-        clubBErg = 0;
+        clubAScore = 0;
+        clubBScore = 0;
 
     }
 
@@ -54,8 +54,8 @@ public class ErgebnisInputController implements ActionListener {
         this.game = game;
         this.master = master;
         this.view = ergDialog;
-        this.view.setClubALbl(game.getClub1().getName());
-        this.view.setClubBLbl(game.getClub2().getName());
+        this.view.setClubALbl(game.getClub(0).getName());
+        this.view.setClubBLbl(game.getClub(1).getName());
 
         String day = String.valueOf(game.getStart().getDayOfMonth());
         String mounth = String.valueOf(game.getStart().getMonthValue());
@@ -104,8 +104,8 @@ public class ErgebnisInputController implements ActionListener {
 
     private void getData() {
         // TODO daten aus DB holen
-        List<Player> spielerClub1 = game.getClub1().getPlayers();
-        List<Player> spielerClub2 = game.getClub2().getPlayers();
+        List<Player> spielerClub1 = game.getClub(0).getPlayers();
+        List<Player> spielerClub2 = game.getClub(1).getPlayers();
         DefaultListModel<String> listModelClubA = new DefaultListModel<>();
         for (Player p : spielerClub1) {
             listModelClubA.addElement(p.getName());
@@ -202,10 +202,10 @@ public class ErgebnisInputController implements ActionListener {
         view.setScoredPlayerClubB(tbmB);
 
         // Den spielstand aktualisieren
-        clubAErg = getSpielStand(scoreClubA);
-        clubBErg = getSpielStand(scoreClubB);
-        view.setErgClubALbl(String.valueOf(clubAErg));
-        view.setErgClubBLbl1(String.valueOf(clubBErg));
+        clubAScore = getSpielStand(scoreClubA);
+        clubBScore = getSpielStand(scoreClubB);
+        view.setErgClubALbl(String.valueOf(clubAScore));
+        view.setErgClubBLbl1(String.valueOf(clubBScore));
     }
 
     private int getSpielStand(List<List<String>> inPutData) {
@@ -222,23 +222,15 @@ public class ErgebnisInputController implements ActionListener {
     }
 
     private void save() {
-        if (clubAErg == -1 || clubBErg == -1) {
+        if (clubAScore == -1 || clubBScore == -1) {
             JOptionPane.showMessageDialog(master, "Bitte fuegen Sie Ergebnisse hinzu");
-            LOGGER.log(Level.INFO, "Spielstand: " + clubAErg + " zu " + clubBErg);
         } else {
-            LOGGER.log(Level.INFO, "Spielstand: " + clubAErg + " zu " + clubBErg);
+            LOGGER.log(Level.INFO, "Spielstand: {0} zu {1}", new Object[]{clubAScore, clubBScore});
 
-            // Score für clubs Setzem
-            game.setScore1(clubAErg);
-            game.getClub1().addMadeGoals(clubAErg);
-            game.getClub2().addReceivedGoals(clubAErg);
-            game.setScore2(clubBErg);
-            game.getClub2().addMadeGoals(clubBErg);
-            game.getClub1().addReceivedGoals(clubBErg);
+            // Score für clubs Setzen
+            game.setResults(clubAScore, clubBScore);
             setPlayerGoals();
-            game.setFinished(true);
             liga.updateGame(game);
-            // TODO: Spieler updaten
             view.dispose();
         }
     }
@@ -248,14 +240,14 @@ public class ErgebnisInputController implements ActionListener {
             String player = l.get(0);
             int goals = Integer.parseInt(l.get(1));
 
-            game.getClub1().addPlayerGoals(player, goals);
+            game.getClub(0).addPlayerGoals(player, goals);
         }
 
         for (List<String> l : scoreClubB) {
             String player = l.get(0);
             int goals = Integer.parseInt(l.get(1));
 
-            game.getClub2().addPlayerGoals(player, goals);
+            game.getClub(1).addPlayerGoals(player, goals);
         }
     }
 

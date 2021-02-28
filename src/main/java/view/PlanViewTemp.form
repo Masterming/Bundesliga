@@ -63,7 +63,7 @@
     <Component class="javax.swing.JButton" name="addSpielBtn">
       <Properties>
         <Property name="text" type="java.lang.String" value="Spiel hinzuf&#xfc;gen"/>
-        <Property name="actionCommand" type="java.lang.String" value="addSpiel"/>
+        <Property name="actionCommand" type="java.lang.String" value="addGame"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -72,7 +72,7 @@
     <Component class="javax.swing.JButton" name="createGames">
       <Properties>
         <Property name="text" type="java.lang.String" value="Spiele automatisch erstellen"/>
-        <Property name="actionCommand" type="java.lang.String" value="addSpielAuto"/>
+        <Property name="actionCommand" type="java.lang.String" value="addGameAuto"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

@@ -65,7 +65,7 @@ public class Game implements Serializable {
         } catch (NumberFormatException e) {
             gameId = -1;
         }
-        System.out.println(gameId);
+
         this.club1 = club1;
         this.club2 = club2;
         this.startTime = start;
@@ -93,20 +93,12 @@ public class Game implements Serializable {
         gameId = id;
     }
 
-    public Club getClub1() {
-        return club1;
+    public Club getClub(int id) {
+        return id == 0 ? club1 : club2;
     }
 
-    public Club getClub2() {
-        return club2;
-    }
-
-    public int getScore1() {
-        return score1;
-    }
-
-    public int getScore2() {
-        return score2;
+    public int getScore(int id) {
+        return id == 0 ? score1 : score2;
     }
 
     public LocalDateTime getStart() {
@@ -117,12 +109,51 @@ public class Game implements Serializable {
         this.startTime = start;
     }
 
-    public void increaseScore1() {
-        score1++;
+    public int increaseScore(int id, int ammount) {
+        return id == 0 ? score1++ : score2++;
     }
 
-    public void increaseScore2() {
-        score2++;
+    public boolean isFinished() {
+        return finished;
+    }
+
+    public void setResults(int score1, int score2) {
+        this.score1 = score1;
+        this.score2 = score2;
+        club1.addMadeGoals(score1);
+        club2.addMadeGoals(score2);
+        club1.addReceivedGoals(score2);
+        club2.addReceivedGoals(score1);
+        setFinished();
+    }
+
+    public void setFinished() {
+        if (score1 < score2) {
+            club2.setWins(club2.getWins() + 1);
+            club2.setGamesCount(club2.getGamesCount() + 1);
+            club2.addPoints(3);
+            club1.setLosses(club1.getLosses() + 1);
+            club1.setGamesCount(club1.getGamesCount() + 1);
+        } else if (score1 > score2) {
+            club1.setWins(club1.getWins() + 1);
+            club1.setGamesCount(club1.getGamesCount() + 1);
+            club1.addPoints(3);
+            club2.setLosses(club2.getLosses() + 1);
+            club2.setGamesCount(club2.getGamesCount() + 1);
+        } else if (score1 == score2) {
+            club1.setGamesCount(club1.getGamesCount() + 1);
+            club1.setDraw(club1.getDraw() + 1);
+            club1.addPoints(1);
+            club2.setGamesCount(club2.getGamesCount() + 1);
+            club2.setDraw(club2.getDraw() + 1);
+            club2.addPoints(1);
+        }
+
+        this.finished = true;
+    }
+
+    public List<Liga> getLigas() {
+        return ligas;
     }
 
     @Override
@@ -130,51 +161,7 @@ public class Game implements Serializable {
         return "Game: " + club1.getName() + " vs " + club2.getName();
     }
 
-    public boolean isFinished() {
-        return finished;
-    }
-
-    public void setFinished(boolean finished) {
-        if(finished){
-            if(score1 < score2){
-                club2.setWins(club2.getWins() + 1);
-                club2.setGamesCount(club2.getGamesCount() + 1);
-                club2.addPoints(3);
-                club1.setLosses(club1.getLosses() + 1);
-                club1.setGamesCount(club1.getGamesCount() + 1);
-            }
-            else if(score1 > score2){
-                club1.setWins(club1.getWins() + 1);
-                club1.setGamesCount(club1.getGamesCount() + 1);
-                club1.addPoints(3);
-                club2.setLosses(club2.getLosses() + 1);
-                club2.setGamesCount(club2.getGamesCount() + 1);
-            }
-            else if(score1 == score2){
-                club1.setGamesCount(club1.getGamesCount() + 1);
-                club1.setDraw(club1.getDraw() + 1);
-                club1.addPoints(1);
-                club2.setGamesCount(club2.getGamesCount() + 1);
-                club2.setDraw(club2.getDraw() + 1);
-                club2.addPoints(1);                
-            }
-        }
-        this.finished = finished;
-    }
-
-    public void setScore1(int score1) {
-        this.score1 = score1;
-    }
-
-    public void setScore2(int score2) {
-        this.score2 = score2;
-    }
-
-    public List<Liga> getLigas() {
-        return ligas;
-    }
-
-     @Override
+    @Override
     public boolean equals(Object o) {
         // self check
         if (this == o) {
@@ -191,5 +178,12 @@ public class Game implements Serializable {
         Game g = (Game) o;
         // field comparison
         return this.gameId == g.gameId;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 89 * hash + this.gameId;
+        return hash;
     }
 }

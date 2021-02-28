@@ -205,7 +205,7 @@ public class Liga extends Observable implements Serializable {
     private void removeGames(Club temp) {
         List<Game> gamesToRemove = new ArrayList<>();
         for (Game g : games) {
-            if (!g.isFinished() && (g.getClub1().equals(temp) || g.getClub2().equals(temp))) {
+            if (!g.isFinished() && (g.getClub(0).equals(temp) || g.getClub(1).equals(temp))) {
                 gamesToRemove.add(g);
             }
         }
