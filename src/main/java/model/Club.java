@@ -1,7 +1,9 @@
 package model;
 
+import controller.MainController;
 import java.io.Serializable;
 import java.util.*;
+import java.util.logging.*;
 import javax.persistence.*;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -11,7 +13,9 @@ import org.hibernate.annotations.LazyCollectionOption;
  */
 @Entity
 @Table(name = "clubs")
-public class Club implements Serializable {
+public class Club implements Serializable, Comparable {
+    
+    private final static Logger LOGGER = Logger.getLogger(Club.class.getName());
 
     private static final long serialVersionUID = 1L;
 
@@ -20,14 +24,14 @@ public class Club implements Serializable {
     private int clubId;
     private String name;
     private String stadion;
-    private int points;
-    private int gamesCount;
-    private int wins;
-    private int draw;
-    private int losses;
+    private int points         = 0;
+    private int gamesCount     = 0;
+    private int wins           = 0;
+    private int draw           = 0;
+    private int losses         = 0;
     // Für die Anzeige des Torverhältnisses
-    private int madeGoals;
-    private int receivedGoals;
+    private int madeGoals      = 0;
+    private int receivedGoals  = 0;
 
     @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany(cascade = CascadeType.ALL)
@@ -258,5 +262,57 @@ public class Club implements Serializable {
     @Override
     public String toString() {
         return "Club: " + name;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        //null check
+        if(o == null)
+            throw new NullPointerException("comparing " + this.name + " to null");
+        // type check and cast
+        if (getClass() != o.getClass()) {
+            throw new ClassCastException("cannot compare class Club with class " + o.getClass());
+        }
+        Club c = (Club) o;
+        //equality check
+        if(this.equals(c))
+            return 0;        
+        //comparisons
+        //points
+        if(points != c.points)
+            return (points > c.points ? 1 : -1);
+        //goal difference
+        int diff1 = madeGoals - receivedGoals;
+        int diff2 = c.madeGoals - c.receivedGoals;
+        if(diff1 != diff2)
+            return (diff1 > diff2 ? 1 : -1);
+        //total result from direct comparison
+        int tot1 = 0; //total score for this team
+        int tot2 = 0; //total score for other team
+        for (int i = 1; i < 3; i++){
+            if(MainController.getLigas().get(i).getClubs().contains(this)){
+                List<Game> tmp = MainController.getLigas().get(i).getGames(); //get all games from own league
+                for(Game g : tmp){ //find all games with both teams in them
+                    if(this.equals(g.getClub1()) && c.equals(g.getClub2())){
+                        tot1 += g.getScore1(); //add game score to according total score
+                        tot2 += g.getScore2();
+                    }
+                    else if(this.equals(g.getClub2()) && c.equals(g.getClub1())){
+                        tot1 += g.getScore2();
+                        tot2 += g.getScore1();
+                    }
+                }
+                break;
+            }
+        }
+        if(tot1 != tot2)
+            return (tot1 > tot2 ? 1 : -1);
+        /*
+        Hier wird theoretisch noch ausgewertet, wer im direkten vergleich mehr Auswärts-Tore erzielt hat,
+        dafür müssten wir aber die Heimmannschaft im Game-Objekt tracken.
+        Passiert eh fast nie, wird also (erstmal) weggelassen.
+        -> Heimteam immer Club1 im Game Objekt!! -> TODO
+        */
+        return 0;
     }
 }

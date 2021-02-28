@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
 import java.util.logging.*;
 
+import java.util.Collections;
+
 import model.Club;
 import model.Liga;
 import view.TableView;
@@ -54,13 +56,17 @@ public class TableController implements ActionListener {
     }
 
     private String[][] getData() {
-        // TODO Daten Holen
+        //sort clubs in order of rank
+        Collections.sort(liga.getClubs());
+        Collections.reverse(liga.getClubs());
+        
         String[][] data = new String[liga.getClubs().size()][];
+        Integer rank = 1;
         int count = 0;
 
         for (Club c : liga.getClubs()) {
             String[] temp = new String[8];
-            temp[0] = "1";
+            temp[0] = rank.toString();
             temp[1] = c.getName();
             temp[2] = String.valueOf(c.getGamesCount());
             temp[3] = String.valueOf(c.getPoints());
@@ -69,6 +75,7 @@ public class TableController implements ActionListener {
             temp[6] = String.valueOf(c.getLosses());
             temp[7] = String.valueOf(c.getMadeGoals()) + " : " + String.valueOf(c.getReceivedGoals());
             data[count] = temp;
+            rank++;
             count++;
         }
         return data;

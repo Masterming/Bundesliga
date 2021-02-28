@@ -51,16 +51,14 @@ public class Game implements Serializable {
         ligas = new ArrayList();
         DateTimeFormatter f = DateTimeFormatter.ofPattern("yyMMdd");
         try {
-            String id = LocalDateTime.now().format(f);
-            id += String.format("%02d%02d", club1.getId(), club1.getId());
+            // String id = LocalDateTime.now().format(f);
+            String id = String.format("%02d%02d", club1.getId(), club2.getId());
             gameId = Integer.parseInt(id);
         } catch (NumberFormatException e) {
             gameId = -1;
         }
-        String id = LocalDateTime.now().format(f);
-        id += String.format("%02d%02d", club1.getId(), club2.getId());
-        gameId = Integer.parseInt(id);
-        System.out.println(id);
+        
+        System.out.println(gameId);
         this.club1 = club1;
         this.club2 = club2;
         this.startTime = start;
@@ -130,6 +128,30 @@ public class Game implements Serializable {
     }
 
     public void setFinished(boolean finished) {
+        if(finished){
+            if(score1 < score2){
+                club2.setWins(club2.getWins() + 1);
+                club2.setGamesCount(club2.getGamesCount() + 1);
+                club2.addPoints(3);
+                club1.setLosses(club1.getLosses() + 1);
+                club1.setGamesCount(club1.getGamesCount() + 1);
+            }
+            else if(score1 > score2){
+                club1.setWins(club1.getWins() + 1);
+                club1.setGamesCount(club1.getGamesCount() + 1);
+                club1.addPoints(3);
+                club2.setLosses(club2.getLosses() + 1);
+                club2.setGamesCount(club2.getGamesCount() + 1);
+            }
+            else if(score1 == score2){
+                club1.setGamesCount(club1.getGamesCount() + 1);
+                club1.setDraw(club1.getDraw() + 1);
+                club1.addPoints(1);
+                club2.setGamesCount(club2.getGamesCount() + 1);
+                club2.setDraw(club2.getDraw() + 1);
+                club2.addPoints(1);                
+            }
+        }
         this.finished = finished;
     }
 

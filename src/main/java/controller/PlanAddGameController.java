@@ -134,11 +134,19 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
         LOGGER.log(Level.INFO, dtGame.toString());
          */
         Game game = new Game(c1, c2, dtGame, ligaA, ligaB);
-        ligaA.updateGame(game);
+        
+        try{
+            ligaA.updateGame(game);
+            LOGGER.log(Level.INFO, "Setup of {0} successful", game);            
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(view, "Spiel existiert bereits!");
+            LOGGER.log(Level.SEVERE, e.getMessage());
+        }
+        
         if (ligaA.getId() != ligaB.getId()) {
             ligaB.updateGame(game);
         }
-        LOGGER.log(Level.INFO, "Setup of {0} successful", game);
 
         view.dispose();
 
