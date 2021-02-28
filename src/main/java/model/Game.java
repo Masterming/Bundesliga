@@ -54,10 +54,10 @@ public class Game implements Serializable {
             //String id = LocalDateTime.now().format(f);
             String id = String.format("%02d%02d", club1.getId(), club2.getId());
             gameId = Integer.parseInt(id);
-            System.out.println(id);
         } catch (NumberFormatException e) {
             gameId = -1;
         }
+        System.out.println(gameId);
         this.club1 = club1;
         this.club2 = club2;
         this.startTime = start;

@@ -240,6 +240,7 @@ public class ErgebnisInputController implements ActionListener {
             game.getClub1().setReceivedGoals(game.getClub1().getReceivedGoals() + clubBErg);
             game.setFinished(true);
             liga.updateGame(game);
+            // TODO: Spieler updaten
             view.dispose();
         }
     }
