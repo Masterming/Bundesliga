@@ -55,7 +55,7 @@ public class TableController implements ActionListener {
     }
 
     private String[][] getData() {
-        //sort clubs in order of rank
+        // sort clubs in order of rank
         Collections.sort(liga.getClubs());
         Collections.reverse(liga.getClubs());
 

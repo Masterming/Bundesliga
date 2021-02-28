@@ -56,16 +56,16 @@ public class PlanController implements ActionListener {
                 break;
             case "addGameAuto":
                 LOGGER.log(Level.INFO, "Spielplan wird automatisch erstellt");
-                //TODO Spielplan automatisch erstellen und Liga Model aktualiseiren
+                // TODO Spielplan automatisch erstellen und Liga Model aktualiseiren
                 break;
             case "setResultAuto":
                 LOGGER.log(Level.INFO, "Spielergebnisse werden automatisch erstellt");
-                //Tordurchschnitt Bundesliga zwischen 2.5 & 3.5
+                // Tordurchschnitt Bundesliga zwischen 2.5 & 3.5
                 Random rand = new Random();
                 for (Game game : liga.getGames()) {
                     if (!game.isFinished()) {
                         int goals = rand.nextInt(6);
-                        int clubScore[] = {0, 0};
+                        int clubScore[] = { 0, 0 };
                         for (int i = 0; i < goals; i++) {
                             int det = rand.nextInt(2);
                             clubScore[det]++;
@@ -78,7 +78,8 @@ public class PlanController implements ActionListener {
                 break;
             case "restartSeason":
                 LOGGER.log(Level.INFO, "Restart Season");
-                //TODO Saison-Daten zurücksetzen (Spieler mit Toranzahl und Teams bleiben, alles andere geht)
+                // TODO Saison-Daten zurücksetzen (Spieler mit Toranzahl und Teams bleiben,
+                // alles andere geht)
                 for (Liga l : MainController.getLigas().values()) {
                     l.reset();
                 }
@@ -116,7 +117,9 @@ public class PlanController implements ActionListener {
                 String year = String.valueOf(g.getStart().getYear());
                 String hour = String.valueOf(g.getStart().getHour());
                 String minute = String.valueOf(g.getStart().getMinute());
-                String labelText = day + "." + mounth + "." + year + " um " + String.format("%02d", Integer.parseInt(hour)) + ":" + String.format("%02d", Integer.parseInt(minute)) + " Uhr ";
+                String labelText = day + "." + mounth + "." + year + " um "
+                        + String.format("%02d", Integer.parseInt(hour)) + ":"
+                        + String.format("%02d", Integer.parseInt(minute)) + " Uhr ";
                 test.setText(labelText);
                 JButton testBtn = new JButton();
                 String labelButton = g.getClub(0).getName() + " - " + g.getClub(1).getName();

@@ -122,17 +122,17 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
             return;
         }
 
-        if ((selectedALiga.contains("1") && selectedBLiga.contains("3")) || (selectedALiga.contains("3") && selectedBLiga.contains("1"))) {
+        if ((selectedALiga.contains("1") && selectedBLiga.contains("3"))
+                || (selectedALiga.contains("3") && selectedBLiga.contains("1"))) {
             JOptionPane.showMessageDialog(master, "Gewuenschte Ligakombination nicht auswaehlbar");
             return;
         }
 
         /*
-        LOGGER.log(Level.INFO, ligaA.toString());
-        LOGGER.log(Level.INFO, ligaB.toString());
-        LOGGER.log(Level.INFO, c1.toString());
-        LOGGER.log(Level.INFO, c2.toString());
-        LOGGER.log(Level.INFO, dtGame.toString());
+         * LOGGER.log(Level.INFO, ligaA.toString()); LOGGER.log(Level.INFO,
+         * ligaB.toString()); LOGGER.log(Level.INFO, c1.toString());
+         * LOGGER.log(Level.INFO, c2.toString()); LOGGER.log(Level.INFO,
+         * dtGame.toString());
          */
         Game game = new Game(c1, c2, dtGame, ligaA, ligaB);
 

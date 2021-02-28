@@ -58,12 +58,13 @@ public class RowPopupClubController implements ActionListener {
                     case 0:
                         String newName = JOptionPane.showInputDialog(master, "Neuen Namen eingeben", name);
                         if (newName != null && !newName.isBlank()) {
-                            LOGGER.log(Level.INFO, "Rename Club {0} to {1}", new String[]{name, newName.trim()});
+                            LOGGER.log(Level.INFO, "Rename Club {0} to {1}", new String[] { name, newName.trim() });
                             liga.changeClubName(name, newName);
                         }
                         break;
                     case 1:
-                        String stadionName = JOptionPane.showInputDialog(master, "Neuen Stadionname eingeben", stadion).trim();
+                        String stadionName = JOptionPane.showInputDialog(master, "Neuen Stadionname eingeben", stadion)
+                                .trim();
                         if (!stadionName.isEmpty()) {
                             LOGGER.log(Level.INFO, "Change stadion to {0}", stadionName);
                             liga.changeClubStadion(name, stadionName);

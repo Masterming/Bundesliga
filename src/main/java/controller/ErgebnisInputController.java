@@ -225,7 +225,7 @@ public class ErgebnisInputController implements ActionListener {
         if (clubAScore == -1 || clubBScore == -1) {
             JOptionPane.showMessageDialog(master, "Bitte fuegen Sie Ergebnisse hinzu");
         } else {
-            LOGGER.log(Level.INFO, "Spielstand: {0} zu {1}", new Object[]{clubAScore, clubBScore});
+            LOGGER.log(Level.INFO, "Spielstand: {0} zu {1}", new Object[] { clubAScore, clubBScore });
 
             // Score für clubs Setzen
             game.setResults(clubAScore, clubBScore);

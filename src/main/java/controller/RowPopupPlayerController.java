@@ -64,7 +64,7 @@ public class RowPopupPlayerController implements ActionListener {
                     case 0:
                         String newName = JOptionPane.showInputDialog(master, "Neuen Namen eingeben", name);
                         if (newName != null && !newName.isBlank()) {
-                            LOGGER.log(Level.INFO, "Rename Club {0} to {1}", new Object[]{name, newName.trim()});
+                            LOGGER.log(Level.INFO, "Rename Club {0} to {1}", new Object[] { name, newName.trim() });
                             club.changePlayerName(name, newName);
                             liga.updateClub(club);
                             dtm.setValueAt(newName, row, 0);
