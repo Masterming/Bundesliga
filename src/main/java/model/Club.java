@@ -153,6 +153,10 @@ public class Club implements Serializable, Comparable {
     public void setMadeGoals(int madeGoals) {
         this.madeGoals = madeGoals;
     }
+    
+    public void addMadeGoals(int madeGoals) {
+        this.madeGoals += madeGoals;
+    }
 
     public int getReceivedGoals() {
         return receivedGoals;
@@ -160,6 +164,10 @@ public class Club implements Serializable, Comparable {
 
     public void setReceivedGoals(int receivedGoals) {
         this.receivedGoals = receivedGoals;
+    }
+    
+    public void addReceivedGoals(int receivedGoals) {
+        this.receivedGoals += receivedGoals;
     }
 
     public String getStadion() {

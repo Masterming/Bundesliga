@@ -231,11 +231,11 @@ public class ErgebnisInputController implements ActionListener {
             
             // Score für clubs Setzem
             game.setScore1(clubAErg);
-            game.getClub1().setMadeGoals(game.getClub1().getMadeGoals() + clubAErg);
-            game.getClub2().setReceivedGoals(game.getClub2().getReceivedGoals() + clubAErg);
+            game.getClub1().addMadeGoals(clubAErg);
+            game.getClub2().addReceivedGoals(clubAErg);
             game.setScore2(clubBErg);
-            game.getClub2().setMadeGoals(game.getClub2().getMadeGoals() + clubBErg);
-            game.getClub1().setReceivedGoals(game.getClub1().getReceivedGoals() + clubBErg);
+            game.getClub2().addMadeGoals(clubBErg);
+            game.getClub1().addReceivedGoals(clubBErg);
             setPlayerGoals();
             game.setFinished(true);
             liga.updateGame(game);

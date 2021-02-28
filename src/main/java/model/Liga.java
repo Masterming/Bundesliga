@@ -173,6 +173,20 @@ public class Liga extends Observable implements Serializable {
             return false;
         }
     }
+    
+    public boolean updateGames(List<Game> gl) {
+        boolean success = true;
+        for (Game g : gl) {
+            if (!this.games.contains(g)) {
+                this.games.add(g);
+            } else {
+                success = false;
+            }
+        }
+        setChanged();
+        notifyObservers(this);
+        return success;
+    }
 
     private void removeGames(Club temp) {
         List<Game> gamesToRemove = new ArrayList();

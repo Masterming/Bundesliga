@@ -49,40 +49,49 @@ public class PlanController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand() == "addSpiel") {
+        if ("addSpiel".equals(e.getActionCommand())) {
             // LOGGER.log(Level.INFO, "Plan Controller angekommen");
             PlanAddGameView pagV = new PlanAddGameView(master, true);
             PlanAddGameController pagC = new PlanAddGameController(master, pagV, liga);
             pagV.setVisible(true);
         } 
-        else if (e.getActionCommand()=="addSpielAuto"){
+        else if ("addSpielAuto".equals(e.getActionCommand())){
             System.out.println("SPielplan wird automatisch erstellt");
             //TODO Spielplan automatisch erstellen und Liga Model aktualiseiren
             
         }
-        else if(e.getActionCommand()=="setResultAuto"){
+        else if("setResultAuto".equals(e.getActionCommand())){
             System.out.println("Spielergebnisse werden automatisch erstellt");
             Random rand = new Random();
-            for(Game g : liga.getGames()){
+            for (Game g : liga.getGames()) {
                 //Tordurchschnitt Bundesliga zwischen 2,5 und 3,5.
-                int goals = rand.nextInt(6);
-                for (int i = 0; i < goals; i++){
-                    int det = rand.nextInt(2);
-                    switch(det){
-                        case 1:
-                            g.increaseScore1();
-                            g.getClub1().getPlayers().get(rand.nextInt(g.getClub1().getPlayers().size())).increaseGoals();
-                        case 2:
-                            g.increaseScore2();
-                            g.getClub2().getPlayers().get(rand.nextInt(g.getClub2().getPlayers().size())).increaseGoals();
-                        default:
+                if (!g.isFinished()) {
+                    int goals = rand.nextInt(6);
+                    for (int i = 0; i < goals; i++) {
+                        int det = rand.nextInt(2);
+                        switch (det) {
+                            case 0:
+                                g.increaseScore1();
+                                g.getClub1().addMadeGoals(1);
+                                g.getClub2().addReceivedGoals(1);
+                                g.getClub1().getPlayers().get(rand.nextInt(g.getClub1().getPlayers().size())).increaseGoals();
+                                break;
+                            case 1:
+                                g.increaseScore2();
+                                g.getClub2().addMadeGoals(1);
+                                g.getClub1().addReceivedGoals(1);
+                                g.getClub2().getPlayers().get(rand.nextInt(g.getClub2().getPlayers().size())).increaseGoals();
+                                break;
+                            default:
+                        }
                     }
-                }
-                g.setFinished(true);
+                    g.setFinished(true);
+                }                
             }
+            liga.updateGames(liga.getGames());
             //TODO Liga Modell aktualisieren
         }
-        else if (e.getActionCommand()=="restartSeason"){
+        else if ("restartSeason".equals(e.getActionCommand())){
             System.out.println("Restart Season");
             //TODO Saison-Daten zurücksetzen (Spieler mit Toranzahl und Teams bleiben, alles andere geht)
             for(Liga l : MainController.getLigas().values()){
