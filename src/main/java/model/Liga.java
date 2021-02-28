@@ -161,14 +161,16 @@ public class Liga extends Observable implements Serializable {
         return games;
     }
 
-    public void updateGame(Game g) {
+    public boolean updateGame(Game g) {
         if (!this.games.contains(g)) {
             this.games.add(g);
             setChanged();
             notifyObservers(this);
+            return true;
         } else {
             setChanged();
             notifyObservers(this);
+            return false;
         }
     }
 
@@ -258,5 +260,14 @@ public class Liga extends Observable implements Serializable {
     @Override
     public String toString() {
         return "Liga: " + name;
+    }
+    
+    public void reset() {
+        for (Club c : getClubs()) {
+            c.reset();
+        }
+        games.clear();
+        setChanged();
+        notifyObservers();
     }
 }

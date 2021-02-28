@@ -166,4 +166,22 @@ public class Game implements Serializable {
         return ligas;
     }
 
+     @Override
+    public boolean equals(Object o) {
+        // self check
+        if (this == o) {
+            return true;
+        }
+        // null check
+        if (o == null) {
+            return false;
+        }
+        // type check and cast
+        if (getClass() != o.getClass()) {
+            return false;
+        }
+        Game g = (Game) o;
+        // field comparison
+        return this.gameId == g.gameId;
+    }
 }

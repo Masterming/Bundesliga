@@ -11,6 +11,7 @@ import java.util.Random;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import model.Club;
 import model.Game;
 import model.Liga;
 import view.ErgebnisInputView;
@@ -84,6 +85,9 @@ public class PlanController implements ActionListener {
         else if (e.getActionCommand()=="restartSeason"){
             System.out.println("Restart Season");
             //TODO Saison-Daten zurücksetzen (Spieler mit Toranzahl und Teams bleiben, alles andere geht)
+            for(Liga l : MainController.getLigas().values()){
+                l.reset();
+            }
         }
         else {
             ErgebnisInputView ergV = new ErgebnisInputView(master, true);

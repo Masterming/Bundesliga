@@ -227,10 +227,8 @@ public class ErgebnisInputController implements ActionListener {
             JOptionPane.showMessageDialog(f, "Bitte fuegen Sie Ergebnisse hinzu");
             LOGGER.log(Level.INFO, "Spielstand: " + clubAErg + " zu " + clubBErg);
         } else {
-            LOGGER.log(Level.INFO, scoreClubA.toString());
-            LOGGER.log(Level.INFO, scoreClubB.toString());
-
-            view.dispose();
+            LOGGER.log(Level.INFO, "Spielstand: " + clubAErg + " zu " + clubBErg);
+            
             // Score für clubs Setzem
             game.setScore1(clubAErg);
             game.getClub1().setMadeGoals(game.getClub1().getMadeGoals() + clubAErg);
@@ -238,10 +236,27 @@ public class ErgebnisInputController implements ActionListener {
             game.setScore2(clubBErg);
             game.getClub2().setMadeGoals(game.getClub2().getMadeGoals() + clubBErg);
             game.getClub1().setReceivedGoals(game.getClub1().getReceivedGoals() + clubBErg);
+            setPlayerGoals();
             game.setFinished(true);
             liga.updateGame(game);
             // TODO: Spieler updaten
             view.dispose();
+        }
+    }
+    
+    private void setPlayerGoals(){
+        for(List<String> l : scoreClubA){
+            String player = l.get(0);
+            int goals = Integer.parseInt(l.get(1));
+            
+            game.getClub1().addPlayerGoals(player, goals);
+        }
+        
+        for(List<String> l : scoreClubB){
+            String player = l.get(0);
+            int goals = Integer.parseInt(l.get(1));
+            
+            game.getClub2().addPlayerGoals(player, goals);
         }
     }
 

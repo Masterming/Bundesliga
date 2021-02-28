@@ -193,6 +193,16 @@ public class Club implements Serializable, Comparable {
         }
         return false;
     }
+    
+    public boolean addPlayerGoals(String name, int count) {
+        for (Player p : players) {
+            if (p.getName().equals(name)) {
+                p.setGoals(p.getGoals() + count);
+                return true;
+            }
+        }
+        return false;
+    }
 
     public boolean copy(Club other) {
         boolean success = true;
@@ -314,5 +324,15 @@ public class Club implements Serializable, Comparable {
         -> Heimteam immer Club1 im Game Objekt!! -> TODO
         */
         return 0;
+    }
+    
+    public void reset() {
+        points = 0;
+        gamesCount = 0;
+        wins = 0;
+        draw = 0;
+        losses = 0;
+        madeGoals = 0;
+        receivedGoals = 0;
     }
 }
