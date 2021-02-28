@@ -2,21 +2,22 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Collections;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.swing.table.DefaultTableModel;
-import java.util.logging.*;
 
 import model.Club;
 import model.Liga;
 import view.TableView;
 
 /**
- *
  * @author z003ywys
  */
 public class TableController implements ActionListener {
 
     private final static Logger LOGGER = Logger.getLogger(TableController.class.getName());
-
     private TableView view;
     private Liga liga;
 
@@ -54,24 +55,37 @@ public class TableController implements ActionListener {
     }
 
     private String[][] getData() {
-        // TODO Daten Holen
+        // sort clubs in order of rank
+        Collections.sort(liga.getClubs());
+        Collections.reverse(liga.getClubs());
+
         String[][] data = new String[liga.getClubs().size()][];
+        Integer rank = 1;
         int count = 0;
 
         for (Club c : liga.getClubs()) {
             String[] temp = new String[8];
-            temp[0] = "1";
+            temp[0] = rank.toString();
             temp[1] = c.getName();
             temp[2] = String.valueOf(c.getGamesCount());
             temp[3] = String.valueOf(c.getPoints());
             temp[4] = String.valueOf(c.getWins());
             temp[5] = String.valueOf(c.getDraw());
             temp[6] = String.valueOf(c.getLosses());
-            temp[7] = String.valueOf(c.getMadeGoals()) + " : " + String.valueOf(c.getReceivedGoals());
+            int gcd = gcd(c.getMadeGoals(), c.getReceivedGoals());
+            if (gcd == 0 || c.getMadeGoals() == 0 || c.getReceivedGoals() == 0) {
+                temp[7] = String.valueOf(c.getMadeGoals()) + " : " + String.valueOf(c.getReceivedGoals());
+            } else {
+                temp[7] = String.valueOf(c.getMadeGoals() / gcd) + " : " + String.valueOf(c.getReceivedGoals() / gcd);
+            }
             data[count] = temp;
+            rank++;
             count++;
         }
         return data;
     }
 
+    public int gcd(int a, int b) {
+        return b == 0 ? a : gcd(b, a % b);
+    }
 }

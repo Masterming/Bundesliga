@@ -5,26 +5,27 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JFrame;
-import java.util.logging.*;
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+
 import model.Game;
 import model.Liga;
 import view.ErgebnisInputView;
-
 import view.PlanAddGameView;
 import view.PlanView;
 
 /**
- *
  * @author z003ywys
  */
 public class PlanController implements ActionListener {
 
     private final static Logger LOGGER = Logger.getLogger(PlanController.class.getName());
-
     private PlanView view;
     private JFrame master;
     private Liga liga;
@@ -36,32 +37,68 @@ public class PlanController implements ActionListener {
         this.master = master;
         this.liga = liga;
         this.view.getAddSpielBtn().addActionListener(this);
-        this.listButtons = new ArrayList();
-        this.unfinishedGames = new ArrayList();
+        this.view.getCreateGames().addActionListener(this);
+        this.view.getSetResult().addActionListener(this);
+        this.view.getRestartSeasonBtn().addActionListener(this);
+        this.listButtons = new ArrayList<>();
+        this.unfinishedGames = new ArrayList<>();
         getDataAndAdaptView();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand() == "addSpiel") {
-            // LOGGER.log(Level.INFO, "Plan Controller angekommen");
-            PlanAddGameView pagV = new PlanAddGameView(master, true);
-            PlanAddGameController pagC = new PlanAddGameController(master, pagV, liga);
-            pagV.setVisible(true);
-        } else {
-            ErgebnisInputView ergV = new ErgebnisInputView(master, true);
-            JButton temp = (JButton) e.getSource();
-            int count = 0;
-            for (JButton jB : listButtons) {
-                if (temp == jB) {
-                    count = listButtons.indexOf(jB);
-                    break;
+        switch (e.getActionCommand()) {
+            case "addGame":
+                LOGGER.log(Level.INFO, "Spiel hinzufuegen");
+                PlanAddGameView pagV = new PlanAddGameView(master, true);
+                PlanAddGameController pagC = new PlanAddGameController(master, pagV, liga);
+                pagV.setVisible(true);
+                break;
+            case "addGameAuto":
+                LOGGER.log(Level.INFO, "Spielplan wird automatisch erstellt");
+                // TODO Spielplan automatisch erstellen und Liga Model aktualiseiren
+                break;
+            case "setResultAuto":
+                LOGGER.log(Level.INFO, "Spielergebnisse werden automatisch erstellt");
+                // Tordurchschnitt Bundesliga zwischen 2.5 & 3.5
+                Random rand = new Random();
+                for (Game game : liga.getGames()) {
+                    if (!game.isFinished()) {
+                        int goals = rand.nextInt(6);
+                        int clubScore[] = { 0, 0 };
+                        for (int i = 0; i < goals; i++) {
+                            int det = rand.nextInt(2);
+                            clubScore[det]++;
+                            game.getClub(det).addPlayerGoals(rand.nextInt(game.getClub(det).getSize()), 1);
+                        }
+                        game.setResults(clubScore[0], clubScore[1]);
+                    }
                 }
-            }
-            Game g = unfinishedGames.get(count);
-            // Hier nochmal schleuife durchfgehen
-            ErgebnisInputController ergC = new ErgebnisInputController(ergV, g, liga);
-            ergV.setVisible(true);
+                liga.updateGames(liga.getGames());
+                break;
+            case "restartSeason":
+                LOGGER.log(Level.INFO, "Restart Season");
+                // TODO Saison-Daten zurücksetzen (Spieler mit Toranzahl und Teams bleiben,
+                // alles andere geht)
+                for (Liga l : MainController.getLigas().values()) {
+                    l.reset();
+                }
+                break;
+            default:
+                ErgebnisInputView ergV = new ErgebnisInputView(master, true);
+                JButton temp = (JButton) e.getSource();
+                int count = 0;
+                for (JButton jB : listButtons) {
+                    if (temp == jB) {
+                        count = listButtons.indexOf(jB);
+                        break;
+                    }
+                }
+                Game g = unfinishedGames.get(count);
+                // Hier nochmal schleuife durchgehen
+                ErgebnisInputController ergC = new ErgebnisInputController(master, ergV, g, liga);
+                ergV.setVisible(true);
+                break;
         }
     }
 
@@ -80,10 +117,12 @@ public class PlanController implements ActionListener {
                 String year = String.valueOf(g.getStart().getYear());
                 String hour = String.valueOf(g.getStart().getHour());
                 String minute = String.valueOf(g.getStart().getMinute());
-                String labelText = day + "." + mounth + "." + year + " um " + hour + ":" + minute + " Uhr ";
+                String labelText = day + "." + mounth + "." + year + " um "
+                        + String.format("%02d", Integer.parseInt(hour)) + ":"
+                        + String.format("%02d", Integer.parseInt(minute)) + " Uhr ";
                 test.setText(labelText);
                 JButton testBtn = new JButton();
-                String labelButton = g.getClub1().getName() + " - " + g.getClub2().getName();
+                String labelButton = g.getClub(0).getName() + " - " + g.getClub(1).getName();
                 testBtn.setText(labelButton);
                 test.setBackground(java.awt.Color.lightGray);
                 test.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -95,6 +134,7 @@ public class PlanController implements ActionListener {
                 // action(evt);
                 // });
                 testBtn.addActionListener(this);
+
                 view.getPlanContent().add(test);
                 view.getPlanContent().add(testBtn);
                 view.getPlanContent().setVisible(true);

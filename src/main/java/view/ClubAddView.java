@@ -10,7 +10,6 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 
 /**
- *
  * @author z003ywys
  */
 public class ClubAddView extends javax.swing.JDialog {

@@ -6,7 +6,6 @@
 package view;
 
 /**
- *
  * @author z003ywys
  */
 public class ClubViewTemp extends javax.swing.JPanel {

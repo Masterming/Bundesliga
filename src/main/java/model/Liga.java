@@ -1,8 +1,22 @@
 package model;
 
 import java.io.Serializable;
-import java.util.*;
-import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Observable;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -161,21 +175,37 @@ public class Liga extends Observable implements Serializable {
         return games;
     }
 
-    public void updateGame(Game g) {
+    public boolean updateGame(Game g) {
         if (!this.games.contains(g)) {
             this.games.add(g);
             setChanged();
             notifyObservers(this);
+            return true;
         } else {
             setChanged();
             notifyObservers(this);
+            return false;
         }
+    }
+    
+    public boolean updateGames(List<Game> gl) {
+        boolean success = true;
+        for (Game g : gl) {
+            if (!this.games.contains(g)) {
+                this.games.add(g);
+            } else {
+                success = false;
+            }
+        }
+        setChanged();
+        notifyObservers(this);
+        return success;
     }
 
     private void removeGames(Club temp) {
-        List<Game> gamesToRemove = new ArrayList();
+        List<Game> gamesToRemove = new ArrayList<>();
         for (Game g : games) {
-            if (!g.isFinished() && (g.getClub1().equals(temp) || g.getClub2().equals(temp))) {
+            if (!g.isFinished() && (g.getClub(0).equals(temp) || g.getClub(1).equals(temp))) {
                 gamesToRemove.add(g);
             }
         }
@@ -258,5 +288,14 @@ public class Liga extends Observable implements Serializable {
     @Override
     public String toString() {
         return "Liga: " + name;
+    }
+    
+    public void reset() {
+        for (Club c : getClubs()) {
+            c.reset();
+        }
+        games.clear();
+        setChanged();
+        notifyObservers();
     }
 }

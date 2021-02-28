@@ -12,7 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 
 /**
- *
  * @author z003ywys
  */
 public class ClubAddExistingView extends javax.swing.JDialog {

@@ -5,9 +5,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import java.util.logging.*;
 
 import model.Club;
 import model.Liga;
@@ -15,21 +18,22 @@ import model.Player;
 import view.TransactionView;
 
 /**
- *
  * @author z003ywys
  */
 public class TransactionController implements ActionListener, MouseListener {
 
     private final static Logger LOGGER = Logger.getLogger(TransactionController.class.getName());
     private TransactionView view;
+    private JFrame master;
     private Club club;
     private String selectedClub;
     private DefaultListModel<String> listModelUrsprung;
     private DefaultListModel<String> listModelSend;
     private Map<Integer, Liga> ligas;
 
-    public TransactionController(TransactionView view, Club club) {
+    public TransactionController(JFrame master, TransactionView view, Club club) {
         this.view = view;
+        this.master = master;
         this.club = club;
         ligas = MainController.getLigas();
         this.view.getAddToTransBtn().addActionListener(this);
@@ -110,7 +114,7 @@ public class TransactionController implements ActionListener, MouseListener {
     }
 
     private void transFinish() {
-        int confirm = JOptionPane.showConfirmDialog(view, "Wollen Sie die Transaktion abschliessen", "Bestaetigen",
+        int confirm = JOptionPane.showConfirmDialog(master, "Wollen Sie die Transaktion abschliessen", "Bestaetigen",
                 JOptionPane.YES_NO_OPTION);
         Player removedPlayer;
         Club originC = null;
@@ -121,7 +125,7 @@ public class TransactionController implements ActionListener, MouseListener {
         if (confirm == JOptionPane.YES_OPTION) {
             if (listModelSend.getSize() == 0) {
                 LOGGER.log(Level.WARNING, "No players selected");
-                JOptionPane.showMessageDialog(view, "Bitte Waehlen Sie die zu uebertragenden Clubs aus");
+                JOptionPane.showMessageDialog(master, "Bitte Waehlen Sie die zu uebertragenden Clubs aus");
                 return;
             }
 
@@ -147,10 +151,10 @@ public class TransactionController implements ActionListener, MouseListener {
             boolean updateTarget = targetL.updateClub(targetC);
 
             if (updateOrigin && updateTarget) {
-                JOptionPane.showMessageDialog(view, "Transfer war erfolgreich");
+                JOptionPane.showMessageDialog(master, "Transfer war erfolgreich");
                 LOGGER.log(Level.INFO, "Player Transfer finished successfully");
             } else {
-                JOptionPane.showMessageDialog(view, "Transfer fehlgeschlagen");
+                JOptionPane.showMessageDialog(master, "Transfer fehlgeschlagen");
                 LOGGER.log(Level.INFO, "Player Transfer failed");
 
             }

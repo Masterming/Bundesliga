@@ -7,7 +7,6 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 /**
- *
  * @author z003ywys
  */
 public class PlanAddGameView extends javax.swing.JDialog {

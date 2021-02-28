@@ -4,28 +4,26 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
+import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
-import java.util.logging.*;
-import javax.swing.JFrame;
+
 import model.Club;
 import model.Liga;
 import model.Player;
-
 import view.KaderView;
 import view.RowPopupPlayerView;
 
 /**
- *
  * @author z003ywys
  */
 public class KaderController implements ActionListener, MouseListener {
 
-    private final static Logger LOGGER = Logger.getLogger(KaderController.class.getName());
     private KaderView view;
-    private Club club;
     private JFrame master;
     private Liga liga;
+    private Club club;
 
     public KaderController(KaderView view, Club club, JFrame mas, Liga liga) {
         this.view = view;

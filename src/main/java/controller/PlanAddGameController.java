@@ -9,10 +9,12 @@ import java.awt.event.MouseListener;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import java.util.logging.*;
 
 import model.Club;
 import model.Game;
@@ -20,14 +22,13 @@ import model.Liga;
 import view.PlanAddGameView;
 
 /**
- *
  * @author z003ywys
  */
 public class PlanAddGameController implements ActionListener, ItemListener, MouseListener {
 
     private final static Logger LOGGER = Logger.getLogger(PlanAddGameController.class.getName());
-    private JFrame master;
     private PlanAddGameView view;
+    private JFrame master;
     private Liga liga;
     private Liga ligaA;
     private Liga ligaB;
@@ -105,43 +106,45 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
         Club c2 = ligaB.getClub(view.getClubBLbl().getText());
 
         if (c1 == null || c2 == null) {
-            JOptionPane.showMessageDialog(view, "Einer der Clubs ist invalide");
+            JOptionPane.showMessageDialog(master, "Einer der Clubs ist invalide");
             return;
         }
 
         if (c1.equals(c2)) {
-            JOptionPane.showMessageDialog(view, "Die Clubs die gegeneinander Spielen muessen verschieden sein");
+            JOptionPane.showMessageDialog(master, "Die Clubs die gegeneinander Spielen muessen verschieden sein");
             return;
         }
 
         try {
             dtGame = LocalDateTime.from(f.parse(dateTemp));
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(view, "Bitte Datum im richtigen Format eingeben");
+            JOptionPane.showMessageDialog(master, "Bitte Datum im richtigen Format eingeben");
             return;
         }
 
-        if ((selectedALiga.contains("1") && selectedBLiga.contains("3")) || (selectedALiga.contains("3") && selectedBLiga.contains("1"))) {
-            JOptionPane.showMessageDialog(view, "Gewuenschte Ligakombination nicht auswaehlbar");
+        if ((selectedALiga.contains("1") && selectedBLiga.contains("3"))
+                || (selectedALiga.contains("3") && selectedBLiga.contains("1"))) {
+            JOptionPane.showMessageDialog(master, "Gewuenschte Ligakombination nicht auswaehlbar");
             return;
         }
 
         /*
-        LOGGER.log(Level.INFO, ligaA.toString());
-        LOGGER.log(Level.INFO, ligaB.toString());
-        LOGGER.log(Level.INFO, c1.toString());
-        LOGGER.log(Level.INFO, c2.toString());
-        LOGGER.log(Level.INFO, dtGame.toString());
+         * LOGGER.log(Level.INFO, ligaA.toString()); LOGGER.log(Level.INFO,
+         * ligaB.toString()); LOGGER.log(Level.INFO, c1.toString());
+         * LOGGER.log(Level.INFO, c2.toString()); LOGGER.log(Level.INFO,
+         * dtGame.toString());
          */
         Game game = new Game(c1, c2, dtGame, ligaA, ligaB);
-        ligaA.updateGame(game);
-        if (ligaA.getId() != ligaB.getId()) {
-            ligaB.updateGame(game);
+
+        if (ligaA.updateGame(game)) {
+            if (ligaA.getId() != ligaB.getId()) {
+                ligaB.updateGame(game);
+            }
+            LOGGER.log(Level.INFO, "Setup of {0} successful", game);
+        } else {
+            JOptionPane.showMessageDialog(master, "Spiel existiert bereits!");
         }
-        LOGGER.log(Level.INFO, "Setup of {0} successful", game);
-
         view.dispose();
-
     }
 
     @Override

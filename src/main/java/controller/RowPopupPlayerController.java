@@ -2,28 +2,28 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import java.util.logging.*;
 
 import model.Club;
 import model.Liga;
 import view.RowPopupPlayerView;
 
 /**
- *
  * @author z003ywys
  */
 public class RowPopupPlayerController implements ActionListener {
 
     private RowPopupPlayerView view;
+    private JFrame master;
     private Liga liga;
     private Club club;
     private JTable table;
-    private JFrame master;
 
     private final static Logger LOGGER = Logger.getLogger(RowPopupPlayerController.class.getName());
 
@@ -64,7 +64,7 @@ public class RowPopupPlayerController implements ActionListener {
                     case 0:
                         String newName = JOptionPane.showInputDialog(master, "Neuen Namen eingeben", name);
                         if (newName != null && !newName.isBlank()) {
-                            LOGGER.log(Level.INFO, "Rename Club {0} to {1}", new Object[]{name, newName.trim()});
+                            LOGGER.log(Level.INFO, "Rename Club {0} to {1}", new Object[] { name, newName.trim() });
                             club.changePlayerName(name, newName);
                             liga.updateClub(club);
                             dtm.setValueAt(newName, row, 0);

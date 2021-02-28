@@ -9,7 +9,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
 /**
- *
  * @author z003ywys
  */
 public class RowPopupClubView extends JPopupMenu {

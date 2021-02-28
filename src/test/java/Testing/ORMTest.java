@@ -127,7 +127,7 @@ public class ORMTest {
     public void testGetClub() {
         LOGGER.log(Level.INFO, "Test 6");
         ClubDBMapper dao = new ClubDBMapper();
-        Club club = dao.getClub(1);
+        Club club = dao.getClub(0);
         Assert.assertNotNull(club);
     }
 
@@ -159,7 +159,7 @@ public class ORMTest {
     public void testGetClubAttribute() {
         LOGGER.log(Level.INFO, "Test 10");
         ClubDBMapper dao = new ClubDBMapper();
-        Club club = dao.getClub(1);
+        Club club = dao.getClub(0);
         Assert.assertEquals(c1.getPlayers().get(0).getName(), club.getPlayers().get(0).getName());
     }
 
@@ -176,6 +176,6 @@ public class ORMTest {
         LOGGER.log(Level.INFO, "Test 12");
         GameDBMapper dao = new GameDBMapper();
         Game game = dao.getGame(1);
-        Assert.assertEquals(game.getClub1().getName(), g1.getClub1().getName());
+        Assert.assertEquals(game.getClub(0).getName(), g1.getClub(0).getName());
     }
 }

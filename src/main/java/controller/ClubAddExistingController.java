@@ -6,11 +6,14 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import java.util.Map;
-import java.util.logging.*;
 
 import model.Club;
 import model.Liga;
@@ -23,14 +26,16 @@ public class ClubAddExistingController implements ActionListener, MouseListener,
 
     private final static Logger LOGGER = Logger.getLogger(ClubAddExistingController.class.getName());
     private ClubAddExistingView view;
+    private JFrame master;
     private Liga liga;
     private String selectedClub;
     private DefaultListModel<String> clubList;
     private Map<Integer, Liga> ligas;
     private int targetLigaId;
 
-    public ClubAddExistingController(ClubAddExistingView view, Liga liga) {
+    public ClubAddExistingController(JFrame master, ClubAddExistingView view, Liga liga) {
         this.view = view;
+        this.master = master;
         this.liga = liga;
         clubList = new DefaultListModel<>();
         this.view.getLigaClubList().setModel(clubList);
@@ -51,8 +56,8 @@ public class ClubAddExistingController implements ActionListener, MouseListener,
                 dfC = new DefaultComboBoxModel<>(ligen);
                 view.setLigaComboModel(dfC);
                 populateComboBox();
-
                 break;
+
             case 2:
                 ligen = new String[2];
                 ligen[0] = "Liga 1";
@@ -61,6 +66,7 @@ public class ClubAddExistingController implements ActionListener, MouseListener,
                 view.setLigaComboModel(dfC);
                 populateComboBox();
                 break;
+
             case 3:
                 ligen = new String[1];
                 ligen[0] = "Liga 2";
@@ -68,6 +74,7 @@ public class ClubAddExistingController implements ActionListener, MouseListener,
                 view.setLigaComboModel(dfC);
                 populateComboBox();
                 break;
+
         }
         view.repaint();
         view.revalidate();
@@ -77,7 +84,7 @@ public class ClubAddExistingController implements ActionListener, MouseListener,
     public void actionPerformed(ActionEvent evt) {
         switch (evt.getActionCommand()) {
             case "clubAddLiga":
-                int confirm = JOptionPane.showConfirmDialog(view, "Wollen Sie den Club zur Liga hinzufuegen ?",
+                int confirm = JOptionPane.showConfirmDialog(master, "Wollen Sie den Club zur Liga hinzufuegen ?",
                         "Club Hinzufuegen", JOptionPane.YES_NO_OPTION);
                 if (confirm == JOptionPane.YES_OPTION && selectedClub != null) {
                     LOGGER.log(Level.INFO, "Club: {0} zur Liga hinzugefuegt", selectedClub);
@@ -87,7 +94,7 @@ public class ClubAddExistingController implements ActionListener, MouseListener,
                     Club remClub = origin.removeClub(selectedClub);
                     target.addClub(remClub);
 
-                    JOptionPane.showMessageDialog(view, "Transfer war erfolgreich");
+                    JOptionPane.showMessageDialog(master, "Transfer war erfolgreich");
                     LOGGER.log(Level.INFO, "Club Transfer finished successful");
 
                     view.dispose();

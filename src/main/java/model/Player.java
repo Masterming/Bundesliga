@@ -1,7 +1,12 @@
 package model;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * @author Rene
@@ -35,32 +40,32 @@ public class Player implements Serializable {
         this.goals = goals;
     }
 
-    public int getId() {
-        return playerId;
-    }
-
     public void setId(int id) {
         playerId = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public int getGoals() {
-        return goals;
-    }
-
-    public void increaseGoals() {
-        goals++;
+    public int getId() {
+        return playerId;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void setGoals(int goals) {
         this.goals = goals;
+    }
+
+    public void addGoals(int ammount) {
+        goals += ammount;
+    }
+
+    public int getGoals() {
+        return goals;
     }
 
     public boolean copy(Player other) {

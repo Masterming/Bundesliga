@@ -13,7 +13,6 @@ import javax.swing.JTable;
 import javax.swing.table.TableModel;
 
 /**
- *
  * @author z003ywys
  */
 public class ErgebnisInputView extends javax.swing.JDialog {

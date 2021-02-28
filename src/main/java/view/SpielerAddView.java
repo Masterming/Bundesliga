@@ -4,7 +4,6 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 
 /**
- *
  * @author z003ywys
  */
 public class SpielerAddView extends javax.swing.JPanel {

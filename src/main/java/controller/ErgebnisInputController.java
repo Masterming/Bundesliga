@@ -4,37 +4,37 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import java.util.logging.*;
+
 import model.Game;
 import model.Liga;
 import model.Player;
-
 import view.ErgebnisInputView;
 
 /**
- *
  * @author z003ywys
  */
 public class ErgebnisInputController implements ActionListener {
 
     private final static Logger LOGGER = Logger.getLogger(ErgebnisInputController.class.getName());
-
     private ErgebnisInputView view;
+    private JFrame master;
+    private Liga liga;
+    private Game game;
     private List<List<String>> scoreClubA;
     private List<List<String>> scoreClubB;
-    private Map<Integer, Liga> ligas;
-    private Game game;
-    private Liga liga;
-    int clubAErg;
-    int clubBErg;
+    int clubAScore;
+    int clubBScore;
 
-    public ErgebnisInputController(ErgebnisInputView view, String clubA, String clubB) {
+    public ErgebnisInputController(JFrame master, ErgebnisInputView view, String clubA, String clubB) {
         this.view = view;
+        this.master = master;
         this.view.setClubALbl(clubA);
         this.view.setClubBLbl(clubB);
         this.view.getSaveBtn().addActionListener(this);
@@ -45,17 +45,17 @@ public class ErgebnisInputController implements ActionListener {
         scoreClubA = new ArrayList<>();
         scoreClubB = new ArrayList<>();
         getData();
-        clubAErg = 0;
-        clubBErg = 0;
-        this.ligas = MainController.getLigas();
+        clubAScore = 0;
+        clubBScore = 0;
 
     }
 
-    public ErgebnisInputController(ErgebnisInputView ergDialog, Game game, Liga l) {
+    public ErgebnisInputController(JFrame master, ErgebnisInputView ergDialog, Game game, Liga l) {
         this.game = game;
+        this.master = master;
         this.view = ergDialog;
-        this.view.setClubALbl(game.getClub1().getName());
-        this.view.setClubBLbl(game.getClub2().getName());
+        this.view.setClubALbl(game.getClub(0).getName());
+        this.view.setClubBLbl(game.getClub(1).getName());
 
         String day = String.valueOf(game.getStart().getDayOfMonth());
         String mounth = String.valueOf(game.getStart().getMonthValue());
@@ -104,8 +104,8 @@ public class ErgebnisInputController implements ActionListener {
 
     private void getData() {
         // TODO daten aus DB holen
-        List<Player> spielerClub1 = game.getClub1().getPlayers();
-        List<Player> spielerClub2 = game.getClub2().getPlayers();
+        List<Player> spielerClub1 = game.getClub(0).getPlayers();
+        List<Player> spielerClub2 = game.getClub(1).getPlayers();
         DefaultListModel<String> listModelClubA = new DefaultListModel<>();
         for (Player p : spielerClub1) {
             listModelClubA.addElement(p.getName());
@@ -202,10 +202,10 @@ public class ErgebnisInputController implements ActionListener {
         view.setScoredPlayerClubB(tbmB);
 
         // Den spielstand aktualisieren
-        clubAErg = getSpielStand(scoreClubA);
-        clubBErg = getSpielStand(scoreClubB);
-        view.setErgClubALbl(String.valueOf(clubAErg));
-        view.setErgClubBLbl1(String.valueOf(clubBErg));
+        clubAScore = getSpielStand(scoreClubA);
+        clubBScore = getSpielStand(scoreClubB);
+        view.setErgClubALbl(String.valueOf(clubAScore));
+        view.setErgClubBLbl1(String.valueOf(clubBScore));
     }
 
     private int getSpielStand(List<List<String>> inPutData) {
@@ -222,27 +222,32 @@ public class ErgebnisInputController implements ActionListener {
     }
 
     private void save() {
-        if (clubAErg == -1 || clubBErg == -1) {
-            JFrame f = new JFrame();
-            JOptionPane.showMessageDialog(f, "Bitte fuegen Sie Ergebnisse hinzu");
-            LOGGER.log(Level.INFO, "Spielstand: " + clubAErg + " zu " + clubBErg);
+        if (clubAScore == -1 || clubBScore == -1) {
+            JOptionPane.showMessageDialog(master, "Bitte fuegen Sie Ergebnisse hinzu");
         } else {
-            // TODO in DB Schreiben und Model aendern
-            LOGGER.log(Level.INFO, scoreClubA.toString());
-            LOGGER.log(Level.INFO, scoreClubB.toString());
+            LOGGER.log(Level.INFO, "Spielstand: {0} zu {1}", new Object[] { clubAScore, clubBScore });
 
+            // Score für clubs Setzen
+            game.setResults(clubAScore, clubBScore);
+            setPlayerGoals();
+            liga.updateGame(game);
             view.dispose();
-            // Score für clubs Setzem
-            this.game.setFinished(true);
-            this.game.setScore1(clubAErg);
-            this.game.setScore2(clubBErg);
+        }
+    }
 
-            // Über Liga Objekt Game updaten ?
-            // TO DO bei spielen in 2 Ligen beide Ligen updaten --> Game Braucht Liste mit
-            // Ligen
-            // TO DO Liegen herausfinden und beide Ligen aktualsieiren
-            this.liga.updateGame(game);
-            view.dispose();
+    private void setPlayerGoals() {
+        for (List<String> l : scoreClubA) {
+            String player = l.get(0);
+            int goals = Integer.parseInt(l.get(1));
+
+            game.getClub(0).addPlayerGoals(player, goals);
+        }
+
+        for (List<String> l : scoreClubB) {
+            String player = l.get(0);
+            int goals = Integer.parseInt(l.get(1));
+
+            game.getClub(1).addPlayerGoals(player, goals);
         }
     }
 
