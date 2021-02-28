@@ -52,7 +52,7 @@ public class Game implements Serializable {
         DateTimeFormatter f = DateTimeFormatter.ofPattern("yyMMdd");
         try {
             // String id = LocalDateTime.now().format(f);
-            String id = String.format("%02d%02d", club1.getId(), club1.getId());
+            String id = String.format("%02d%02d", club1.getId(), club2.getId());
             gameId = Integer.parseInt(id);
         } catch (NumberFormatException e) {
             gameId = -1;
