@@ -9,7 +9,6 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 /**
- *
  * @author z003ywys
  */
 public class PlanViewTemp extends javax.swing.JPanel {

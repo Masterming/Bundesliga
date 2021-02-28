@@ -2,25 +2,25 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import java.util.logging.*;
 
 import model.Club;
 import model.Liga;
 import view.ClubAddView;
 
 /**
- *
  * @author z003ywys
  */
 public class ClubAddController implements ActionListener {
 
     private final static Logger LOGGER = Logger.getLogger(ClubAddController.class.getName());
-    private JFrame master;
     private ClubAddView view;
+    private JFrame master;
     private Liga liga;
-    // private ClubDB
 
     public ClubAddController(JFrame master, ClubAddView view, Liga liga) {
         this.view = view;
@@ -53,8 +53,7 @@ public class ClubAddController implements ActionListener {
             }
         }
         if (!eingabe) {
-            JFrame f = new JFrame();
-            JOptionPane.showMessageDialog(f, "Bitte geben sie etwas fuer Clubname und Stadion ein");
+            JOptionPane.showMessageDialog(master, "Bitte geben sie etwas fuer Clubname und Stadion ein");
         } else {
             Club temp = new Club(clubName, stadion);
             liga.addClub(temp);
@@ -62,9 +61,6 @@ public class ClubAddController implements ActionListener {
             master.repaint();
             master.revalidate();
             view.dispose();
-
         }
-
     }
-
 }

@@ -1,21 +1,30 @@
 package model;
 
-import controller.MainController;
 import java.io.Serializable;
-import java.util.*;
-import java.util.logging.*;
-import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+
+import controller.MainController;
 
 /**
  * @author Rene
  */
 @Entity
 @Table(name = "clubs")
-public class Club implements Serializable, Comparable {
-    
-    private final static Logger LOGGER = Logger.getLogger(Club.class.getName());
+public class Club implements Serializable, Comparable<Club> {
 
     private static final long serialVersionUID = 1L;
 
@@ -24,14 +33,14 @@ public class Club implements Serializable, Comparable {
     private int clubId;
     private String name;
     private String stadion;
-    private int points         = 0;
-    private int gamesCount     = 0;
-    private int wins           = 0;
-    private int draw           = 0;
-    private int losses         = 0;
+    private int points = 0;
+    private int gamesCount = 0;
+    private int wins = 0;
+    private int draw = 0;
+    private int losses = 0;
     // Für die Anzeige des Torverhältnisses
-    private int madeGoals      = 0;
-    private int receivedGoals  = 0;
+    private int madeGoals = 0;
+    private int receivedGoals = 0;
 
     @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany(cascade = CascadeType.ALL)
@@ -153,7 +162,7 @@ public class Club implements Serializable, Comparable {
     public void setMadeGoals(int madeGoals) {
         this.madeGoals = madeGoals;
     }
-    
+
     public void addMadeGoals(int madeGoals) {
         this.madeGoals += madeGoals;
     }
@@ -165,7 +174,7 @@ public class Club implements Serializable, Comparable {
     public void setReceivedGoals(int receivedGoals) {
         this.receivedGoals = receivedGoals;
     }
-    
+
     public void addReceivedGoals(int receivedGoals) {
         this.receivedGoals += receivedGoals;
     }
@@ -201,7 +210,7 @@ public class Club implements Serializable, Comparable {
         }
         return false;
     }
-    
+
     public boolean addPlayerGoals(String name, int count) {
         for (Player p : players) {
             if (p.getName().equals(name)) {
@@ -283,39 +292,33 @@ public class Club implements Serializable, Comparable {
     }
 
     @Override
-    public int compareTo(Object o) {
-        //null check
-        if(o == null)
+    public int compareTo(Club c) {
+        // null check
+        if (c == null)
             throw new NullPointerException("comparing " + this.name + " to null");
-        // type check and cast
-        if (getClass() != o.getClass()) {
-            throw new ClassCastException("cannot compare class Club with class " + o.getClass());
-        }
-        Club c = (Club) o;
-        //equality check
-        if(this.equals(c))
-            return 0;        
-        //comparisons
-        //points
-        if(points != c.points)
+        // equality check
+        if (this.equals(c))
+            return 0;
+        // comparisons
+        // points
+        if (points != c.points)
             return (points > c.points ? 1 : -1);
-        //goal difference
+        // goal difference
         int diff1 = madeGoals - receivedGoals;
         int diff2 = c.madeGoals - c.receivedGoals;
-        if(diff1 != diff2)
+        if (diff1 != diff2)
             return (diff1 > diff2 ? 1 : -1);
-        //total result from direct comparison
-        int tot1 = 0; //total score for this team
-        int tot2 = 0; //total score for other team
-        for (int i = 1; i < 3; i++){
-            if(MainController.getLigas().get(i).getClubs().contains(this)){
-                List<Game> tmp = MainController.getLigas().get(i).getGames(); //get all games from own league
-                for(Game g : tmp){ //find all games with both teams in them
-                    if(this.equals(g.getClub1()) && c.equals(g.getClub2())){
-                        tot1 += g.getScore1(); //add game score to according total score
+        // total result from direct comparison
+        int tot1 = 0; // total score for this team
+        int tot2 = 0; // total score for other team
+        for (int i = 1; i < 3; i++) {
+            if (MainController.getLigas().get(i).getClubs().contains(this)) {
+                List<Game> tmp = MainController.getLigas().get(i).getGames(); // get all games from own league
+                for (Game g : tmp) { // find all games with both teams in them
+                    if (this.equals(g.getClub1()) && c.equals(g.getClub2())) {
+                        tot1 += g.getScore1(); // add game score to according total score
                         tot2 += g.getScore2();
-                    }
-                    else if(this.equals(g.getClub2()) && c.equals(g.getClub1())){
+                    } else if (this.equals(g.getClub2()) && c.equals(g.getClub1())) {
                         tot1 += g.getScore2();
                         tot2 += g.getScore1();
                     }
@@ -323,17 +326,17 @@ public class Club implements Serializable, Comparable {
                 break;
             }
         }
-        if(tot1 != tot2)
+        if (tot1 != tot2)
             return (tot1 > tot2 ? 1 : -1);
         /*
-        Hier wird theoretisch noch ausgewertet, wer im direkten vergleich mehr Auswärts-Tore erzielt hat,
-        dafür müssten wir aber die Heimmannschaft im Game-Objekt tracken.
-        Passiert eh fast nie, wird also (erstmal) weggelassen.
-        -> Heimteam immer Club1 im Game Objekt!! -> TODO
-        */
+         * Hier wird theoretisch noch ausgewertet, wer im direkten vergleich mehr
+         * Auswärts-Tore erzielt hat, dafür müssten wir aber die Heimmannschaft im
+         * Game-Objekt tracken. Passiert eh fast nie, wird also (erstmal) weggelassen.
+         * -> Heimteam immer Club1 im Game Objekt!! -> TODO
+         */
         return 0;
     }
-    
+
     public void reset() {
         points = 0;
         gamesCount = 0;

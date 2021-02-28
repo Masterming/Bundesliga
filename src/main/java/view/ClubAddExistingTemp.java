@@ -8,7 +8,6 @@ package view;
 import java.util.logging.*;
 
 /**
- *
  * @author z003ywys
  */
 public class ClubAddExistingTemp extends javax.swing.JDialog {

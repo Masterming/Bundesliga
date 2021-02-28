@@ -3,27 +3,28 @@ package controller;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.logging.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.swing.JFrame;
+
 import model.Club;
 import model.Liga;
-
 import view.ClubEditView;
 import view.KaderView;
 import view.SpielerAddView;
 import view.TransactionView;
 
 /**
- *
  * @author z003ywys
  */
 public class ClubEditController implements ActionListener {
 
     private final static Logger LOGGER = Logger.getLogger(ClubEditController.class.getName());
     private ClubEditView view;
-    private Club club;
     private JFrame master;
     private Liga liga;
+    private Club club;
 
     public ClubEditController(ClubEditView view, Club club, Liga liga, JFrame master) {
         this.view = view;
@@ -62,7 +63,7 @@ public class ClubEditController implements ActionListener {
             view.getKaderBtn().setBackground(Color.lightGray);
             view.getAddSpielerBtn().setBackground(Color.lightGray);
             TransactionView tranView = new TransactionView();
-            TransactionController tr = new TransactionController(tranView, club);
+            TransactionController tr = new TransactionController(master, tranView, club);
             // Layout setzen ?
             view.getClubEditContent().removeAll();
             view.getClubEditContent().add(tranView);
@@ -82,7 +83,7 @@ public class ClubEditController implements ActionListener {
             view.getClubEditContent().repaint();
             view.getClubEditContent().revalidate();
             SpielerAddView spV = new SpielerAddView();
-            SpielerAddController spAC = new SpielerAddController(spV, club, liga);
+            SpielerAddController spAC = new SpielerAddController(master, spV, club, liga);
             view.getClubEditContent().add(spV);
             view.getClubEditContent().repaint();
             view.getClubEditContent().revalidate();

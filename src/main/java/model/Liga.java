@@ -1,8 +1,22 @@
 package model;
 
 import java.io.Serializable;
-import java.util.*;
-import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Observable;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -189,7 +203,7 @@ public class Liga extends Observable implements Serializable {
     }
 
     private void removeGames(Club temp) {
-        List<Game> gamesToRemove = new ArrayList();
+        List<Game> gamesToRemove = new ArrayList<>();
         for (Game g : games) {
             if (!g.isFinished() && (g.getClub1().equals(temp) || g.getClub2().equals(temp))) {
                 gamesToRemove.add(g);

@@ -9,7 +9,6 @@ import javax.swing.table.TableModel;
 import java.util.logging.*;
 
 /**
- *
  * @author z003ywys
  */
 public class TableView extends JPanel {

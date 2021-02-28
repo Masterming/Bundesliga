@@ -7,7 +7,6 @@ import javax.swing.JList;
 import javax.swing.JTextField;
 
 /**
- *
  * @author z003ywys
  */
 public class TransactionView extends javax.swing.JPanel {

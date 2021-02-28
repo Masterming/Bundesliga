@@ -2,13 +2,21 @@ package model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.*;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
-import org.hibernate.annotations.GenericGenerator;
 
 /**
  * @author Rene
@@ -48,10 +56,10 @@ public class Game implements Serializable {
     }
 
     public Game(Club club1, Club club2, LocalDateTime start, Liga l1, Liga l2) {
-        ligas = new ArrayList();
-        DateTimeFormatter f = DateTimeFormatter.ofPattern("yyMMdd");
+        ligas = new ArrayList<>();
         try {
-            //String id = LocalDateTime.now().format(f);
+            // DateTimeFormatter f = DateTimeFormatter.ofPattern("yyMMdd");
+            // String id = LocalDateTime.now().format(f);
             String id = String.format("%02d%02d", club1.getId(), club2.getId());
             gameId = Integer.parseInt(id);
         } catch (NumberFormatException e) {
@@ -70,7 +78,7 @@ public class Game implements Serializable {
     }
 
     public Game(int id, Club club1, Club club2, LocalDateTime start) {
-        ligas = new ArrayList();
+        ligas = new ArrayList<>();
         this.gameId = id;
         this.club1 = club1;
         this.club2 = club2;

@@ -1,12 +1,11 @@
 package program;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import controller.MainController;
 import model.*;
-
-import java.util.logging.*;
-import java.io.IOException;
-import java.time.LocalDateTime;
-
 import view.MainView;
 
 /**
@@ -29,8 +28,8 @@ public class Main {
         try {
             // Insert Code here
             testAdd();
-            MainView mv2 = new MainView();
-            MainController m2 = new MainController(mv2);
+            MainView view = new MainView();
+            MainController controller = new MainController(view);
             // resetDB(); //current persistence settings auto-drop on startup
         } catch (Exception ex) {
             LOGGER.log(Level.SEVERE, ex.getLocalizedMessage());

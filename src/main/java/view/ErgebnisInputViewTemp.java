@@ -8,7 +8,6 @@ package view;
 import java.util.logging.*;
 
 /**
- *
  * @author z003ywys
  */
 public class ErgebnisInputViewTemp extends javax.swing.JDialog {

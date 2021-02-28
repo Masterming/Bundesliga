@@ -5,7 +5,6 @@ import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 
 /**
- *
  * @author z003ywys
  */
 public class RowPopupPlayerView extends JPopupMenu {

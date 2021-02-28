@@ -3,33 +3,35 @@ package controller;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
-import javax.swing.JScrollPane;
-import java.util.logging.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import model.*;
+import javax.swing.JScrollPane;
+
+import model.Liga;
+import model.LigaDBMapper;
 import view.ClubView;
 import view.MainView;
 import view.PlanView;
-import view.PlanViewTemp;
 import view.TableView;
 
 /**
- *
  * @author z003ywys
  */
 public class MainController implements ActionListener, Observer {
 
     private final static Logger LOGGER = Logger.getLogger(MainController.class.getName());
+    private static MainView view;
 
     // Es wird 3 Ligen Model geben jeweils eins pro Liga
     // --> werden beim ersten klick auf LigaButtons gesetzt
     private static Map<Integer, Liga> ligas;
     private LigaDBMapper dao;
 
-    private static MainView view;
     private static int ligaId = 1;
     private static int selection = 1;
 
@@ -143,10 +145,10 @@ public class MainController implements ActionListener, Observer {
             if (!ligas.get(id).copy(temp)) {
                 LOGGER.log(Level.WARNING, "Mismatch in copy of {0}", ligas.get(id));
             }
-            
+
             renderView();
         }
-        
+
     }
 
     public static Map<Integer, Liga> getLigas() {

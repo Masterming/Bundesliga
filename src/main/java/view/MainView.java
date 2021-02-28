@@ -12,7 +12,6 @@ import javax.swing.JPanel;
 import java.util.logging.*;
 
 /**
- *
  * @author z003ywys
  */
 public class MainView extends javax.swing.JFrame {

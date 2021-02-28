@@ -4,37 +4,37 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import java.util.logging.*;
+
 import model.Game;
 import model.Liga;
 import model.Player;
-
 import view.ErgebnisInputView;
 
 /**
- *
  * @author z003ywys
  */
 public class ErgebnisInputController implements ActionListener {
 
     private final static Logger LOGGER = Logger.getLogger(ErgebnisInputController.class.getName());
-
     private ErgebnisInputView view;
+    private JFrame master;
+    private Liga liga;
+    private Game game;
     private List<List<String>> scoreClubA;
     private List<List<String>> scoreClubB;
-    private Map<Integer, Liga> ligas;
-    private Game game;
-    private Liga liga;
     int clubAErg;
     int clubBErg;
 
-    public ErgebnisInputController(ErgebnisInputView view, String clubA, String clubB) {
+    public ErgebnisInputController(JFrame master, ErgebnisInputView view, String clubA, String clubB) {
         this.view = view;
+        this.master = master;
         this.view.setClubALbl(clubA);
         this.view.setClubBLbl(clubB);
         this.view.getSaveBtn().addActionListener(this);
@@ -47,12 +47,12 @@ public class ErgebnisInputController implements ActionListener {
         getData();
         clubAErg = 0;
         clubBErg = 0;
-        this.ligas = MainController.getLigas();
 
     }
 
-    public ErgebnisInputController(ErgebnisInputView ergDialog, Game game, Liga l) {
+    public ErgebnisInputController(JFrame master, ErgebnisInputView ergDialog, Game game, Liga l) {
         this.game = game;
+        this.master = master;
         this.view = ergDialog;
         this.view.setClubALbl(game.getClub1().getName());
         this.view.setClubBLbl(game.getClub2().getName());
@@ -223,12 +223,11 @@ public class ErgebnisInputController implements ActionListener {
 
     private void save() {
         if (clubAErg == -1 || clubBErg == -1) {
-            JFrame f = new JFrame();
-            JOptionPane.showMessageDialog(f, "Bitte fuegen Sie Ergebnisse hinzu");
+            JOptionPane.showMessageDialog(master, "Bitte fuegen Sie Ergebnisse hinzu");
             LOGGER.log(Level.INFO, "Spielstand: " + clubAErg + " zu " + clubBErg);
         } else {
             LOGGER.log(Level.INFO, "Spielstand: " + clubAErg + " zu " + clubBErg);
-            
+
             // Score für clubs Setzem
             game.setScore1(clubAErg);
             game.getClub1().addMadeGoals(clubAErg);
@@ -243,19 +242,19 @@ public class ErgebnisInputController implements ActionListener {
             view.dispose();
         }
     }
-    
-    private void setPlayerGoals(){
-        for(List<String> l : scoreClubA){
+
+    private void setPlayerGoals() {
+        for (List<String> l : scoreClubA) {
             String player = l.get(0);
             int goals = Integer.parseInt(l.get(1));
-            
+
             game.getClub1().addPlayerGoals(player, goals);
         }
-        
-        for(List<String> l : scoreClubB){
+
+        for (List<String> l : scoreClubB) {
             String player = l.get(0);
             int goals = Integer.parseInt(l.get(1));
-            
+
             game.getClub2().addPlayerGoals(player, goals);
         }
     }

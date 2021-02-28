@@ -9,7 +9,6 @@ import javax.swing.JTable;
 import javax.swing.table.TableModel;
 
 /**
- *
  * @author z003ywys
  */
 public class KaderView extends javax.swing.JPanel {

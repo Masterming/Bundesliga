@@ -2,17 +2,17 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import java.util.logging.*;
 
 import model.Liga;
 import view.RowPopupClubView;
 
 /**
- *
  * @author z003ywys
  */
 public class RowPopupClubController implements ActionListener {
@@ -24,10 +24,10 @@ public class RowPopupClubController implements ActionListener {
     private JTable table;
     private JFrame master;
 
-    public RowPopupClubController(JFrame master, RowPopupClubView view, Liga l, JTable table) {
+    public RowPopupClubController(JFrame master, RowPopupClubView view, Liga liga, JTable table) {
         this.view = view;
         this.master = master;
-        this.liga = l;
+        this.liga = liga;
         this.table = table;
         this.view.getBearbeiten().addActionListener(this);
         this.view.getLoeschen().addActionListener(this);

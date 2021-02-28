@@ -4,11 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
-import java.util.logging.*;
 
 import model.Club;
 import model.Liga;
@@ -24,10 +26,9 @@ import view.RowPopupClubView;
 public class ClubController implements MouseListener, ActionListener {
 
     private final static Logger LOGGER = Logger.getLogger(ClubController.class.getName());
-
     private ClubView view;
-    private Liga liga;
     private JFrame master;
+    private Liga liga;
 
     public ClubController(JFrame master, ClubView view, Liga liga) {
         this.view = view;
@@ -71,7 +72,8 @@ public class ClubController implements MouseListener, ActionListener {
         if (SwingUtilities.isRightMouseButton(evt)) {
             // Kontext Menue mit Spieler Loeschen und name aendern ueber Pop up Item
             RowPopupClubView kontext = new RowPopupClubView();
-            RowPopupClubController rowPopupClubController = new RowPopupClubController(master, kontext, liga, view.getClubTable());
+            RowPopupClubController rowPopupClubController = new RowPopupClubController(master, kontext, liga,
+                    view.getClubTable());
             kontext.show(view.getClubTable(), evt.getX(), evt.getY());
         }
 
@@ -138,9 +140,10 @@ public class ClubController implements MouseListener, ActionListener {
             case "addClub":
                 LOGGER.log(Level.INFO, "Club Hinzufuegen button gedrueckt");
                 ClubAddView caV = new ClubAddView(master, true);
-                new ClubAddController(master, caV, liga);
+                ClubAddController clubAddController = new ClubAddController(master, caV, liga);
                 caV.setVisible(true);
                 break;
+
             case "addExistClub":
                 LOGGER.log(Level.INFO, "Vorhandenen Club zur Liga hinzufuegen");
                 // Dialog box mit drop down menue ueber die 2 Ligen die nicht der aktuellen liga
@@ -149,7 +152,7 @@ public class ClubController implements MouseListener, ActionListener {
                 // Down menue ausgewaehlt wurde
                 // in Liste: mehrfach auswahl moeglich
                 ClubAddExistingView caEV = new ClubAddExistingView(master, true);
-                ClubAddExistingController caEC = new ClubAddExistingController(caEV, liga);
+                ClubAddExistingController caEC = new ClubAddExistingController(master, caEV, liga);
                 caEV.setVisible(true);
                 break;
 

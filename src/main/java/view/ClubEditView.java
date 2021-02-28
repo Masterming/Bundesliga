@@ -10,7 +10,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
- *
  * @author z003ywys
  */
 public class ClubEditView extends javax.swing.JDialog {

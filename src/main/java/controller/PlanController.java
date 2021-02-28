@@ -5,29 +5,26 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JFrame;
-import java.util.logging.*;
 import java.util.Random;
+import java.util.logging.Logger;
+
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
-import model.Club;
+
 import model.Game;
 import model.Liga;
 import view.ErgebnisInputView;
-
 import view.PlanAddGameView;
 import view.PlanView;
-import view.PlanViewTemp;
 
 /**
- *
  * @author z003ywys
  */
 public class PlanController implements ActionListener {
 
     private final static Logger LOGGER = Logger.getLogger(PlanController.class.getName());
-
     private PlanView view;
     private JFrame master;
     private Liga liga;
@@ -42,8 +39,8 @@ public class PlanController implements ActionListener {
         this.view.getCreateGames().addActionListener(this);
         this.view.getSetResult().addActionListener(this);
         this.view.getRestartSeasonBtn().addActionListener(this);
-        this.listButtons = new ArrayList();
-        this.unfinishedGames = new ArrayList();
+        this.listButtons = new ArrayList<>();
+        this.unfinishedGames = new ArrayList<>();
         getDataAndAdaptView();
     }
 
@@ -54,13 +51,11 @@ public class PlanController implements ActionListener {
             PlanAddGameView pagV = new PlanAddGameView(master, true);
             PlanAddGameController pagC = new PlanAddGameController(master, pagV, liga);
             pagV.setVisible(true);
-        } 
-        else if ("addSpielAuto".equals(e.getActionCommand())){
+        } else if ("addSpielAuto".equals(e.getActionCommand())) {
             System.out.println("SPielplan wird automatisch erstellt");
             //TODO Spielplan automatisch erstellen und Liga Model aktualiseiren
-            
-        }
-        else if("setResultAuto".equals(e.getActionCommand())){
+
+        } else if ("setResultAuto".equals(e.getActionCommand())) {
             System.out.println("Spielergebnisse werden automatisch erstellt");
             Random rand = new Random();
             for (Game g : liga.getGames()) {
@@ -86,19 +81,17 @@ public class PlanController implements ActionListener {
                         }
                     }
                     g.setFinished(true);
-                }                
+                }
             }
             liga.updateGames(liga.getGames());
             //TODO Liga Modell aktualisieren
-        }
-        else if ("restartSeason".equals(e.getActionCommand())){
+        } else if ("restartSeason".equals(e.getActionCommand())) {
             System.out.println("Restart Season");
             //TODO Saison-Daten zurücksetzen (Spieler mit Toranzahl und Teams bleiben, alles andere geht)
-            for(Liga l : MainController.getLigas().values()){
+            for (Liga l : MainController.getLigas().values()) {
                 l.reset();
             }
-        }
-        else {
+        } else {
             ErgebnisInputView ergV = new ErgebnisInputView(master, true);
             JButton temp = (JButton) e.getSource();
             int count = 0;
@@ -110,7 +103,7 @@ public class PlanController implements ActionListener {
             }
             Game g = unfinishedGames.get(count);
             // Hier nochmal schleuife durchfgehen
-            ErgebnisInputController ergC = new ErgebnisInputController(ergV, g, liga);
+            ErgebnisInputController ergC = new ErgebnisInputController(master, ergV, g, liga);
             ergV.setVisible(true);
         }
     }
@@ -145,7 +138,7 @@ public class PlanController implements ActionListener {
                 // action(evt);
                 // });
                 testBtn.addActionListener(this);
-                
+
                 view.getPlanContent().add(test);
                 view.getPlanContent().add(testBtn);
                 view.getPlanContent().setVisible(true);

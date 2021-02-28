@@ -2,9 +2,11 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import java.util.logging.*;
 
 import model.Club;
 import model.Liga;
@@ -18,11 +20,13 @@ public class SpielerAddController implements ActionListener {
 
     private final static Logger LOGGER = Logger.getLogger(SpielerAddController.class.getName());
     private SpielerAddView view;
-    private Club club;
+    private JFrame master;
     private Liga liga;
+    private Club club;
 
-    public SpielerAddController(SpielerAddView view, Club club, Liga liga) {
+    public SpielerAddController(JFrame master, SpielerAddView view, Club club, Liga liga) {
         this.view = view;
+        this.master = master;
         this.liga = liga;
         this.club = club;
         this.view.getAddSpielerBtn().addActionListener(this);
@@ -45,17 +49,15 @@ public class SpielerAddController implements ActionListener {
         try {
             anzTor = Integer.parseInt(anzTorStr);
         } catch (NumberFormatException ex) {
-            JFrame f = new JFrame();
-            JOptionPane.showMessageDialog(f, "Es wurden keine ganzen Zahlen eingeben! Bitte versuchen Sie es erneut");
+            JOptionPane.showMessageDialog(master,
+                    "Es wurden keine ganzen Zahlen eingeben! Bitte versuchen Sie es erneut");
             LOGGER.log(Level.WARNING, "Es wurden keine ganzen Zahlen eingeben");
             inputOk = false;
         }
         if (inputOk) {
             LOGGER.log(Level.INFO, "Spieler hinzugefuegt");
             Player P = new Player(name, anzTor);
-            //To DO: 
-            JFrame f = new JFrame();
-            JOptionPane.showMessageDialog(f,"Spieler wurde erfolgreich hinzugefügt");
+            JOptionPane.showMessageDialog(master, "Spieler wurde erfolgreich hinzugefügt");
             this.view.getAnzToreTxt().setText("");
             this.view.getPlayerNameTxt().setText("");
             club.addPlayer(P);

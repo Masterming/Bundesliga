@@ -8,7 +8,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
- *
  * @author z003ywys
  */
 public class PlanView extends JPanel {
