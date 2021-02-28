@@ -227,24 +227,20 @@ public class ErgebnisInputController implements ActionListener {
             JOptionPane.showMessageDialog(f, "Bitte fuegen Sie Ergebnisse hinzu");
             LOGGER.log(Level.INFO, "Spielstand: " + clubAErg + " zu " + clubBErg);
         } else {
-            // TODO in DB Schreiben und Model aendern
             LOGGER.log(Level.INFO, scoreClubA.toString());
             LOGGER.log(Level.INFO, scoreClubB.toString());
 
             view.dispose();
             // Score für clubs Setzem
-            this.game.setScore1(clubAErg);
+            game.setScore1(clubAErg);
+            game.setScore2(clubBErg);
             game.getClub1().setMadeGoals(game.getClub1().getMadeGoals() + clubAErg);
-            game.getClub2().setReceivedGoals(game.getClub2().getReceivedGoals() + clubAErg);
-            this.game.setScore2(clubBErg);
-            game.getClub2().setMadeGoals(game.getClub2().getMadeGoals() + clubBErg);
             game.getClub1().setReceivedGoals(game.getClub1().getReceivedGoals() + clubBErg);
-            this.game.setFinished(true);
-            // Über Liga Objekt Game updaten ?
-            // TODO bei spielen in 2 Ligen beide Ligen updaten --> Game Braucht Liste mit
-            // Ligen
-            // TODO Liegen herausfinden und beide Ligen aktualsieiren
-            this.liga.updateGame(game);
+            game.getClub2().setMadeGoals(game.getClub2().getMadeGoals() + clubBErg);
+            game.getClub2().setReceivedGoals(game.getClub2().getReceivedGoals() + clubAErg);
+            game.setFinished(true);
+            liga.updateGame(game);
+            // TODO: Spieler updaten
             view.dispose();
         }
     }
