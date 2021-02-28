@@ -53,7 +53,7 @@ public class PlanController implements ActionListener {
             PlanAddGameView pagV = new PlanAddGameView(master, true);
             PlanAddGameController pagC = new PlanAddGameController(master, pagV, liga);
             pagV.setVisible(true);
-        }
+        } 
         else if (e.getActionCommand()=="addSpielAuto"){
             System.out.println("SPielplan wird automatisch erstellt");
             //TODO Spielplan automatisch erstellen und Liga Model aktualiseiren

@@ -240,7 +240,6 @@ public class ErgebnisInputController implements ActionListener {
             game.getClub2().setMadeGoals(game.getClub2().getMadeGoals() + clubBErg);
             game.getClub1().setReceivedGoals(game.getClub1().getReceivedGoals() + clubBErg);
             this.game.setFinished(true);
-
             // Über Liga Objekt Game updaten ?
             // TODO bei spielen in 2 Ligen beide Ligen updaten --> Game Braucht Liste mit
             // Ligen
