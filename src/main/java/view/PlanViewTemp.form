@@ -27,8 +27,10 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="createGames" min="-2" pref="174" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="restartSeasonBtn" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="restartSeasonBtn" min="-2" pref="111" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                      <Component id="gameHistory" min="-2" pref="106" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="12" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -39,15 +41,17 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="restartSeasonBtn" alignment="3" max="32767" attributes="0"/>
-                  <Component id="createGames" alignment="3" max="32767" attributes="0"/>
-                  <Component id="setResult" alignment="3" max="32767" attributes="0"/>
-                  <Component id="addSpielBtn" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="restartSeasonBtn" alignment="3" max="32767" attributes="0"/>
+                      <Component id="createGames" alignment="3" max="32767" attributes="0"/>
+                      <Component id="setResult" alignment="3" max="32767" attributes="0"/>
+                      <Component id="addSpielBtn" max="32767" attributes="0"/>
+                  </Group>
+                  <Component id="gameHistory" min="-2" pref="21" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="planContent" min="-2" pref="245" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -95,6 +99,15 @@
         <Property name="text" type="java.lang.String" value="Saison neustarten"/>
         <Property name="actionCommand" type="java.lang.String" value="restartSeason"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="gameHistory">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Spielhistorie"/>
+        <Property name="actionCommand" type="java.lang.String" value="gamesHistory"/>
+      </Properties>
+      <AccessibilityProperties>
+        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value=""/>
+      </AccessibilityProperties>
     </Component>
   </SubComponents>
 </Form>

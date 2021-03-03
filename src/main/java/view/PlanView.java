@@ -1,6 +1,8 @@
 package view;
 
 import controller.ErgebnisInputController;
+import java.awt.Dimension;
+import java.awt.FontMetrics;
 import java.awt.event.ActionEvent;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -19,6 +21,7 @@ public class PlanView extends JPanel {
 
     public javax.swing.JButton addSpielBtn;
     public javax.swing.JButton createGames;
+    private javax.swing.JButton gameHistory;
     public javax.swing.JPanel planContent;
     private javax.swing.JButton restartSeasonBtn;
     public javax.swing.JButton setResult;
@@ -48,21 +51,41 @@ public class PlanView extends JPanel {
         createGames = new javax.swing.JButton();
         setResult = new javax.swing.JButton();
         restartSeasonBtn = new javax.swing.JButton();
+        gameHistory= new javax.swing.JButton(); 
+        //restartSeasonBtn.setMinimumSize(new java.awt.Dimension(150, 21));
+        restartSeasonBtn.setMinimumSize(new java.awt.Dimension(150, 21));
+
 
         planContent.setLayout(new javax.swing.BoxLayout(planContent, javax.swing.BoxLayout.LINE_AXIS));
 
         addSpielBtn.setText("Spiel hinzufügen");
         addSpielBtn.setActionCommand("addSpiel");
+        //addSpielBtn.setMaximumSize(new java.awt.Dimension(150, 21));
+        addSpielBtn.setMinimumSize(new java.awt.Dimension(150, 21));
 
         createGames.setText("Spiele automatisch erstellen");
         createGames.setActionCommand("addSpielAuto");
+        //createGames.setMaximumSize(new java.awt.Dimension(150, 21));
+        FontMetrics metrics = getFontMetrics(getFont()); 
+        int width = metrics.stringWidth("Spiele automatisch erstellen");
+        createGames.setMinimumSize(new java.awt.Dimension(350,21));
 
         setResult.setText("Ergebnisse automatisch setzen");
         setResult.setActionCommand("setResultAuto");
+        //setResult.setMaximumSize(new java.awt.Dimension(150, 21));
+        setResult.setMinimumSize(new java.awt.Dimension(350, 21));
 
-        restartSeasonBtn.setText("Saison neustarten");
+        restartSeasonBtn.setText("Saison neu starten");
         restartSeasonBtn.setActionCommand("restartSeason");
-
+        metrics = getFontMetrics(getFont()); 
+        width = metrics.stringWidth("Saison neustarten");
+        //restartSeasonBtn.setMaximumSize(new java.awt.Dimension(150, 21));
+        restartSeasonBtn.setMinimumSize(new java.awt.Dimension(350, 21));
+        
+        gameHistory.setText("Spielhistorie");
+        gameHistory.setActionCommand("gamesHistory");
+        //gameHistory.setMinimumSize(new java.awt.Dimension(150, 21));
+        
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -78,22 +101,25 @@ public class PlanView extends JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(createGames, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(restartSeasonBtn)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(restartSeasonBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addComponent(gameHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 12, 33)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(restartSeasonBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(createGames, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(setResult, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(addSpielBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(restartSeasonBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(createGames, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(setResult, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(addSpielBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(gameHistory, javax.swing.GroupLayout.PREFERRED_SIZE,21, javax.swing.GroupLayout.DEFAULT_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(planContent, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(planContent, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }
 

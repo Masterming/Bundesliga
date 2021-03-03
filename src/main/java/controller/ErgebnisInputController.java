@@ -230,7 +230,7 @@ public class ErgebnisInputController implements ActionListener {
             LOGGER.log(Level.INFO, scoreClubA.toString());
             LOGGER.log(Level.INFO, scoreClubB.toString());
 
-            view.dispose();
+            //view.dispose();
             // Score für clubs Setzem
             game.setScore1(clubAErg);
             game.setScore2(clubBErg);

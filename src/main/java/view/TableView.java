@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Dimension;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -21,6 +22,8 @@ public class TableView extends JPanel {
 
     // JLabel jLabel1;
     private void initComponents() {
+        Dimension preferredSize = new Dimension(600, 400);
+        this.setMinimumSize(preferredSize);
         jScrollPane1 = new JScrollPane();
         table = new JTable() {
             public boolean editCellAt(int row, int column, java.util.EventObject e) {
