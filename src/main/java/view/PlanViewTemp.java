@@ -31,21 +31,17 @@ public class PlanViewTemp extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        planContent = new javax.swing.JPanel();
         addSpielBtn = new javax.swing.JButton();
         createGames = new javax.swing.JButton();
         setResult = new javax.swing.JButton();
         restartSeasonBtn = new javax.swing.JButton();
         gameHistory = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        planContent = new javax.swing.JPanel();
 
         setMaximumSize(new java.awt.Dimension(800, 400));
         setMinimumSize(new java.awt.Dimension(800, 400));
         setPreferredSize(new java.awt.Dimension(800, 400));
-
-        planContent.setPreferredSize(new java.awt.Dimension(100, 100));
-        planContent.setLayout(new javax.swing.BoxLayout(planContent, javax.swing.BoxLayout.LINE_AXIS));
-        jScrollPane1.setViewportView(planContent);
 
         addSpielBtn.setText("Spiel hinzufügen");
         addSpielBtn.setActionCommand("addSpiel");
@@ -67,13 +63,20 @@ public class PlanViewTemp extends javax.swing.JPanel {
         gameHistory.setText("Spielhistorie");
         gameHistory.setActionCommand("gamesHistory");
 
+        jScrollPane1.setViewportView(planContent);
+
+        planContent.setPreferredSize(null);
+        planContent.setLayout(new javax.swing.BoxLayout(planContent, javax.swing.BoxLayout.LINE_AXIS));
+        jScrollPane1.setViewportView(planContent);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(addSpielBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -83,10 +86,8 @@ public class PlanViewTemp extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(restartSeasonBtn)
                         .addGap(29, 29, 29)
-                        .addComponent(gameHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 22, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap())
+                        .addComponent(gameHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,17 +132,13 @@ public class PlanViewTemp extends javax.swing.JPanel {
     public javax.swing.JButton createGames;
     private javax.swing.JButton gameHistory;
     private javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JPanel planContent;
+    private javax.swing.JPanel planContent;
     private javax.swing.JButton restartSeasonBtn;
     public javax.swing.JButton setResult;
     // End of variables declaration//GEN-END:variables
 
     public JButton getGameHistory() {
         return gameHistory;
-    }
-
-    public JScrollPane getjScrollPane1() {
-        return jScrollPane1;
     }
 
     public JButton getRestartSeasonBtn() {
