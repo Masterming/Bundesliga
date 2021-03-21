@@ -96,6 +96,7 @@ public class PlanController implements ActionListener {
             this.view.getPlanContent().setVisible(true);
             this.view.getPlanContent().repaint();
             this.view.getPlanContent().revalidate();
+            //TODO Spieldaten aus der DB holen
             
         }
         else if(e.getActionCommand() =="backToPlan"){
