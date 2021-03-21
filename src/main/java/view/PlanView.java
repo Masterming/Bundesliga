@@ -123,6 +123,10 @@ public class PlanView extends JPanel {
         );
     }
 
+    public JButton getGameHistory() {
+        return gameHistory;
+    }
+
     public JButton getAddSpielBtn() {
         return addSpielBtn;
     }

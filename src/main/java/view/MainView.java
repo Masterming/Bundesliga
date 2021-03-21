@@ -90,6 +90,7 @@ public class MainView extends javax.swing.JFrame {
         // }
         // });
         contentView.setMinimumSize(new java.awt.Dimension(800, 400));
+        //contentView.setPreferredSize(new java.awt.Dimension(800, 400));
         javax.swing.GroupLayout contentViewLayout = new javax.swing.GroupLayout(contentView);
         contentView.setLayout(contentViewLayout);
         contentViewLayout.setHorizontalGroup(

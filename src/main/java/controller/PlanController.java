@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import model.Game;
 import model.Liga;
 import view.ErgebnisInputView;
+import view.GameHistory;
 
 import view.PlanAddGameView;
 import view.PlanView;
@@ -41,6 +42,7 @@ public class PlanController implements ActionListener {
         this.view.getCreateGames().addActionListener(this);
         this.view.getSetResult().addActionListener(this);
         this.view.getRestartSeasonBtn().addActionListener(this);
+        this.view.getGameHistory().addActionListener(this);
         this.listButtons = new ArrayList();
         this.unfinishedGames = new ArrayList();
         getDataAndAdaptView();
@@ -85,6 +87,21 @@ public class PlanController implements ActionListener {
             System.out.println("Restart Season");
             //TODO Saison-Daten zurücksetzen (Spieler mit Toranzahl und Teams bleiben, alles andere geht)
         }
+        else if (e.getActionCommand()=="gamesHistory"){
+            System.out.println("Game History");
+            this.view.getPlanContent().removeAll();
+            GameHistory gh = new GameHistory();
+            gh.getBackToPlanBtn().addActionListener(this);
+            this.view.getPlanContent().add(gh);
+            this.view.getPlanContent().setVisible(true);
+            this.view.getPlanContent().repaint();
+            this.view.getPlanContent().revalidate();
+            
+        }
+        else if(e.getActionCommand() =="backToPlan"){
+            System.out.println("Back to Spielapln");
+            getDataAndAdaptView();
+        }
         else {
             ErgebnisInputView ergV = new ErgebnisInputView(master, true);
             JButton temp = (JButton) e.getSource();
@@ -105,7 +122,8 @@ public class PlanController implements ActionListener {
     private void getDataAndAdaptView() {
         int counter = 0;
         // TODO: gelöschte Clubs ? --> wie finden wir die raus
-
+        this.view.getPlanContent().setLayout(new BoxLayout(view.getPlanContent(), BoxLayout.Y_AXIS));
+        this.view.getPlanContent().removeAll();
         for (Game g : this.liga.getGames()) {
 
             this.view.getPlanContent().setLayout(new BoxLayout(view.getPlanContent(), BoxLayout.Y_AXIS));
@@ -143,6 +161,7 @@ public class PlanController implements ActionListener {
             }
 
         }
+        
     }
     // Alternatuve Lösung: PlanController implementiert Observer und wird
     // benachrichtigt wenn sich Model ändert und passt dann den View an
