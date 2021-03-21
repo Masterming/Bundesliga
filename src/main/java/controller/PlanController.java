@@ -28,13 +28,13 @@ public class PlanController implements ActionListener {
 
     private final static Logger LOGGER = Logger.getLogger(PlanController.class.getName());
 
-    private PlanView view;
+    private PlanViewTemp view;
     private JFrame master;
     private Liga liga;
     private List<JButton> listButtons;
     private List<Game> unfinishedGames;
 
-    public PlanController(JFrame master, PlanView view, Liga liga) {
+    public PlanController(JFrame master, PlanViewTemp view, Liga liga) {
         this.view = view;
         this.master = master;
         this.liga = liga;
@@ -145,7 +145,6 @@ public class PlanController implements ActionListener {
                 test.setAlignmentX(Component.CENTER_ALIGNMENT);
                 testBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
                 testBtn.setActionCommand(String.valueOf(counter));
-
                 // testBtn.setActionCommand(String.valueOf(i) + "RB Leipzig");
                 // testBtn.addActionListener((java.awt.event.ActionEvent evt) -> {
                 // action(evt);
