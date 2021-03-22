@@ -152,4 +152,9 @@ public class MainController implements ActionListener, Observer {
     public static Map<Integer, Liga> getLigas() {
         return ligas;
     }
+
+    public static MainView getView() {
+        return view;
+    }
+    
 }

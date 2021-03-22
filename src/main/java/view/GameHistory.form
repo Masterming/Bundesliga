@@ -34,7 +34,7 @@
               <Component id="jScrollPane1" min="-2" pref="202" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="backToPlanBtn" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="24" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -47,10 +47,11 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="jTable1">
+        <Component class="javax.swing.JTable" name="historyTable">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="5" rowCount="0">
+              <Table columnCount="6" rowCount="0">
+                <Column editable="false" title="Datum" type="java.lang.Object"/>
                 <Column editable="false" title="Heimteam" type="java.lang.Object"/>
                 <Column editable="false" title="Tore Heim" type="java.lang.Object"/>
                 <Column editable="false" title="Tore Gast" type="java.lang.Object"/>

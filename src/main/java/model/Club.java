@@ -315,4 +315,13 @@ public class Club implements Serializable, Comparable {
         */
         return 0;
     }
+    public void reset() {
+        points = 0;
+        gamesCount = 0;
+        wins = 0;
+        draw = 0;
+        losses = 0;
+        madeGoals = 0;
+        receivedGoals = 0;
+    }
 }

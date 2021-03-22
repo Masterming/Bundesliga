@@ -15,6 +15,7 @@ import model.Game;
 import model.Liga;
 import view.ErgebnisInputView;
 import view.GameHistory;
+import view.GameHistoryView;
 
 import view.PlanAddGameView;
 import view.PlanView;
@@ -46,6 +47,7 @@ public class PlanController implements ActionListener {
         this.listButtons = new ArrayList();
         this.unfinishedGames = new ArrayList();
         getDataAndAdaptView();
+        
     }
 
     @Override
@@ -86,12 +88,16 @@ public class PlanController implements ActionListener {
         else if (e.getActionCommand()=="restartSeason"){
             System.out.println("Restart Season");
             //TODO Saison-Daten zurücksetzen (Spieler mit Toranzahl und Teams bleiben, alles andere geht)
+             for (Liga l : MainController.getLigas().values()) {
+                    l.reset();
+             }
         }
         else if (e.getActionCommand()=="gamesHistory"){
             System.out.println("Game History");
             this.view.getPlanContent().removeAll();
-            GameHistory gh = new GameHistory();
-            gh.getBackToPlanBtn().addActionListener(this);
+            GameHistoryView gh = new GameHistoryView();
+            GameHistoryController ghC = new GameHistoryController(liga,gh, master);
+            //gh.getBackToPlanBtn().addActionListener(this);
             this.view.getPlanContent().add(gh);
             this.view.getPlanContent().setVisible(true);
             this.view.getPlanContent().repaint();

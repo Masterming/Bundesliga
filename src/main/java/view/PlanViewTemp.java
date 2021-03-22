@@ -62,6 +62,9 @@ public class PlanViewTemp extends javax.swing.JPanel {
 
         gameHistory.setText("Spielhistorie");
         gameHistory.setActionCommand("gamesHistory");
+        gameHistory.setMaximumSize(new java.awt.Dimension(111, 21));
+        gameHistory.setMinimumSize(new java.awt.Dimension(111, 21));
+        gameHistory.setPreferredSize(new java.awt.Dimension(111, 21));
 
         jScrollPane1.setViewportView(planContent);
 
