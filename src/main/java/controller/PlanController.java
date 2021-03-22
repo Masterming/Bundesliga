@@ -96,7 +96,7 @@ public class PlanController implements ActionListener {
             System.out.println("Game History");
             this.view.getPlanContent().removeAll();
             GameHistoryView gh = new GameHistoryView();
-            GameHistoryController ghC = new GameHistoryController(liga,gh, master);
+            GameHistoryController ghC = new GameHistoryController(liga,gh, this);
             //gh.getBackToPlanBtn().addActionListener(this);
             this.view.getPlanContent().add(gh);
             this.view.getPlanContent().setVisible(true);
@@ -104,10 +104,6 @@ public class PlanController implements ActionListener {
             this.view.getPlanContent().revalidate();
             //TODO Spieldaten aus der DB holen
             
-        }
-        else if(e.getActionCommand() =="backToPlan"){
-            System.out.println("Back to Spielapln");
-            getDataAndAdaptView();
         }
         else {
             ErgebnisInputView ergV = new ErgebnisInputView(master, true);
@@ -171,5 +167,9 @@ public class PlanController implements ActionListener {
     }
     // Alternatuve Lösung: PlanController implementiert Observer und wird
     // benachrichtigt wenn sich Model ändert und passt dann den View an
+    
+    public void restorePlanView(){
+        getDataAndAdaptView();
+    }
 
 }

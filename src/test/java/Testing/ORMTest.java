@@ -2,6 +2,8 @@ package Testing;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,6 +28,7 @@ public class ORMTest {
     private static Liga l2;
     private static Liga l3;
     private static Game g1;
+    private static List<Club> clubList;
 
     @BeforeClass
     public static void setUp() {
@@ -78,13 +81,20 @@ public class ORMTest {
     }
 
     public static void testAddClub() {
+        clubList = new ArrayList();
         LOGGER.log(Level.INFO, "Test 2: Add Club");
         c1 = new Club("FC Augsburg");
         c2 = new Club("FC Schalke 04");
         c1.addPlayer(p1);
         c2.addPlayer(p2);
-
         ClubDBMapper dao = new ClubDBMapper();
+        for(int i=0; i<15;i++){
+            Club c = new Club("Club " + i);
+            c.setId(dao.addClub(c));
+            clubList.add(c);
+        }
+
+        
         c1.setId(dao.addClub(c1));
         c2.setId(dao.addClub(c2));
         LOGGER.log(Level.INFO, "Club1 ID: {0}", c1.getId());
@@ -98,7 +108,9 @@ public class ORMTest {
         l3 = new Liga("3. Liga");
         l1.addClub(c1);
         l1.addClub(c2);
-
+        for(Club c :clubList){
+            l1.addClub(c);
+        }
         LigaDBMapper dao = new LigaDBMapper();
         l1.setId(dao.addLiga(l1));
         l2.setId(dao.addLiga(l2));

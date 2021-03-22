@@ -21,13 +21,13 @@ import view.PlanViewTemp;
 public class GameHistoryController implements ActionListener {
     private Liga l;
     private GameHistoryView ghV;
-    private JFrame master;
+    private PlanController plC;
 
-    public GameHistoryController(Liga l, GameHistoryView ghV, JFrame master) {
+    public GameHistoryController(Liga l, GameHistoryView ghV,PlanController PLC) {
         this.l = l;
         this.ghV = ghV;
         this.ghV.getBackToPlanBtn().addActionListener(this);
-        this.master = master;
+        this.plC = PLC;
         getDataAndAdapatView();
     }
 
@@ -36,12 +36,8 @@ public class GameHistoryController implements ActionListener {
         String act = evt.getActionCommand();
         if(act=="backToPlan"){
             System.out.println("Go Back to Plan");
-            PlanViewTemp plv = new PlanViewTemp();
-            PlanController plc = new PlanController(master, plv, l);
-            //master.get getContentPane().add(plv);
-            master.getContentPane().setVisible(true);
-            master.getContentPane().repaint();
-            master.getContentPane().revalidate();
+            this.plC.restorePlanView();
+            
         }
     }
     private void getDataAndAdapatView(){
