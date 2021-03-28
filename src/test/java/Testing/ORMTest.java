@@ -87,14 +87,7 @@ public class ORMTest {
         c2 = new Club("FC Schalke 04");
         c1.addPlayer(p1);
         c2.addPlayer(p2);
-        ClubDBMapper dao = new ClubDBMapper();
-        for(int i=0; i<15;i++){
-            Club c = new Club("Club " + i);
-            c.setId(dao.addClub(c));
-            clubList.add(c);
-        }
-
-        
+        ClubDBMapper dao = new ClubDBMapper();        
         c1.setId(dao.addClub(c1));
         c2.setId(dao.addClub(c2));
         LOGGER.log(Level.INFO, "Club1 ID: {0}", c1.getId());
@@ -108,9 +101,6 @@ public class ORMTest {
         l3 = new Liga("3. Liga");
         l1.addClub(c1);
         l1.addClub(c2);
-        for(Club c :clubList){
-            l1.addClub(c);
-        }
         LigaDBMapper dao = new LigaDBMapper();
         l1.setId(dao.addLiga(l1));
         l2.setId(dao.addLiga(l2));
@@ -139,7 +129,7 @@ public class ORMTest {
     public void testGetClub() {
         LOGGER.log(Level.INFO, "Test 6");
         ClubDBMapper dao = new ClubDBMapper();
-        Club club = dao.getClub(0);
+        Club club = dao.getClub(1);
         Assert.assertNotNull(club);
     }
 
@@ -155,7 +145,7 @@ public class ORMTest {
     public void testGetGame() {
         LOGGER.log(Level.INFO, "Test 8");
         GameDBMapper dao = new GameDBMapper();
-        Game game = dao.getGame(1);
+        Game game = dao.getGame(102);
         Assert.assertNotNull(game);
     }
 
@@ -171,7 +161,7 @@ public class ORMTest {
     public void testGetClubAttribute() {
         LOGGER.log(Level.INFO, "Test 10");
         ClubDBMapper dao = new ClubDBMapper();
-        Club club = dao.getClub(0);
+        Club club = dao.getClub(1);
         Assert.assertEquals(c1.getPlayers().get(0).getName(), club.getPlayers().get(0).getName());
     }
 
@@ -187,7 +177,7 @@ public class ORMTest {
     public void testGetGameAttribute() {
         LOGGER.log(Level.INFO, "Test 12");
         GameDBMapper dao = new GameDBMapper();
-        Game game = dao.getGame(1);
+        Game game = dao.getGame(102);
         Assert.assertEquals(game.getClub(0).getName(), g1.getClub(0).getName());
     }
 }
