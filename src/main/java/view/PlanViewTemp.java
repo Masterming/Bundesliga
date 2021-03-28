@@ -7,6 +7,7 @@ package view;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 /**
  * @author z003ywys
@@ -29,13 +30,17 @@ public class PlanViewTemp extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        planContent = new javax.swing.JPanel();
         addSpielBtn = new javax.swing.JButton();
         createGames = new javax.swing.JButton();
         setResult = new javax.swing.JButton();
         restartSeasonBtn = new javax.swing.JButton();
+        gameHistory = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        planContent = new javax.swing.JPanel();
 
-        planContent.setLayout(new javax.swing.BoxLayout(planContent, javax.swing.BoxLayout.LINE_AXIS));
+        setMaximumSize(new java.awt.Dimension(900, 400));
+        setMinimumSize(new java.awt.Dimension(900, 400));
+        setPreferredSize(new java.awt.Dimension(900, 400));
 
         addSpielBtn.setText("Spiel hinzufügen");
         addSpielBtn.setActionCommand("addGame");
@@ -54,6 +59,18 @@ public class PlanViewTemp extends javax.swing.JPanel {
         restartSeasonBtn.setText("Saison neustarten");
         restartSeasonBtn.setActionCommand("restartSeason");
 
+        gameHistory.setText("Spielhistorie");
+        gameHistory.setToolTipText("");
+        gameHistory.setActionCommand("gamesHistory");
+        gameHistory.setMaximumSize(new java.awt.Dimension(111, 27));
+        gameHistory.setMinimumSize(new java.awt.Dimension(111, 27));
+        gameHistory.setPreferredSize(new java.awt.Dimension(111, 27));
+
+        jScrollPane1.setViewportView(planContent);
+
+        planContent.setLayout(new javax.swing.BoxLayout(planContent, javax.swing.BoxLayout.LINE_AXIS));
+        jScrollPane1.setViewportView(planContent);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -61,16 +78,17 @@ public class PlanViewTemp extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(planContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(addSpielBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(36, 36, 36)
                         .addComponent(setResult, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(createGames, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                        .addComponent(createGames, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                        .addGap(54, 54, 54)
                         .addComponent(restartSeasonBtn)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(32, 32, 32)
+                        .addComponent(gameHistory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -81,11 +99,14 @@ public class PlanViewTemp extends javax.swing.JPanel {
                     .addComponent(restartSeasonBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(createGames, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(setResult, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(addSpielBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(planContent, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addSpielBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(gameHistory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
+
+        gameHistory.getAccessibleContext().setAccessibleName("");
     }// </editor-fold>//GEN-END:initComponents
 
     private void setResultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setResultActionPerformed
@@ -107,12 +128,21 @@ public class PlanViewTemp extends javax.swing.JPanel {
     public JButton getSetResult() {
         return setResult;
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton addSpielBtn;
     public javax.swing.JButton createGames;
+    private javax.swing.JButton gameHistory;
+    private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JPanel planContent;
     private javax.swing.JButton restartSeasonBtn;
     public javax.swing.JButton setResult;
     // End of variables declaration//GEN-END:variables
+
+    public JButton getGameHistory() {
+        return gameHistory;
+    }
+
+    public JButton getRestartSeasonBtn() {
+        return restartSeasonBtn;
+    }
 }

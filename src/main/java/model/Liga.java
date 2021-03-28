@@ -187,7 +187,7 @@ public class Liga extends Observable implements Serializable {
             return false;
         }
     }
-    
+
     public boolean updateGames(List<Game> gl) {
         boolean success = true;
         for (Game g : gl) {
@@ -289,7 +289,17 @@ public class Liga extends Observable implements Serializable {
     public String toString() {
         return "Liga: " + name;
     }
-    
+
+    public int getFinishCount() {
+        int finishCount = 0;
+        for (Game g : this.getGames()) {
+            if (g.isFinished()) {
+                finishCount++;
+            }
+        }
+        return finishCount;
+    }
+
     public void reset() {
         for (Club c : getClubs()) {
             c.reset();

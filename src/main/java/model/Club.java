@@ -122,8 +122,8 @@ public class Club implements Serializable, Comparable<Club> {
         }
         return ret;
     }
-    
-    public int getSize(){
+
+    public int getSize() {
         return players.size();
     }
 
@@ -232,6 +232,16 @@ public class Club implements Serializable, Comparable<Club> {
         } catch (IndexOutOfBoundsException e) {
             return false;
         }
+    }
+
+    public void reset() {
+        points = 0;
+        gamesCount = 0;
+        wins = 0;
+        draw = 0;
+        losses = 0;
+        madeGoals = 0;
+        receivedGoals = 0;
     }
 
     public boolean copy(Club other) {
@@ -353,15 +363,5 @@ public class Club implements Serializable, Comparable<Club> {
          * -> Heimteam immer Club1 im Game Objekt!! -> TODO
          */
         return 0;
-    }
-
-    public void reset() {
-        points = 0;
-        gamesCount = 0;
-        wins = 0;
-        draw = 0;
-        losses = 0;
-        madeGoals = 0;
-        receivedGoals = 0;
     }
 }

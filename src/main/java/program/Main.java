@@ -79,6 +79,11 @@ public class Main {
         l3 = new Liga("3. Liga");
         l1.addClub(c1);
         l1.addClub(c2);
+        
+         for(int i=0; i<20;i++){
+            Club c = new Club("Club " + i);
+            l1.addClub(c);
+        }
         LigaDBMapper dao_l = new LigaDBMapper();
         l1.setId(dao_l.addLiga(l1));
         l2.setId(dao_l.addLiga(l2));

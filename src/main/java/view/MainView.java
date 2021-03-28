@@ -27,7 +27,7 @@ public class MainView extends javax.swing.JFrame {
     JPanel contentView;
 
     private void initComponents() {
-        Dimension preferredSize = new Dimension(724, 423);
+        Dimension preferredSize = new Dimension(900, 600);
         this.setPreferredSize(preferredSize);
         liga1Btn = new javax.swing.JButton();
         liga2Btn = new javax.swing.JButton();
@@ -88,7 +88,8 @@ public class MainView extends javax.swing.JFrame {
         // clubBtnClicked(evt);
         // }
         // });
-
+        contentView.setMinimumSize(new java.awt.Dimension(800, 400));
+        //contentView.setPreferredSize(new java.awt.Dimension(800, 400));
         javax.swing.GroupLayout contentViewLayout = new javax.swing.GroupLayout(contentView);
         contentView.setLayout(contentViewLayout);
         contentViewLayout.setHorizontalGroup(

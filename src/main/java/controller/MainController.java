@@ -16,7 +16,7 @@ import model.Liga;
 import model.LigaDBMapper;
 import view.ClubView;
 import view.MainView;
-import view.PlanView;
+import view.PlanViewTemp;
 import view.TableView;
 
 /**
@@ -113,14 +113,14 @@ public class MainController implements ActionListener, Observer {
                 view.getContentView().add(tv);
                 break;
             case 2:
-                PlanView plv = new PlanView(view);
-                // PlanViewTemp plv = new PlanViewTemp();
+                //PlanView plv = new PlanView(view);
+                PlanViewTemp plv = new PlanViewTemp();
                 PlanController plc = new PlanController(view, plv, ligas.get(ligaId));
-                JScrollPane scroll = new JScrollPane(plv);
 
                 view.getPlanBtn().setBackground(Color.white);
                 view.getContentView().removeAll();
-                view.getContentView().add(scroll);
+                //view.getContentView().add(scroll);
+                view.getContentView().add(plv);
                 break;
             case 3:
                 ClubView cv = new ClubView(view);
@@ -154,4 +154,9 @@ public class MainController implements ActionListener, Observer {
     public static Map<Integer, Liga> getLigas() {
         return ligas;
     }
+
+    public static MainView getView() {
+        return view;
+    }
+    
 }

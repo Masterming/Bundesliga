@@ -51,6 +51,10 @@ public class Game implements Serializable {
     private int score2;
     private LocalDateTime startTime;
 
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
     public Game() {
         this.gameId = -1;
     }
