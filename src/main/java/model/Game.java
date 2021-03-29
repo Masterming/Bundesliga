@@ -42,6 +42,14 @@ public class Game implements Serializable {
     @JoinColumn(name = "club1_id")
     private Club club1;
 
+    public Club getClub1() {
+        return club1;
+    }
+
+    public Club getClub2() {
+        return club2;
+    }
+
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "club2_id")

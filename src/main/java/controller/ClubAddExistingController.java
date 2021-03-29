@@ -6,6 +6,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import static java.lang.System.in;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,6 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import model.Club;
+import model.Game;
 import model.Liga;
 import view.ClubAddExistingView;
 
@@ -88,69 +90,118 @@ public class ClubAddExistingController implements ActionListener, MouseListener,
                         "Club Hinzufuegen", JOptionPane.YES_NO_OPTION);
                 if (confirm == JOptionPane.YES_OPTION && selectedClub != null) {
                     LOGGER.log(Level.INFO, "Club: {0} zur Liga hinzugefuegt", selectedClub);
+                    //TODO: Check if club has any games left to play
+
                     Liga origin = ligas.get(this.targetLigaId);
-                    Liga target = ligas.get(liga.getId());
+                    Club temp = origin.getClub(selectedClub);
+                    for (Game g : origin.getGames()) {
+                        if (g.isFinished() == false) {
+                            if (g.getClub1() != temp && g.getClub2() != temp) {
+                                Club remClub = origin.removeClub(selectedClub);
+                                Liga target = ligas.get(liga.getId());
 
-                    Club remClub = origin.removeClub(selectedClub);
-                    target.addClub(remClub);
+                                target.addClub(remClub);
 
-                    JOptionPane.showMessageDialog(master, "Transfer war erfolgreich");
-                    LOGGER.log(Level.INFO, "Club Transfer finished successful");
+                                JOptionPane.showMessageDialog(master, "Transfer war erfolgreich");
+                                LOGGER.log(Level.INFO, "Club Transfer finished successful");
 
-                    view.dispose();
+                                view.dispose();
+                            }
+                            else{
+                                JOptionPane.showMessageDialog(master, "Club kann nicht zur neuen Liga hinzugefügt werden, da noch spiele in der aktuellen Liga ausstehen");
+                            }
+
+                        }
+                        if(g.isFinished() == true){
+                             Club remClub = origin.removeClub(selectedClub);
+                                Liga target = ligas.get(liga.getId());
+
+                                target.addClub(remClub);
+
+                                JOptionPane.showMessageDialog(master, "Transfer war erfolgreich");
+                                LOGGER.log(Level.INFO, "Club Transfer finished successful");
+
+                                view.dispose();
+                        }
+
+                    }
+                    break;
                 }
-                break;
         }
     }
 
-    @Override
-    public void mouseClicked(MouseEvent evt) {
+        @Override
+        public void mouseClicked
+        (MouseEvent evt
+        
+            ) {
         // 1. Liga auswahl
         if (evt.getClickCount() == 1) {
-            try {
-                selectedClub = view.getLigaClubList().getSelectedValue();
-                if (selectedClub != null) {
-                    view.getToAddClubLbl().setText(selectedClub);
+                try {
+                    selectedClub = view.getLigaClubList().getSelectedValue();
+                    if (selectedClub != null) {
+                        view.getToAddClubLbl().setText(selectedClub);
 
-                } else {
+                    } else {
+                        view.getToAddClubLbl().setText("");
+                    }
+                } catch (Exception e) {
+                    LOGGER.log(Level.SEVERE, e.getLocalizedMessage());
                     view.getToAddClubLbl().setText("");
                 }
-            } catch (Exception e) {
-                LOGGER.log(Level.SEVERE, e.getLocalizedMessage());
-                view.getToAddClubLbl().setText("");
+
             }
-
         }
-    }
 
-    @Override
-    public void mousePressed(MouseEvent arg0) {
+        @Override
+        public void mousePressed
+        (MouseEvent arg0
+        
+        
+        ) {
         // throw new UnsupportedOperationException("Not supported yet."); //To change
         // body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void mouseReleased(MouseEvent arg0) {
+        public void mouseReleased
+        (MouseEvent arg0
+        
+        
+        ) {
         // throw new UnsupportedOperationException("Not supported yet."); //To change
         // body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void mouseEntered(MouseEvent arg0) {
+        public void mouseEntered
+        (MouseEvent arg0
+        
+        
+        ) {
         // throw new UnsupportedOperationException("Not supported yet."); //To change
         // body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void mouseExited(MouseEvent arg0) {
+        public void mouseExited
+        (MouseEvent arg0
+        
+        
+        ) {
         // throw new UnsupportedOperationException("Not supported yet."); //To change
         // body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void itemStateChanged(ItemEvent evt) {
+        public void itemStateChanged
+        (ItemEvent evt
+        
+            ) {
         populateComboBox();
-    }
+        }
+
+    
 
     private void populateComboBox() {
         String ligStr = view.getSelectedLiga().getSelectedItem().toString();
@@ -179,5 +230,6 @@ public class ClubAddExistingController implements ActionListener, MouseListener,
             this.targetLigaId = 3;
         }
     }
+   
 
 }
