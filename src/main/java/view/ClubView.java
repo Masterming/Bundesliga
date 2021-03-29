@@ -47,7 +47,7 @@ public class ClubView extends JPanel {
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup().addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
                                 .addGroup(layout.createSequentialGroup().addComponent(addClubBtn).addGap(18, 18, 18)
                                         .addComponent(addExistingClubBtn).addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap()));

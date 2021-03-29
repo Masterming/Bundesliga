@@ -18,8 +18,10 @@ import model.Game;
 import model.Liga;
 
 import view.ErgebnisInputView;
+import view.GameHistory;
 import view.GameHistoryView;
 import view.PlanAddGameView;
+import view.PlanView;
 import view.PlanViewTemp;
 
 /**
@@ -28,13 +30,13 @@ import view.PlanViewTemp;
 public class PlanController implements ActionListener {
 
     private final static Logger LOGGER = Logger.getLogger(PlanController.class.getName());
-    private PlanViewTemp view;
+    private PlanView view;
     private JFrame master;
     private Liga liga;
     private List<JButton> listButtons;
     private List<Game> unfinishedGames;
 
-    public PlanController(JFrame master, PlanViewTemp view, Liga liga) {
+    public PlanController(JFrame master, PlanView view, Liga liga) {
         this.view = view;
         this.master = master;
         this.liga = liga;

@@ -19,12 +19,12 @@ public class GameHistoryView extends JPanel {
         initComponents();
     }
      private void initComponents() {
-
        jScrollPane1 = new javax.swing.JScrollPane();
         historyTable = new javax.swing.JTable();
         backToPlanBtn = new javax.swing.JButton();
 
-        setMinimumSize(new java.awt.Dimension(541, 448));
+        setMinimumSize(new java.awt.Dimension(541, 350));
+        setPreferredSize(new java.awt.Dimension(541, 350));
 
         historyTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -59,10 +59,10 @@ public class GameHistoryView extends JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(backToPlanBtn)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
     }
     private javax.swing.JButton backToPlanBtn;

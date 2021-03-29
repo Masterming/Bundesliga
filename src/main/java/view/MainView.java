@@ -19,7 +19,7 @@ public class MainView extends javax.swing.JFrame {
     private final static Logger LOGGER = Logger.getLogger(MainView.class.getName());
     private static final long serialVersionUID = 13L;
     javax.swing.JButton liga1Btn;
-    JButton liga2Btn;
+    private javax.swing.JButton liga2Btn;
     JButton liga3Btn;
     JButton tableBtn;
     JButton planBtn;
@@ -43,53 +43,46 @@ public class MainView extends javax.swing.JFrame {
         liga1Btn.setActionCommand("liga1");
         liga1Btn.setMaximumSize(new java.awt.Dimension(90, 21));
         liga1Btn.setMinimumSize(new java.awt.Dimension(90, 21));
+        liga1Btn.setPreferredSize(new java.awt.Dimension(90, 21));
 
         liga2Btn.setBackground(java.awt.Color.lightGray);
         liga2Btn.setText("Liga 2");
         liga2Btn.setActionCommand("liga2");
         liga2Btn.setMaximumSize(new java.awt.Dimension(90, 21));
         liga2Btn.setMinimumSize(new java.awt.Dimension(90, 21));
+        liga2Btn.setPreferredSize(new java.awt.Dimension(90, 21));
 
         liga3Btn.setBackground(java.awt.Color.lightGray);
         liga3Btn.setActionCommand("liga3");
         liga3Btn.setText("Liga 3");
         liga3Btn.setMaximumSize(new java.awt.Dimension(90, 21));
         liga3Btn.setMinimumSize(new java.awt.Dimension(90, 21));
+        liga3Btn.setPreferredSize(new java.awt.Dimension(90, 21));
 
         tableBtn.setBackground(java.awt.Color.lightGray);
         tableBtn.setText("Tabelle");
         tableBtn.setActionCommand("table");
         tableBtn.setMaximumSize(new java.awt.Dimension(90, 21));
         tableBtn.setMinimumSize(new java.awt.Dimension(90, 21));
-        // tableBtn.addActionListener(new java.awt.event.ActionListener() {
-        // public void actionPerformed(java.awt.event.ActionEvent evt) {
-        // tableBtnClicked(evt);
-        // }
-        // });
+        tableBtn.setPreferredSize(new java.awt.Dimension(90, 21));
 
         planBtn.setBackground(java.awt.Color.lightGray);
         planBtn.setText("Spielplan");
         planBtn.setActionCommand("plan");
         planBtn.setMaximumSize(new java.awt.Dimension(90, 21));
         planBtn.setMinimumSize(new java.awt.Dimension(90, 21));
-        // planBtn.addActionListener(new java.awt.event.ActionListener() {
-        // public void actionPerformed(java.awt.event.ActionEvent evt) {
-        // planBtnClicked(evt);
-        // }
-        // });
+        planBtn.setPreferredSize(new java.awt.Dimension(90, 21));
 
         clubsBtn.setBackground(java.awt.Color.lightGray);
         clubsBtn.setText("Clubs");
         clubsBtn.setActionCommand("clubs");
         clubsBtn.setMaximumSize(new java.awt.Dimension(90, 21));
         clubsBtn.setMinimumSize(new java.awt.Dimension(90, 21));
-        // clubsBtn.addActionListener(new java.awt.event.ActionListener() {
-        // public void actionPerformed(java.awt.event.ActionEvent evt) {
-        // clubBtnClicked(evt);
-        // }
-        // });
+        clubsBtn.setPreferredSize(new java.awt.Dimension(90, 21));
+        
+        
         contentView.setMinimumSize(new java.awt.Dimension(800, 400));
-        //contentView.setPreferredSize(new java.awt.Dimension(800, 400));
+        contentView.setPreferredSize(new java.awt.Dimension(800, 400));
         javax.swing.GroupLayout contentViewLayout = new javax.swing.GroupLayout(contentView);
         contentView.setLayout(contentViewLayout);
         contentViewLayout.setHorizontalGroup(
