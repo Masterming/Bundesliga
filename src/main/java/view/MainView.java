@@ -86,22 +86,22 @@ public class MainView extends javax.swing.JFrame {
         javax.swing.GroupLayout contentViewLayout = new javax.swing.GroupLayout(contentView);
         contentView.setLayout(contentViewLayout);
         contentViewLayout.setHorizontalGroup(
-                contentViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                contentViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                         .addGap(0, 0, Short.MAX_VALUE));
         contentViewLayout.setVerticalGroup(
-                contentViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                contentViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                         .addGap(0, 209, Short.MAX_VALUE));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                 .addGroup(layout.createSequentialGroup().addContainerGap().addGroup(layout
-                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                         .addComponent(contentView, javax.swing.GroupLayout.DEFAULT_SIZE,
                                 javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createSequentialGroup().addGroup(layout
                                 .createParallelGroup(
-                                        javax.swing.GroupLayout.Alignment.LEADING,
+                                        javax.swing.GroupLayout.Alignment.CENTER,
                                         false)
                                 .addComponent(liga1Btn,
                                         javax.swing.GroupLayout.DEFAULT_SIZE,
@@ -112,19 +112,19 @@ public class MainView extends javax.swing.JFrame {
                                         75, Short.MAX_VALUE))
                                 .addGap(250, 250, 250)
                                 .addGroup(layout.createParallelGroup(
-                                        javax.swing.GroupLayout.Alignment.LEADING)
+                                        javax.swing.GroupLayout.Alignment.CENTER)
                                         .addGroup(layout.createSequentialGroup()
                                                 .addComponent(liga2Btn,
                                                         javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                        75,
+                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
                                                         javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(
                                                         javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-                                                        228,
+                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
                                                         Short.MAX_VALUE)
                                                 .addComponent(liga3Btn,
                                                         javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                        75,
+                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
                                                         javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(layout.createSequentialGroup()
                                                 .addComponent(planBtn)
@@ -134,12 +134,12 @@ public class MainView extends javax.swing.JFrame {
                                                         Short.MAX_VALUE)
                                                 .addComponent(clubsBtn,
                                                         javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                        75,
+                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
                                                         javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addContainerGap()));
-        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                 .addGroup(layout.createSequentialGroup().addContainerGap().addGroup(layout
-                        .createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                         .addComponent(liga1Btn, javax.swing.GroupLayout.PREFERRED_SIZE,
                                 javax.swing.GroupLayout.DEFAULT_SIZE,
                                 javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -148,7 +148,7 @@ public class MainView extends javax.swing.JFrame {
                                 javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(liga3Btn)).addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(
-                                javax.swing.GroupLayout.Alignment.BASELINE)
+                                javax.swing.GroupLayout.Alignment.CENTER)
                                 .addComponent(tableBtn,
                                         javax.swing.GroupLayout.PREFERRED_SIZE,
                                         javax.swing.GroupLayout.DEFAULT_SIZE,
