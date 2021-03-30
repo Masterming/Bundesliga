@@ -94,37 +94,33 @@ public class ClubAddExistingController implements ActionListener, MouseListener,
 
                     Liga origin = ligas.get(this.targetLigaId);
                     Club temp = origin.getClub(selectedClub);
+                    if(origin.getGames().isEmpty()){
+                        System.out.println("Club kann erst bewebt werden nachdem gespielt wurde");
+                    }
+                    boolean hasClubAnyGamesLeft = false;
                     for (Game g : origin.getGames()) {
                         if (g.isFinished() == false) {
                             if (g.getClub1() != temp && g.getClub2() != temp) {
-                                Club remClub = origin.removeClub(selectedClub);
-                                Liga target = ligas.get(liga.getId());
-
-                                target.addClub(remClub);
-
-                                JOptionPane.showMessageDialog(master, "Transfer war erfolgreich");
-                                LOGGER.log(Level.INFO, "Club Transfer finished successful");
-
-                                view.dispose();
+                               hasClubAnyGamesLeft = false;
                             }
                             else{
-                                JOptionPane.showMessageDialog(master, "Club kann nicht zur neuen Liga hinzugefügt werden, da noch spiele in der aktuellen Liga ausstehen");
+                                hasClubAnyGamesLeft = true;
                             }
 
                         }
                         if(g.isFinished() == true){
-                             Club remClub = origin.removeClub(selectedClub);
-                                Liga target = ligas.get(liga.getId());
-
-                                target.addClub(remClub);
-
-                                JOptionPane.showMessageDialog(master, "Transfer war erfolgreich");
-                                LOGGER.log(Level.INFO, "Club Transfer finished successful");
-
-                                view.dispose();
+                            hasClubAnyGamesLeft = false;
                         }
 
                     }
+                    if(!hasClubAnyGamesLeft){
+                        //remove Club
+                        removeClub(origin);
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(master, "Club kann nicht zur neuen Liga hinzugefügt werden, da noch spiele in der aktuellen Liga ausstehen");
+                    }
+                    
                     break;
                 }
         }
@@ -229,6 +225,18 @@ public class ClubAddExistingController implements ActionListener, MouseListener,
             }
             this.targetLigaId = 3;
         }
+    }
+    
+    private void removeClub(Liga origin){
+        Club remClub = origin.removeClub(selectedClub);
+        Liga target = ligas.get(liga.getId());
+
+        target.addClub(remClub);
+
+        JOptionPane.showMessageDialog(master, "Transfer war erfolgreich");
+        LOGGER.log(Level.INFO, "Club Transfer finished successful");
+
+        view.dispose();
     }
    
 
