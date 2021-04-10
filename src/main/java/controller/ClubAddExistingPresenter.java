@@ -24,9 +24,9 @@ import view.ClubAddExistingView;
 /**
  * @author z003ywys
  */
-public class ClubAddExistingController implements ActionListener, MouseListener, ItemListener {
+public class ClubAddExistingPresenter implements ActionListener, MouseListener, ItemListener {
 
-    private final static Logger LOGGER = Logger.getLogger(ClubAddExistingController.class.getName());
+    private final static Logger LOGGER = Logger.getLogger(ClubAddExistingPresenter.class.getName());
     private ClubAddExistingView view;
     private JFrame master;
     private Liga liga;
@@ -35,13 +35,13 @@ public class ClubAddExistingController implements ActionListener, MouseListener,
     private Map<Integer, Liga> ligas;
     private int targetLigaId;
 
-    public ClubAddExistingController(JFrame master, ClubAddExistingView view, Liga liga) {
+    public ClubAddExistingPresenter(JFrame master, ClubAddExistingView view, Liga liga) {
         this.view = view;
         this.master = master;
         this.liga = liga;
         clubList = new DefaultListModel<>();
         this.view.getLigaClubList().setModel(clubList);
-        this.ligas = MainController.getLigas();
+        this.ligas = MainPresenter.getLigas();
         this.view.getAdClubToLigaBtn().addActionListener(this);
         this.view.getSelectedLiga().addItemListener(this);
         this.view.getLigaClubList().addMouseListener(this);

@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import controller.MainController;
+import controller.MainPresenter;
 import model.*;
 import view.MainView;
 
@@ -29,7 +29,7 @@ public class Main {
             // Insert Code here
             testAdd();
             MainView view = new MainView();
-            MainController controller = new MainController(view);
+            MainPresenter controller = new MainPresenter(view);
             // resetDB(); //current persistence settings auto-drop on startup
         } catch (Exception ex) {
             LOGGER.log(Level.SEVERE, ex.getLocalizedMessage());

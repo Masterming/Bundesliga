@@ -15,14 +15,14 @@ import view.ClubAddView;
 /**
  * @author z003ywys
  */
-public class ClubAddController implements ActionListener {
+public class ClubAddPresenter implements ActionListener {
 
-    private final static Logger LOGGER = Logger.getLogger(ClubAddController.class.getName());
+    private final static Logger LOGGER = Logger.getLogger(ClubAddPresenter.class.getName());
     private ClubAddView view;
     private JFrame master;
     private Liga liga;
 
-    public ClubAddController(JFrame master, ClubAddView view, Liga liga) {
+    public ClubAddPresenter(JFrame master, ClubAddView view, Liga liga) {
         this.view = view;
         this.master = master;
         this.liga = liga;

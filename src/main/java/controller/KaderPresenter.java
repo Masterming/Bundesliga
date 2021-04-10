@@ -18,14 +18,14 @@ import view.RowPopupPlayerView;
 /**
  * @author z003ywys
  */
-public class KaderController implements ActionListener, MouseListener {
+public class KaderPresenter implements ActionListener, MouseListener {
 
     private KaderView view;
     private JFrame master;
     private Liga liga;
     private Club club;
 
-    public KaderController(KaderView view, Club club, JFrame mas, Liga liga) {
+    public KaderPresenter(KaderView view, Club club, JFrame mas, Liga liga) {
         this.view = view;
         this.master = mas;
         this.liga = liga;
@@ -71,7 +71,7 @@ public class KaderController implements ActionListener, MouseListener {
             // Kontext Menue mit Spieler Loeschen und name aendern ueber Pop up Item
 
             RowPopupPlayerView kontext = new RowPopupPlayerView(view.getPlayerTable());
-            RowPopupPlayerController rPoPPlC = new RowPopupPlayerController(kontext, this.club,
+            RowPopupPlayerPresenter rPoPPlC = new RowPopupPlayerPresenter(kontext, this.club,
                     this.view.getPlayerTable(), master, this.liga);
             kontext.show(view.getPlayerTable(), e.getX(), e.getY());
         }

@@ -15,13 +15,13 @@ import view.TableView;
 /**
  * @author z003ywys
  */
-public class TableController implements ActionListener {
+public class TablePresenter implements ActionListener {
 
-    private final static Logger LOGGER = Logger.getLogger(TableController.class.getName());
+    private final static Logger LOGGER = Logger.getLogger(TablePresenter.class.getName());
     private TableView view;
     private Liga liga;
 
-    public TableController(TableView view, Liga liga) {
+    public TablePresenter(TableView view, Liga liga) {
         this.view = view;
         this.liga = liga;
         // this.view.setjLabel1(liga.getName());

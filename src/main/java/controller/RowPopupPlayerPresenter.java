@@ -17,7 +17,7 @@ import view.RowPopupPlayerView;
 /**
  * @author z003ywys
  */
-public class RowPopupPlayerController implements ActionListener {
+public class RowPopupPlayerPresenter implements ActionListener {
 
     private RowPopupPlayerView view;
     private JFrame master;
@@ -25,9 +25,9 @@ public class RowPopupPlayerController implements ActionListener {
     private Club club;
     private JTable table;
 
-    private final static Logger LOGGER = Logger.getLogger(RowPopupPlayerController.class.getName());
+    private final static Logger LOGGER = Logger.getLogger(RowPopupPlayerPresenter.class.getName());
 
-    public RowPopupPlayerController(RowPopupPlayerView view, Club club, JTable table, JFrame master, Liga liga) {
+    public RowPopupPlayerPresenter(RowPopupPlayerView view, Club club, JTable table, JFrame master, Liga liga) {
         this.view = view;
         this.master = master;
         this.liga = liga;

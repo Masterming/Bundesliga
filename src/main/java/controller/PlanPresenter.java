@@ -27,16 +27,16 @@ import view.PlanViewTemp;
 /**
  * @author z003ywys
  */
-public class PlanController implements ActionListener {
+public class PlanPresenter implements ActionListener {
 
-    private final static Logger LOGGER = Logger.getLogger(PlanController.class.getName());
+    private final static Logger LOGGER = Logger.getLogger(PlanPresenter.class.getName());
     private PlanView view;
     private JFrame master;
     private Liga liga;
     private List<JButton> listButtons;
     private List<Game> unfinishedGames;
 
-    public PlanController(JFrame master, PlanView view, Liga liga) {
+    public PlanPresenter(JFrame master, PlanView view, Liga liga) {
         this.view = view;
         this.master = master;
         this.liga = liga;
@@ -57,7 +57,7 @@ public class PlanController implements ActionListener {
         case "addGame":
             LOGGER.log(Level.INFO, "Spiel hinzufuegen");
             PlanAddGameView pagV = new PlanAddGameView(master, true);
-            PlanAddGameController pagC = new PlanAddGameController(master, pagV, liga);
+            PlanAddGamePresenter pagC = new PlanAddGamePresenter(master, pagV, liga);
             pagV.setVisible(true);
             break;
         case "addGameAuto":
@@ -86,7 +86,7 @@ public class PlanController implements ActionListener {
             LOGGER.log(Level.INFO, "Restart Season");
             // TODO Saison-Daten zurücksetzen (Spieler mit Toranzahl und Teams bleiben,
             // alles andere geht)
-            for (Liga l : MainController.getLigas().values()) {
+            for (Liga l : MainPresenter.getLigas().values()) {
                 l.reset();
             }
             break;
@@ -94,7 +94,7 @@ public class PlanController implements ActionListener {
             System.out.println("Game History");
             this.view.getPlanContent().removeAll();
             GameHistoryView gh = new GameHistoryView();
-            GameHistoryController ghC = new GameHistoryController(liga, gh, this);
+            GameHistoryPresenter ghC = new GameHistoryPresenter(liga, gh, this);
             // gh.getBackToPlanBtn().addActionListener(this);
             this.view.getPlanContent().add(gh);
             this.view.getPlanContent().setVisible(true);
@@ -115,7 +115,7 @@ public class PlanController implements ActionListener {
             }
             Game g = unfinishedGames.get(count);
             // Hier nochmal schleuife durchgehen
-            ErgebnisInputController ergC = new ErgebnisInputController(master, ergV, g, liga);
+            ErgebnisInputPresenter ergC = new ErgebnisInputPresenter(master, ergV, g, liga);
             ergV.setVisible(true);
             break;
         }
@@ -166,7 +166,7 @@ public class PlanController implements ActionListener {
         }
 
     }
-    // Alternatuve Lösung: PlanController implementiert Observer und wird
+    // Alternatuve Lösung: PlanPresenter implementiert Observer und wird
     // benachrichtigt wenn sich Model ändert und passt dann den View an
 
     public void restorePlanView() {

@@ -20,9 +20,9 @@ import view.ErgebnisInputView;
 /**
  * @author z003ywys
  */
-public class ErgebnisInputController implements ActionListener {
+public class ErgebnisInputPresenter implements ActionListener {
 
-    private final static Logger LOGGER = Logger.getLogger(ErgebnisInputController.class.getName());
+    private final static Logger LOGGER = Logger.getLogger(ErgebnisInputPresenter.class.getName());
     private ErgebnisInputView view;
     private JFrame master;
     private Liga liga;
@@ -32,7 +32,7 @@ public class ErgebnisInputController implements ActionListener {
     int clubAScore;
     int clubBScore;
 
-    public ErgebnisInputController(JFrame master, ErgebnisInputView view, String clubA, String clubB) {
+    public ErgebnisInputPresenter(JFrame master, ErgebnisInputView view, String clubA, String clubB) {
         this.view = view;
         this.master = master;
         this.view.setClubALbl(clubA);
@@ -50,7 +50,7 @@ public class ErgebnisInputController implements ActionListener {
 
     }
 
-    public ErgebnisInputController(JFrame master, ErgebnisInputView ergDialog, Game game, Liga l) {
+    public ErgebnisInputPresenter(JFrame master, ErgebnisInputView ergDialog, Game game, Liga l) {
         this.game = game;
         this.master = master;
         this.view = ergDialog;

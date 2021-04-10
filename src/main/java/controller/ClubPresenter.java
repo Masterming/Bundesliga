@@ -23,14 +23,14 @@ import view.RowPopupClubView;
 /**
  * @author Rene
  */
-public class ClubController implements MouseListener, ActionListener {
+public class ClubPresenter implements MouseListener, ActionListener {
 
-    private final static Logger LOGGER = Logger.getLogger(ClubController.class.getName());
+    private final static Logger LOGGER = Logger.getLogger(ClubPresenter.class.getName());
     private ClubView view;
     private JFrame master;
     private Liga liga;
 
-    public ClubController(JFrame master, ClubView view, Liga liga) {
+    public ClubPresenter(JFrame master, ClubView view, Liga liga) {
         this.view = view;
         this.master = master;
         this.liga = liga;
@@ -57,7 +57,7 @@ public class ClubController implements MouseListener, ActionListener {
     @Override
     public void mouseClicked(MouseEvent evt) {
         if (evt.getClickCount() == 2 && SwingUtilities.isLeftMouseButton(evt)) {
-            // LOGGER.log(Level.INFO, "Tabelle wurde 2 mal geklcikt im ClubController");
+            // LOGGER.log(Level.INFO, "Tabelle wurde 2 mal geklcikt im ClubPresenter");
             // Neues Fenster geht auf --> Neuen Controller + View
             JTable temp = (JTable) evt.getSource();
             int row = temp.getSelectedRow();
@@ -66,13 +66,13 @@ public class ClubController implements MouseListener, ActionListener {
 
             Club c = liga.getClub(club);
             ClubEditView cbV = new ClubEditView(view.getmaster(), true);
-            ClubEditController clubEditController = new ClubEditController(cbV, c, liga, master);
+            ClubEditPresenter clubEditController = new ClubEditPresenter(cbV, c, liga, master);
             cbV.setVisible(true);
         }
         if (SwingUtilities.isRightMouseButton(evt)) {
             // Kontext Menue mit Spieler Loeschen und name aendern ueber Pop up Item
             RowPopupClubView kontext = new RowPopupClubView();
-            RowPopupClubController rowPopupClubController = new RowPopupClubController(master, kontext, liga,
+            RowPopupClubPresenter rowPopupClubController = new RowPopupClubPresenter(master, kontext, liga,
                     view.getClubTable());
             kontext.show(view.getClubTable(), evt.getX(), evt.getY());
         }
@@ -140,7 +140,7 @@ public class ClubController implements MouseListener, ActionListener {
             case "addClub":
                 LOGGER.log(Level.INFO, "Club Hinzufuegen button gedrueckt");
                 ClubAddView caV = new ClubAddView(master, true);
-                ClubAddController clubAddController = new ClubAddController(master, caV, liga);
+                ClubAddPresenter clubAddController = new ClubAddPresenter(master, caV, liga);
                 caV.setVisible(true);
                 break;
 
@@ -152,7 +152,7 @@ public class ClubController implements MouseListener, ActionListener {
                 // Down menue ausgewaehlt wurde
                 // in Liste: mehrfach auswahl moeglich
                 ClubAddExistingView caEV = new ClubAddExistingView(master, true);
-                ClubAddExistingController caEC = new ClubAddExistingController(master, caEV, liga);
+                ClubAddExistingPresenter caEC = new ClubAddExistingPresenter(master, caEV, liga);
                 caEV.setVisible(true);
                 break;
 

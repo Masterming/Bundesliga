@@ -17,7 +17,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
-import controller.MainController;
+import controller.MainPresenter;
 
 /**
  * @author Rene
@@ -339,8 +339,8 @@ public class Club implements Serializable, Comparable<Club> {
         int tot1 = 0; // total score for this team
         int tot2 = 0; // total score for other team
         for (int i = 1; i < 3; i++) {
-            if (MainController.getLigas().get(i).getClubs().contains(this)) {
-                List<Game> tmp = MainController.getLigas().get(i).getGames(); // get all games from own league
+            if (MainPresenter.getLigas().get(i).getClubs().contains(this)) {
+                List<Game> tmp = MainPresenter.getLigas().get(i).getGames(); // get all games from own league
                 for (Game g : tmp) { // find all games with both teams in them
                     if (this.equals(g.getClub(0)) && c.equals(g.getClub(1))) {
                         tot1 += g.getScore(0); // add game score to according total score

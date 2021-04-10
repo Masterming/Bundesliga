@@ -15,12 +15,12 @@ import view.GameHistoryView;
 /**
  * @author z003ywys
  */
-public class GameHistoryController implements ActionListener {
+public class GameHistoryPresenter implements ActionListener {
     private Liga l;
     private GameHistoryView ghV;
-    private PlanController plC;
+    private PlanPresenter plC;
 
-    public GameHistoryController(Liga l, GameHistoryView ghV, PlanController PLC) {
+    public GameHistoryPresenter(Liga l, GameHistoryView ghV, PlanPresenter PLC) {
         this.l = l;
         this.ghV = ghV;
         this.ghV.getBackToPlanBtn().addActionListener(this);

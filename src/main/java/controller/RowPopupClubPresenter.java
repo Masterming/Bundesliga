@@ -15,16 +15,16 @@ import view.RowPopupClubView;
 /**
  * @author z003ywys
  */
-public class RowPopupClubController implements ActionListener {
+public class RowPopupClubPresenter implements ActionListener {
 
-    private final static Logger LOGGER = Logger.getLogger(RowPopupClubController.class.getName());
+    private final static Logger LOGGER = Logger.getLogger(RowPopupClubPresenter.class.getName());
 
     private RowPopupClubView view;
     private Liga liga;
     private JTable table;
     private JFrame master;
 
-    public RowPopupClubController(JFrame master, RowPopupClubView view, Liga liga, JTable table) {
+    public RowPopupClubPresenter(JFrame master, RowPopupClubView view, Liga liga, JTable table) {
         this.view = view;
         this.master = master;
         this.liga = liga;

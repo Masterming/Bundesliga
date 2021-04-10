@@ -23,9 +23,9 @@ import view.TableView;
 /**
  * @author z003ywys
  */
-public class MainController implements ActionListener, Observer {
+public class MainPresenter implements ActionListener, Observer {
 
-    private final static Logger LOGGER = Logger.getLogger(MainController.class.getName());
+    private final static Logger LOGGER = Logger.getLogger(MainPresenter.class.getName());
     private static MainView view;
 
     // Es wird 3 Ligen Model geben jeweils eins pro Liga
@@ -36,7 +36,7 @@ public class MainController implements ActionListener, Observer {
     private static int ligaId = 1;
     private static int selection = 1;
 
-    public MainController(MainView view) {
+    public MainPresenter(MainView view) {
         LOGGER.log(Level.INFO, "Adding Ligas");
         dao = new LigaDBMapper();
         ligas = new HashMap<>();
@@ -53,7 +53,7 @@ public class MainController implements ActionListener, Observer {
         view.getPlanBtn().addActionListener(this);
         view.getTableBtn().addActionListener(this);
         view.setVisible(true);
-        MainController.view = view;
+        MainPresenter.view = view;
         renderView();
     }
 
@@ -107,7 +107,7 @@ public class MainController implements ActionListener, Observer {
         switch (selection) {
             case 1:
                 TableView tv = new TableView();
-                TableController tbc = new TableController(tv, ligas.get(ligaId));
+                TablePresenter tbc = new TablePresenter(tv, ligas.get(ligaId));
 
                 view.getTableBtn().setBackground(Color.white);
                 view.getContentView().removeAll();
@@ -116,7 +116,7 @@ public class MainController implements ActionListener, Observer {
             case 2:
                 PlanView plv = new PlanView(view);
                 //PlanViewTemp plv = new PlanViewTemp();
-                PlanController plc = new PlanController(view, plv, ligas.get(ligaId));
+                PlanPresenter plc = new PlanPresenter(view, plv, ligas.get(ligaId));
 
                 view.getPlanBtn().setBackground(Color.white);
                 view.getContentView().removeAll();
@@ -125,7 +125,7 @@ public class MainController implements ActionListener, Observer {
                 break;
             case 3:
                 ClubView cv = new ClubView(view);
-                ClubController clc = new ClubController(view, cv, ligas.get(ligaId));
+                ClubPresenter clc = new ClubPresenter(view, cv, ligas.get(ligaId));
 
                 view.getClubsBtn().setBackground(Color.white);
                 view.getContentView().removeAll();

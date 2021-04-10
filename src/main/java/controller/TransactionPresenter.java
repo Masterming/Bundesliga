@@ -20,9 +20,9 @@ import view.TransactionView;
 /**
  * @author z003ywys
  */
-public class TransactionController implements ActionListener, MouseListener {
+public class TransactionPresenter implements ActionListener, MouseListener {
 
-    private final static Logger LOGGER = Logger.getLogger(TransactionController.class.getName());
+    private final static Logger LOGGER = Logger.getLogger(TransactionPresenter.class.getName());
     private TransactionView view;
     private JFrame master;
     private Club club;
@@ -31,11 +31,11 @@ public class TransactionController implements ActionListener, MouseListener {
     private DefaultListModel<String> listModelSend;
     private Map<Integer, Liga> ligas;
 
-    public TransactionController(JFrame master, TransactionView view, Club club) {
+    public TransactionPresenter(JFrame master, TransactionView view, Club club) {
         this.view = view;
         this.master = master;
         this.club = club;
-        ligas = MainController.getLigas();
+        ligas = MainPresenter.getLigas();
         this.view.getAddToTransBtn().addActionListener(this);
         this.view.getRemoveFromTransBtn().addActionListener(this);
         this.view.getSuchenBtn().addActionListener(this);
