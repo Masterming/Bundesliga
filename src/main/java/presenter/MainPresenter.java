@@ -3,14 +3,18 @@ package presenter;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 import javax.swing.JScrollPane;
+import model.Club;
 
 import model.Liga;
 import model.LigaDBMapper;
@@ -31,6 +35,7 @@ public class MainPresenter implements ActionListener, Observer {
     // Es wird 3 Ligen Model geben jeweils eins pro Liga
     // --> werden beim ersten klick auf LigaButtons gesetzt
     private static Map<Integer, Liga> ligas;
+    private static List<Liga> ligasReference;
     private LigaDBMapper dao;
 
     private static int ligaId = 1;
@@ -40,10 +45,11 @@ public class MainPresenter implements ActionListener, Observer {
         LOGGER.log(Level.INFO, "Adding Ligas");
         dao = new LigaDBMapper();
         ligas = new HashMap<>();
-
+       ligasReference = new ArrayList();
         for (int i = 1; i <= 3; i++) {
             ligas.put(i, dao.getLiga(i));
             ligas.get(i).addObserver(this);
+            ligasReference.add(dao.getLiga(i));
         }
 
         view.getLiga1Btn().addActionListener(this);
@@ -125,7 +131,7 @@ public class MainPresenter implements ActionListener, Observer {
                 break;
             case 3:
                 ClubView cv = new ClubView(view);
-                ClubPresenter clc = new ClubPresenter(view, cv, ligas.get(ligaId));
+                ClubPresenter clc = new ClubPresenter(view, cv, ligas.get(ligaId),ligasReference);
 
                 view.getClubsBtn().setBackground(Color.white);
                 view.getContentView().removeAll();
@@ -159,5 +165,5 @@ public class MainPresenter implements ActionListener, Observer {
     public static MainView getView() {
         return view;
     }
-    
+
 }

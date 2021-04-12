@@ -2,6 +2,9 @@ package presenter;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.Map;
+import static java.util.Map.entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,11 +24,20 @@ public class ClubAddPresenter implements ActionListener {
     private ClubAddView view;
     private JFrame master;
     private Liga liga;
+    private List <Liga>ligas;
 
     public ClubAddPresenter(JFrame master, ClubAddView view, Liga liga) {
         this.view = view;
         this.master = master;
         this.liga = liga;
+        this.view.getClubAddBtn().addActionListener(this);
+    }
+
+    public ClubAddPresenter(JFrame master, ClubAddView view, Liga liga, List ligas) {
+        this.view = view;
+        this.master = master;
+        this.liga = liga;
+        this.ligas = ligas;
         this.view.getClubAddBtn().addActionListener(this);
     }
 
@@ -56,15 +68,24 @@ public class ClubAddPresenter implements ActionListener {
             JOptionPane.showMessageDialog(master, "Bitte geben sie etwas fuer Clubname und Stadion ein");
         } else {
             Club temp = new Club(clubName, stadion);
-            if(liga.addClub(temp)){
-                            LOGGER.log(Level.INFO, "Club Hinzugefuegt: {0}", clubName);
+            boolean clubExists = false;
+            for (Liga l : ligas) {
+                for (Club c : l.getClubs()) {
+                    if (c.getName().equals(clubName)) {
+                        clubExists = true;
+                        JOptionPane.showMessageDialog(master, "Club existiert bereits in der " + l.getName());
+                        break;
+                    }
+                }
+            }
+            if (!clubExists) {
+                liga.addClub(temp);
+                JOptionPane.showMessageDialog(master, "Club wurde hinzugefügt");
+            }
+            LOGGER.log(Level.INFO, "Club Hinzugefuegt: {0}", clubName);
             master.repaint();
             master.revalidate();
             view.dispose();
-            }
-            else{
-                JOptionPane.showMessageDialog(master, "Club existiert bereits");
-            }
 
         }
     }

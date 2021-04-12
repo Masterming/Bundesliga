@@ -4,6 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -29,6 +32,7 @@ public class ClubPresenter implements MouseListener, ActionListener {
     private ClubView view;
     private JFrame master;
     private Liga liga;
+    private List<Liga> ligas;
 
     public ClubPresenter(JFrame master, ClubView view, Liga liga) {
         this.view = view;
@@ -49,6 +53,26 @@ public class ClubPresenter implements MouseListener, ActionListener {
         this.setData();
 
     }
+        public ClubPresenter(JFrame master, ClubView view, Liga liga, List ligas) {
+        this.view = view;
+        this.master = master;
+        this.liga = liga;
+        this.view.getClubTable().addMouseListener(this);
+        this.view.getAddClubBtn().addActionListener(this);
+        this.view.getAddExistingClubBtn().addActionListener(this);
+        if (liga.getId() == 1 || liga.getId() == 2) {
+            this.view.getAddClubBtn().setVisible(false);
+            this.view.getAddExistingClubBtn().setVisible(true);
+        } else {
+            this.view.getAddClubBtn().setVisible(true);
+            this.view.getAddExistingClubBtn().setVisible(true);
+        }
+        this.view.repaint();
+        this.view.revalidate();
+        this.ligas=ligas;
+        this.setData();
+
+    }
 
     public void addPlayer(String player) {
         throw new UnsupportedOperationException("Not supported yet.");
@@ -66,14 +90,14 @@ public class ClubPresenter implements MouseListener, ActionListener {
 
             Club c = liga.getClub(club);
             ClubEditView cbV = new ClubEditView(view.getmaster(), true);
-            ClubEditPresenter clubEditController = new ClubEditPresenter(cbV, c, liga, master);
+            ClubEditPresenter clubEditController = new ClubEditPresenter(cbV, c, liga, master, ligas);
             cbV.setVisible(true);
         }
         if (SwingUtilities.isRightMouseButton(evt)) {
             // Kontext Menue mit Spieler Loeschen und name aendern ueber Pop up Item
             RowPopupClubView kontext = new RowPopupClubView();
             RowPopupClubPresenter rowPopupClubController = new RowPopupClubPresenter(master, kontext, liga,
-                    view.getClubTable());
+                    view.getClubTable(),ligas);
             kontext.show(view.getClubTable(), evt.getX(), evt.getY());
         }
 
@@ -140,7 +164,7 @@ public class ClubPresenter implements MouseListener, ActionListener {
             case "addClub":
                 LOGGER.log(Level.INFO, "Club Hinzufuegen button gedrueckt");
                 ClubAddView caV = new ClubAddView(master, true);
-                ClubAddPresenter clubAddController = new ClubAddPresenter(master, caV, liga);
+                ClubAddPresenter clubAddController = new ClubAddPresenter(master, caV, liga, ligas);
                 caV.setVisible(true);
                 break;
 

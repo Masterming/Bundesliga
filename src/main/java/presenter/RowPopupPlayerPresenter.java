@@ -2,6 +2,7 @@ package presenter;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -12,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
 
 import model.Club;
 import model.Liga;
+import model.Player;
 import view.RowPopupPlayerView;
 
 /**
@@ -24,15 +26,17 @@ public class RowPopupPlayerPresenter implements ActionListener {
     private Liga liga;
     private Club club;
     private JTable table;
+    private List<Liga> ligas;
 
     private final static Logger LOGGER = Logger.getLogger(RowPopupPlayerPresenter.class.getName());
 
-    public RowPopupPlayerPresenter(RowPopupPlayerView view, Club club, JTable table, JFrame master, Liga liga) {
+    public RowPopupPlayerPresenter(RowPopupPlayerView view, Club club, JTable table, JFrame master, Liga liga, List<Liga> ligas) {
         this.view = view;
         this.master = master;
         this.liga = liga;
         this.club = club;
         this.table = table;
+        this.ligas = ligas;
         this.view.getBearbeiten().addActionListener(this);
         this.view.getLoeschen().addActionListener(this);
     }
@@ -64,10 +68,24 @@ public class RowPopupPlayerPresenter implements ActionListener {
                     case 0:
                         String newName = JOptionPane.showInputDialog(master, "Neuen Namen eingeben", name);
                         if (newName != null && !newName.isBlank()) {
-                            LOGGER.log(Level.INFO, "Rename Club {0} to {1}", new Object[] { name, newName.trim() });
+                            LOGGER.log(Level.INFO, "Rename Club {0} to {1}", new Object[]{name, newName.trim()});
+                            boolean playerExists = false;
+                            for (Liga l : ligas) {
+                                for (Club c : l.getClubs()) {
+                                    for (Player pl : c.getPlayers()) {
+                                        if (pl.getName().equals(newName)) {
+                                            playerExists = true;
+                                            JOptionPane.showMessageDialog(master, "Spieler existiert bereits in " + c.getName());
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                            if(!playerExists){
                             club.changePlayerName(name, newName);
                             liga.updateClub(club);
                             dtm.setValueAt(newName, row, 0);
+                            }
                         }
                         break;
                     case 1:

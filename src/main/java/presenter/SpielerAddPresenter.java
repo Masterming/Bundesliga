@@ -2,6 +2,7 @@ package presenter;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,12 +24,14 @@ public class SpielerAddPresenter implements ActionListener {
     private JFrame master;
     private Liga liga;
     private Club club;
+    private List<Liga> ligas;
 
-    public SpielerAddPresenter(JFrame master, SpielerAddView view, Club club, Liga liga) {
+    public SpielerAddPresenter(JFrame master, SpielerAddView view, Club club, Liga liga, List<Liga> ligas) {
         this.view = view;
         this.master = master;
         this.liga = liga;
         this.club = club;
+        this.ligas = ligas;
         this.view.getAddSpielerBtn().addActionListener(this);
     }
 
@@ -58,18 +61,30 @@ public class SpielerAddPresenter implements ActionListener {
             boolean addPlayerOk = true;
             LOGGER.log(Level.INFO, "Spieler hinzugefuegt");
             Player P = new Player(name, anzTor);
-            
-            addPlayerOk = club.addPlayer(P);
-            if(addPlayerOk){
-                JOptionPane.showMessageDialog(master, "Spieler wurde erfolgreich hinzugefügt");
-                this.view.getAnzToreTxt().setText("");
-                this.view.getPlayerNameTxt().setText("");
-                liga.updateClub(club);
+            boolean playerExists = false;
+            Club existingClub=null;
+            for (Liga l : ligas) {
+                for (Club c : l.getClubs()) {
+                    for (Player pl : c.getPlayers()) {
+                        if (pl.getName().equals(name)) {
+                            playerExists = true;
+                            existingClub = c;
+                        }
+                    }
+                }
             }
-            else{
-                JOptionPane.showMessageDialog(master, "Spieler existiert bereits");
+            if (!playerExists) {
+                addPlayerOk = club.addPlayer(P);
+                if (addPlayerOk) {
+                    JOptionPane.showMessageDialog(master, "Spieler wurde erfolgreich hinzugefügt");
+                    this.view.getAnzToreTxt().setText("");
+                    this.view.getPlayerNameTxt().setText("");
+                    liga.updateClub(club);
+                }
+            } else {
+                JOptionPane.showMessageDialog(master, "Spieler existiert bereits in " + existingClub.getName());
             }
-            
+
         }
     }
 

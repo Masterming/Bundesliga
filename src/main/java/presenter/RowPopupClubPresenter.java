@@ -2,12 +2,14 @@ package presenter;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import model.Club;
 
 import model.Liga;
 import view.RowPopupClubView;
@@ -23,12 +25,14 @@ public class RowPopupClubPresenter implements ActionListener {
     private Liga liga;
     private JTable table;
     private JFrame master;
+    private List<Liga> ligas;
 
-    public RowPopupClubPresenter(JFrame master, RowPopupClubView view, Liga liga, JTable table) {
+    public RowPopupClubPresenter(JFrame master, RowPopupClubView view, Liga liga, JTable table, List<Liga> ligas) {
         this.view = view;
         this.master = master;
         this.liga = liga;
         this.table = table;
+        this.ligas = ligas;
         this.view.getBearbeiten().addActionListener(this);
         this.view.getLoeschen().addActionListener(this);
     }
@@ -58,8 +62,21 @@ public class RowPopupClubPresenter implements ActionListener {
                     case 0:
                         String newName = JOptionPane.showInputDialog(master, "Neuen Namen eingeben", name);
                         if (newName != null && !newName.isBlank()) {
-                            LOGGER.log(Level.INFO, "Rename Club {0} to {1}", new String[] { name, newName.trim() });
-                            liga.changeClubName(name, newName);
+                            LOGGER.log(Level.INFO, "Rename Club {0} to {1}", new String[]{name, newName.trim()});
+                            boolean clubExists = false;
+                            for (Liga l : ligas) {
+                                for (Club c : l.getClubs()) {
+                                    if (c.getName().equals(newName)) {
+                                        clubExists = true;
+                                        JOptionPane.showMessageDialog(master, "Club existiert bereits in der " + l.getName());
+                                        break;
+                                    }
+                                }
+                            }
+                            if(!clubExists){
+                                liga.changeClubName(name, newName);
+                            }
+                            
                         }
                         break;
                     case 1:
