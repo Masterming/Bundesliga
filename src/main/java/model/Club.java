@@ -17,7 +17,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
-import controller.MainPresenter;
+import presenter.MainPresenter;
 
 /**
  * @author Rene

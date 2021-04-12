@@ -1,6 +1,6 @@
 package view;
 
-import controller.ErgebnisInputPresenter;
+import presenter.ErgebnisInputPresenter;
 import java.awt.Dimension;
 import java.awt.FontMetrics;
 import java.awt.event.ActionEvent;

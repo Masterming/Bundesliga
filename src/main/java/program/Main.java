@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import controller.MainPresenter;
+import presenter.MainPresenter;
 import model.*;
 import view.MainView;
 
