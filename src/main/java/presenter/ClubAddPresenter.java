@@ -56,11 +56,16 @@ public class ClubAddPresenter implements ActionListener {
             JOptionPane.showMessageDialog(master, "Bitte geben sie etwas fuer Clubname und Stadion ein");
         } else {
             Club temp = new Club(clubName, stadion);
-            liga.addClub(temp);
-            LOGGER.log(Level.INFO, "Club Hinzugefuegt: {0}", clubName);
+            if(liga.addClub(temp)){
+                            LOGGER.log(Level.INFO, "Club Hinzugefuegt: {0}", clubName);
             master.repaint();
             master.revalidate();
             view.dispose();
+            }
+            else{
+                JOptionPane.showMessageDialog(master, "Club existiert bereits");
+            }
+
         }
     }
 }

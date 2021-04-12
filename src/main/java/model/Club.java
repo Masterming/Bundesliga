@@ -104,6 +104,11 @@ public class Club implements Serializable, Comparable<Club> {
     }
 
     public boolean addPlayer(Player p) {
+        for(int i=0; i<players.size();i++){
+            if(players.get(i).getName().equals(p.getName())){
+                return false;
+            }
+        }
         return players.add(p);
     }
 

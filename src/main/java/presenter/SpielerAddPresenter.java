@@ -55,13 +55,21 @@ public class SpielerAddPresenter implements ActionListener {
             inputOk = false;
         }
         if (inputOk) {
+            boolean addPlayerOk = true;
             LOGGER.log(Level.INFO, "Spieler hinzugefuegt");
             Player P = new Player(name, anzTor);
-            JOptionPane.showMessageDialog(master, "Spieler wurde erfolgreich hinzugefügt");
-            this.view.getAnzToreTxt().setText("");
-            this.view.getPlayerNameTxt().setText("");
-            club.addPlayer(P);
-            liga.updateClub(club);
+            
+            addPlayerOk = club.addPlayer(P);
+            if(addPlayerOk){
+                JOptionPane.showMessageDialog(master, "Spieler wurde erfolgreich hinzugefügt");
+                this.view.getAnzToreTxt().setText("");
+                this.view.getPlayerNameTxt().setText("");
+                liga.updateClub(club);
+            }
+            else{
+                JOptionPane.showMessageDialog(master, "Spieler existiert bereits");
+            }
+            
         }
     }
 
