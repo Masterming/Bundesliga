@@ -90,14 +90,14 @@ public class ClubPresenter implements MouseListener, ActionListener {
 
             Club c = liga.getClub(club);
             ClubEditView cbV = new ClubEditView(view.getmaster(), true);
-            ClubEditPresenter clubEditController = new ClubEditPresenter(cbV, c, liga, master, ligas);
+            ClubEditPresenter clubEditController = new ClubEditPresenter(cbV, c, liga, master);
             cbV.setVisible(true);
         }
         if (SwingUtilities.isRightMouseButton(evt)) {
             // Kontext Menue mit Spieler Loeschen und name aendern ueber Pop up Item
             RowPopupClubView kontext = new RowPopupClubView();
             RowPopupClubPresenter rowPopupClubController = new RowPopupClubPresenter(master, kontext, liga,
-                    view.getClubTable(),ligas);
+                    view.getClubTable());
             kontext.show(view.getClubTable(), evt.getX(), evt.getY());
         }
 
@@ -164,7 +164,7 @@ public class ClubPresenter implements MouseListener, ActionListener {
             case "addClub":
                 LOGGER.log(Level.INFO, "Club Hinzufuegen button gedrueckt");
                 ClubAddView caV = new ClubAddView(master, true);
-                ClubAddPresenter clubAddController = new ClubAddPresenter(master, caV, liga, ligas);
+                ClubAddPresenter clubAddController = new ClubAddPresenter(master, caV, liga);
                 caV.setVisible(true);
                 break;
 

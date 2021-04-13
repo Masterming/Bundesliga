@@ -3,6 +3,7 @@ package presenter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,14 +25,14 @@ public class SpielerAddPresenter implements ActionListener {
     private JFrame master;
     private Liga liga;
     private Club club;
-    private List<Liga> ligas;
+    private Map<Integer,Liga> ligas;
 
-    public SpielerAddPresenter(JFrame master, SpielerAddView view, Club club, Liga liga, List<Liga> ligas) {
+    public SpielerAddPresenter(JFrame master, SpielerAddView view, Club club, Liga liga) {
         this.view = view;
         this.master = master;
         this.liga = liga;
         this.club = club;
-        this.ligas = ligas;
+        this.ligas = MainPresenter.getLigas();
         this.view.getAddSpielerBtn().addActionListener(this);
     }
 
@@ -63,7 +64,7 @@ public class SpielerAddPresenter implements ActionListener {
             Player P = new Player(name, anzTor);
             boolean playerExists = false;
             Club existingClub=null;
-            for (Liga l : ligas) {
+            for (Liga l : ligas.values()) {
                 for (Club c : l.getClubs()) {
                     for (Player pl : c.getPlayers()) {
                         if (pl.getName().equals(name)) {

@@ -3,6 +3,7 @@ package presenter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,17 +27,17 @@ public class RowPopupPlayerPresenter implements ActionListener {
     private Liga liga;
     private Club club;
     private JTable table;
-    private List<Liga> ligas;
+    private Map<Integer,Liga> ligas;
 
     private final static Logger LOGGER = Logger.getLogger(RowPopupPlayerPresenter.class.getName());
 
-    public RowPopupPlayerPresenter(RowPopupPlayerView view, Club club, JTable table, JFrame master, Liga liga, List<Liga> ligas) {
+    public RowPopupPlayerPresenter(RowPopupPlayerView view, Club club, JTable table, JFrame master, Liga liga) {
         this.view = view;
         this.master = master;
         this.liga = liga;
         this.club = club;
         this.table = table;
-        this.ligas = ligas;
+        this.ligas = MainPresenter.getLigas();
         this.view.getBearbeiten().addActionListener(this);
         this.view.getLoeschen().addActionListener(this);
     }
@@ -70,7 +71,7 @@ public class RowPopupPlayerPresenter implements ActionListener {
                         if (newName != null && !newName.isBlank()) {
                             LOGGER.log(Level.INFO, "Rename Club {0} to {1}", new Object[]{name, newName.trim()});
                             boolean playerExists = false;
-                            for (Liga l : ligas) {
+                            for (Liga l : ligas.values()) {
                                 for (Club c : l.getClubs()) {
                                     for (Player pl : c.getPlayers()) {
                                         if (pl.getName().equals(newName)) {

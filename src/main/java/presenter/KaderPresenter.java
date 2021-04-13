@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -25,15 +26,14 @@ public class KaderPresenter implements ActionListener, MouseListener {
     private JFrame master;
     private Liga liga;
     private Club club;
-    private List<Liga> ligas;
+   
 
-    public KaderPresenter(KaderView view, Club club, JFrame mas, Liga liga,List<Liga> ligas) {
+    public KaderPresenter(KaderView view, Club club, JFrame mas, Liga liga) {
         this.view = view;
         this.master = mas;
         this.liga = liga;
         this.club = club;
         this.view.getPlayerTable().addMouseListener(this);
-        this.ligas = ligas;
         this.setTableData();
     }
 
@@ -75,7 +75,7 @@ public class KaderPresenter implements ActionListener, MouseListener {
 
             RowPopupPlayerView kontext = new RowPopupPlayerView(view.getPlayerTable());
             RowPopupPlayerPresenter rPoPPlC = new RowPopupPlayerPresenter(kontext, this.club,
-                    this.view.getPlayerTable(), master, this.liga,ligas);
+                    this.view.getPlayerTable(), master, this.liga);
             kontext.show(view.getPlayerTable(), e.getX(), e.getY());
         }
     }

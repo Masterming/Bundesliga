@@ -24,20 +24,23 @@ public class ClubAddPresenter implements ActionListener {
     private ClubAddView view;
     private JFrame master;
     private Liga liga;
-    private List <Liga>ligas;
+    private Map<Integer,Liga>ligas;
 
     public ClubAddPresenter(JFrame master, ClubAddView view, Liga liga) {
         this.view = view;
         this.master = master;
         this.liga = liga;
         this.view.getClubAddBtn().addActionListener(this);
+        this.ligas = MainPresenter.getLigas();
+        
     }
 
     public ClubAddPresenter(JFrame master, ClubAddView view, Liga liga, List ligas) {
         this.view = view;
         this.master = master;
         this.liga = liga;
-        this.ligas = ligas;
+        //this.ligas = ligas;
+        this.ligas = MainPresenter.getLigas();
         this.view.getClubAddBtn().addActionListener(this);
     }
 
@@ -69,7 +72,7 @@ public class ClubAddPresenter implements ActionListener {
         } else {
             Club temp = new Club(clubName, stadion);
             boolean clubExists = false;
-            for (Liga l : ligas) {
+            for (Liga l : ligas.values()) {
                 for (Club c : l.getClubs()) {
                     if (c.getName().equals(clubName)) {
                         clubExists = true;
