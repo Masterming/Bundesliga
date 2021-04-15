@@ -142,7 +142,7 @@ public class PlanAddGamePresenter implements ActionListener, ItemListener, Mouse
             }
             LOGGER.log(Level.INFO, "Setup of {0} successful", game);
         } else {
-            JOptionPane.showMessageDialog(master, "Spiel existiert bereits!");
+            JOptionPane.showMessageDialog(master, "Spiel existiert bereits oder wurde schon gespielt!");
         }
         view.dispose();
     }

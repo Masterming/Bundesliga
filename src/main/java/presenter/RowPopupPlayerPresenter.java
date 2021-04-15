@@ -68,7 +68,8 @@ public class RowPopupPlayerPresenter implements ActionListener {
                 switch (table.getSelectedColumn()) {
                     case 0:
                         String newName = JOptionPane.showInputDialog(master, "Neuen Namen eingeben", name);
-                        if (newName != null && !newName.isBlank()) {
+                        newName = newName.trim();
+                        if (!newName.isBlank()) {
                             LOGGER.log(Level.INFO, "Rename Club {0} to {1}", new Object[]{name, newName.trim()});
                             boolean playerExists = false;
                             for (Liga l : ligas.values()) {

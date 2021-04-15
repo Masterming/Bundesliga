@@ -62,7 +62,8 @@ public class RowPopupClubPresenter implements ActionListener {
                 switch (table.getSelectedColumn()) {
                     case 0:
                         String newName = JOptionPane.showInputDialog(master, "Neuen Namen eingeben", name);
-                        if (newName != null && !newName.isBlank()) {
+                         newName = newName.trim();
+                        if (!newName.isBlank()){
                             LOGGER.log(Level.INFO, "Rename Club {0} to {1}", new String[]{name, newName.trim()});
                             boolean clubExists = false;
                             for (Liga l : ligas.values()) {
