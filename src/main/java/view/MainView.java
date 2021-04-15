@@ -36,6 +36,7 @@ public class MainView extends javax.swing.JFrame {
         planBtn = new javax.swing.JButton();
         clubsBtn = new javax.swing.JButton();
         contentView = new javax.swing.JPanel();
+        this.setTitle("Bundesligaverwaltung");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         liga1Btn.setBackground(java.awt.Color.lightGray);

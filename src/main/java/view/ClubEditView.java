@@ -35,6 +35,7 @@ public class ClubEditView extends javax.swing.JDialog {
         transBtn = new javax.swing.JButton();
         clubName = new javax.swing.JLabel();
         clubEditContent = new javax.swing.JPanel();
+        this.setTitle("Club");
 
         jLabel1.setText("jLabel1");
 
