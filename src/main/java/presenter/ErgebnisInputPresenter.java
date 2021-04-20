@@ -9,8 +9,10 @@ import java.util.logging.Logger;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.Club;
 
 import model.Game;
 import model.Liga;
@@ -63,7 +65,13 @@ public class ErgebnisInputPresenter implements ActionListener {
         String hour = String.valueOf(game.getStart().getHour());
         String minute = String.valueOf(game.getStart().getMinute());
         String labelText = day + "." + mounth + "." + year + " um " + hour + ":" + minute + " Uhr ";
-        this.view.setDateLbl(labelText);
+        Club temp = game.getClub1();
+        labelText += " im " + temp.getStadion();
+        
+        this.view.getDateLbl().setText(labelText);
+        this.view.getDateLbl().setSize(this.view.getDateLbl().getPreferredSize());
+        this.view.getDateLbl().repaint();
+        this.view.getDateLbl().validate();
         this.view.getSaveBtn().addActionListener(this);
         this.view.getClubAAddGoalForPlayer().addActionListener(this);
         this.view.getClubASubGoalForPlayer().addActionListener(this);
