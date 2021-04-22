@@ -77,6 +77,7 @@ public class RowPopupClubPresenter implements ActionListener {
                             }
                             if(!clubExists){
                                 liga.changeClubName(name, newName);
+                                JOptionPane.showMessageDialog(master, "Club Name wurde erfolgreich geändert");
                             }
                             
                         }
@@ -87,6 +88,7 @@ public class RowPopupClubPresenter implements ActionListener {
                         if (!stadionName.isEmpty()) {
                             LOGGER.log(Level.INFO, "Change stadion to {0}", stadionName);
                             liga.changeClubStadion(name, stadionName);
+                            JOptionPane.showMessageDialog(master, "Stadion Name wurde erfolgreich geändert");
                         }
                         break;
 
