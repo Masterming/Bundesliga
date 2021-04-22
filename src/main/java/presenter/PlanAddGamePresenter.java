@@ -141,6 +141,7 @@ public class PlanAddGamePresenter implements ActionListener, ItemListener, Mouse
                 ligaB.updateGame(game);
             }
             LOGGER.log(Level.INFO, "Setup of {0} successful", game);
+            JOptionPane.showMessageDialog(master, "Spiel wurde erfolgreich erstellt und gesichert!");
         } else {
             JOptionPane.showMessageDialog(master, "Spiel existiert bereits oder wurde schon gespielt!");
         }

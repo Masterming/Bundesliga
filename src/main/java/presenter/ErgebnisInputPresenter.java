@@ -239,6 +239,7 @@ public class ErgebnisInputPresenter implements ActionListener {
             game.setResults(clubAScore, clubBScore);
             setPlayerGoals();
             liga.updateGame(game);
+            JOptionPane.showMessageDialog(master, "Spilergebnis wurde erfolgreich gespeichert");
             view.dispose();
         }
     }

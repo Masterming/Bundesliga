@@ -24,7 +24,7 @@ public class ClubAddExistingView extends javax.swing.JDialog {
     }
 
     private void initComponents() {
-
+        this.setTitle("Bereits vorhandenen Club hinzufügen");
         selectedLiga = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         ligaClubList = new javax.swing.JList<>();
