@@ -25,6 +25,9 @@ public class GameHistoryView extends JPanel {
 
         setMinimumSize(new java.awt.Dimension(541, 350));
         setPreferredSize(new java.awt.Dimension(541, 350));
+        historyTable.setRowSelectionAllowed(false);
+        historyTable.setColumnSelectionAllowed(false);
+        historyTable.setAutoCreateRowSorter(true);
 
         historyTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
