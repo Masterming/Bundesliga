@@ -5,6 +5,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 
 /**
  * @author z003ywys
@@ -78,6 +79,7 @@ public class TransactionView extends javax.swing.JPanel {
                 return strings[i];
             }
         });
+        ergListClub.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(ergListClub);
 
         selectedClub.setText("Empfaengerclub:");

@@ -2,6 +2,7 @@ package view;
 
 import javax.swing.JButton;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 /**
  * @author z003ywys
@@ -33,6 +34,7 @@ public class SpielerAddView extends javax.swing.JPanel {
         anzToreTxt.setMargin(new java.awt.Insets(0, 0, 0, 0));
         anzToreTxt.setMinimumSize(new java.awt.Dimension(3, 15));
         anzToreTxt.setPreferredSize(new java.awt.Dimension(127, 19));
+        anzToreTxt.setHorizontalAlignment(SwingConstants.RIGHT);
 
         addSpielerBtn.setText("Spieler hinzufuegen");
         addSpielerBtn.setActionCommand("addSpieler");
