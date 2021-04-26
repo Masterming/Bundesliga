@@ -22,7 +22,7 @@ public class ClubAddView extends javax.swing.JDialog {
     }
 
     private void initComponents() {
-
+        this.setTitle("Neuen Club hinzuüfgen");
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();

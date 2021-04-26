@@ -1,4 +1,4 @@
-package controller;
+package presenter;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,8 +9,10 @@ import java.util.logging.Logger;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.Club;
 
 import model.Game;
 import model.Liga;
@@ -20,9 +22,9 @@ import view.ErgebnisInputView;
 /**
  * @author z003ywys
  */
-public class ErgebnisInputController implements ActionListener {
+public class ErgebnisInputPresenter implements ActionListener {
 
-    private final static Logger LOGGER = Logger.getLogger(ErgebnisInputController.class.getName());
+    private final static Logger LOGGER = Logger.getLogger(ErgebnisInputPresenter.class.getName());
     private ErgebnisInputView view;
     private JFrame master;
     private Liga liga;
@@ -32,7 +34,7 @@ public class ErgebnisInputController implements ActionListener {
     int clubAScore;
     int clubBScore;
 
-    public ErgebnisInputController(JFrame master, ErgebnisInputView view, String clubA, String clubB) {
+    public ErgebnisInputPresenter(JFrame master, ErgebnisInputView view, String clubA, String clubB) {
         this.view = view;
         this.master = master;
         this.view.setClubALbl(clubA);
@@ -50,7 +52,7 @@ public class ErgebnisInputController implements ActionListener {
 
     }
 
-    public ErgebnisInputController(JFrame master, ErgebnisInputView ergDialog, Game game, Liga l) {
+    public ErgebnisInputPresenter(JFrame master, ErgebnisInputView ergDialog, Game game, Liga l) {
         this.game = game;
         this.master = master;
         this.view = ergDialog;
@@ -63,7 +65,13 @@ public class ErgebnisInputController implements ActionListener {
         String hour = String.valueOf(game.getStart().getHour());
         String minute = String.valueOf(game.getStart().getMinute());
         String labelText = day + "." + mounth + "." + year + " um " + hour + ":" + minute + " Uhr ";
-        this.view.setDateLbl(labelText);
+        Club temp = game.getClub(0);
+        labelText += " im " + temp.getStadion();
+
+        this.view.getDateLbl().setText(labelText);
+        this.view.getDateLbl().setSize(this.view.getDateLbl().getPreferredSize());
+        this.view.getDateLbl().repaint();
+        this.view.getDateLbl().validate();
         this.view.getSaveBtn().addActionListener(this);
         this.view.getClubAAddGoalForPlayer().addActionListener(this);
         this.view.getClubASubGoalForPlayer().addActionListener(this);
@@ -82,22 +90,22 @@ public class ErgebnisInputController implements ActionListener {
         String nameA = view.getClubAPlayerList().getSelectedValue();
         String nameB = view.getClubBPlayerList().getSelectedValue();
         switch (e.getActionCommand()) {
-            case "scoreClubA":
-                scoreClub(nameA, scoreClubA);
-                break;
-            case "descoreClubA":
-                descoreClub(nameA, scoreClubA);
-                break;
-            case "scoreClubB":
-                scoreClub(nameB, scoreClubB);
-                break;
-            case "descoreClubB":
-                descoreClub(nameB, scoreClubB);
-                break;
-            case "save":
-                LOGGER.log(Level.INFO, "save");
-                save();
-                break;
+        case "scoreClubA":
+            scoreClub(nameA, scoreClubA);
+            break;
+        case "descoreClubA":
+            descoreClub(nameA, scoreClubA);
+            break;
+        case "scoreClubB":
+            scoreClub(nameB, scoreClubB);
+            break;
+        case "descoreClubB":
+            descoreClub(nameB, scoreClubB);
+            break;
+        case "save":
+            LOGGER.log(Level.INFO, "save");
+            save();
+            break;
         }
         updateView();
     }
@@ -231,6 +239,7 @@ public class ErgebnisInputController implements ActionListener {
             game.setResults(clubAScore, clubBScore);
             setPlayerGoals();
             liga.updateGame(game);
+            JOptionPane.showMessageDialog(master, "Spilergebnis wurde erfolgreich gespeichert");
             view.dispose();
         }
     }

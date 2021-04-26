@@ -1,4 +1,4 @@
-package controller;
+package presenter;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,9 +24,9 @@ import view.PlanAddGameView;
 /**
  * @author z003ywys
  */
-public class PlanAddGameController implements ActionListener, ItemListener, MouseListener {
+public class PlanAddGamePresenter implements ActionListener, ItemListener, MouseListener {
 
-    private final static Logger LOGGER = Logger.getLogger(PlanAddGameController.class.getName());
+    private final static Logger LOGGER = Logger.getLogger(PlanAddGamePresenter.class.getName());
     private PlanAddGameView view;
     private JFrame master;
     private Liga liga;
@@ -36,7 +36,7 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
     private String selectedBLiga;
     private Map<Integer, Liga> ligas;
 
-    public PlanAddGameController(JFrame master, PlanAddGameView view, Liga liga) {
+    public PlanAddGamePresenter(JFrame master, PlanAddGameView view, Liga liga) {
         this.view = view;
         this.master = master;
         this.liga = liga;
@@ -45,7 +45,7 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
         this.view.getClubBLigaList().addItemListener(this);
         this.view.getClubAList().addItemListener(this);
         this.view.getClubBList().addItemListener(this);
-        this.ligas = MainController.getLigas();
+        this.ligas = MainPresenter.getLigas();
 
         DateTimeFormatter f = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
         view.getDateInputTxt().setText(LocalDateTime.now().format(f));
@@ -91,9 +91,9 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
     public void actionPerformed(ActionEvent evt) {
         String comm = evt.getActionCommand();
         switch (comm) {
-            case "addGame":
-                addGame();
-                break;
+        case "addGame":
+            addGame();
+            break;
         }
     }
 
@@ -141,8 +141,9 @@ public class PlanAddGameController implements ActionListener, ItemListener, Mous
                 ligaB.updateGame(game);
             }
             LOGGER.log(Level.INFO, "Setup of {0} successful", game);
+            JOptionPane.showMessageDialog(master, "Spiel wurde erfolgreich erstellt und gesichert!");
         } else {
-            JOptionPane.showMessageDialog(master, "Spiel existiert bereits!");
+            JOptionPane.showMessageDialog(master, "Spiel existiert bereits oder wurde schon gespielt!");
         }
         view.dispose();
     }

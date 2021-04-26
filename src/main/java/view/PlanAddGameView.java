@@ -35,12 +35,13 @@ public class PlanAddGameView extends javax.swing.JDialog {
         clubALbl = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         clubBLbl = new javax.swing.JLabel();
+        this.setTitle("Neues spiel hinzufügen");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel2.setText("Datum: ");
 
-        jLabel1.setText("Club B:");
+        jLabel1.setText("Gastteam:");
 
         jLabel3.setText("Liga");
 
@@ -49,21 +50,21 @@ public class PlanAddGameView extends javax.swing.JDialog {
 
         jLabel4.setText("Format: dd.MM.yyyy HH:mm");
 
-        jLabel5.setText("Club A:");
+        jLabel5.setText("Heimteam:");
 
         jLabel6.setText("Liga: ");
 
         clubALigaList.setModel(
-                new javax.swing.DefaultComboBoxModel<>(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
+                new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         clubBLigaList.setModel(
-                new javax.swing.DefaultComboBoxModel<>(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
+                new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         clubAList.setModel(
-                new javax.swing.DefaultComboBoxModel<>(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
+                new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         clubBList.setModel(
-                new javax.swing.DefaultComboBoxModel<>(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
+                new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         clubALbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         clubALbl.setText("ClubA");
@@ -80,16 +81,16 @@ public class PlanAddGameView extends javax.swing.JDialog {
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
                         layout.createSequentialGroup().addContainerGap(53, Short.MAX_VALUE).addGroup(layout
                                 .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                                layout.createSequentialGroup()
-                                        .addComponent(clubALbl, javax.swing.GroupLayout.PREFERRED_SIZE, 162,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(
-                                                jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 31,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(clubBLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 150,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        layout.createSequentialGroup()
+                                                .addComponent(clubALbl, javax.swing.GroupLayout.PREFERRED_SIZE, 162,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(
+                                                        jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 31,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(clubBLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 150,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addComponent(addSpielBtn, javax.swing.GroupLayout.DEFAULT_SIZE,
                                                 javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

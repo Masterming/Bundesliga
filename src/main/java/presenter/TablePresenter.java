@@ -1,4 +1,4 @@
-package controller;
+package presenter;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,13 +15,13 @@ import view.TableView;
 /**
  * @author z003ywys
  */
-public class TableController implements ActionListener {
+public class TablePresenter implements ActionListener {
 
-    private final static Logger LOGGER = Logger.getLogger(TableController.class.getName());
+    private final static Logger LOGGER = Logger.getLogger(TablePresenter.class.getName());
     private TableView view;
     private Liga liga;
 
-    public TableController(TableView view, Liga liga) {
+    public TablePresenter(TableView view, Liga liga) {
         this.view = view;
         this.liga = liga;
         // this.view.setjLabel1(liga.getName());
@@ -32,10 +32,10 @@ public class TableController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
         switch (ae.getActionCommand()) {
-            case "test":
-                LOGGER.log(Level.INFO, "Table Controller Button/ Aktion erfolgreich");
-                LOGGER.log(Level.INFO, "Gezeigte Liga: {0}", liga.getName());
-                break;
+        case "test":
+            LOGGER.log(Level.INFO, "Table Controller Button/ Aktion erfolgreich");
+            LOGGER.log(Level.INFO, "Gezeigte Liga: {0}", liga.getName());
+            break;
         }
     }
 

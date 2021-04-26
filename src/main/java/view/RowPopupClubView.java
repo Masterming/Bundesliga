@@ -25,7 +25,6 @@ public class RowPopupClubView extends JPopupMenu {
         bearbeiten.setActionCommand("bearbeiten");
         add(loeschen);
         add(bearbeiten);
-
     }
 
     public JMenuItem getLoeschen() {

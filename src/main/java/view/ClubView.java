@@ -32,7 +32,7 @@ public class ClubView extends JPanel {
         addExistingClubBtn.setText("Vorhandenen Club Hinzufuegen");
         addExistingClubBtn.setActionCommand("addExistClub");
 
-        clubTable.setModel(new DefaultTableModel(new Object[][]{}, new String[]{"Club", "Stadion"}) {
+        clubTable.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Club", "Stadion" }) {
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return false;
             }
@@ -47,7 +47,7 @@ public class ClubView extends JPanel {
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup().addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
                                 .addGroup(layout.createSequentialGroup().addComponent(addClubBtn).addGap(18, 18, 18)
                                         .addComponent(addExistingClubBtn).addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap()));

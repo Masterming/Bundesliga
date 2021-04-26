@@ -25,6 +25,7 @@ public class ErgebnisInputView extends javax.swing.JDialog {
     }
 
     private void initComponents() {
+        this.setTitle("Spielergebnisse eintragen");
         clubBLbl = new javax.swing.JLabel();
         clubALbl = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -39,17 +40,8 @@ public class ErgebnisInputView extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-
-        ergClubALbl = new javax.swing.JLabel() {
-            public boolean editCellAt(int row, int column, java.util.EventObject e) {
-                return false;
-            }
-        };
-        ergClubBLbl1 = new javax.swing.JLabel() {
-            public boolean editCellAt(int row, int column, java.util.EventObject e) {
-                return false;
-            }
-        };
+        ergClubALbl = new javax.swing.JLabel();
+        ergClubBLbl1 = new javax.swing.JLabel();
         saveBtn = new javax.swing.JButton();
         dateLbl = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -68,30 +60,9 @@ public class ErgebnisInputView extends javax.swing.JDialog {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText(":");
 
-        clubBPlayerList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-
-            public int getSize() {
-                return strings.length;
-            }
-
-            public String getElementAt(int i) {
-                return strings[i];
-            }
-        });
         jScrollPane1.setViewportView(clubBPlayerList);
 
-        clubAPlayerList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-
-            public int getSize() {
-                return strings.length;
-            }
-
-            public String getElementAt(int i) {
-                return strings[i];
-            }
-        });
+        clubAPlayerList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(clubAPlayerList);
 
         clubBSubGoalForPlayer.setText("-");
@@ -106,6 +77,8 @@ public class ErgebnisInputView extends javax.swing.JDialog {
         clubASubGoalForPlayer.setText("-");
         clubASubGoalForPlayer.setActionCommand("descoreClubA");
 
+        this.saveBtn.setActionCommand("save");
+
         jLabel2.setText("Spielerliste:");
 
         jLabel3.setText("Spielerliste:");
@@ -118,17 +91,18 @@ public class ErgebnisInputView extends javax.swing.JDialog {
         ergClubBLbl1.setText("0");
 
         saveBtn.setText("Speichern");
-        saveBtn.setActionCommand("save");
 
         dateLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         dateLbl.setText("Datum");
 
-        scoredPlayerClubB.setModel(
-                new javax.swing.table.DefaultTableModel(new Object[][] {}, new String[] { "Spieler", "Toranzahl" }));
+        scoredPlayerClubB.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
+
+        }, new String[] { "Spieler", "Toranzahl" }));
         jScrollPane3.setViewportView(scoredPlayerClubB);
 
-        scoredPlayerClubA.setModel(
-                new javax.swing.table.DefaultTableModel(new Object[][] {}, new String[] { "Spieler", "Toranzahl" }));
+        scoredPlayerClubA.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
+
+        }, new String[] { "Spieler", "Toranzahl" }));
         jScrollPane4.setViewportView(scoredPlayerClubA);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -187,8 +161,8 @@ public class ErgebnisInputView extends javax.swing.JDialog {
                                                 .addGap(113, 113, 113).addComponent(clubBLbl,
                                                         javax.swing.GroupLayout.PREFERRED_SIZE, 199,
                                                         javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGroup(layout.createSequentialGroup().addGap(249, 249, 249).addComponent(dateLbl,
-                                javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createSequentialGroup().addGap(143, 143, 143).addComponent(dateLbl,
+                                javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup().addContainerGap()
@@ -334,6 +308,10 @@ public class ErgebnisInputView extends javax.swing.JDialog {
     public void setDateLbl(String date) {
         this.dateLbl.setText(date);
 
+    }
+
+    public JLabel getDateLbl() {
+        return dateLbl;
     }
 
 }

@@ -1,8 +1,10 @@
-package controller;
+package presenter;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,15 +20,16 @@ import view.TransactionView;
 /**
  * @author z003ywys
  */
-public class ClubEditController implements ActionListener {
+public class ClubEditPresenter implements ActionListener {
 
-    private final static Logger LOGGER = Logger.getLogger(ClubEditController.class.getName());
+    private final static Logger LOGGER = Logger.getLogger(ClubEditPresenter.class.getName());
     private ClubEditView view;
     private JFrame master;
     private Liga liga;
     private Club club;
+    private Map<Integer, Liga> ligas;
 
-    public ClubEditController(ClubEditView view, Club club, Liga liga, JFrame master) {
+    public ClubEditPresenter(ClubEditView view, Club club, Liga liga, JFrame master) {
         this.view = view;
         this.master = master;
         this.liga = liga;
@@ -35,6 +38,7 @@ public class ClubEditController implements ActionListener {
         this.view.getKaderBtn().addActionListener(this);
         this.view.getTransBtn().addActionListener(this);
         this.view.getAddSpielerBtn().addActionListener(this);
+        this.ligas = MainPresenter.getLigas();
     }
 
     @Override
@@ -51,7 +55,7 @@ public class ClubEditController implements ActionListener {
             view.getClubEditContent().revalidate();
 
             KaderView kdw2 = new KaderView();
-            KaderController kDc = new KaderController(kdw2, club, this.master, this.liga);
+            KaderPresenter kDc = new KaderPresenter(kdw2, club, this.master, this.liga);
             view.getClubEditContent().add(kdw2);
             view.getClubEditContent().repaint();
             view.getClubEditContent().revalidate();
@@ -63,7 +67,7 @@ public class ClubEditController implements ActionListener {
             view.getKaderBtn().setBackground(Color.lightGray);
             view.getAddSpielerBtn().setBackground(Color.lightGray);
             TransactionView tranView = new TransactionView();
-            TransactionController tr = new TransactionController(master, tranView, club);
+            TransactionPresenter tr = new TransactionPresenter(master, tranView, club);
             // Layout setzen ?
             view.getClubEditContent().removeAll();
             view.getClubEditContent().add(tranView);
@@ -83,7 +87,7 @@ public class ClubEditController implements ActionListener {
             view.getClubEditContent().repaint();
             view.getClubEditContent().revalidate();
             SpielerAddView spV = new SpielerAddView();
-            SpielerAddController spAC = new SpielerAddController(master, spV, club, liga);
+            SpielerAddPresenter spAC = new SpielerAddPresenter(master, spV, club, liga);
             view.getClubEditContent().add(spV);
             view.getClubEditContent().repaint();
             view.getClubEditContent().revalidate();

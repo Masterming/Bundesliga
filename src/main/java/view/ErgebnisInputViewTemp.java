@@ -30,7 +30,8 @@ public class ErgebnisInputViewTemp extends javax.swing.JDialog {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         clubBLbl = new javax.swing.JLabel();
@@ -67,18 +68,9 @@ public class ErgebnisInputViewTemp extends javax.swing.JDialog {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText(":");
 
-        clubBPlayerList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane1.setViewportView(clubBPlayerList);
 
-        clubAPlayerList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
+        clubAPlayerList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(clubAPlayerList);
 
         clubBSubGoalForPlayer.setText("-");
@@ -100,137 +92,130 @@ public class ErgebnisInputViewTemp extends javax.swing.JDialog {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText(":");
 
-        ergClubALbl.setText("-1");
+        ergClubALbl.setText("0");
 
-        ergClubBLbl1.setText("-1");
+        ergClubBLbl1.setText("0");
 
         saveBtn.setText("Speichern");
+        saveBtn.setActionCommand("save");
 
         dateLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         dateLbl.setText("Datum");
 
-        scoredPlayerClubB.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Spieler", "Toranzahl"
-            }
-        ));
+        scoredPlayerClubB.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
+
+        }, new String[] { "Spieler", "Toranzahl" }));
         jScrollPane3.setViewportView(scoredPlayerClubB);
 
-        scoredPlayerClubA.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Spieler", "Toranzahl"
-            }
-        ));
+        scoredPlayerClubA.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
+
+        }, new String[] { "Spieler", "Toranzahl" }));
         jScrollPane4.setViewportView(scoredPlayerClubA);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout
+                .createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(233, 233, 233)
-                        .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(clubAAddGoalForPlayer)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(clubASubGoalForPlayer))
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(65, 65, 65)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(clubBAddGoalForPlayer)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(clubBSubGoalForPlayer))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup().addGap(233, 233, 233).addComponent(saveBtn,
+                                javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup().addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup().addComponent(clubAAddGoalForPlayer)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(clubASubGoalForPlayer))
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 62,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 121,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(284, 284, 284)
-                                .addComponent(ergClubALbl, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(27, 27, 27))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(clubALbl, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(62, 62, 62)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(33, 33, 33)
-                                .addComponent(ergClubBLbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(113, 113, 113)
-                                .addComponent(clubBLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(249, 249, 249)
-                        .addComponent(dateLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(dateLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(clubBLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(clubALbl, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(5, 5, 5)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 187,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(65, 65, 65)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 62,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createSequentialGroup().addComponent(clubBAddGoalForPlayer)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(clubBSubGoalForPlayer))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 139,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18).addComponent(jScrollPane3,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE, 167,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createSequentialGroup().addGroup(layout
+                                .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup().addGap(284, 284, 284)
+                                        .addComponent(ergClubALbl, javax.swing.GroupLayout.PREFERRED_SIZE, 31,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(27, 27, 27))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
+                                        layout.createSequentialGroup().addContainerGap()
+                                                .addComponent(clubALbl, javax.swing.GroupLayout.PREFERRED_SIZE, 187,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(62, 62, 62)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 31,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(33, 33, 33).addComponent(ergClubBLbl1,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE, 31,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(113, 113, 113).addComponent(clubBLbl,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE, 199,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createSequentialGroup().addGap(143, 143, 143).addComponent(dateLbl,
+                                javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup().addContainerGap()
+                        .addComponent(dateLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 13,
+                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(clubBAddGoalForPlayer)
-                            .addComponent(clubBSubGoalForPlayer))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(clubBLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 36,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(clubALbl, javax.swing.GroupLayout.PREFERRED_SIZE, 36,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1))
+                        .addGap(5, 5, 5)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout
+                                .createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(clubBAddGoalForPlayer).addComponent(clubBSubGoalForPlayer))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 15,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(
+                                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jScrollPane1)
+                                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0,
+                                                        Short.MAX_VALUE)))
+                                .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(clubAAddGoalForPlayer)
+                                                .addComponent(clubASubGoalForPlayer))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 15,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout
+                                                .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 158,
+                                                        Short.MAX_VALUE)
+                                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0,
+                                                        Short.MAX_VALUE))))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(clubAAddGoalForPlayer)
-                            .addComponent(clubASubGoalForPlayer))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(ergClubALbl)
-                    .addComponent(ergClubBLbl1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27))
-        );
+                                .addComponent(jLabel4).addComponent(ergClubALbl).addComponent(ergClubBLbl1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addComponent(saveBtn,
+                                javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -281,6 +266,14 @@ public class ErgebnisInputViewTemp extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton clubAAddGoalForPlayer;
+    private javax.swing.JLabel clubALbl;
+    private javax.swing.JList<String> clubAPlayerList;
+    private javax.swing.JButton clubASubGoalForPlayer;
+    private javax.swing.JButton clubBAddGoalForPlayer;
+    private javax.swing.JLabel clubBLbl;
+    private javax.swing.JList<String> clubBPlayerList;
+    private javax.swing.JButton clubBSubGoalForPlayer;
     private javax.swing.JLabel dateLbl;
     private javax.swing.JLabel ergClubALbl;
     private javax.swing.JLabel ergClubBLbl1;
@@ -295,13 +288,5 @@ public class ErgebnisInputViewTemp extends javax.swing.JDialog {
     private javax.swing.JButton saveBtn;
     private javax.swing.JTable scoredPlayerClubA;
     private javax.swing.JTable scoredPlayerClubB;
-    private javax.swing.JButton clubAAddGoalForPlayer;
-    private javax.swing.JLabel clubALbl;
-    private javax.swing.JList<String> clubAPlayerList;
-    private javax.swing.JButton clubASubGoalForPlayer;
-    private javax.swing.JButton clubBAddGoalForPlayer;
-    private javax.swing.JLabel clubBLbl;
-    private javax.swing.JList<String> clubBPlayerList;
-    private javax.swing.JButton clubBSubGoalForPlayer;
     // End of variables declaration//GEN-END:variables
 }

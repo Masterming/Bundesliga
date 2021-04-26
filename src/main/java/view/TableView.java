@@ -21,8 +21,9 @@ public class TableView extends JPanel {
 
     // JLabel jLabel1;
     private void initComponents() {
-        Dimension preferredSize = new Dimension(800, 400);
-        //this.setMinimumSize(preferredSize);
+        setMaximumSize(new java.awt.Dimension(800, 400));
+        setMinimumSize(new java.awt.Dimension(800, 400));
+        setPreferredSize(new java.awt.Dimension(800, 400));
         jScrollPane1 = new JScrollPane();
         table = new JTable() {
             public boolean editCellAt(int row, int column, java.util.EventObject e) {
@@ -33,9 +34,8 @@ public class TableView extends JPanel {
 
         // ggf. extra Tabellen Modell als extra Klasse erstellen erstellen in dem man
         // Eigenschaften wie Editable relaisiert
-        table.setModel(new DefaultTableModel(new Object[][]{}, new String[]{"Platz", "Club",
-            "Spiele", "Punkte", "Siege", "Unentschieden", "Niederlagen", "Torverhaeltnis"}
-        ));
+        table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Platz", "Club", "Spiele", "Punkte",
+                "Siege", "Unentschieden", "Niederlagen", "Torverhaeltnis" }));
         table.setRowSelectionAllowed(false);
         table.setColumnSelectionAllowed(false);
         table.setAutoCreateRowSorter(true);
@@ -45,11 +45,11 @@ public class TableView extends JPanel {
 
         GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
-        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE));
+        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(jScrollPane1,
+                GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE));
         layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup().addComponent(jScrollPane1,
-                        GroupLayout.PREFERRED_SIZE, 309, GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 450, GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)));
 
     }
