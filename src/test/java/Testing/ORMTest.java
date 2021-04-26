@@ -2,8 +2,6 @@ package Testing;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,7 +26,6 @@ public class ORMTest {
     private static Liga l2;
     private static Liga l3;
     private static Game g1;
-    private static List<Club> clubList;
 
     @BeforeClass
     public static void setUp() {
@@ -81,7 +78,6 @@ public class ORMTest {
     }
 
     public static void testAddClub() {
-        clubList = new ArrayList();
         LOGGER.log(Level.INFO, "Test 2: Add Club");
         c1 = new Club("FC Augsburg");
         c2 = new Club("FC Schalke 04");
