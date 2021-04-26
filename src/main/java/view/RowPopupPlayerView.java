@@ -17,7 +17,7 @@ public class RowPopupPlayerView extends JPopupMenu {
     public RowPopupPlayerView(JTable table) {
         loeschen = new JMenuItem("Loeschen");
         loeschen.setActionCommand("loeschen");
-        bearbeiten = new JMenuItem("Bearbeiten");;
+        bearbeiten = new JMenuItem("Bearbeiten");
         bearbeiten.setActionCommand("bearbeiten");
         add(loeschen);
         add(bearbeiten);

@@ -45,7 +45,7 @@ public class MainPresenter implements ActionListener, Observer {
         LOGGER.log(Level.INFO, "Adding Ligas");
         dao = new LigaDBMapper();
         ligas = new HashMap<>();
-       ligasReference = new ArrayList();
+        ligasReference = new ArrayList();
         for (int i = 1; i <= 3; i++) {
             ligas.put(i, dao.getLiga(i));
             ligas.get(i).addObserver(this);
@@ -66,24 +66,24 @@ public class MainPresenter implements ActionListener, Observer {
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
-            case "liga1":
-                ligaId = 1;
-                break;
-            case "liga2":
-                ligaId = 2;
-                break;
-            case "liga3":
-                ligaId = 3;
-                break;
-            case "table":
-                selection = 1;
-                break;
-            case "plan":
-                selection = 2;
-                break;
-            case "clubs":
-                selection = 3;
-                break;
+        case "liga1":
+            ligaId = 1;
+            break;
+        case "liga2":
+            ligaId = 2;
+            break;
+        case "liga3":
+            ligaId = 3;
+            break;
+        case "table":
+            selection = 1;
+            break;
+        case "plan":
+            selection = 2;
+            break;
+        case "clubs":
+            selection = 3;
+            break;
         }
         renderView();
 
@@ -98,45 +98,45 @@ public class MainPresenter implements ActionListener, Observer {
         view.getClubsBtn().setBackground(Color.lightGray);
 
         switch (ligaId) {
-            case 1:
-                view.getLiga1Btn().setBackground(Color.white);
-                break;
-            case 2:
-                view.getLiga2Btn().setBackground(Color.white);
-                break;
-            case 3:
-                view.getLiga3Btn().setBackground(Color.white);
-                break;
+        case 1:
+            view.getLiga1Btn().setBackground(Color.white);
+            break;
+        case 2:
+            view.getLiga2Btn().setBackground(Color.white);
+            break;
+        case 3:
+            view.getLiga3Btn().setBackground(Color.white);
+            break;
         }
 
         // Anzeige anpassen + Controller erstellen
         switch (selection) {
-            case 1:
-                TableView tv = new TableView();
-                TablePresenter tbc = new TablePresenter(tv, ligas.get(ligaId));
+        case 1:
+            TableView tv = new TableView();
+            TablePresenter tbc = new TablePresenter(tv, ligas.get(ligaId));
 
-                view.getTableBtn().setBackground(Color.white);
-                view.getContentView().removeAll();
-                view.getContentView().add(tv);
-                break;
-            case 2:
-                PlanView plv = new PlanView(view);
-                //PlanViewTemp plv = new PlanViewTemp();
-                PlanPresenter plc = new PlanPresenter(view, plv, ligas.get(ligaId));
+            view.getTableBtn().setBackground(Color.white);
+            view.getContentView().removeAll();
+            view.getContentView().add(tv);
+            break;
+        case 2:
+            PlanView plv = new PlanView(view);
+            // PlanViewTemp plv = new PlanViewTemp();
+            PlanPresenter plc = new PlanPresenter(view, plv, ligas.get(ligaId));
 
-                view.getPlanBtn().setBackground(Color.white);
-                view.getContentView().removeAll();
-                //view.getContentView().add(scroll);
-                view.getContentView().add(plv);
-                break;
-            case 3:
-                ClubView cv = new ClubView(view);
-                ClubPresenter clc = new ClubPresenter(view, cv, ligas.get(ligaId),ligasReference);
+            view.getPlanBtn().setBackground(Color.white);
+            view.getContentView().removeAll();
+            // view.getContentView().add(scroll);
+            view.getContentView().add(plv);
+            break;
+        case 3:
+            ClubView cv = new ClubView(view);
+            ClubPresenter clc = new ClubPresenter(view, cv, ligas.get(ligaId), ligasReference);
 
-                view.getClubsBtn().setBackground(Color.white);
-                view.getContentView().removeAll();
-                view.getContentView().add(cv);
-                break;
+            view.getClubsBtn().setBackground(Color.white);
+            view.getContentView().removeAll();
+            view.getContentView().add(cv);
+            break;
         }
         view.getContentView().repaint();
         view.getContentView().revalidate();

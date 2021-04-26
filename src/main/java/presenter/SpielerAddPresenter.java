@@ -25,7 +25,7 @@ public class SpielerAddPresenter implements ActionListener {
     private JFrame master;
     private Liga liga;
     private Club club;
-    private Map<Integer,Liga> ligas;
+    private Map<Integer, Liga> ligas;
 
     public SpielerAddPresenter(JFrame master, SpielerAddView view, Club club, Liga liga) {
         this.view = view;
@@ -39,9 +39,9 @@ public class SpielerAddPresenter implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent evt) {
         switch (evt.getActionCommand()) {
-            case "addSpieler":
-                addSpieler();
-                break;
+        case "addSpieler":
+            addSpieler();
+            break;
         }
     }
 
@@ -63,7 +63,7 @@ public class SpielerAddPresenter implements ActionListener {
             LOGGER.log(Level.INFO, "Spieler hinzugefuegt");
             Player P = new Player(name, anzTor);
             boolean playerExists = false;
-            Club existingClub=null;
+            Club existingClub = null;
             for (Liga l : ligas.values()) {
                 for (Club c : l.getClubs()) {
                     for (Player pl : c.getPlayers()) {

@@ -51,18 +51,18 @@ public class TransactionPresenter implements ActionListener, MouseListener {
     public void actionPerformed(ActionEvent evt) {
         String command = evt.getActionCommand();
         switch (command) {
-            case "suchen":
-                suchen();
-                break;
-            case "trans_finish":
-                transFinish();
-                break;
-            case "add":
-                add();
-                break;
-            case "rem":
-                remove();
-                break;
+        case "suchen":
+            suchen();
+            break;
+        case "trans_finish":
+            transFinish();
+            break;
+        case "add":
+            add();
+            break;
+        case "rem":
+            remove();
+            break;
         }
     }
 

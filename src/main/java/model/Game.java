@@ -42,14 +42,6 @@ public class Game implements Serializable {
     @JoinColumn(name = "club1_id")
     private Club club1;
 
-    public Club getClub1() {
-        return club1;
-    }
-
-    public Club getClub2() {
-        return club2;
-    }
-
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "club2_id")
@@ -140,23 +132,20 @@ public class Game implements Serializable {
     }
 
     public void setFinished() {
+        club2.setGamesCount(club2.getGamesCount() + 1);
+        club1.setGamesCount(club1.getGamesCount() + 1);
+
         if (score1 < score2) {
             club2.setWins(club2.getWins() + 1);
-            club2.setGamesCount(club2.getGamesCount() + 1);
             club2.addPoints(3);
             club1.setLosses(club1.getLosses() + 1);
-            club1.setGamesCount(club1.getGamesCount() + 1);
         } else if (score1 > score2) {
             club1.setWins(club1.getWins() + 1);
-            club1.setGamesCount(club1.getGamesCount() + 1);
             club1.addPoints(3);
             club2.setLosses(club2.getLosses() + 1);
-            club2.setGamesCount(club2.getGamesCount() + 1);
         } else if (score1 == score2) {
-            club1.setGamesCount(club1.getGamesCount() + 1);
             club1.setDraw(club1.getDraw() + 1);
             club1.addPoints(1);
-            club2.setGamesCount(club2.getGamesCount() + 1);
             club2.setDraw(club2.getDraw() + 1);
             club2.addPoints(1);
         }

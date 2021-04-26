@@ -46,7 +46,7 @@ public class PlanView extends JPanel {
     }
 
     private void initComponents() {
-       addSpielBtn = new javax.swing.JButton();
+        addSpielBtn = new javax.swing.JButton();
         createGames = new javax.swing.JButton();
         setResult = new javax.swing.JButton();
         restartSeasonBtn = new javax.swing.JButton();
@@ -84,41 +84,39 @@ public class PlanView extends JPanel {
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(addSpielBtn)
-                        .addGap(18, 18, 18)
-                        .addComponent(setResult, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(createGames, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(restartSeasonBtn)
+        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+                javax.swing.GroupLayout.Alignment.TRAILING,
+                layout.createSequentialGroup().addContainerGap().addGroup(layout
+                        .createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING).addComponent(jScrollPane1)
+                        .addGroup(layout.createSequentialGroup().addComponent(addSpielBtn).addGap(18, 18, 18)
+                                .addComponent(setResult, javax.swing.GroupLayout.PREFERRED_SIZE, 203,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(createGames, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                                .addGap(18, 18, 18).addComponent(restartSeasonBtn)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(gameHistory, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap()));
+        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup().addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(restartSeasonBtn, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(createGames, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(setResult, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(addSpielBtn, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(gameHistory, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(gameHistory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(restartSeasonBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(createGames, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(setResult, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(addSpielBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(gameHistory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27))
-        );
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 390,
+                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)));
 
         gameHistory.getAccessibleContext().setAccessibleName("");
-
 
     }
 
@@ -142,50 +140,49 @@ public class PlanView extends JPanel {
         return setResult;
     }
 
-//    @Override
-//    public void update(Observable o, Object arg1) {
-//        // Hier landet man wenn man im Model was veraendert hat durch norifyObservers
-//        this.planContent.setLayout(new BoxLayout(this.planContent, BoxLayout.Y_AXIS));
-//        if (o instanceof PlanModel) {
-//            // To change body of generated methods, choose Tools | Templates.
-//            // javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-//            // this.setLayout(layout);
-//            planContent.removeAll();
-//            plm = (PlanModel) o;
-//            int count = 1;
-//            if (plm.getLiga().getId() == 1) {
-//                count = 5;
-//            }
-//            if (plm.getLiga().getId() == 2) {
-//                count = 10;
-//            }
-//            if (plm.getLiga().getId() == 3) {
-//                count = 15;
-//            }
-//            for (int i = 0; i < count; i++) {
-//                JLabel test = new JLabel(plm.getLiga().getName());
-//                JButton testBtn = new JButton("TestBTN " + i);
-//                test.setBackground(java.awt.Color.lightGray);
-//                test.setAlignmentX(Component.CENTER_ALIGNMENT);
-//                testBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
-//                testBtn.setActionCommand(String.valueOf(i) + "RB Leipzig");
-//                testBtn.addActionListener((java.awt.event.ActionEvent evt) -> {
-//                    action(evt);
-//                });
-//                this.planContent.add(test);
-//                this.planContent.add(testBtn);
-//            }
-//            this.planContent.revalidate();
-//            this.planContent.repaint();
-//            this.planContent.setVisible(true);
-//
-//        }
-//    }
+    // @Override
+    // public void update(Observable o, Object arg1) {
+    // // Hier landet man wenn man im Model was veraendert hat durch norifyObservers
+    // this.planContent.setLayout(new BoxLayout(this.planContent,
+    // BoxLayout.Y_AXIS));
+    // if (o instanceof PlanModel) {
+    // // To change body of generated methods, choose Tools | Templates.
+    // // javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+    // // this.setLayout(layout);
+    // planContent.removeAll();
+    // plm = (PlanModel) o;
+    // int count = 1;
+    // if (plm.getLiga().getId() == 1) {
+    // count = 5;
+    // }
+    // if (plm.getLiga().getId() == 2) {
+    // count = 10;
+    // }
+    // if (plm.getLiga().getId() == 3) {
+    // count = 15;
+    // }
+    // for (int i = 0; i < count; i++) {
+    // JLabel test = new JLabel(plm.getLiga().getName());
+    // JButton testBtn = new JButton("TestBTN " + i);
+    // test.setBackground(java.awt.Color.lightGray);
+    // test.setAlignmentX(Component.CENTER_ALIGNMENT);
+    // testBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+    // testBtn.setActionCommand(String.valueOf(i) + "RB Leipzig");
+    // testBtn.addActionListener((java.awt.event.ActionEvent evt) -> {
+    // action(evt);
+    // });
+    // this.planContent.add(test);
+    // this.planContent.add(testBtn);
+    // }
+    // this.planContent.revalidate();
+    // this.planContent.repaint();
+    // this.planContent.setVisible(true);
+    //
+    // }
+    // }
 
     public JButton getRestartSeasonBtn() {
         return restartSeasonBtn;
     }
 
-
-    
 }

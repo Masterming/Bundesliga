@@ -32,10 +32,10 @@ public class TablePresenter implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
         switch (ae.getActionCommand()) {
-            case "test":
-                LOGGER.log(Level.INFO, "Table Controller Button/ Aktion erfolgreich");
-                LOGGER.log(Level.INFO, "Gezeigte Liga: {0}", liga.getName());
-                break;
+        case "test":
+            LOGGER.log(Level.INFO, "Table Controller Button/ Aktion erfolgreich");
+            LOGGER.log(Level.INFO, "Gezeigte Liga: {0}", liga.getName());
+            break;
         }
     }
 

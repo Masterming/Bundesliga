@@ -26,7 +26,6 @@ public class KaderPresenter implements ActionListener, MouseListener {
     private JFrame master;
     private Liga liga;
     private Club club;
-   
 
     public KaderPresenter(KaderView view, Club club, JFrame mas, Liga liga) {
         this.view = view;

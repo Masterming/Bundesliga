@@ -27,7 +27,7 @@ public class ClubEditPresenter implements ActionListener {
     private JFrame master;
     private Liga liga;
     private Club club;
-    private Map<Integer,Liga> ligas;
+    private Map<Integer, Liga> ligas;
 
     public ClubEditPresenter(ClubEditView view, Club club, Liga liga, JFrame master) {
         this.view = view;
