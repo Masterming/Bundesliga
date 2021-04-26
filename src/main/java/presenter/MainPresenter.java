@@ -11,10 +11,6 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-
-import javax.swing.JScrollPane;
-import model.Club;
 
 import model.Liga;
 import model.LigaDBMapper;
@@ -86,7 +82,6 @@ public class MainPresenter implements ActionListener, Observer {
             break;
         }
         renderView();
-
     }
 
     private static void renderView() {

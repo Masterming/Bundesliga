@@ -28,6 +28,7 @@ public class MainView extends javax.swing.JFrame {
 
     private void initComponents() {
         Dimension preferredSize = new Dimension(900, 600);
+        setResizable(false);
         this.setPreferredSize(preferredSize);
         liga1Btn = new javax.swing.JButton();
         liga2Btn = new javax.swing.JButton();
