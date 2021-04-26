@@ -6,7 +6,6 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import static java.lang.System.in;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
