@@ -65,7 +65,7 @@ public class SpielerAddView extends javax.swing.JPanel {
                         .addComponent(anzToreTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30,
                                 javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32).addComponent(addSpielerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 32,
-                javax.swing.GroupLayout.PREFERRED_SIZE)
+                        javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(99, Short.MAX_VALUE)));
     }
 

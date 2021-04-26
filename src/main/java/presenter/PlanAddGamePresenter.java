@@ -91,9 +91,9 @@ public class PlanAddGamePresenter implements ActionListener, ItemListener, Mouse
     public void actionPerformed(ActionEvent evt) {
         String comm = evt.getActionCommand();
         switch (comm) {
-            case "addGame":
-                addGame();
-                break;
+        case "addGame":
+            addGame();
+            break;
         }
     }
 

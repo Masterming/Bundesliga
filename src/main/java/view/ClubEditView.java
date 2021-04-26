@@ -88,7 +88,7 @@ public class ClubEditView extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(kaderBtn).addComponent(addSpielerBtn).addComponent(transBtn))
                         .addGap(18, 18, 18).addComponent(clubEditContent, javax.swing.GroupLayout.DEFAULT_SIZE,
-                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap()));
 
         pack();

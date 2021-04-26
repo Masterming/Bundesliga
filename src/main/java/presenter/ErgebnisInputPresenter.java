@@ -65,9 +65,9 @@ public class ErgebnisInputPresenter implements ActionListener {
         String hour = String.valueOf(game.getStart().getHour());
         String minute = String.valueOf(game.getStart().getMinute());
         String labelText = day + "." + mounth + "." + year + " um " + hour + ":" + minute + " Uhr ";
-        Club temp = game.getClub1();
+        Club temp = game.getClub(0);
         labelText += " im " + temp.getStadion();
-        
+
         this.view.getDateLbl().setText(labelText);
         this.view.getDateLbl().setSize(this.view.getDateLbl().getPreferredSize());
         this.view.getDateLbl().repaint();
@@ -90,22 +90,22 @@ public class ErgebnisInputPresenter implements ActionListener {
         String nameA = view.getClubAPlayerList().getSelectedValue();
         String nameB = view.getClubBPlayerList().getSelectedValue();
         switch (e.getActionCommand()) {
-            case "scoreClubA":
-                scoreClub(nameA, scoreClubA);
-                break;
-            case "descoreClubA":
-                descoreClub(nameA, scoreClubA);
-                break;
-            case "scoreClubB":
-                scoreClub(nameB, scoreClubB);
-                break;
-            case "descoreClubB":
-                descoreClub(nameB, scoreClubB);
-                break;
-            case "save":
-                LOGGER.log(Level.INFO, "save");
-                save();
-                break;
+        case "scoreClubA":
+            scoreClub(nameA, scoreClubA);
+            break;
+        case "descoreClubA":
+            descoreClub(nameA, scoreClubA);
+            break;
+        case "scoreClubB":
+            scoreClub(nameB, scoreClubB);
+            break;
+        case "descoreClubB":
+            descoreClub(nameB, scoreClubB);
+            break;
+        case "save":
+            LOGGER.log(Level.INFO, "save");
+            save();
+            break;
         }
         updateView();
     }

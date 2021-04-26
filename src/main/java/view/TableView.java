@@ -34,9 +34,8 @@ public class TableView extends JPanel {
 
         // ggf. extra Tabellen Modell als extra Klasse erstellen erstellen in dem man
         // Eigenschaften wie Editable relaisiert
-        table.setModel(new DefaultTableModel(new Object[][]{}, new String[]{"Platz", "Club",
-            "Spiele", "Punkte", "Siege", "Unentschieden", "Niederlagen", "Torverhaeltnis"}
-        ));
+        table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Platz", "Club", "Spiele", "Punkte",
+                "Siege", "Unentschieden", "Niederlagen", "Torverhaeltnis" }));
         table.setRowSelectionAllowed(false);
         table.setColumnSelectionAllowed(false);
         table.setAutoCreateRowSorter(true);
@@ -46,11 +45,11 @@ public class TableView extends JPanel {
 
         GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
-        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE));
+        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(jScrollPane1,
+                GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE));
         layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup().addComponent(jScrollPane1,
-                        GroupLayout.PREFERRED_SIZE, 450, GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 450, GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)));
 
     }

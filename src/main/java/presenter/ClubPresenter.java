@@ -53,7 +53,8 @@ public class ClubPresenter implements MouseListener, ActionListener {
         this.setData();
 
     }
-        public ClubPresenter(JFrame master, ClubView view, Liga liga, List ligas) {
+
+    public ClubPresenter(JFrame master, ClubView view, Liga liga, List ligas) {
         this.view = view;
         this.master = master;
         this.liga = liga;
@@ -69,7 +70,7 @@ public class ClubPresenter implements MouseListener, ActionListener {
         }
         this.view.repaint();
         this.view.revalidate();
-        this.ligas=ligas;
+        this.ligas = ligas;
         this.setData();
 
     }
@@ -161,24 +162,24 @@ public class ClubPresenter implements MouseListener, ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
-            case "addClub":
-                LOGGER.log(Level.INFO, "Club Hinzufuegen button gedrueckt");
-                ClubAddView caV = new ClubAddView(master, true);
-                ClubAddPresenter clubAddController = new ClubAddPresenter(master, caV, liga);
-                caV.setVisible(true);
-                break;
+        case "addClub":
+            LOGGER.log(Level.INFO, "Club Hinzufuegen button gedrueckt");
+            ClubAddView caV = new ClubAddView(master, true);
+            ClubAddPresenter clubAddController = new ClubAddPresenter(master, caV, liga);
+            caV.setVisible(true);
+            break;
 
-            case "addExistClub":
-                LOGGER.log(Level.INFO, "Vorhandenen Club zur Liga hinzufuegen");
-                // Dialog box mit drop down menue ueber die 2 Ligen die nicht der aktuellen liga
-                // entsprechen
-                // auf grund der auswahl wird liste angapsst mit den clubs der liga, die im Drop
-                // Down menue ausgewaehlt wurde
-                // in Liste: mehrfach auswahl moeglich
-                ClubAddExistingView caEV = new ClubAddExistingView(master, true);
-                ClubAddExistingPresenter caEC = new ClubAddExistingPresenter(master, caEV, liga);
-                caEV.setVisible(true);
-                break;
+        case "addExistClub":
+            LOGGER.log(Level.INFO, "Vorhandenen Club zur Liga hinzufuegen");
+            // Dialog box mit drop down menue ueber die 2 Ligen die nicht der aktuellen liga
+            // entsprechen
+            // auf grund der auswahl wird liste angapsst mit den clubs der liga, die im Drop
+            // Down menue ausgewaehlt wurde
+            // in Liste: mehrfach auswahl moeglich
+            ClubAddExistingView caEV = new ClubAddExistingView(master, true);
+            ClubAddExistingPresenter caEC = new ClubAddExistingPresenter(master, caEV, liga);
+            caEV.setVisible(true);
+            break;
 
         }
     }

@@ -52,31 +52,30 @@ public class ClubAddExistingPresenter implements ActionListener, MouseListener, 
         String[] ligen;
         DefaultComboBoxModel<String> dfC;
         switch (liga.getId()) {
-            case 1:
-                ligen = new String[1];
-                ligen[0] = "Liga 2";
-                dfC = new DefaultComboBoxModel<>(ligen);
-                view.setLigaComboModel(dfC);
-                populateComboBox();
-                break;
+        case 1:
+            ligen = new String[1];
+            ligen[0] = "Liga 2";
+            dfC = new DefaultComboBoxModel<>(ligen);
+            view.setLigaComboModel(dfC);
+            populateComboBox();
+            break;
 
-            case 2:
-                ligen = new String[2];
-                ligen[0] = "Liga 1";
-                ligen[1] = "Liga 3";
-                dfC = new DefaultComboBoxModel<>(ligen);
-                view.setLigaComboModel(dfC);
-                populateComboBox();
-                break;
+        case 2:
+            ligen = new String[2];
+            ligen[0] = "Liga 1";
+            ligen[1] = "Liga 3";
+            dfC = new DefaultComboBoxModel<>(ligen);
+            view.setLigaComboModel(dfC);
+            populateComboBox();
+            break;
 
-            case 3:
-                ligen = new String[1];
-                ligen[0] = "Liga 2";
-                dfC = new DefaultComboBoxModel<>(ligen);
-                view.setLigaComboModel(dfC);
-                populateComboBox();
-                break;
-
+        case 3:
+            ligen = new String[1];
+            ligen[0] = "Liga 2";
+            dfC = new DefaultComboBoxModel<>(ligen);
+            view.setLigaComboModel(dfC);
+            populateComboBox();
+            break;
         }
         view.repaint();
         view.revalidate();
@@ -85,119 +84,106 @@ public class ClubAddExistingPresenter implements ActionListener, MouseListener, 
     @Override
     public void actionPerformed(ActionEvent evt) {
         switch (evt.getActionCommand()) {
-            case "clubAddLiga":
-                int confirm = JOptionPane.showConfirmDialog(master, "Wollen Sie den Club zur Liga hinzufuegen ?",
-                        "Club Hinzufuegen", JOptionPane.YES_NO_OPTION);
-                if (confirm == JOptionPane.YES_OPTION && selectedClub != null) {
-                    LOGGER.log(Level.INFO, "Club: {0} zur Liga hinzugefuegt", selectedClub);
-                    //TODO: Check if club has any games left to play
+        case "clubAddLiga":
+            int confirm = JOptionPane.showConfirmDialog(master, "Wollen Sie den Club zur Liga hinzufuegen ?",
+                    "Club Hinzufuegen", JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION && selectedClub != null) {
+                LOGGER.log(Level.INFO, "Club: {0} zur Liga hinzugefuegt", selectedClub);
+                // TODO: Check if club has any games left to play
 
-                    Liga origin = ligas.get(this.targetLigaId);
-                    Club temp = origin.getClub(selectedClub);
-                    if(origin.getGames().isEmpty()){
-                        System.out.println("Club kann erst bewebt werden nachdem gespielt wurde");
-                    }
-                    boolean hasClubAnyGamesLeft = false;
-                    for (Game g : origin.getGames()) {
-                        if (g.isFinished() == false) {
-                            if (g.getClub1() != temp && g.getClub2() != temp) {
-                               hasClubAnyGamesLeft = false;
-                            }
-                            else{
-                                hasClubAnyGamesLeft = true;
-                            }
-
-                        }
-                        if(g.isFinished() == true){
+                Liga origin = ligas.get(this.targetLigaId);
+                Club temp = origin.getClub(selectedClub);
+                if (origin.getGames().isEmpty()) {
+                    System.out.println("Club kann erst bewebt werden nachdem gespielt wurde");
+                }
+                boolean hasClubAnyGamesLeft = false;
+                for (Game g : origin.getGames()) {
+                    if (g.isFinished() == false) {
+                        if (g.getClub(0) != temp && g.getClub(1) != temp) {
                             hasClubAnyGamesLeft = false;
+                        } else {
+                            hasClubAnyGamesLeft = true;
                         }
 
                     }
-                    if(!hasClubAnyGamesLeft){
-                        //remove Club
-                        removeClub(origin);
+                    if (g.isFinished() == true) {
+                        hasClubAnyGamesLeft = false;
                     }
-                    else{
-                        JOptionPane.showMessageDialog(master, "Club kann nicht zur neuen Liga hinzugefügt werden, da noch spiele in der aktuellen Liga ausstehen");
-                    }
-                    
-                    break;
+
                 }
-        }
-    }
-
-        @Override
-        public void mouseClicked
-        (MouseEvent evt
-        
-            ) {
-        // 1. Liga auswahl
-        if (evt.getClickCount() == 1) {
-                try {
-                    selectedClub = view.getLigaClubList().getSelectedValue();
-                    if (selectedClub != null) {
-                        view.getToAddClubLbl().setText(selectedClub);
-
-                    } else {
-                        view.getToAddClubLbl().setText("");
-                    }
-                } catch (Exception e) {
-                    LOGGER.log(Level.SEVERE, e.getLocalizedMessage());
-                    view.getToAddClubLbl().setText("");
+                if (!hasClubAnyGamesLeft) {
+                    // remove Club
+                    removeClub(origin);
+                } else {
+                    JOptionPane.showMessageDialog(master,
+                            "Club kann nicht zur neuen Liga hinzugefügt werden, da noch spiele in der aktuellen Liga ausstehen");
                 }
 
+                break;
             }
         }
-
-        @Override
-        public void mousePressed
-        (MouseEvent arg0
-        
-        
-        ) {
-        // throw new UnsupportedOperationException("Not supported yet."); //To change
-        // body of generated methods, choose Tools | Templates.
     }
 
     @Override
-        public void mouseReleased
-        (MouseEvent arg0
-        
-        
-        ) {
-        // throw new UnsupportedOperationException("Not supported yet."); //To change
-        // body of generated methods, choose Tools | Templates.
-    }
+    public void mouseClicked(MouseEvent evt
 
-    @Override
-        public void mouseEntered
-        (MouseEvent arg0
-        
-        
-        ) {
-        // throw new UnsupportedOperationException("Not supported yet."); //To change
-        // body of generated methods, choose Tools | Templates.
-    }
+    ) {
+        // 1. Liga auswahl
+        if (evt.getClickCount() == 1) {
+            try {
+                selectedClub = view.getLigaClubList().getSelectedValue();
+                if (selectedClub != null) {
+                    view.getToAddClubLbl().setText(selectedClub);
 
-    @Override
-        public void mouseExited
-        (MouseEvent arg0
-        
-        
-        ) {
-        // throw new UnsupportedOperationException("Not supported yet."); //To change
-        // body of generated methods, choose Tools | Templates.
-    }
+                } else {
+                    view.getToAddClubLbl().setText("");
+                }
+            } catch (Exception e) {
+                LOGGER.log(Level.SEVERE, e.getLocalizedMessage());
+                view.getToAddClubLbl().setText("");
+            }
 
-    @Override
-        public void itemStateChanged
-        (ItemEvent evt
-        
-            ) {
-        populateComboBox();
         }
+    }
 
-    
+    @Override
+    public void mousePressed(MouseEvent arg0
+
+    ) {
+        // throw new UnsupportedOperationException("Not supported yet."); //To change
+        // body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent arg0
+
+    ) {
+        // throw new UnsupportedOperationException("Not supported yet."); //To change
+        // body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent arg0
+
+    ) {
+        // throw new UnsupportedOperationException("Not supported yet."); //To change
+        // body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseExited(MouseEvent arg0
+
+    ) {
+        // throw new UnsupportedOperationException("Not supported yet."); //To change
+        // body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void itemStateChanged(ItemEvent evt
+
+    ) {
+        populateComboBox();
+    }
 
     private void populateComboBox() {
         String ligStr = view.getSelectedLiga().getSelectedItem().toString();
@@ -226,8 +212,8 @@ public class ClubAddExistingPresenter implements ActionListener, MouseListener, 
             this.targetLigaId = 3;
         }
     }
-    
-    private void removeClub(Liga origin){
+
+    private void removeClub(Liga origin) {
         Club remClub = origin.removeClub(selectedClub);
         Liga target = ligas.get(liga.getId());
 
@@ -238,6 +224,5 @@ public class ClubAddExistingPresenter implements ActionListener, MouseListener, 
 
         view.dispose();
     }
-   
 
 }

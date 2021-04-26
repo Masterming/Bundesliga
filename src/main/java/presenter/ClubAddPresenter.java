@@ -24,7 +24,7 @@ public class ClubAddPresenter implements ActionListener {
     private ClubAddView view;
     private JFrame master;
     private Liga liga;
-    private Map<Integer,Liga>ligas;
+    private Map<Integer, Liga> ligas;
 
     public ClubAddPresenter(JFrame master, ClubAddView view, Liga liga) {
         this.view = view;
@@ -32,14 +32,14 @@ public class ClubAddPresenter implements ActionListener {
         this.liga = liga;
         this.view.getClubAddBtn().addActionListener(this);
         this.ligas = MainPresenter.getLigas();
-        
+
     }
 
     public ClubAddPresenter(JFrame master, ClubAddView view, Liga liga, List ligas) {
         this.view = view;
         this.master = master;
         this.liga = liga;
-        //this.ligas = ligas;
+        // this.ligas = ligas;
         this.ligas = MainPresenter.getLigas();
         this.view.getClubAddBtn().addActionListener(this);
     }
@@ -48,9 +48,9 @@ public class ClubAddPresenter implements ActionListener {
     public void actionPerformed(ActionEvent evt) {
         String comm = evt.getActionCommand();
         switch (comm) {
-            case "clubAdd":
-                addClub();
-                break;
+        case "clubAdd":
+            addClub();
+            break;
         }
     }
 
