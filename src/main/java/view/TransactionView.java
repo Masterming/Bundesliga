@@ -54,7 +54,7 @@ public class TransactionView extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(0, 258));
 
         receivingClubInput.setForeground(java.awt.Color.lightGray);
-        receivingClubInput.setText("Erhaltendes Club");
+        receivingClubInput.setText("Empfangender Club");
         receivingClubInput.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 receivingClubInputFocusGained(evt);
@@ -189,7 +189,7 @@ public class TransactionView extends javax.swing.JPanel {
     }// </editor-fold>
 
     private void receivingClubInputFocusGained(java.awt.event.FocusEvent evt) {
-        if (this.receivingClubInput.getText().equals("Erhaltendes Club")) {
+        if (this.receivingClubInput.getText().equals("Empfangender Club")) {
             this.receivingClubInput.setText("");
             this.receivingClubInput.setForeground(Color.BLACK);
         }
@@ -197,7 +197,7 @@ public class TransactionView extends javax.swing.JPanel {
 
     private void receivingClubInputFocusLost(java.awt.event.FocusEvent evt) {
         if (this.receivingClubInput.getText().isBlank()) {
-            this.receivingClubInput.setText("Erhaltendes Club");
+            this.receivingClubInput.setText("Empfangender Club");
             this.receivingClubInput.setForeground(Color.lightGray);
         }
     }
