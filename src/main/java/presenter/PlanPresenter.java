@@ -3,6 +3,7 @@ package presenter;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -13,6 +14,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import model.Club;
 
 import model.Game;
 import model.Liga;
@@ -54,70 +57,96 @@ public class PlanPresenter implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
-        case "addGame":
-            LOGGER.log(Level.INFO, "Spiel hinzufuegen");
-            PlanAddGameView pagV = new PlanAddGameView(master, true);
-            PlanAddGamePresenter pagC = new PlanAddGamePresenter(master, pagV, liga);
-            pagV.setVisible(true);
-            break;
-        case "addGameAuto":
-            LOGGER.log(Level.INFO, "Spielplan wird automatisch erstellt");
-            // TODO Spielplan automatisch erstellen und Liga Model aktualiseiren
-            break;
-        case "setResultAuto":
-            LOGGER.log(Level.INFO, "Spielergebnisse werden automatisch erstellt");
-            // Tordurchschnitt Bundesliga zwischen 2.5 & 3.5
-            Random rand = new Random();
-            for (Game game : liga.getGames()) {
-                if (!game.isFinished()) {
-                    int goals = rand.nextInt(6);
-                    int clubScore[] = { 0, 0 };
-                    for (int i = 0; i < goals; i++) {
-                        int det = rand.nextInt(2);
-                        clubScore[det]++;
-                        game.getClub(det).addPlayerGoals(rand.nextInt(game.getClub(det).getSize()), 1);
-                    }
-                    game.setResults(clubScore[0], clubScore[1]);
-                }
-            }
-            liga.updateGames(liga.getGames());
-            break;
-        case "restartSeason":
-            LOGGER.log(Level.INFO, "Restart Season");
-            // TODO Saison-Daten zurücksetzen (Spieler mit Toranzahl und Teams bleiben,
-            // alles andere geht)
-            for (Liga l : MainPresenter.getLigas().values()) {
-                l.reset();
-            }
-            break;
-        case "gamesHistory":
-            System.out.println("Game History");
-            this.view.getPlanContent().removeAll();
-            GameHistoryView gh = new GameHistoryView();
-            GameHistoryPresenter ghC = new GameHistoryPresenter(liga, gh, this);
-            // gh.getBackToPlanBtn().addActionListener(this);
-            this.view.getPlanContent().add(gh);
-            this.view.getPlanContent().setVisible(true);
-            this.view.getPlanContent().repaint();
-            this.view.getPlanContent().revalidate();
-            // TODO Spieldaten aus der DB holen
-
-            break;
-        default:
-            ErgebnisInputView ergV = new ErgebnisInputView(master, true);
-            JButton temp = (JButton) e.getSource();
-            int count = 0;
-            for (JButton jB : listButtons) {
-                if (temp == jB) {
-                    count = listButtons.indexOf(jB);
+            case "addGame":
+                LOGGER.log(Level.INFO, "Spiel hinzufuegen");
+                PlanAddGameView pagV = new PlanAddGameView(master, true);
+                PlanAddGamePresenter pagC = new PlanAddGamePresenter(master, pagV, liga);
+                pagV.setVisible(true);
+                break;
+            case "addGameAuto":
+                LOGGER.log(Level.INFO, "Spielplan wird automatisch erstellt");
+                int numOfClubs = (liga.getId() > 2 ? 20 : 18);
+                if (liga.getClubs().size() != numOfClubs) {
+                    JOptionPane.showMessageDialog(master, "Falsche anzahl an Teams: " + String.valueOf(liga.getClubs().size()) + " != " + String.valueOf(numOfClubs));
+                    LOGGER.log(Level.INFO, ("Falsche anzahl an Teams: " + String.valueOf(liga.getClubs().size()) + " != " + String.valueOf(numOfClubs)));
                     break;
                 }
-            }
-            Game g = unfinishedGames.get(count);
-            // Hier nochmal schleuife durchgehen
-            ErgebnisInputPresenter ergC = new ErgebnisInputPresenter(master, ergV, g, liga);
-            ergV.setVisible(true);
-            break;
+                boolean success = true;
+                for (int i = 0; i < numOfClubs; i++) {
+                    Club c1 = liga.getClubs().get(i);
+                    Club c2;
+                    for (int j = 0; j < numOfClubs; j++) {
+                        if (i != j) {
+                            c2 = liga.getClubs().get(j);
+                            Game newGame = new Game(c1, c2, LocalDateTime.now(), liga, liga);
+                            if (liga.updateGame(newGame)) {
+                                //LOGGER.log(Level.INFO, "Setup of {0} successful", newGame);
+                                //LOGGER.log(Level.INFO, "Spiel wurde erfolgreich erstellt und gesichert!");
+                            } else {
+                                LOGGER.log(Level.INFO, ("Generating Game: " + c1.getName() + " vs " + c2.getName()));
+                                LOGGER.log(Level.SEVERE, "Spiel existiert bereits oder wurde schon gespielt!");
+                                success = false;
+                            }
+                        }
+                    }
+                }
+                if(!success)
+                    JOptionPane.showMessageDialog(master,"Ein oder mehrere Spiele existieren bereits, oder wurden schon gepsielt!");
+                break;
+            case "setResultAuto":
+                LOGGER.log(Level.INFO, "Spielergebnisse werden automatisch erstellt");
+                // Tordurchschnitt Bundesliga zwischen 2.5 & 3.5
+                Random rand = new Random();
+                for (Game game : liga.getGames()) {
+                    if (!game.isFinished()) {
+                        int goals = rand.nextInt(6);
+                        int clubScore[] = {0, 0};
+                        for (int i = 0; i < goals; i++) {
+                            int det = rand.nextInt(2);
+                            clubScore[det]++;
+                            game.getClub(det).addPlayerGoals(rand.nextInt(game.getClub(det).getSize()), 1);
+                        }
+                        game.setResults(clubScore[0], clubScore[1]);
+                    }
+                }
+                liga.updateGames(liga.getGames());
+                break;
+            case "restartSeason":
+                LOGGER.log(Level.INFO, "Restart Season");
+                // TODO Saison-Daten zurücksetzen (Spieler mit Toranzahl und Teams bleiben,
+                // alles andere geht)
+                for (Liga l : MainPresenter.getLigas().values()) {
+                    l.reset();
+                }
+                break;
+            case "gamesHistory":
+                System.out.println("Game History");
+                this.view.getPlanContent().removeAll();
+                GameHistoryView gh = new GameHistoryView();
+                GameHistoryPresenter ghC = new GameHistoryPresenter(liga, gh, this);
+                // gh.getBackToPlanBtn().addActionListener(this);
+                this.view.getPlanContent().add(gh);
+                this.view.getPlanContent().setVisible(true);
+                this.view.getPlanContent().repaint();
+                this.view.getPlanContent().revalidate();
+                // TODO Spieldaten aus der DB holen
+
+                break;
+            default:
+                ErgebnisInputView ergV = new ErgebnisInputView(master, true);
+                JButton temp = (JButton) e.getSource();
+                int count = 0;
+                for (JButton jB : listButtons) {
+                    if (temp == jB) {
+                        count = listButtons.indexOf(jB);
+                        break;
+                    }
+                }
+                Game g = unfinishedGames.get(count);
+                // Hier nochmal schleuife durchgehen
+                ErgebnisInputPresenter ergC = new ErgebnisInputPresenter(master, ergV, g, liga);
+                ergV.setVisible(true);
+                break;
         }
     }
 
