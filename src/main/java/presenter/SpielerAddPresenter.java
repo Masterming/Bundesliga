@@ -46,9 +46,16 @@ public class SpielerAddPresenter implements ActionListener {
 
     private void addSpieler() {
         String name = view.getPlayerNameTxt().getText();
+        name = name.trim();
         String anzTorStr = view.getAnzToreTxt().getText();
+        anzTorStr = anzTorStr.trim();
         int anzTor = -1;
         boolean inputOk = true;
+        if(name.isBlank()|| name.isEmpty()){
+            inputOk=false;
+            JOptionPane.showMessageDialog(master,
+                    "Es wurden kein Name für den Spieler eingeben! Bitte versuchen Sie es erneut");
+        }
         try {
             anzTor = Integer.parseInt(anzTorStr);
         } catch (NumberFormatException ex) {
