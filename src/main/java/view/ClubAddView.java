@@ -36,7 +36,7 @@ public class ClubAddView extends javax.swing.JDialog {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Club Hinzufuegen");
+        jLabel1.setText("Club hinzufügen");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 184, 33));
 
         jLabel2.setText("Clubname");
@@ -48,7 +48,7 @@ public class ClubAddView extends javax.swing.JDialog {
         getContentPane().add(clubNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(69, 50, 130, 30));
         getContentPane().add(clubStadionTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(69, 87, 130, 30));
 
-        clubAddBtn.setText("Club Hinzufuegen");
+        clubAddBtn.setText("Club hinzufügen");
         clubAddBtn.setActionCommand("clubAdd");
         getContentPane().add(clubAddBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 190, -1));
 

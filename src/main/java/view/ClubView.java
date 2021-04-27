@@ -26,10 +26,10 @@ public class ClubView extends JPanel {
         jScrollPane1 = new JScrollPane();
         clubTable = new JTable();
 
-        addClubBtn.setText("Neuen Club Hinzufuegen");
+        addClubBtn.setText("Neuen Club hinzufügen");
         addClubBtn.setActionCommand("addClub");
 
-        addExistingClubBtn.setText("Vorhandenen Club Hinzufuegen");
+        addExistingClubBtn.setText("Vorhandenen Club hinzufügen");
         addExistingClubBtn.setActionCommand("addExistClub");
 
         clubTable.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Club", "Stadion" }) {

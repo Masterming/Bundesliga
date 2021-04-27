@@ -41,9 +41,9 @@ public class Main {
 ////        Player p2;
 ////        Club c1;
 ////        Club c2;
-//        Liga l1;
-//        Liga l2;
-//        Liga l3;
+         Liga l1;
+         Liga l2;
+         Liga l3;
 ////
 ////        p1 = new Player("Thomas Mueller", 0);
 ////        p2 = new Player("Luca Schuler", 0);
@@ -59,9 +59,9 @@ public class Main {
 ////        c1.setId(dao_c.addClub(c1));
 ////        c2.setId(dao_c.addClub(c2));
 ////
-//        l1 = new Liga("1. Bundesliga");
-//        l2 = new Liga("2. Bundesliga");
-//        l3 = new Liga("3. Bundesliga");
+            l1 = new Liga("1. Bundesliga");
+            l2 = new Liga("2. Bundesliga");
+            l3 = new Liga("3. Bundesliga");
 ////        l1.addClub(c1);
 ////        l1.addClub(c2);
 ////        
@@ -69,9 +69,9 @@ public class Main {
 ////            Club c = new Club("Club " + i);
 ////            l1.addClub(c);
 ////        }
-//        LigaDBMapper dao_l = new LigaDBMapper();
-//        l1.setId(dao_l.addLiga(l1));
-//        l2.setId(dao_l.addLiga(l2));
-//        l3.setId(dao_l.addLiga(l3));
+           LigaDBMapper dao_l = new LigaDBMapper();
+           l1.setId(dao_l.addLiga(l1));
+           l2.setId(dao_l.addLiga(l2));
+           l3.setId(dao_l.addLiga(l3));
     }
 }
