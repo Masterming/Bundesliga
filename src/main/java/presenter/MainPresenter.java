@@ -17,7 +17,6 @@ import model.LigaDBMapper;
 import view.ClubView;
 import view.MainView;
 import view.PlanView;
-import view.PlanViewTemp;
 import view.TableView;
 
 /**

@@ -10,7 +10,6 @@ import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
 import model.Game;
 import model.Liga;
-import view.GameHistory;
 import view.GameHistoryView;
 
 /**

@@ -21,11 +21,9 @@ import model.Game;
 import model.Liga;
 
 import view.ErgebnisInputView;
-import view.GameHistory;
 import view.GameHistoryView;
 import view.PlanAddGameView;
 import view.PlanView;
-import view.PlanViewTemp;
 
 /**
  * @author z003ywys
