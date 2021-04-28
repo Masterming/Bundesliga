@@ -64,7 +64,6 @@ public class PlanAddGamePresenter implements ActionListener, ItemListener, Mouse
             DefaultComboBoxModel<String> dfB = new DefaultComboBoxModel<>(ligen);
             view.setClubALigaList(dfC);
             view.setClubBLigaList(dfB);
-            // TODO Clubs Holen pro liga
         }
         if (liga.getId() == 2) {
             String[] ligen = new String[3];

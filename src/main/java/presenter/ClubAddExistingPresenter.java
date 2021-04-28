@@ -88,8 +88,6 @@ public class ClubAddExistingPresenter implements ActionListener, MouseListener, 
                     "Club Hinzufuegen", JOptionPane.YES_NO_OPTION);
             if (confirm == JOptionPane.YES_OPTION && selectedClub != null) {
                 LOGGER.log(Level.INFO, "Club: {0} zur Liga hinzugefuegt", selectedClub);
-                // TODO: Check if club has any games left to play
-
                 Liga origin = ligas.get(this.targetLigaId);
                 Club temp = origin.getClub(selectedClub);
                 if (origin.getGames().isEmpty()) {
@@ -188,7 +186,6 @@ public class ClubAddExistingPresenter implements ActionListener, MouseListener, 
         String ligStr = view.getSelectedLiga().getSelectedItem().toString();
         clubList.removeAllElements();
         if (ligStr.contains("1")) {
-            // TODO Clubs Aufzaehlen aus der Liga
             for (Club c : ligas.get(1).getClubs()) {
                 clubList.addElement(c.getName());
             }
@@ -196,7 +193,6 @@ public class ClubAddExistingPresenter implements ActionListener, MouseListener, 
 
         }
         if (ligStr.contains("2")) {
-            // TODO Clubs Aufzaehlen aus der Liga
             for (Club c : ligas.get(2).getClubs()) {
                 clubList.addElement(c.getName());
             }
@@ -204,7 +200,6 @@ public class ClubAddExistingPresenter implements ActionListener, MouseListener, 
 
         }
         if (ligStr.contains("3")) {
-            // TODO Clubs Aufzaehlen aus der Liga
             for (Club c : ligas.get(3).getClubs()) {
                 clubList.addElement(c.getName());
             }

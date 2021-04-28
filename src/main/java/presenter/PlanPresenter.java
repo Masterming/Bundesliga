@@ -114,8 +114,6 @@ public class PlanPresenter implements ActionListener {
             break;
         case "restartSeason":
             LOGGER.log(Level.INFO, "Restart Season");
-            // TODO Saison-Daten zurücksetzen (Spieler mit Toranzahl und Teams bleiben,
-            // alles andere geht)
             for (Liga l : MainPresenter.getLigas().values()) {
                 l.reset();
             }
@@ -129,8 +127,6 @@ public class PlanPresenter implements ActionListener {
             this.view.getPlanContent().setVisible(true);
             this.view.getPlanContent().repaint();
             this.view.getPlanContent().revalidate();
-            // TODO Spieldaten aus der DB holen
-
             break;
         default:
             ErgebnisInputView ergV = new ErgebnisInputView(master, true);
@@ -152,7 +148,6 @@ public class PlanPresenter implements ActionListener {
 
     private void getDataAndAdaptView() {
         int counter = 0;
-        // TODO: gelöschte Clubs ? --> wie finden wir die raus
         this.view.getPlanContent().setLayout(new BoxLayout(view.getPlanContent(), BoxLayout.Y_AXIS));
         this.view.getPlanContent().removeAll();
         for (Game g : this.liga.getGames()) {

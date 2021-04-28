@@ -110,7 +110,6 @@ public class ErgebnisInputPresenter implements ActionListener {
     }
 
     private void getData() {
-        // TODO daten aus DB holen
         List<Player> spielerClub1 = game.getClub(0).getPlayers();
         List<Player> spielerClub2 = game.getClub(1).getPlayers();
         DefaultListModel<String> listModelClubA = new DefaultListModel<>();
