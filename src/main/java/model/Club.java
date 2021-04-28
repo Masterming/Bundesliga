@@ -17,8 +17,6 @@ import javax.persistence.Table;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
-import presenter.MainPresenter;
-
 /**
  * @author Rene
  */
@@ -340,32 +338,11 @@ public class Club implements Serializable, Comparable<Club> {
         if (diff1 != diff2) {
             return (diff1 > diff2 ? 1 : -1);
         }
-        // total result from direct comparison
-        int tot1 = 0; // total score for this team
-        int tot2 = 0; // total score for other team
-        for (int i = 1; i < 3; i++) {
-            if (MainPresenter.getLigas().get(i).getClubs().contains(this)) {
-                List<Game> tmp = MainPresenter.getLigas().get(i).getGames(); // get all games from own league
-                for (Game g : tmp) { // find all games with both teams in them
-                    if (this.equals(g.getClub(0)) && c.equals(g.getClub(1))) {
-                        tot1 += g.getScore(0); // add game score to according total score
-                        tot2 += g.getScore(1);
-                    } else if (this.equals(g.getClub(1)) && c.equals(g.getClub(0))) {
-                        tot1 += g.getScore(1);
-                        tot2 += g.getScore(0);
-                    }
-                }
-                break;
-            }
-        }
-        if (tot1 != tot2) {
-            return (tot1 > tot2 ? 1 : -1);
-        }
+
         /*
          * Hier wird theoretisch noch ausgewertet, wer im direkten vergleich mehr
          * Auswärts-Tore erzielt hat, dafür müssten wir aber die Heimmannschaft im
-         * Game-Objekt tracken. Passiert eh fast nie, wird also (erstmal) weggelassen.
-         * -> Heimteam immer Club1 im Game Objekt!! -> TODO
+         * Game-Objekt tracken. Passiert eh fast nie, wird also weggelassen.
          */
         return 0;
     }
