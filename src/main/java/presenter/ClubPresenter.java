@@ -52,7 +52,7 @@ public class ClubPresenter implements MouseListener, ActionListener {
 
     }
 
-    public ClubPresenter(JFrame master, ClubView view, Liga liga, List ligas) {
+    public ClubPresenter(JFrame master, ClubView view, Liga liga, List<Liga> ligas) {
         this.view = view;
         this.master = master;
         this.liga = liga;
@@ -70,7 +70,6 @@ public class ClubPresenter implements MouseListener, ActionListener {
         this.view.revalidate();
         this.ligas = ligas;
         this.setData();
-
     }
 
     public void addPlayer(String player) {

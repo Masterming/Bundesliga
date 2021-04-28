@@ -83,8 +83,8 @@ public class Liga extends Observable implements Serializable {
     }
 
     public boolean addClub(Club c) {
-        for(int i=0; i<clubs.size();i++){
-            if(c.getName().equals(clubs.get(i).getName())){
+        for (int i = 0; i < clubs.size(); i++) {
+            if (c.getName().equals(clubs.get(i).getName())) {
                 return false;
             }
         }

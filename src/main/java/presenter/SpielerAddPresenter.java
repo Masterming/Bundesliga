@@ -51,8 +51,8 @@ public class SpielerAddPresenter implements ActionListener {
         anzTorStr = anzTorStr.trim();
         int anzTor = -1;
         boolean inputOk = true;
-        if(name.isBlank()|| name.isEmpty()){
-            inputOk=false;
+        if (name.isBlank() || name.isEmpty()) {
+            inputOk = false;
             JOptionPane.showMessageDialog(master,
                     "Es wurden kein Name für den Spieler eingeben! Bitte versuchen Sie es erneut");
         }

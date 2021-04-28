@@ -40,7 +40,7 @@ public class MainPresenter implements ActionListener, Observer {
         LOGGER.log(Level.INFO, "Adding Ligas");
         dao = new LigaDBMapper();
         ligas = new HashMap<>();
-        ligasReference = new ArrayList();
+        ligasReference = new ArrayList<>();
         for (int i = 1; i <= 3; i++) {
             ligas.put(i, dao.getLiga(i));
             ligas.get(i).addObserver(this);

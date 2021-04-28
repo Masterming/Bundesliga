@@ -34,7 +34,7 @@ public class ClubAddPresenter implements ActionListener {
 
     }
 
-    public ClubAddPresenter(JFrame master, ClubAddView view, Liga liga, List ligas) {
+    public ClubAddPresenter(JFrame master, ClubAddView view, Liga liga, List<Liga> ligas) {
         this.view = view;
         this.master = master;
         this.liga = liga;

@@ -9,8 +9,8 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import model.Club;
 
+import model.Club;
 import model.Liga;
 import view.RowPopupClubView;
 

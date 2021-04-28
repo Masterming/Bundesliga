@@ -11,8 +11,8 @@ import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.Club;
 
+import model.Club;
 import model.Game;
 import model.Liga;
 import model.Player;

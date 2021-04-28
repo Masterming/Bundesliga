@@ -1,9 +1,5 @@
 package view;
 
-import presenter.ErgebnisInputPresenter;
-import java.awt.Dimension;
-import java.awt.FontMetrics;
-import java.awt.event.ActionEvent;
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
