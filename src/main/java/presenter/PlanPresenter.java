@@ -1,5 +1,6 @@
 package presenter;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -172,14 +173,10 @@ public class PlanPresenter implements ActionListener {
                 JButton testBtn = new JButton();
                 String labelButton = g.getClub(0).getName() + " - " + g.getClub(1).getName();
                 testBtn.setText(labelButton);
-                test.setBackground(java.awt.Color.lightGray);
+                test.setBackground(Color.lightGray);
                 test.setAlignmentX(Component.CENTER_ALIGNMENT);
                 testBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
                 testBtn.setActionCommand(String.valueOf(counter));
-                // testBtn.setActionCommand(String.valueOf(i) + "RB Leipzig");
-                // testBtn.addActionListener((java.awt.event.ActionEvent evt) -> {
-                // action(evt);
-                // });
                 testBtn.addActionListener(this);
 
                 view.getPlanContent().add(test);

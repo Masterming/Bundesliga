@@ -3,11 +3,12 @@ package view;
 import java.awt.Frame;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+import javax.swing.JDialog;
 
 /**
  * @author z003ywys
  */
-public class ClubAddView extends javax.swing.JDialog {
+public class ClubAddView extends JDialog {
 
     private static final long serialVersionUID = 23L;
 
