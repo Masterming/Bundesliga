@@ -93,7 +93,7 @@ public class ClubAddExistingPresenter implements ActionListener, MouseListener, 
                 Liga origin = ligas.get(this.targetLigaId);
                 Club temp = origin.getClub(selectedClub);
                 if (origin.getGames().isEmpty()) {
-                    System.out.println("Club kann erst bewebt werden nachdem gespielt wurde");
+                    LOGGER.log(Level.WARNING, "Club kann erst bewebt werden nachdem gespielt wurde");
                 }
                 boolean hasClubAnyGamesLeft = false;
                 for (Game g : origin.getGames()) {

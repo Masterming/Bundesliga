@@ -120,7 +120,6 @@ public class PlanPresenter implements ActionListener {
             }
             break;
         case "gamesHistory":
-            System.out.println("Game History");
             this.view.getPlanContent().removeAll();
             GameHistoryView gh = new GameHistoryView();
             GameHistoryPresenter ghC = new GameHistoryPresenter(liga, gh, this);

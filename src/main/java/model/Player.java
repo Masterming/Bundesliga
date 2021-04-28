@@ -70,7 +70,6 @@ public class Player implements Serializable {
 
     public boolean copy(Player other) {
         if (!equals(other)) {
-            System.out.println("Player mismatch");
             return false;
         }
         this.name = other.name;

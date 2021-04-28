@@ -250,7 +250,6 @@ public class Club implements Serializable, Comparable<Club> {
     public boolean copy(Club other) {
         boolean success = true;
         if (!equals(other)) {
-            System.out.println("Club mismatch");
             success = false;
         }
         this.name = other.name;

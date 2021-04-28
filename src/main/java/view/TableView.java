@@ -6,14 +6,11 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-import java.util.logging.*;
-
 /**
  * @author z003ywys
  */
 public class TableView extends JPanel {
 
-    private final static Logger LOGGER = Logger.getLogger(TableView.class.getName());
     private static final long serialVersionUID = 20L;
     JScrollPane jScrollPane1;
     JTable table;
@@ -82,7 +79,6 @@ public class TableView extends JPanel {
     public TableView() {
         initComponents();
         try {
-
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     UIManager.setLookAndFeel(info.getClassName());
@@ -91,9 +87,8 @@ public class TableView extends JPanel {
             }
         } catch (UnsupportedLookAndFeelException | IllegalAccessException | InstantiationException
                 | ClassNotFoundException ex) {
-            LOGGER.log(Level.SEVERE, ex.getLocalizedMessage());
-            this.setVisible(true);
         }
+        this.setVisible(true);
     }
 
 }

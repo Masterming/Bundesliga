@@ -28,9 +28,7 @@ public class GameHistoryPresenter implements ActionListener {
     public void actionPerformed(ActionEvent evt) {
         String act = evt.getActionCommand();
         if (act == "backToPlan") {
-            System.out.println("Go Back to Plan");
             this.plC.restorePlanView();
-
         }
     }
 
