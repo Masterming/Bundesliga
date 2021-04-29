@@ -31,7 +31,7 @@ public class TableView extends JPanel {
         // ggf. extra Tabellen Modell als extra Klasse erstellen erstellen in dem man
         // Eigenschaften wie Editable relaisiert
         table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Platz", "Club", "Spiele", "Punkte",
-                "Siege", "Unentschieden", "Niederlagen", "Torverhaeltnis" }));
+                "Siege", "Unentschieden", "Niederlagen", "Torverhältnis" }));
         table.setRowSelectionAllowed(false);
         table.setColumnSelectionAllowed(false);
         table.setAutoCreateRowSorter(true);

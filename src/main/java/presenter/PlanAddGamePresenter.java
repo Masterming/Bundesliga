@@ -28,7 +28,7 @@ public class PlanAddGamePresenter implements ActionListener, ItemListener, Mouse
 
     private final static Logger LOGGER = Logger.getLogger(PlanAddGamePresenter.class.getName());
     private PlanAddGameView view;
-    private JFrame master;
+        private JFrame master;
     private Liga liga;
     private Liga ligaA;
     private Liga ligaB;
