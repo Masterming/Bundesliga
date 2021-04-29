@@ -26,7 +26,6 @@ public class ClubEditPresenter implements ActionListener {
     private JFrame master;
     private Liga liga;
     private Club club;
-    private Map<Integer, Liga> ligas;
 
     public ClubEditPresenter(ClubEditView view, Club club, Liga liga, JFrame master) {
         this.view = view;
@@ -37,7 +36,6 @@ public class ClubEditPresenter implements ActionListener {
         this.view.getKaderBtn().addActionListener(this);
         this.view.getTransBtn().addActionListener(this);
         this.view.getAddSpielerBtn().addActionListener(this);
-        this.ligas = MainPresenter.getLigas();
     }
 
     @Override

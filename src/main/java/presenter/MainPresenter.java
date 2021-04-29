@@ -30,7 +30,6 @@ public class MainPresenter implements ActionListener, Observer {
     // Es wird 3 Ligen Model geben jeweils eins pro Liga
     // --> werden beim ersten klick auf LigaButtons gesetzt
     private static Map<Integer, Liga> ligas;
-    private static List<Liga> ligasReference;
     private LigaDBMapper dao;
 
     private static int ligaId = 1;
@@ -40,11 +39,9 @@ public class MainPresenter implements ActionListener, Observer {
         LOGGER.log(Level.INFO, "Adding Ligas");
         dao = new LigaDBMapper();
         ligas = new HashMap<>();
-        ligasReference = new ArrayList<>();
         for (int i = 1; i <= 3; i++) {
             ligas.put(i, dao.getLiga(i));
             ligas.get(i).addObserver(this);
-            ligasReference.add(dao.getLiga(i));
         }
 
         view.getLiga1Btn().addActionListener(this);
@@ -125,7 +122,7 @@ public class MainPresenter implements ActionListener, Observer {
             break;
         case 3:
             ClubView cv = new ClubView(view);
-            ClubPresenter clc = new ClubPresenter(view, cv, ligas.get(ligaId), ligasReference);
+            ClubPresenter clc = new ClubPresenter(view, cv, ligas.get(ligaId));
 
             view.getClubsBtn().setBackground(Color.white);
             view.getContentView().removeAll();

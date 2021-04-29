@@ -30,7 +30,6 @@ public class ClubPresenter implements MouseListener, ActionListener {
     private ClubView view;
     private JFrame master;
     private Liga liga;
-    private List<Liga> ligas;
 
     public ClubPresenter(JFrame master, ClubView view, Liga liga) {
         this.view = view;
@@ -50,26 +49,6 @@ public class ClubPresenter implements MouseListener, ActionListener {
         this.view.revalidate();
         this.setData();
 
-    }
-
-    public ClubPresenter(JFrame master, ClubView view, Liga liga, List<Liga> ligas) {
-        this.view = view;
-        this.master = master;
-        this.liga = liga;
-        this.view.getClubTable().addMouseListener(this);
-        this.view.getAddClubBtn().addActionListener(this);
-        this.view.getAddExistingClubBtn().addActionListener(this);
-        if (liga.getId() == 1 || liga.getId() == 2) {
-            this.view.getAddClubBtn().setVisible(false);
-            this.view.getAddExistingClubBtn().setVisible(true);
-        } else {
-            this.view.getAddClubBtn().setVisible(true);
-            this.view.getAddExistingClubBtn().setVisible(true);
-        }
-        this.view.repaint();
-        this.view.revalidate();
-        this.ligas = ligas;
-        this.setData();
     }
 
     public void addPlayer(String player) {
