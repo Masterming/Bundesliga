@@ -32,7 +32,7 @@ public class ClubView extends JPanel {
         addExistingClubBtn.setText("Vorhandenen Club hinzufügen");
         addExistingClubBtn.setActionCommand("addExistClub");
 
-        clubTable.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Club", "stadium" }) {
+        clubTable.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Club", "stadion" }) {
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return false;
             }

@@ -56,20 +56,20 @@ public class ClubAddPresenter implements ActionListener {
     private void addClub() {
         boolean input = false;
         String clubName = "";
-        String stadium = "";
-        if (view.getClubNameTxt().getText() != null && view.getClubstadiumTxt().getText() != null) {
+        String stadion = "";
+        if (view.getClubNameTxt().getText() != null && view.getClubstadionTxt().getText() != null) {
             clubName = view.getClubNameTxt().getText();
-            stadium = view.getClubstadiumTxt().getText();
+            stadion = view.getClubstadionTxt().getText();
             clubName = clubName.trim();
-            stadium = stadium.trim();
-            if (clubName.length() > 0 && stadium.length() > 0) {
+            stadion = stadion.trim();
+            if (clubName.length() > 0 && stadion.length() > 0) {
                 input = true;
             }
         }
         if (!input) {
-            JOptionPane.showMessageDialog(master, "Bitte geben sie etwas fuer Clubname und stadium ein");
+            JOptionPane.showMessageDialog(master, "Bitte geben sie etwas fuer Clubname und stadion ein");
         } else {
-            Club temp = new Club(clubName, stadium);
+            Club temp = new Club(clubName, stadion);
             boolean clubExists = false;
             for (Liga l : ligas.values()) {
                 for (Club c : l.getClubs()) {

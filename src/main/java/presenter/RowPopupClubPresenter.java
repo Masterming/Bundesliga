@@ -44,7 +44,7 @@ public class RowPopupClubPresenter implements ActionListener {
             return;
         }
         String name = table.getValueAt(row, 0).toString();
-        String stadium = table.getValueAt(row, 1).toString();
+        String stadion = table.getValueAt(row, 1).toString();
 
         switch (evt.getActionCommand()) {
         case "loeschen":
@@ -81,11 +81,11 @@ public class RowPopupClubPresenter implements ActionListener {
                 }
                 break;
             case 1:
-                String stadiumName = JOptionPane.showInputDialog(master, "Neuen stadiumname eingeben", stadium).trim();
-                if (!stadiumName.isEmpty()) {
-                    LOGGER.log(Level.INFO, "Change stadium to {0}", stadiumName);
-                    liga.changeClubstadium(name, stadiumName);
-                    JOptionPane.showMessageDialog(master, "stadium Name wurde erfolgreich geändert");
+                String stadionName = JOptionPane.showInputDialog(master, "Neuen stadionname eingeben", stadion).trim();
+                if (!stadionName.isEmpty()) {
+                    LOGGER.log(Level.INFO, "Change stadion to {0}", stadionName);
+                    liga.changeClubstadion(name, stadionName);
+                    JOptionPane.showMessageDialog(master, "stadion Name wurde erfolgreich geändert");
                 }
                 break;
 

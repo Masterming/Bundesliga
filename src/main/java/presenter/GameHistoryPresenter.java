@@ -48,7 +48,7 @@ public class GameHistoryPresenter implements ActionListener {
                 String gast = game.getClub(1).getName();
                 String torGast = String.valueOf(game.getScore(1));
                 String datum = day + "." + month + "." + year + " um " + hour + ":" + minute;
-                String austragungsOrt = game.getClub(0).getStadium();
+                String austragungsOrt = game.getClub(0).getStadion();
                 String temp[] = new String[6];
                 temp[0] = datum;
                 temp[1] = heim;

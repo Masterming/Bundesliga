@@ -127,7 +127,7 @@ public class ClubPresenter implements MouseListener, ActionListener {
         for (Club c : liga.getClubs()) {
             String[] temp = new String[2];
             temp[0] = c.getName();
-            temp[1] = c.getStadium();
+            temp[1] = c.getStadion();
             data[count] = temp;
             count++;
         }

@@ -65,7 +65,7 @@ public class ErgebnisInputPresenter implements ActionListener {
         String minute = String.valueOf(game.getStart().getMinute());
         String labelText = day + "." + mounth + "." + year + " um " + hour + ":" + minute + " Uhr ";
         Club temp = game.getClub(0);
-        labelText += " im " + temp.getStadium();
+        labelText += " im " + temp.getStadion();
 
         this.view.getDateLbl().setText(labelText);
         this.view.getDateLbl().setSize(this.view.getDateLbl().getPreferredSize());
