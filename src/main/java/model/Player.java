@@ -68,7 +68,7 @@ public class Player implements Serializable {
         return goals;
     }
 
-    public boolean copy(Player other) {
+    public boolean update(Player other) {
         if (!equals(other)) {
             return false;
         }

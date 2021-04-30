@@ -233,7 +233,7 @@ public class Liga extends Observable implements Serializable {
         games.remove(g);
     }
 
-    public boolean copy(Liga other) {
+    public boolean update(Liga other) {
         boolean success = true;
         if (!equals(other)) {
             success = false;
@@ -245,7 +245,7 @@ public class Liga extends Observable implements Serializable {
         for (Club c : other.clubs) {
             ids.add(c.getId());
             if (clubs.contains(c)) {
-                if (!clubs.get(clubs.indexOf(c)).copy(c)) {
+                if (!clubs.get(clubs.indexOf(c)).update(c)) {
                     success = false;
                 }
             } else {

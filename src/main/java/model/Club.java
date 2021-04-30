@@ -247,7 +247,7 @@ public class Club implements Serializable, Comparable<Club> {
         receivedGoals = 0;
     }
 
-    public boolean copy(Club other) {
+    public boolean update(Club other) {
         boolean success = true;
         if (!equals(other)) {
             success = false;
@@ -266,7 +266,7 @@ public class Club implements Serializable, Comparable<Club> {
         for (Player p : other.players) {
             ids.add(p.getId());
             if (players.contains(p)) {
-                if (!players.get(players.indexOf(p)).copy(p)) {
+                if (!players.get(players.indexOf(p)).update(p)) {
                     success = false;
                 }
             } else {

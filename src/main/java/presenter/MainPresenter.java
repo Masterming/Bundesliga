@@ -138,7 +138,7 @@ public class MainPresenter implements ActionListener, Observer {
             int id = l.getId();
             Liga temp = dao.updateLiga(l);
 
-            if (!ligas.get(id).copy(temp)) {
+            if (!ligas.get(id).update(temp)) {
                 LOGGER.log(Level.WARNING, "Mismatch in copy of {0}", ligas.get(id));
             }
 
