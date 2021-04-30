@@ -26,10 +26,9 @@ public class TableView extends JPanel {
                 return false;
             }
         };
-        // jLabel1 = new JLabel();
 
         // ggf. extra Tabellen Modell als extra Klasse erstellen erstellen in dem man
-        // Eigenschaften wie Editable relaisiert
+        // Eigenschaften wie Editable realisiert
         table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Platz", "Club", "Spiele", "Punkte",
                 "Siege", "Unentschieden", "Niederlagen", "Torverhältnis" }));
         table.setRowSelectionAllowed(false);
@@ -65,13 +64,7 @@ public class TableView extends JPanel {
     public void setjTable1(JTable jTable1) {
         this.table = jTable1;
     }
-
-    // public JLabel getjLabel1() {
-    // return jLabel1;
-    // }
-    // public void setjLabel1(String liga) {
-    // this.jLabel1.setText(liga);
-    // }
+    
     public void setTableContent(TableModel tbm) {
         this.table.setModel(tbm);
     }

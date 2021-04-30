@@ -65,7 +65,7 @@ public class ErgebnisInputPresenter implements ActionListener {
         String minute = String.valueOf(game.getStart().getMinute());
         String labelText = day + "." + mounth + "." + year + " um " + hour + ":" + minute + " Uhr ";
         Club temp = game.getClub(0);
-        labelText += " im " + temp.getStadion();
+        labelText += " im " + temp.getStadium();
 
         this.view.getDateLbl().setText(labelText);
         this.view.getDateLbl().setSize(this.view.getDateLbl().getPreferredSize());
@@ -237,7 +237,7 @@ public class ErgebnisInputPresenter implements ActionListener {
             game.setResults(clubAScore, clubBScore);
             setPlayerGoals();
             liga.updateGame(game);
-            JOptionPane.showMessageDialog(master, "Spilergebnis wurde erfolgreich gespeichert");
+            JOptionPane.showMessageDialog(master, "Spielergebnis wurde erfolgreich gespeichert");
             view.dispose();
         }
     }

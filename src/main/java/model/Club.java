@@ -30,7 +30,7 @@ public class Club implements Serializable, Comparable<Club> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int clubId;
     private String name;
-    private String stadion;
+    private String stadium;
     private int points = 0;
     private int gamesCount = 0;
     private int wins = 0;
@@ -48,28 +48,28 @@ public class Club implements Serializable, Comparable<Club> {
     public Club() {
         this.clubId = -1;
         this.name = "";
-        this.stadion = "";
+        this.stadium = "";
         this.players = new ArrayList<>();
     }
 
     public Club(String name) {
         this.clubId = -1;
         this.name = name;
-        this.stadion = "";
+        this.stadium = "";
         this.players = new ArrayList<>();
     }
 
-    public Club(String name, String stadion) {
+    public Club(String name, String stadium) {
         this.clubId = -1;
         this.name = name;
-        this.stadion = stadion;
+        this.stadium = stadium;
         this.players = new ArrayList<>();
     }
 
     public Club(int id, String name) {
         this.clubId = id;
         this.name = name;
-        this.stadion = "";
+        this.stadium = "";
         this.players = new ArrayList<>();
     }
 
@@ -186,12 +186,12 @@ public class Club implements Serializable, Comparable<Club> {
         this.receivedGoals += receivedGoals;
     }
 
-    public String getStadion() {
-        return stadion;
+    public String getStadium() {
+        return stadium;
     }
 
-    public void setStadion(String stadion) {
-        this.stadion = stadion;
+    public void setStadium(String stadium) {
+        this.stadium = stadium;
     }
 
     public void setName(String name) {
@@ -253,7 +253,7 @@ public class Club implements Serializable, Comparable<Club> {
             success = false;
         }
         this.name = other.name;
-        this.stadion = other.stadion;
+        this.stadium = other.stadium;
         this.points = other.points;
         this.gamesCount = other.gamesCount;
         this.wins = other.wins;

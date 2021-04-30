@@ -44,7 +44,7 @@ public class TablePresenter implements ActionListener {
         // Aufrufen der SetTableContentMethode der Tabelle
         DefaultTableModel tbm = (DefaultTableModel) view.getjTable1().getModel();
 
-        // Bekomme list mit CLub Objkete mit Daten
+        // Bekomme Liste mit CLub Objekten inklusiv Daten
         // Sample Data
         String[][] data = getData();
         for (String[] d : data) {

@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -66,7 +65,7 @@ public class ClubPresenter implements MouseListener, ActionListener {
             String club = temp.getValueAt(row, column).toString();
 
             Club c = liga.getClub(club);
-            ClubEditView cbV = new ClubEditView(view.getmaster(), true);
+            ClubEditView cbV = new ClubEditView(view.getMaster(), true);
             ClubEditPresenter clubEditController = new ClubEditPresenter(cbV, c, liga, master);
             cbV.setVisible(true);
         }
@@ -128,7 +127,7 @@ public class ClubPresenter implements MouseListener, ActionListener {
         for (Club c : liga.getClubs()) {
             String[] temp = new String[2];
             temp[0] = c.getName();
-            temp[1] = c.getStadion();
+            temp[1] = c.getStadium();
             data[count] = temp;
             count++;
         }

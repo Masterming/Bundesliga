@@ -164,8 +164,6 @@ public class MainView extends javax.swing.JFrame {
         }// </editor-fold>
 
         public MainView() {
-                // GroupLayout layout = new GroupLayout(this.contentView);
-                // this.contentView.setLayout(layout);
                 initComponents();
                 try {
                         for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager

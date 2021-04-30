@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 /**
  * @author z003ywys
@@ -14,14 +15,14 @@ public class PlanView extends JPanel {
 
     private static final long serialVersionUID = 16L;
 
-    public javax.swing.JButton addSpielBtn;
-    public javax.swing.JButton createGames;
-    private javax.swing.JButton gameHistory;
-    public javax.swing.JPanel planContent;
-    private javax.swing.JButton restartSeasonBtn;
-    public javax.swing.JButton setResult;
+    public JButton addSpielBtn;
+    public JButton createGames;
+    private JButton gameHistory;
+    public JPanel planContent;
+    private JButton restartSeasonBtn;
+    public JButton setResult;
+    private JScrollPane jScrollPane1;
     private JFrame master;
-    private javax.swing.JScrollPane jScrollPane1;
 
     public PlanView(JFrame master) {
         initComponents();
@@ -135,47 +136,6 @@ public class PlanView extends JPanel {
     public JButton getSetResult() {
         return setResult;
     }
-
-    // @Override
-    // public void update(Observable o, Object arg1) {
-    // // Hier landet man wenn man im Model was veraendert hat durch norifyObservers
-    // this.planContent.setLayout(new BoxLayout(this.planContent,
-    // BoxLayout.Y_AXIS));
-    // if (o instanceof PlanModel) {
-    // // To change body of generated methods, choose Tools | Templates.
-    // // javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-    // // this.setLayout(layout);
-    // planContent.removeAll();
-    // plm = (PlanModel) o;
-    // int count = 1;
-    // if (plm.getLiga().getId() == 1) {
-    // count = 5;
-    // }
-    // if (plm.getLiga().getId() == 2) {
-    // count = 10;
-    // }
-    // if (plm.getLiga().getId() == 3) {
-    // count = 15;
-    // }
-    // for (int i = 0; i < count; i++) {
-    // JLabel test = new JLabel(plm.getLiga().getName());
-    // JButton testBtn = new JButton("TestBTN " + i);
-    // test.setBackground(java.awt.Color.lightGray);
-    // test.setAlignmentX(Component.CENTER_ALIGNMENT);
-    // testBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
-    // testBtn.setActionCommand(String.valueOf(i) + "RB Leipzig");
-    // testBtn.addActionListener((java.awt.event.ActionEvent evt) -> {
-    // action(evt);
-    // });
-    // this.planContent.add(test);
-    // this.planContent.add(testBtn);
-    // }
-    // this.planContent.revalidate();
-    // this.planContent.repaint();
-    // this.planContent.setVisible(true);
-    //
-    // }
-    // }
 
     public JButton getRestartSeasonBtn() {
         return restartSeasonBtn;

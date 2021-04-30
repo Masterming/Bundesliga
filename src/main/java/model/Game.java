@@ -61,6 +61,8 @@ public class Game implements Serializable {
 
     public Game(Club club1, Club club2, LocalDateTime start, Liga l1, Liga l2) {
         ligas = new ArrayList<>();
+
+        // The id of a game is the Concatenation of plying club_ids
         try {
             // DateTimeFormatter f = DateTimeFormatter.ofPattern("yyMMdd");
             // String id = LocalDateTime.now().format(f);
@@ -113,7 +115,7 @@ public class Game implements Serializable {
         this.startTime = start;
     }
 
-    public int increaseScore(int id, int ammount) {
+    public int increaseScore(int id, int amount) {
         return id == 0 ? score1++ : score2++;
     }
 

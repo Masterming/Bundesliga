@@ -60,8 +60,8 @@ public class Player implements Serializable {
         this.goals = goals;
     }
 
-    public void addGoals(int ammount) {
-        goals += ammount;
+    public void addGoals(int amount) {
+        goals += amount;
     }
 
     public int getGoals() {

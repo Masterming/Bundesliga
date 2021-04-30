@@ -21,7 +21,7 @@ public class GameHistoryPresenter implements ActionListener {
         this.ghV = ghV;
         this.ghV.getBackToPlanBtn().addActionListener(this);
         this.plC = PLC;
-        getDataAndAdapatView();
+        getDataAndAdaptView();
     }
 
     @Override
@@ -32,7 +32,7 @@ public class GameHistoryPresenter implements ActionListener {
         }
     }
 
-    private void getDataAndAdapatView() {
+    private void getDataAndAdaptView() {
         String[][] data = new String[l.getFinishCount()][];
         int count = 0;
         for (Game game : this.l.getGames()) {
@@ -48,7 +48,7 @@ public class GameHistoryPresenter implements ActionListener {
                 String gast = game.getClub(1).getName();
                 String torGast = String.valueOf(game.getScore(1));
                 String datum = day + "." + month + "." + year + " um " + hour + ":" + minute;
-                String austragungsOrt = game.getClub(0).getStadion();
+                String austragungsOrt = game.getClub(0).getStadium();
                 String temp[] = new String[6];
                 temp[0] = datum;
                 temp[1] = heim;

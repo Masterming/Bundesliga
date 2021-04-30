@@ -126,13 +126,7 @@ public class PlanAddGamePresenter implements ActionListener, ItemListener, Mouse
             JOptionPane.showMessageDialog(master, "Gewuenschte Ligakombination nicht auswaehlbar");
             return;
         }
-
-        /*
-         * LOGGER.log(Level.INFO, ligaA.toString()); LOGGER.log(Level.INFO,
-         * ligaB.toString()); LOGGER.log(Level.INFO, c1.toString());
-         * LOGGER.log(Level.INFO, c2.toString()); LOGGER.log(Level.INFO,
-         * dtGame.toString());
-         */
+        
         Game game = new Game(c1, c2, dtGame, ligaA, ligaB);
 
         if (ligaA.updateGame(game)) {

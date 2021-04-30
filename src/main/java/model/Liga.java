@@ -88,18 +88,18 @@ public class Liga extends Observable implements Serializable {
                 return false;
             }
         }
-        boolean sucess = clubs.add(c);
+        boolean success = clubs.add(c);
         setChanged();
         notifyObservers(this);
-        return sucess;
+        return success;
     }
 
     public boolean removeClub(Club c) {
-        boolean sucess = clubs.remove(c);
+        boolean success = clubs.remove(c);
         setChanged();
         notifyObservers(this);
         removeGames(c);
-        return sucess;
+        return success;
     }
 
     public Club removeClub(String name) {
@@ -131,20 +131,20 @@ public class Liga extends Observable implements Serializable {
     }
 
     public boolean updateClub(Club c) {
-        boolean sucess = false;
+        boolean success = false;
         ListIterator<Club> iterator = clubs.listIterator();
         while (iterator.hasNext()) {
             Club next = iterator.next();
             if (next.equals(c)) {
                 // Replace element
                 iterator.set(c);
-                sucess = true;
+                success = true;
                 setChanged();
                 notifyObservers(this);
                 break;
             }
         }
-        return sucess;
+        return success;
     }
 
     public boolean changeClubName(String name, String newName) {
@@ -159,10 +159,10 @@ public class Liga extends Observable implements Serializable {
         return false;
     }
 
-    public boolean changeClubStadion(String name, String newName) {
+    public boolean changeClubstadium(String name, String newName) {
         for (Club c : clubs) {
             if (c.getName().equals(name)) {
-                c.setStadion(newName);
+                c.setStadium(newName);
                 setChanged();
                 notifyObservers(this);
                 return true;
@@ -215,7 +215,7 @@ public class Liga extends Observable implements Serializable {
             }
         }
 
-        // Use Iterator to remove the games from all appropiate lists
+        // Use Iterator to remove the games from all appropriate lists
         Iterator<Game> iter = gamesToRemove.iterator();
         while (iter.hasNext()) {
             Game g = iter.next();

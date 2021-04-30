@@ -92,7 +92,7 @@ public class PlanPresenter implements ActionListener {
             }
             if (!success)
                 JOptionPane.showMessageDialog(master,
-                        "Ein oder mehrere Spiele existieren bereits, oder wurden schon gepsielt!");
+                        "Ein oder mehrere Spiele existieren bereits, oder wurden schon gespielt!");
             break;
         case "setResultAuto":
             LOGGER.log(Level.INFO, "Spielergebnisse werden automatisch erstellt");
@@ -139,7 +139,7 @@ public class PlanPresenter implements ActionListener {
                 }
             }
             Game g = unfinishedGames.get(count);
-            // Hier nochmal schleuife durchgehen
+            // Hier nochmal schleife durchgehen
             ErgebnisInputPresenter ergC = new ErgebnisInputPresenter(master, ergV, g, liga);
             ergV.setVisible(true);
             break;
@@ -157,11 +157,11 @@ public class PlanPresenter implements ActionListener {
             if (g.isFinished() == false) {
                 JLabel test = new JLabel();
                 String day = String.valueOf(g.getStart().getDayOfMonth());
-                String mounth = String.valueOf(g.getStart().getMonthValue());
+                String month = String.valueOf(g.getStart().getMonthValue());
                 String year = String.valueOf(g.getStart().getYear());
                 String hour = String.valueOf(g.getStart().getHour());
                 String minute = String.valueOf(g.getStart().getMinute());
-                String labelText = day + "." + mounth + "." + year + " um "
+                String labelText = day + "." + month + "." + year + " um "
                         + String.format("%02d", Integer.parseInt(hour)) + ":"
                         + String.format("%02d", Integer.parseInt(minute)) + " Uhr ";
                 test.setText(labelText);
@@ -186,7 +186,7 @@ public class PlanPresenter implements ActionListener {
         }
 
     }
-    // Alternatuve Lösung: PlanPresenter implementiert Observer und wird
+    // Alternative Lösung: PlanPresenter implementiert Observer und wird
     // benachrichtigt wenn sich Model ändert und passt dann den View an
 
     public void restorePlanView() {

@@ -3,7 +3,6 @@ package presenter;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -65,7 +64,6 @@ public class ClubEditPresenter implements ActionListener {
             view.getAddSpielerBtn().setBackground(Color.lightGray);
             TransactionView tranView = new TransactionView();
             TransactionPresenter tr = new TransactionPresenter(master, tranView, club);
-            // Layout setzen ?
             view.getClubEditContent().removeAll();
             view.getClubEditContent().add(tranView);
             // LOGGER.log(Level.INFO, "Content hizugefuegt");
